@@ -10,6 +10,14 @@ public class Map {
         tileGrid = createBasicTileGrid();
     }
 
+    private Map(Tile[][] tileGrid) {
+        this.tileGrid = tileGrid;
+    }
+
+    public static Map fromTileGrid(Tile[][] tileGrid) {
+        return new Map(tileGrid);
+    }
+
     private Tile[][] createBasicTileGrid() {
         return new Tile[][]{
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND},
@@ -26,6 +34,8 @@ public class Map {
     }
 
     public int getWidth() {
+        if (getHeight() == 0)
+            return 0;
         return tileGrid[0].length;
     }
 
