@@ -1,12 +1,11 @@
 package model.game;
 
 import model.game.map.Map;
-import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
 import model.game.tower.TowerService;
 
 public class Game implements TowerService {
-    private final Map map = new Map();
+    private final Map map = Map.fromDefaultTileGrid();
     private final TowerHandler towerHandler;
 
     public Game() {

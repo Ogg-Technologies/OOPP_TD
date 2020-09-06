@@ -6,19 +6,19 @@ import static model.game.map.Tile.PATH;
 public class Map {
     private final Tile[][] tileGrid;
 
-    public Map() {
-        tileGrid = createBasicTileGrid();
-    }
-
     private Map(Tile[][] tileGrid) {
         this.tileGrid = tileGrid;
+    }
+
+    public static Map fromDefaultTileGrid() {
+        return new Map(createBasicTileGrid());
     }
 
     public static Map fromTileGrid(Tile[][] tileGrid) {
         return new Map(tileGrid);
     }
 
-    private Tile[][] createBasicTileGrid() {
+    private static Tile[][] createBasicTileGrid() {
         return new Tile[][]{
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND},
                 {PATH, PATH, GROUND, GROUND, GROUND, PATH, PATH, PATH, PATH, PATH},
