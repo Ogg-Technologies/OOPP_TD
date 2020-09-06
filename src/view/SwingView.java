@@ -2,6 +2,8 @@ package view;
 
 import model.ModelData;
 
+import java.awt.event.MouseListener;
+
 public class SwingView implements View {
 
     private final Window window;
@@ -19,5 +21,10 @@ public class SwingView implements View {
     @Override
     public void draw() {
 
+    }
+
+    @Override
+    public void addMouseListener(MouseListener mouseListener) {
+        window.addMouseListener(mouseListener);
     }
 }
