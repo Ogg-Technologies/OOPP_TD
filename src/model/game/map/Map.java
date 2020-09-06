@@ -39,6 +39,10 @@ public class Map {
         return tileGrid[0].length;
     }
 
+    public Tile[][] getTileGrid() {
+        return tileGrid;
+    }
+
     public int getHeight() {
         return tileGrid.length;
     }

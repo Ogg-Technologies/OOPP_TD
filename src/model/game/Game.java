@@ -5,6 +5,7 @@ import model.game.enemy.EnemyService;
 import model.game.map.Map;
 import model.game.tower.TowerHandler;
 import model.game.tower.TowerService;
+import model.game.map.Tile;
 
 public class Game implements TowerService, EnemyService {
     private final Map map = Map.fromDefaultTileGrid();
@@ -15,5 +16,10 @@ public class Game implements TowerService, EnemyService {
         towerHandler = new TowerHandler(this);
         enemyHandler = new EnemyHandler(this);
         System.out.println(map.getTile(1, 1));
+    }
+
+    public Tile[][] getMap() {
+        Map mapCopy = Map.fromDefaultTileGrid();
+        return mapCopy.getTileGrid();
     }
 }
