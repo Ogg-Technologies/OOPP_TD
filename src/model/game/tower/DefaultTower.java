@@ -13,6 +13,19 @@ public class DefaultTower implements Tower {
         return towerService;
     }
 
+
+    //TODO: positioning
+
+    @Override
+    public int getXPos() {
+        return 0;
+    }
+
+    @Override
+    public int getYPos() {
+        return 0;
+    }
+
     @Override
     public void update() {
 
