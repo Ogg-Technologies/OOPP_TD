@@ -8,4 +8,8 @@ public interface View extends Drawable {
     void draw();
 
     void addMouseListener(MouseListener mouseListener);
+
+    int getXOffset();
+    int getYOffset();
+
 }

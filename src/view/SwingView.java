@@ -9,28 +9,40 @@ public class SwingView implements View {
 
     private final Window window;
     private final ModelData modelData;
-    private final JPanel mainPanel;
+    private final Background mapPanel;
     private final int width = 800;
-    private final int height = 800;
+    private final int height = 1000;
+
+    private final int xOffset = 8;
+    private final int yOffset = 31;
+
+    public int getXOffset() {
+        return xOffset;
+    }
+
+    public int getYOffset() {
+        return yOffset;
+    }
 
     public SwingView(ModelData modelData) {
         window = new Window();
         this.modelData = modelData;
-        this.mainPanel = new Background(width,height,this.modelData.getTileMap());
+        this.mapPanel = new Background(width,height,this.modelData.getTileMap(), xOffset, yOffset);
     }
 
     @Override
     public void start() {
         window.setSize(width, height);
         window.setVisible(true);
-        this.mainPanel.setSize(window.getSize());
-        this.window.add(this.mainPanel);
+        this.mapPanel.setSize(window.getSize());
+        this.window.add(this.mapPanel);
         draw();
     }
 
     @Override
     public void draw() {
-        mainPanel.repaint();
+        mapPanel.drawBackground(window.getWidth(), window.getHeight());
+
     }
 
     @Override
