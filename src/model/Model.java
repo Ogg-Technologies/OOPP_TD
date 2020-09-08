@@ -1,7 +1,6 @@
 package model;
 
 import model.game.Game;
-import model.game.map.Map;
 import model.game.map.Tile;
 
 public final class Model implements ModelEventHandler, ModelData, Updatable {
@@ -16,7 +15,7 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     }
 
     @Override
-    public Tile[][] getTileGrid() {
-        return this.game.getMap();
+    public Tile[][] getTileMap() {
+        return this.game.getTileMap();
     }
 }

@@ -3,19 +3,19 @@ package model.game.map;
 import static model.game.map.Tile.GROUND;
 import static model.game.map.Tile.PATH;
 
-public class Map {
+public class TileMap {
     private final Tile[][] tileGrid;
 
-    private Map(Tile[][] tileGrid) {
+    private TileMap(Tile[][] tileGrid) {
         this.tileGrid = tileGrid;
     }
 
-    public static Map fromDefaultTileGrid() {
-        return new Map(createBasicTileGrid());
+    public static TileMap fromDefaultTileGrid() {
+        return new TileMap(createBasicTileGrid());
     }
 
-    public static Map fromTileGrid(Tile[][] tileGrid) {
-        return new Map(tileGrid);
+    public static TileMap fromTileGrid(Tile[][] tileGrid) {
+        return new TileMap(tileGrid);
     }
 
     private static Tile[][] createBasicTileGrid() {

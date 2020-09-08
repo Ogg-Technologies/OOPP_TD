@@ -2,8 +2,8 @@ package view;
 
 import model.ModelData;
 
-import java.awt.event.MouseListener;
 import javax.swing.*;
+import java.awt.event.MouseListener;
 
 public class SwingView implements View {
 
@@ -16,7 +16,7 @@ public class SwingView implements View {
     public SwingView(ModelData modelData) {
         window = new Window();
         this.modelData = modelData;
-        this.mainPanel = new Background(width,height,this.modelData.getTileGrid());
+        this.mainPanel = new Background(width,height,this.modelData.getTileMap());
     }
 
     @Override
