@@ -1,13 +1,21 @@
 package model.game.map;
 
+import utils.Vector;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static model.game.map.Tile.GROUND;
 import static model.game.map.Tile.PATH;
 
 public class TileMap {
+
     private final Tile[][] tileGrid;
+    private final List<Vector> path;
 
     private TileMap(Tile[][] tileGrid) {
         this.tileGrid = tileGrid;
+        this.path = calculatePath();
     }
 
     public static TileMap fromDefaultTileGrid() {
@@ -31,6 +39,38 @@ public class TileMap {
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, PATH},
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, PATH}
         };
+    }
+
+    private List<Vector> calculatePath() {
+        List<Vector> path = new ArrayList<>();
+
+        Vector start = findStartPosition();
+        path.add(start);
+        return path;
+    }
+
+    // TODO: Come up with a more suitable way to find start position
+
+    /**
+     * Goes through the border and finds the first PATH tile for start position
+     * @return A vector defining the start position
+     */
+    private Vector findStartPosition() {
+        for (int y = 0; y < tileGrid.length; y++) {
+            if (tileGrid[y][0] == PATH) {   // Check leftmost
+                return new Vector(0, y);
+            } else if (tileGrid[y][tileGrid[y].length - 1] == PATH) {   // Check rightmost
+                return new Vector(tileGrid[y].length - 1, y);
+            }
+        }
+        for (int x = 0; x < tileGrid[0].length; x++) {
+            if (tileGrid[0][x] == PATH) {   // Check topmost
+                return new Vector(x, 0);
+            } else if (tileGrid[tileGrid.length - 1][x] == PATH) {   // Check bottommost
+                return new Vector(x, tileGrid[tileGrid.length - 1].length);
+            }
+        }
+        throw new IllegalTileMapException("Could not find a start position for the map");
     }
 
     public int getWidth() {
