@@ -12,10 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class TileMapTest {
 
     @Test
-    void emptyMapHas0HeightWidth() {
-        TileMap tileMap = TileMap.fromTileGrid(new Tile[][]{});
-        assertEquals(tileMap.getWidth(), 0);
-        assertEquals(tileMap.getHeight(), 0);
+    void mapWithNoStartPosition() {
+        assertThrows(IllegalTileMapException.class, () ->
+                TileMap.fromTileGrid(new Tile[][]{
+                    {GROUND, GROUND, GROUND},
+                    {GROUND, PATH, GROUND},
+                    {GROUND, GROUND, GROUND},
+        }));
     }
 
     @Nested
