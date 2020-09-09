@@ -1,6 +1,7 @@
 package view;
 
 import model.ModelData;
+import utils.Vector;
 
 import javax.swing.*;
 import java.awt.event.MouseListener;
@@ -55,15 +56,16 @@ public class SwingView implements View {
         width = window.getWidth() - xOffset;
         height = window.getHeight() - yOffset;
 
+
+
         int mapLength;
-        int xPos = 0;
-        int yPos = 0;
+        Vector pos = new Vector(0,0);
         if (width > height) {
             mapLength = height;
-            xPos += (width - height) / 2;
+            pos = pos.plus(new Vector((width - height) / 2,0));//(width - height) / 2;
         } else {
             mapLength = width;
-            yPos += (height - width) / 2;
+            pos = pos.plus(new Vector(0,(height - width) / 2));
         }
 
         int tileWidth = mapLength / modelData.getTileMap().length;
@@ -71,8 +73,8 @@ public class SwingView implements View {
         mapPanel.setSize(window.getSize());
         towerDrawer.setSize(window.getSize());
 
-        mapPanel.drawBackground(xPos, yPos, tileWidth);
-        towerDrawer.draw(modelData.getTowers(), xPos, yPos, tileWidth);
+        mapPanel.drawBackground(pos, tileWidth);
+        towerDrawer.draw(modelData.getTowers(), pos, tileWidth);
     }
 
     @Override

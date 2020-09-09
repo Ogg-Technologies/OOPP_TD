@@ -2,6 +2,7 @@ package view;
 
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.BasicTower;
+import utils.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,8 +19,7 @@ public class TowerDrawer extends JPanel {
 
     private final Map<Class<? extends Tower>, BufferedImage> towerDrawerMap = new HashMap<>();
 
-    private int xPos = 0;
-    private int yPos = 0;
+    private Vector pos = new Vector(0,0);
     private int tileWidth = 0;
     private List<Tower> towers = null;
 
@@ -27,9 +27,8 @@ public class TowerDrawer extends JPanel {
         setup();
     }
 
-    void draw(List<Tower> towers, int xPos, int yPos, int tileWidth) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    void draw(List<Tower> towers, Vector pos, int tileWidth) {
+        this.pos = pos;
         this.towers = towers;
         this.tileWidth = tileWidth;
     }
@@ -53,8 +52,8 @@ public class TowerDrawer extends JPanel {
         for (Tower t : towers) {
             BufferedImage curTower = towerDrawerMap.get(t.getClass());
 
-            int x = tileWidth * t.getXPos() + xPos;
-            int y = tileWidth * t.getYPos() + yPos;
+            int x = tileWidth * t.getXPos() + pos.getX();
+            int y = tileWidth * t.getYPos() + pos.getY();
 
             g.drawImage(curTower, x, y, tileWidth, tileWidth, null);
         }

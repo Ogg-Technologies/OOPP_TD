@@ -1,23 +1,22 @@
 package view;
 
 import model.game.map.Tile;
+import utils.Vector;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Background extends JPanel {
     private Tile[][] tileGrid;
-    private int xPos = 0;
-    private int yPos = 0;
+    private Vector pos = new Vector(0,0);
     private int tileWidth = 0;
 
     public Background(Tile[][] tileGrid) {
         this.tileGrid = tileGrid;
     }
 
-    void drawBackground(int xPos, int yPos, int tileWidth) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    void drawBackground(Vector pos, int tileWidth) {
+        this.pos = pos;
         this.tileWidth = tileWidth;
         repaint();
     }
@@ -34,7 +33,7 @@ public class Background extends JPanel {
                 } else {
                     g.setColor(Color.decode("#D3D3D3"));
                 }
-                g.fillRect(tileX * tileWidth + xPos, tileY * tileWidth + yPos, tileWidth, tileWidth);
+                g.fillRect(tileX * tileWidth + this.pos.getX(), tileY * tileWidth + this.pos.getY(), tileWidth, tileWidth);
             }
         }
     }
