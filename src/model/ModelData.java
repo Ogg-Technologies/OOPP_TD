@@ -1,5 +1,6 @@
 package model;
 
+import model.game.enemy.ImmutableEnemy;
 import model.game.map.Tile;
 import model.game.tower.ImmutableTower;
 
@@ -9,4 +10,6 @@ public interface ModelData {
     Tile[][] getTileMap();   // TODO: Make method return TileMap instead to make it immutable and to remove copying matrix?
 
     List<? extends ImmutableTower> getTowers();
+
+    List<? extends ImmutableEnemy> getEnemies();
 }

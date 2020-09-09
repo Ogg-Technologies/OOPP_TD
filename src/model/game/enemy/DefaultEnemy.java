@@ -1,10 +1,14 @@
 package model.game.enemy;
 
-public class DefualtEnemy implements Enemy {
-    private final EnemyService enemyService;
+import utils.VectorF;
 
-    public DefualtEnemy(EnemyService service) {
+public class DefaultEnemy implements Enemy {
+    private final EnemyService enemyService;
+    private VectorF pos;
+
+    public DefaultEnemy(EnemyService service, VectorF pos) {
         enemyService = service;
+        this.pos = pos;
     }
 
     @Override
@@ -14,6 +18,10 @@ public class DefualtEnemy implements Enemy {
 
     @Override
     public void update() {
+    }
 
+    @Override
+    public VectorF getPos() {
+        return pos;
     }
 }

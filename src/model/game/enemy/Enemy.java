@@ -1,7 +1,7 @@
 package model.game.enemy;
 
-public interface Enemy {
-    void update();
+public interface Enemy extends ImmutableEnemy {
     EnemyService getEnemyService();
-    
+
+    void update();
 }

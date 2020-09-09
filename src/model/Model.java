@@ -1,6 +1,7 @@
 package model;
 
 import model.game.Game;
+import model.game.enemy.ImmutableEnemy;
 import model.game.map.Tile;
 import model.game.tower.ImmutableTower;
 
@@ -25,5 +26,10 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     @Override
     public List<? extends ImmutableTower> getTowers() {
         return game.getTowers();
+    }
+
+    @Override
+    public List<? extends ImmutableEnemy> getEnemies() {
+        return game.getEnemies();
     }
 }

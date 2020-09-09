@@ -1,6 +1,7 @@
 package model.game.enemy;
 
-import java.security.Provider.Service;
+import utils.VectorF;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,10 @@ public class EnemyHandler {
     public EnemyHandler(EnemyService service) {
         enemyFactory = new EnemyFactory(service);
         enemies = new ArrayList<>();
+        enemies.add(enemyFactory.createBasicEnemy(new VectorF(2, 1)));
     }
 
+    public List<? extends ImmutableEnemy> getEnemies() {
+        return enemies;
+    }
 }
