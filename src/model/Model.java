@@ -2,10 +2,8 @@ package model;
 
 import model.game.Game;
 import model.game.map.Tile;
-import model.game.tower.Tower;
-import model.game.tower.concretetowers.BasicTower;
+import model.game.tower.ImmutableTower;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class Model implements ModelEventHandler, ModelData, Updatable {
@@ -24,11 +22,8 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
         return this.game.getTileMap();
     }
 
-    //TODO: make this correct
     @Override
-    public List<Tower> getTowers() {
-        List<Tower> tempList = new ArrayList<>();
-        tempList.add(new BasicTower(game));
-        return tempList;
+    public List<? extends ImmutableTower> getTowers() {
+        return game.getTowers();
     }
 }

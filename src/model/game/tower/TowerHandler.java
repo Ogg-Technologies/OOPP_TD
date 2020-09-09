@@ -1,5 +1,7 @@
 package model.game.tower;
 
+import utils.Vector;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,5 +13,10 @@ public class TowerHandler {
     public TowerHandler(TowerService towerService) {
         factory = new TowerFactory(towerService);
         towers = new ArrayList<>();
+        towers.add(factory.createBasicTower(new Vector(0, 0)));
+    }
+
+    public List<? extends ImmutableTower> getTowers() {
+        return towers;
     }
 }

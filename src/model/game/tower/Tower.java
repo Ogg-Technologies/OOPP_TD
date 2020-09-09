@@ -1,12 +1,11 @@
 package model.game.tower;
 
-public interface Tower {
+import utils.Vector;
+
+public interface Tower extends ImmutableTower {
     TowerService getTowerService();
 
-    //TODO:
-    int getXPos();
-
-    int getYPos();
+    Vector getPos();
 
     void update();
 }

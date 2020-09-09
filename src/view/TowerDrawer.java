@@ -1,6 +1,6 @@
 package view;
 
-import model.game.tower.Tower;
+import model.game.tower.ImmutableTower;
 import model.game.tower.concretetowers.BasicTower;
 import utils.Vector;
 
@@ -17,17 +17,17 @@ import java.util.Map;
 
 public class TowerDrawer extends JPanel {
 
-    private final Map<Class<? extends Tower>, BufferedImage> towerDrawerMap = new HashMap<>();
+    private final Map<Class<? extends ImmutableTower>, BufferedImage> towerDrawerMap = new HashMap<>();
 
     private Vector pos = new Vector(0,0);
     private int tileWidth = 0;
-    private List<Tower> towers = null;
+    private List<? extends ImmutableTower> towers = null;
 
     public TowerDrawer() {
         setup();
     }
 
-    void draw(List<Tower> towers, Vector pos, int tileWidth) {
+    void draw(List<? extends ImmutableTower> towers, Vector pos, int tileWidth) {
         this.pos = pos;
         this.towers = towers;
         this.tileWidth = tileWidth;
@@ -49,11 +49,11 @@ public class TowerDrawer extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (Tower t : towers) {
+        for (ImmutableTower t : towers) {
             BufferedImage curTower = towerDrawerMap.get(t.getClass());
 
-            int x = tileWidth * t.getXPos() + pos.getX();
-            int y = tileWidth * t.getYPos() + pos.getY();
+            int x = tileWidth * t.getPos().getX() + pos.getX();
+            int y = tileWidth * t.getPos().getY() + pos.getY();
 
             g.drawImage(curTower, x, y, tileWidth, tileWidth, null);
         }

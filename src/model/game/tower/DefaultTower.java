@@ -1,11 +1,15 @@
 package model.game.tower;
 
+import utils.Vector;
+
 public class DefaultTower implements Tower {
 
     private final TowerService towerService;
+    private final Vector pos;
 
-    public DefaultTower(TowerService towerService) {
+    public DefaultTower(TowerService towerService, Vector pos) {
         this.towerService = towerService;
+        this.pos = pos;
     }
 
     @Override
@@ -13,17 +17,9 @@ public class DefaultTower implements Tower {
         return towerService;
     }
 
-
-    //TODO: positioning
-
     @Override
-    public int getXPos() {
-        return 0;
-    }
-
-    @Override
-    public int getYPos() {
-        return 0;
+    public Vector getPos() {
+        return pos;
     }
 
     @Override
