@@ -24,6 +24,11 @@ public class Game implements TowerService, EnemyService {
 
     }
 
+    public void update() {
+        towerHandler.update();
+        enemyHandler.update();
+    }
+
     public Tile[][] getTileMap() {
         TileMap tileMapCopy = TileMap.fromDefaultTileGrid();
         return tileMapCopy.getTileGrid();

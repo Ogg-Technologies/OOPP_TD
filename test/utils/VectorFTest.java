@@ -48,6 +48,13 @@ class VectorFTest {
     }
 
     @Test
+    void canSetMagnitude() {
+        VectorF v = vec1.setMagnitude(10);
+        assertEquals(v.getAngle(), vec1.getAngle());
+        assertEquals(10, v.getDist(), 0.001);
+    }
+
+    @Test
     void canProjectToUnitCircle() {
         VectorF v = vec1.asUnitVector();
         assertEquals(v.getAngle(), vec1.getAngle());

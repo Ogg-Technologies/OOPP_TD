@@ -65,4 +65,8 @@ public class Vector {
     public VectorF minus(VectorF other) {
         return new VectorF(x - other.getX(), y - other.getY());
     }
+
+    public VectorF asVector() {
+        return new VectorF(x, y);
+    }
 }

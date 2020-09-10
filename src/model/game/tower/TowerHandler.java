@@ -20,5 +20,9 @@ public class TowerHandler {
         return towers;
     }
 
-
+    public void update() {
+        for (Tower t : towers) {
+            t.update();
+        }
+    }
 }

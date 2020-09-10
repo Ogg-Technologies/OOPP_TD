@@ -16,6 +16,7 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
 
     @Override
     public void update() {
+        game.update();
     }
 
     @Override

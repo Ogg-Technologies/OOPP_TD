@@ -62,10 +62,14 @@ public class VectorF {
         return new VectorF(x * scalar, y * scalar);
     }
 
-    public VectorF asUnitVector() {
+    public VectorF setMagnitude(float scalar) {
         float magnitude = getDist();
         if (magnitude == 0)
-            throw new IllegalStateException("Zero vector: " + this + " cannot be projected to a unit vector");
-        return new VectorF(x / magnitude, y / magnitude);
+            throw new IllegalStateException("Zero vector: " + this + " cannot be projected to another magnitude");
+        return times(scalar / magnitude);
+    }
+
+    public VectorF asUnitVector() {
+        return setMagnitude(1);
     }
 }
