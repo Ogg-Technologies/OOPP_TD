@@ -1,21 +1,32 @@
 package model.game.map;
 
+import utils.ConnectedSequence;
 import utils.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.game.map.Tile.GROUND;
-import static model.game.map.Tile.PATH;
+import static model.game.map.Tile.*;
 
 public class TileMap {
 
     private final Tile[][] tileGrid;
-    private final List<Vector> path;
+    private final List<? extends Vector> deltas;
+    private final ConnectedSequence<Vector> path;
 
     private TileMap(Tile[][] tileGrid) {
         this.tileGrid = tileGrid;
+        this.deltas = initDirectionDeltas();
         this.path = calculatePath();
+    }
+
+    private List<Vector> initDirectionDeltas() {
+        List<Vector> deltas = new ArrayList<>();
+        deltas.add(new Vector(1, 0));
+        deltas.add(new Vector(-1, 0));
+        deltas.add(new Vector(0, 1));
+        deltas.add(new Vector(0, -1));
+        return deltas;
     }
 
     public static TileMap fromDefaultTileGrid() {
@@ -29,7 +40,7 @@ public class TileMap {
     private static Tile[][] createBasicTileGrid() {
         return new Tile[][]{
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND},
-                {PATH, PATH, GROUND, GROUND, GROUND, PATH, PATH, PATH, PATH, PATH},
+                {START, PATH, GROUND, GROUND, GROUND, PATH, PATH, PATH, PATH, PATH},
                 {GROUND, PATH, GROUND, GROUND, GROUND, PATH, GROUND, GROUND, GROUND, PATH},
                 {GROUND, PATH, GROUND, GROUND, GROUND, PATH, GROUND, GROUND, GROUND, PATH},
                 {GROUND, PATH, GROUND, GROUND, GROUND, PATH, GROUND, GROUND, GROUND, PATH},
@@ -41,36 +52,78 @@ public class TileMap {
         };
     }
 
-    private List<Vector> calculatePath() {
-        List<Vector> path = new ArrayList<>();
+    public Vector getStartPosition() {
+        return path.first();
+    }
+
+    public Vector getNextInPath(Vector previous) {
+        return path.next(previous);
+    }
+
+    private ConnectedSequence<Vector> calculatePath() {
+        ConnectedSequence<Vector> path = new ConnectedSequence<>();
 
         Vector start = findStartPosition();
         path.add(start);
-        return path;
+
+        Vector current = path.first();
+        Vector previous = path.first();
+        while (true) {
+            current = findNext(current, previous);
+            if (current == null) {
+                // Path is finished
+                return path;
+            }
+            path.add(current);
+            if (path.size() > 2) {
+                previous = path.next(previous);
+            }
+        }
     }
 
-    // TODO: Come up with a more suitable way to find start position
+    private Vector findNext(Vector current, Vector previous) {
+        for (Vector direction : this.deltas) {
+            Vector potentialNextPath = current.plus(direction);
+
+            if (!potentialNextPath.equals(previous) && isPath(potentialNextPath)) {
+                return potentialNextPath;
+            }
+        }
+        return null;
+    }
+
+    private boolean isPath(Vector position) {
+        // Check if outside grid
+        if (position.getX() < 0 || position.getX() >= tileGrid[0].length
+                || position.getY() < 0 || position.getY() >= tileGrid.length) {
+            return false;
+        }
+        return tileGrid[position.getY()][position.getX()] == PATH;
+    }
+
 
     /**
-     * Goes through the border and finds the first PATH tile for start position
+     * Goes through every tile in the map to find the start position marked with enum Tile.START,
+     * or throws an exception if there are multiple
      * @return A vector defining the start position
      */
     private Vector findStartPosition() {
+        Vector start = null;
         for (int y = 0; y < tileGrid.length; y++) {
-            if (tileGrid[y][0] == PATH) {   // Check leftmost
-                return new Vector(0, y);
-            } else if (tileGrid[y][tileGrid[y].length - 1] == PATH) {   // Check rightmost
-                return new Vector(tileGrid[y].length - 1, y);
+            for (int x = 0; x < tileGrid[0].length; x++) {
+                if (getTile(x, y) != START) {
+                    continue;
+                }
+                if (start != null) {
+                    throw new IllegalTileMapException("A map cannot have more than one start position");
+                }
+                start = new Vector(x, y);
             }
         }
-        for (int x = 0; x < tileGrid[0].length; x++) {
-            if (tileGrid[0][x] == PATH) {   // Check topmost
-                return new Vector(x, 0);
-            } else if (tileGrid[tileGrid.length - 1][x] == PATH) {   // Check bottommost
-                return new Vector(x, tileGrid[tileGrid.length - 1].length);
-            }
+        if (start == null) {
+            throw new IllegalTileMapException("Could not find a start position for map");
         }
-        throw new IllegalTileMapException("Could not find a start position for the map");
+        return start;
     }
 
     public int getWidth() {
