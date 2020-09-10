@@ -1,15 +1,17 @@
 package model.game.enemy;
 
+import utils.Vector;
 import utils.VectorF;
 
 public class DefaultEnemy implements Enemy {
     private final EnemyService enemyService;
-    private float speed = 0.005f;
+    private final float SPEED = 0.015f;
     private VectorF pos;
-    private VectorF targetPos = getNextTargetPosition();
+    private Vector targetPos;
 
     public DefaultEnemy(EnemyService service, VectorF pos) {
         enemyService = service;
+        targetPos = enemyService.getFirstTargetPosition();
         this.pos = pos;
     }
 
@@ -25,24 +27,19 @@ public class DefaultEnemy implements Enemy {
 
 
     private void move() {
-        float moveDistance = speed;
+        float moveDistance = SPEED;
         VectorF targetDelta = targetPos.minus(pos);
         float targetDistance = targetDelta.getDist();
         while (targetDistance < moveDistance) {
-            pos = targetPos;
+            pos = targetPos.asVectorF();
             moveDistance -= targetDistance;
-            targetPos = getNextTargetPosition();
+            targetPos = enemyService.getNextTargetPosition(targetPos);
+            if (targetPos == null) targetPos = enemyService.getFirstTargetPosition();
             targetDelta = targetPos.minus(pos);
             targetDistance = targetDelta.getDist();
         }
         VectorF velocity = targetDelta.setMagnitude(moveDistance);
         pos = pos.plus(velocity);
-    }
-
-    private VectorF getNextTargetPosition() {
-        int x = (int) (Math.random() * 8);
-        int y = (int) (Math.random() * 8);
-        return new VectorF(x, y);
     }
 
     @Override

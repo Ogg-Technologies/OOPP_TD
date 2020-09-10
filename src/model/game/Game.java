@@ -8,6 +8,7 @@ import model.game.map.TileMap;
 import model.game.tower.ImmutableTower;
 import model.game.tower.TowerHandler;
 import model.game.tower.TowerService;
+import utils.Vector;
 
 import java.util.List;
 
@@ -19,9 +20,6 @@ public class Game implements TowerService, EnemyService {
     public Game() {
         towerHandler = new TowerHandler(this);
         enemyHandler = new EnemyHandler(this);
-        System.out.println(tileMap.getTile(1, 1));
-
-
     }
 
     public void update() {
@@ -40,5 +38,15 @@ public class Game implements TowerService, EnemyService {
 
     public List<? extends ImmutableEnemy> getEnemies() {
         return enemyHandler.getEnemies();
+    }
+
+    @Override
+    public Vector getFirstTargetPosition() {
+        return tileMap.getStartPosition();
+    }
+
+    @Override
+    public Vector getNextTargetPosition(Vector currentTargetPosition) {
+        return tileMap.getNextInPath(currentTargetPosition);
     }
 }

@@ -12,7 +12,7 @@ public class EnemyHandler {
     public EnemyHandler(EnemyService service) {
         enemyFactory = new EnemyFactory(service);
         enemies = new ArrayList<>();
-        enemies.add(enemyFactory.createBasicEnemy(new VectorF(1, 1)));
+        enemies.add(enemyFactory.createBasicEnemy(new VectorF(0, 1)));
     }
 
     public void update() {

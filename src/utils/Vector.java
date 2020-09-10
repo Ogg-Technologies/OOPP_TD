@@ -66,7 +66,7 @@ public class Vector {
         return new VectorF(x - other.getX(), y - other.getY());
     }
 
-    public VectorF asVector() {
+    public VectorF asVectorF() {
         return new VectorF(x, y);
     }
 }
