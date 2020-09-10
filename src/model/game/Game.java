@@ -20,6 +20,8 @@ public class Game implements TowerService, EnemyService {
         towerHandler = new TowerHandler(this);
         enemyHandler = new EnemyHandler(this);
         System.out.println(tileMap.getTile(1, 1));
+
+
     }
 
     public Tile[][] getTileMap() {

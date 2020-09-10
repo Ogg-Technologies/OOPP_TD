@@ -19,4 +19,6 @@ public class TowerHandler {
     public List<? extends ImmutableTower> getTowers() {
         return towers;
     }
+
+
 }
