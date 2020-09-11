@@ -12,6 +12,7 @@ public class SwingView implements View {
     private final ModelData modelData;
     private final Background mapPanel;
     private final TowerDrawer towerDrawer;
+    private final EnemyDrawer enemyDrawer;
 
     private int width = 800;
     private int height = 1000;
@@ -34,6 +35,7 @@ public class SwingView implements View {
         this.modelData = modelData;
         this.mapPanel = new Background(this.modelData.getTileMap());
         this.towerDrawer = new TowerDrawer();
+        this.enemyDrawer = new EnemyDrawer();
     }
 
     @Override
@@ -44,9 +46,11 @@ public class SwingView implements View {
         JLayeredPane layeredPane = new JLayeredPane();
 
         this.towerDrawer.setOpaque(false);
+        this.enemyDrawer.setOpaque(false);
 
         layeredPane.add(this.mapPanel, 0, 0);
         layeredPane.add(this.towerDrawer, 1, 0);
+        layeredPane.add(this.enemyDrawer, 2, 0);
 
         this.window.add(layeredPane);
         draw();
@@ -79,10 +83,11 @@ public class SwingView implements View {
         pos = pos.plus(new Vector(startX,startY));
 
         mapPanel.setSize(width,height);
-        mapPanel.setLocation(0,0);
         towerDrawer.setSize(window.getSize());
+        enemyDrawer.setSize(window.getSize());
         mapPanel.drawBackground(pos, tileWidth);
         towerDrawer.draw(modelData.getTowers(), pos, tileWidth);
+        enemyDrawer.draw(modelData.getEnemies(), pos, tileWidth);
     }
 
     @Override
