@@ -35,7 +35,7 @@ public class EnemyDrawer extends JPanel {
     private void setup() {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("resource/zombie.png"));
+            image = ImageIO.read(new File("resource/enemy.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

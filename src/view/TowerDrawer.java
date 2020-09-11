@@ -37,7 +37,7 @@ public class TowerDrawer extends JPanel {
     private void setup() {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("resource/archer.png"));
+            image = ImageIO.read(new File("resource/tower.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
