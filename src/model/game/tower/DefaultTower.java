@@ -45,4 +45,9 @@ public class DefaultTower implements Tower {
     public float getRange() {
         return 0;
     }
+
+    @Override
+    public void accept(TowerVisitor visitor) {
+        visitor.visit(this);
+    }
 }

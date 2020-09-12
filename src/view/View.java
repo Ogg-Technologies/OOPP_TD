@@ -1,5 +1,7 @@
 package view;
 
+import utils.Vector;
+
 import java.awt.event.MouseListener;
 
 public interface View extends Drawable {
@@ -9,7 +11,6 @@ public interface View extends Drawable {
 
     void addMouseListener(MouseListener mouseListener);
 
-    int getXOffset();
-    int getYOffset();
+    Vector getOffset();
 
 }

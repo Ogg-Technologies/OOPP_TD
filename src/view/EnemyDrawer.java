@@ -14,14 +14,11 @@ import java.io.IOException;
 public class EnemyDrawer implements EnemyVisitor {
     private static final BufferedImage image = getImage();
     private final Graphics graphics;
-    private final Vector offset;
-    private final int tileWidth;
+    private final WindowState windowState;
 
-
-    public EnemyDrawer(Graphics graphics, Vector offset, int tileWidth) {
-        this.graphics = graphics;
-        this.offset = offset;
-        this.tileWidth = tileWidth;
+    public EnemyDrawer(Graphics g, WindowState windowState) {
+        graphics = g;
+        this.windowState = windowState;
     }
 
     private static BufferedImage getImage() {
@@ -37,9 +34,9 @@ public class EnemyDrawer implements EnemyVisitor {
     @Override
     public void visit(Enemy enemy) {
 
-        int x = (int) (tileWidth * enemy.getPos().getX() + offset.getX());
-        int y = (int) (tileWidth * enemy.getPos().getY() + offset.getY());
+        int x = (int) (windowState.getTileSize() * enemy.getPos().getX() + windowState.getOffset().getX());
+        int y = (int) (windowState.getTileSize() * enemy.getPos().getY() + windowState.getOffset().getY());
 
-        graphics.drawImage(image, x, y, tileWidth, tileWidth, null);
+        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
     }
 }

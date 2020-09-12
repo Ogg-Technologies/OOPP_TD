@@ -3,6 +3,7 @@ package model.game.tower.concretetowers;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import model.game.tower.TowerService;
+import model.game.tower.TowerVisitor;
 import utils.Vector;
 
 import java.util.List;
@@ -40,5 +41,10 @@ public class BasicTower implements Tower {
     @Override
     public List<? extends Enemy> getEnemiesInRange(float range) {
         return baseTower.getEnemiesInRange(range);
+    }
+
+    @Override
+    public void accept(TowerVisitor visitor) {
+        visitor.visit(this);
     }
 }

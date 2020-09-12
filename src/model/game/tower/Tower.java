@@ -15,4 +15,6 @@ public interface Tower {
     List<? extends Enemy> getEnemiesInRange(float range);
 
     float getRange();
+
+    void accept(TowerVisitor visitor);
 }

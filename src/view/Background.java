@@ -1,29 +1,22 @@
 package view;
 
 import model.game.map.Tile;
-import utils.Vector;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Background extends JPanel {
     private Tile[][] tileGrid;
-    private Vector pos = new Vector(0,0);
-    private int tileWidth = 0;
+    private final WindowState windowState;
 
-    public Background(Tile[][] tileGrid) {
+    public Background(Tile[][] tileGrid, WindowState windowState) {
         this.tileGrid = tileGrid;
-    }
-
-    void drawBackground(Vector pos, int tileWidth) {
-        this.pos = pos;
-        this.tileWidth = tileWidth;
+        this.windowState = windowState;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
 
         for (int tileY = 0; tileY < this.tileGrid.length; tileY++) {
             for (int tileX = 0; tileX < this.tileGrid[0].length; tileX++) {
@@ -32,7 +25,9 @@ public class Background extends JPanel {
                 } else {
                     g.setColor(Color.decode("#D3D3D3"));
                 }
-                g.fillRect(tileX * tileWidth + this.pos.getX(), tileY * tileWidth + this.pos.getY(), tileWidth, tileWidth);
+                g.fillRect(tileX * windowState.getTileSize() + windowState.getOffset().getX(),
+                        tileY * windowState.getTileSize() + windowState.getOffset().getY(),
+                        windowState.getTileSize(), windowState.getTileSize());
             }
         }
     }
