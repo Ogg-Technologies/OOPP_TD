@@ -5,7 +5,7 @@ import model.game.enemy.EnemyHandler;
 import model.game.enemy.EnemyService;
 import model.game.map.Tile;
 import model.game.map.TileMap;
-import model.game.tower.ImmutableTower;
+import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
 import model.game.tower.TowerService;
 import utils.Vector;
@@ -32,7 +32,7 @@ public class Game implements TowerService, EnemyService {
         return tileMapCopy.getTileGrid();
     }
 
-    public List<? extends ImmutableTower> getTowers() {
+    public List<? extends Tower> getTowers() {
         return towerHandler.getTowers();
     }
 

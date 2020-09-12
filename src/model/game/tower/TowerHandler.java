@@ -16,7 +16,7 @@ public class TowerHandler {
         towers.add(factory.createBasicTower(new Vector(0, 0)));
     }
 
-    public List<? extends ImmutableTower> getTowers() {
+    public List<? extends Tower> getTowers() {
         return towers;
     }
 

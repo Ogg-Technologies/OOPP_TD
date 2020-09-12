@@ -5,7 +5,7 @@ import utils.Vector;
 
 import java.util.List;
 
-public interface Tower extends ImmutableTower {
+public interface Tower {
     TowerService getTowerService();
 
     Vector getPos();
@@ -14,4 +14,5 @@ public interface Tower extends ImmutableTower {
 
     List<? extends Enemy> getEnemiesInRange(float range);
 
+    float getRange();
 }

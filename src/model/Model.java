@@ -3,7 +3,7 @@ package model;
 import model.game.Game;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
-import model.game.tower.ImmutableTower;
+import model.game.tower.Tower;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     }
 
     @Override
-    public List<? extends ImmutableTower> getTowers() {
+    public List<? extends Tower> getTowers() {
         return game.getTowers();
     }
 
