@@ -1,60 +1,45 @@
 package view;
 
 import model.game.enemy.Enemy;
-import model.game.enemy.concreteenemies.BasicEnemy;
+import model.game.enemy.EnemyVisitor;
 import utils.Vector;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOError;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class EnemyDrawer extends JPanel {
-    private final Map<Class<? extends Enemy>, BufferedImage> enemyDrawerMap = new HashMap<>();
+public class EnemyDrawer implements EnemyVisitor {
+    private static final BufferedImage image = getImage();
+    private final Graphics graphics;
+    private final Vector offset;
+    private final int tileWidth;
 
-    private Vector pos = new Vector(0, 0);
-    private int tileWidth = 0;
-    private List<? extends Enemy> enemies = null;
 
-    public EnemyDrawer() {
-        setup();
-    }
-
-    void draw(List<? extends Enemy> enemies, Vector pos, int tileWidth) {
-        this.pos = pos;
-        this.enemies = enemies;
+    public EnemyDrawer(Graphics graphics, Vector offset, int tileWidth) {
+        this.graphics = graphics;
+        this.offset = offset;
         this.tileWidth = tileWidth;
     }
 
-
-    private void setup() {
-        BufferedImage image = null;
+    private static BufferedImage getImage() {
+        BufferedImage image;
         try {
             image = ImageIO.read(new File("resource/enemy.png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOError(e);
         }
-
-        enemyDrawerMap.put(BasicEnemy.class, image);
+        return image;
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void visit(Enemy enemy) {
 
-        for (Enemy e : enemies) {
-            BufferedImage curTower = enemyDrawerMap.get(e.getClass());
+        int x = (int) (tileWidth * enemy.getPos().getX() + offset.getX());
+        int y = (int) (tileWidth * enemy.getPos().getY() + offset.getY());
 
-            int x = (int) (tileWidth * e.getPos().getX() + pos.getX());
-            int y = (int) (tileWidth * e.getPos().getY() + pos.getY());
-
-            g.drawImage(curTower, x, y, tileWidth, tileWidth, null);
-        }
-
+        graphics.drawImage(image, x, y, tileWidth, tileWidth, null);
     }
 }

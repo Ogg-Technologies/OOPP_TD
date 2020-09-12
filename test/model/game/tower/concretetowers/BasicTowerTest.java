@@ -2,6 +2,7 @@ package model.game.tower.concretetowers;
 
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyService;
+import model.game.enemy.EnemyVisitor;
 import model.game.tower.DefaultTower;
 import model.game.tower.TowerService;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,10 @@ class BasicTowerTest {
             @Override
             public VectorF getPos() {
                 return pos;
+            }
+
+            @Override
+            public void accept(EnemyVisitor visitor) {
             }
         };
     }

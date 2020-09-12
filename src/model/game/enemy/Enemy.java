@@ -8,4 +8,6 @@ public interface Enemy {
     void update();
 
     VectorF getPos();
+
+    void accept(EnemyVisitor visitor);
 }

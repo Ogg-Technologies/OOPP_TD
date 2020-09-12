@@ -12,7 +12,7 @@ public class SwingView implements View {
     private final ModelData modelData;
     private final Background mapPanel;
     private final TowerDrawer towerDrawer;
-    private final EnemyDrawer enemyDrawer;
+    private final EnemyLayer enemyLayer;
 
     private int width = 800;
     private int height = 1000;
@@ -35,7 +35,7 @@ public class SwingView implements View {
         this.modelData = modelData;
         this.mapPanel = new Background(this.modelData.getTileMap());
         this.towerDrawer = new TowerDrawer();
-        this.enemyDrawer = new EnemyDrawer();
+        this.enemyLayer = new EnemyLayer();
     }
 
     @Override
@@ -46,11 +46,11 @@ public class SwingView implements View {
         JLayeredPane layeredPane = new JLayeredPane();
 
         this.towerDrawer.setOpaque(false);
-        this.enemyDrawer.setOpaque(false);
+        this.enemyLayer.setOpaque(false);
 
         layeredPane.add(this.mapPanel, 0, 0);
         layeredPane.add(this.towerDrawer, 1, 0);
-        layeredPane.add(this.enemyDrawer, 2, 0);
+        layeredPane.add(this.enemyLayer, 2, 0);
 
         this.window.add(layeredPane);
         draw();
@@ -77,17 +77,18 @@ public class SwingView implements View {
         int mapWidth = tileWidth * modelData.getTileMap()[0].length;
         int mapHeight = tileWidth * modelData.getTileMap().length;
 
-        int startX = (width-mapWidth)/2;
-        int startY = (height-mapHeight)/2;
+        int startX = (width - mapWidth) / 2;
+        int startY = (height - mapHeight) / 2;
 
-        pos = pos.plus(new Vector(startX,startY));
+        pos = pos.plus(new Vector(startX, startY));
 
-        mapPanel.setSize(width,height);
+        mapPanel.setSize(width, height);
         towerDrawer.setSize(window.getSize());
-        enemyDrawer.setSize(window.getSize());
+        enemyLayer.setSize(window.getSize());
         mapPanel.drawBackground(pos, tileWidth);
         towerDrawer.draw(modelData.getTowers(), pos, tileWidth);
-        enemyDrawer.draw(modelData.getEnemies(), pos, tileWidth);
+        enemyLayer.draw(modelData.getEnemies(), pos, tileWidth);
+        window.repaint();
     }
 
     @Override

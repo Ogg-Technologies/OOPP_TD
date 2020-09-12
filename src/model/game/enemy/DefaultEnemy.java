@@ -46,4 +46,9 @@ public class DefaultEnemy implements Enemy {
     public VectorF getPos() {
         return pos;
     }
+
+    @Override
+    public void accept(EnemyVisitor visitor) {
+        visitor.visit(this);
+    }
 }

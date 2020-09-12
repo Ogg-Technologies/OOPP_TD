@@ -18,7 +18,6 @@ public class Background extends JPanel {
     void drawBackground(Vector pos, int tileWidth) {
         this.pos = pos;
         this.tileWidth = tileWidth;
-        repaint();
     }
 
     @Override
