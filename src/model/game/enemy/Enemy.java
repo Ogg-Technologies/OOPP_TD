@@ -1,7 +1,11 @@
 package model.game.enemy;
 
-public interface Enemy extends ImmutableEnemy {
+import utils.VectorF;
+
+public interface Enemy {
     EnemyService getEnemyService();
 
     void update();
+
+    VectorF getPos();
 }

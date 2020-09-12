@@ -1,12 +1,11 @@
 package model.game.tower.concretetowers;
 
-import java.util.List;
-
-import model.game.enemy.ImmutableEnemy;
+import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import model.game.tower.TowerService;
-
 import utils.Vector;
+
+import java.util.List;
 
 public class BasicTower implements Tower {
 
@@ -39,7 +38,7 @@ public class BasicTower implements Tower {
     }
 
     @Override
-    public List<? extends ImmutableEnemy> getEnemiesInRange(float range) {
+    public List<? extends Enemy> getEnemiesInRange(float range) {
         return baseTower.getEnemiesInRange(range);
     }
 }

@@ -1,9 +1,10 @@
 package model.game.tower;
 
+import model.game.enemy.Enemy;
+
 import java.util.List;
 
-import model.game.enemy.ImmutableEnemy;
 
 public interface TowerService {
-    public List<? extends ImmutableEnemy> getEnemies();
+    public List<? extends Enemy> getEnemies();
 }

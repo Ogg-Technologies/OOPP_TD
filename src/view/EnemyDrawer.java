@@ -1,6 +1,6 @@
 package view;
 
-import model.game.enemy.ImmutableEnemy;
+import model.game.enemy.Enemy;
 import model.game.enemy.concreteenemies.BasicEnemy;
 import utils.Vector;
 
@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.Map;
 
 public class EnemyDrawer extends JPanel {
-    private final Map<Class<? extends ImmutableEnemy>, BufferedImage> enemyDrawerMap = new HashMap<>();
+    private final Map<Class<? extends Enemy>, BufferedImage> enemyDrawerMap = new HashMap<>();
 
     private Vector pos = new Vector(0, 0);
     private int tileWidth = 0;
-    private List<? extends ImmutableEnemy> enemies = null;
+    private List<? extends Enemy> enemies = null;
 
     public EnemyDrawer() {
         setup();
     }
 
-    void draw(List<? extends ImmutableEnemy> enemies, Vector pos, int tileWidth) {
+    void draw(List<? extends Enemy> enemies, Vector pos, int tileWidth) {
         this.pos = pos;
         this.enemies = enemies;
         this.tileWidth = tileWidth;
@@ -47,7 +47,7 @@ public class EnemyDrawer extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (ImmutableEnemy e : enemies) {
+        for (Enemy e : enemies) {
             BufferedImage curTower = enemyDrawerMap.get(e.getClass());
 
             int x = (int) (tileWidth * e.getPos().getX() + pos.getX());

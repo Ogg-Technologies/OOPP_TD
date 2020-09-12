@@ -1,10 +1,10 @@
 package model.game.tower;
 
+import model.game.enemy.Enemy;
+import utils.Vector;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import model.game.enemy.ImmutableEnemy;
-import utils.Vector;
 
 public class DefaultTower implements Tower {
 
@@ -31,10 +31,10 @@ public class DefaultTower implements Tower {
 
     }
 
-    public List<? extends ImmutableEnemy> getEnemiesInRange(float range) {
-        List<? extends ImmutableEnemy> allEnemies = towerService.getEnemies();
-        List<ImmutableEnemy> enemiesInRange = new ArrayList<>();
-        for (ImmutableEnemy currentEnemy : allEnemies) {
+    public List<? extends Enemy> getEnemiesInRange(float range) {
+        List<? extends Enemy> allEnemies = towerService.getEnemies();
+        List<Enemy> enemiesInRange = new ArrayList<>();
+        for (Enemy currentEnemy : allEnemies) {
             if (getPos().minus(currentEnemy.getPos()).getDist() <= range) {
                 enemiesInRange.add(currentEnemy);
             }

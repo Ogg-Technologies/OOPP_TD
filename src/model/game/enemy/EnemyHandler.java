@@ -21,7 +21,7 @@ public class EnemyHandler {
         }
     }
 
-    public List<? extends ImmutableEnemy> getEnemies() {
+    public List<? extends Enemy> getEnemies() {
         return enemies;
     }
 }

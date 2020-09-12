@@ -1,12 +1,8 @@
 package model.game.tower.concretetowers;
 
-import model.game.Game;
-import model.game.enemy.DefaultEnemy;
 import model.game.enemy.Enemy;
-import model.game.enemy.ImmutableEnemy;
-import model.game.enemy.concreteenemies.BasicEnemy;
+import model.game.enemy.EnemyService;
 import model.game.tower.DefaultTower;
-import model.game.tower.ImmutableTower;
 import model.game.tower.TowerService;
 import org.junit.jupiter.api.Test;
 import utils.Vector;
@@ -15,12 +11,12 @@ import utils.VectorF;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BasicTowerTest {
     @Test
     void checkEnemyInRange() {
-        ImmutableEnemy enemy = createMockEnemy(new VectorF(20, 1));
+        Enemy enemy = createMockEnemy(new VectorF(20, 1));
         DefaultTower tower = createMockTower(enemy, new Vector(0, 1));
         assertEquals(0, tower.getEnemiesInRange(3).size());
 
@@ -30,8 +26,17 @@ class BasicTowerTest {
     }
 
 
-    private ImmutableEnemy createMockEnemy(VectorF pos) {
-        return new ImmutableEnemy() {
+    private Enemy createMockEnemy(VectorF pos) {
+        return new Enemy() {
+            @Override
+            public EnemyService getEnemyService() {
+                return null;
+            }
+
+            @Override
+            public void update() {
+            }
+
             @Override
             public VectorF getPos() {
                 return pos;
@@ -39,11 +44,11 @@ class BasicTowerTest {
         };
     }
 
-    private DefaultTower createMockTower(ImmutableEnemy enemy, Vector pos) {
+    private DefaultTower createMockTower(Enemy enemy, Vector pos) {
         return new DefaultTower(new TowerService() {
             @Override
-            public List<? extends ImmutableEnemy> getEnemies() {
-                ArrayList<ImmutableEnemy> enemies = new ArrayList<>();
+            public List<? extends Enemy> getEnemies() {
+                ArrayList<Enemy> enemies = new ArrayList<>();
                 enemies.add(enemy);
                 return enemies;
             }

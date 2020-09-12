@@ -1,8 +1,8 @@
 package model.game;
 
+import model.game.enemy.Enemy;
 import model.game.enemy.EnemyHandler;
 import model.game.enemy.EnemyService;
-import model.game.enemy.ImmutableEnemy;
 import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.tower.ImmutableTower;
@@ -36,7 +36,7 @@ public class Game implements TowerService, EnemyService {
         return towerHandler.getTowers();
     }
 
-    public List<? extends ImmutableEnemy> getEnemies() {
+    public List<? extends Enemy> getEnemies() {
         return enemyHandler.getEnemies();
     }
 

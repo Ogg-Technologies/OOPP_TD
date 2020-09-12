@@ -1,6 +1,6 @@
 package model;
 
-import model.game.enemy.ImmutableEnemy;
+import model.game.enemy.Enemy;
 import model.game.map.Tile;
 import model.game.tower.ImmutableTower;
 
@@ -11,5 +11,5 @@ public interface ModelData {
 
     List<? extends ImmutableTower> getTowers();
 
-    List<? extends ImmutableEnemy> getEnemies();
+    List<? extends Enemy> getEnemies();
 }

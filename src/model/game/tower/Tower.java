@@ -1,9 +1,9 @@
 package model.game.tower;
 
-import java.util.List;
-
-import model.game.enemy.ImmutableEnemy;
+import model.game.enemy.Enemy;
 import utils.Vector;
+
+import java.util.List;
 
 public interface Tower extends ImmutableTower {
     TowerService getTowerService();
@@ -12,6 +12,6 @@ public interface Tower extends ImmutableTower {
 
     void update();
 
-    List<? extends ImmutableEnemy> getEnemiesInRange(float range);
+    List<? extends Enemy> getEnemiesInRange(float range);
 
 }
