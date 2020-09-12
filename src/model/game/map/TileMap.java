@@ -48,7 +48,7 @@ public class TileMap {
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, PATH},
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, PATH},
                 {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, PATH},
-                {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, PATH}
+                {GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, BASE, PATH}
         };
     }
 
@@ -63,7 +63,8 @@ public class TileMap {
     private ConnectedSequence<Vector> calculatePath() {
         ConnectedSequence<Vector> path = new ConnectedSequence<>();
 
-        Vector start = findStartPosition();
+        Vector start = findSingleTilePosition(START);
+        Vector base = findSingleTilePosition(BASE);
         path.add(start);
 
         Vector current = path.first();
@@ -72,15 +73,29 @@ public class TileMap {
             current = findNext(current, previous);
             if (current == null) {
                 // Path is finished
-                return path;
+                break;
             }
             path.add(current);
             if (path.size() > 2) {
                 previous = path.next(previous);
             }
         }
+
+        // Check if the base tile is within one tile of the current last path tile
+        if (path.last().minus(base).getDist() == 1) {
+            path.add(base);
+            return path;
+        }
+        throw new IllegalTileMapException("The base tile (" + base
+                + ") is not connected to the last path (" + path.last() + ") tile");
     }
 
+    /**
+     * Goes through all deltas (unit vectors in each direction) and finds out which one is the next in the path
+     * @param current The current grid position as starting point
+     * @param previous The previous grid position to stop backtracking
+     * @return The next grid position in the path as a vector or null if its the end of the path
+     */
     private Vector findNext(Vector current, Vector previous) {
         for (Vector direction : this.deltas) {
             Vector potentialNextPath = current.plus(direction);
@@ -103,27 +118,28 @@ public class TileMap {
 
 
     /**
-     * Goes through every tile in the map to find the start position marked with enum Tile.START,
-     * or throws an exception if there are multiple
-     * @return A vector defining the start position
+     * Goes through every tile in the map to find the position with the tile given as argument
+     * If none or multiple were found it throws an IllegalTileMapException
+     * @param tile The tile to search for
+     * @return A vector defining the position of the tile
      */
-    private Vector findStartPosition() {
-        Vector start = null;
+    private Vector findSingleTilePosition(Tile tile) {
+        Vector position = null;
         for (int y = 0; y < tileGrid.length; y++) {
             for (int x = 0; x < tileGrid[0].length; x++) {
-                if (getTile(x, y) != START) {
+                if (getTile(x, y) != tile) {
                     continue;
                 }
-                if (start != null) {
-                    throw new IllegalTileMapException("A map cannot have more than one start position");
+                if (position != null) {
+                    throw new IllegalTileMapException("Found multiple " + tile + " in map when only expecting one");
                 }
-                start = new Vector(x, y);
+                position = new Vector(x, y);
             }
         }
-        if (start == null) {
-            throw new IllegalTileMapException("Could not find a start position for map");
+        if (position == null) {
+            throw new IllegalTileMapException("Could not find a " + tile + " tile in map");
         }
-        return start;
+        return position;
     }
 
     public int getWidth() {
