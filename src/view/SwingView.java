@@ -4,6 +4,7 @@ import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import utils.Vector;
+import utils.VectorF;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +17,13 @@ public class SwingView implements View {
     private final Background mapPanel;
     private final JPanel towerLayer;
     private final JPanel enemyLayer;
+    private final GUIPanel GUIPanel;
 
     private int width = 800;
     private int height = 1000;
 
-    private final int widthOffset = 17;//WidthOffset = Actual subtraction on width needed to get usable width
-    private final int heightOffset = 40;//same goes for y
+    final static int widthOffset = 17;//WidthOffset = Actual subtraction on width needed to get usable width
+    final static int heightOffset = 40;//same goes for y
 
     private Integer tileWidth = 0;
     private Vector pos;
@@ -61,6 +63,8 @@ public class SwingView implements View {
                 }
             }
         };
+        this.GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f)
+                ,modelData.getBaseHealth());
     }
 
     @Override
@@ -74,10 +78,12 @@ public class SwingView implements View {
 
         this.towerLayer.setOpaque(false);
         this.enemyLayer.setOpaque(false);
+        this.GUIPanel.setOpaque(false);
 
         layeredPane.add(this.mapPanel, 0, 0);
         layeredPane.add(this.towerLayer, 1, 0);
         layeredPane.add(this.enemyLayer, 2, 0);
+        layeredPane.add(this.GUIPanel, 3, 0);
 
         this.window.add(layeredPane);
         draw();
@@ -90,10 +96,12 @@ public class SwingView implements View {
         Vector tileSize = new Vector(modelData.getTileMap()[0].length, modelData.getTileMap().length);
 
         windowState.update(totalSize, tileSize);
+        GUIPanel.updateHp(modelData.getBaseHealth());
 
         mapPanel.setSize(window.getSize());
         towerLayer.setSize(window.getSize());
         enemyLayer.setSize(window.getSize());
+        GUIPanel.setSize(window.getSize());
         window.repaint();
     }
 

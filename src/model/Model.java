@@ -33,4 +33,9 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     public List<? extends Enemy> getEnemies() {
         return game.getEnemies();
     }
+
+    @Override
+    public float getBaseHealth() { //TODO Make this not dummy method
+        return 0.5f;
+    }
 }

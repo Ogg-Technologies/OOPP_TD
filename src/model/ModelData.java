@@ -12,4 +12,6 @@ public interface ModelData {
     List<? extends Tower> getTowers();
 
     List<? extends Enemy> getEnemies();
+
+    float getBaseHealth(); // TODO (see model TODO)
 }
