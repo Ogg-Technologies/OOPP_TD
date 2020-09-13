@@ -1,17 +1,21 @@
 package model.game.enemy;
 
+import model.game.Health;
+import model.game.MutableHealth;
 import utils.Vector;
 import utils.VectorF;
 
 public class DefaultEnemy implements Enemy {
     private final EnemyService enemyService;
-    private final float SPEED = 0.015f;
+    private final float SPEED = 0.115f;
     private VectorF pos;
     private Vector targetPos;
+    private final MutableHealth health;
 
     public DefaultEnemy(EnemyService service, VectorF pos) {
         enemyService = service;
         targetPos = enemyService.getFirstTargetPosition();
+        health = new MutableHealth(20);
         this.pos = pos;
     }
 
@@ -23,6 +27,7 @@ public class DefaultEnemy implements Enemy {
     @Override
     public void update() {
         move();
+        System.out.println(health);
     }
 
 
@@ -33,8 +38,12 @@ public class DefaultEnemy implements Enemy {
         while (targetDistance < moveDistance) {
             pos = targetPos.asVectorF();
             moveDistance -= targetDistance;
-            targetPos = enemyService.getNextTargetPosition(targetPos);
-            if (targetPos == null) targetPos = enemyService.getFirstTargetPosition();
+            Vector nextTargetPosition = enemyService.getNextTargetPosition(targetPos);
+            if (nextTargetPosition == null) {
+                health.setZero();
+                return;
+            }
+            targetPos = nextTargetPosition;
             targetDelta = targetPos.minus(pos);
             targetDistance = targetDelta.getDist();
         }
@@ -50,5 +59,20 @@ public class DefaultEnemy implements Enemy {
     @Override
     public void accept(EnemyVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public void damage(int amount) {
+        health.damage(amount);
+    }
+
+    @Override
+    public void applyStatusEffect(StatusEffect effect) {
+
+    }
+
+    @Override
+    public Health getHealth() {
+        return health;
     }
 }

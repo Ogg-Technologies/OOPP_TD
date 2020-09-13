@@ -1,8 +1,10 @@
 package model.game.enemy.concreteenemies;
 
+import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyService;
 import model.game.enemy.EnemyVisitor;
+import model.game.enemy.StatusEffect;
 import utils.VectorF;
 
 public class BasicEnemy implements Enemy {
@@ -30,5 +32,20 @@ public class BasicEnemy implements Enemy {
     @Override
     public void accept(EnemyVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public void damage(int amount) {
+        baseEnemy.damage(amount);
+    }
+
+    @Override
+    public void applyStatusEffect(StatusEffect effect) {
+        baseEnemy.applyStatusEffect(effect);
+    }
+
+    @Override
+    public Health getHealth() {
+        return baseEnemy.getHealth();
     }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
 import model.game.tower.Tower;
@@ -13,5 +14,5 @@ public interface ModelData {
 
     List<? extends Enemy> getEnemies();
 
-    float getBaseHealth(); // TODO (see model TODO)
+    Health getBaseHealth();
 }

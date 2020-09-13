@@ -1,8 +1,10 @@
 package model.game.tower.concretetowers;
 
+import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyService;
 import model.game.enemy.EnemyVisitor;
+import model.game.enemy.StatusEffect;
 import model.game.tower.DefaultTower;
 import model.game.tower.TowerService;
 import org.junit.jupiter.api.Test;
@@ -45,6 +47,20 @@ class BasicTowerTest {
 
             @Override
             public void accept(EnemyVisitor visitor) {
+            }
+
+            @Override
+            public void damage(int amount) {
+            }
+
+            @Override
+            public void applyStatusEffect(StatusEffect effect) {
+
+            }
+
+            @Override
+            public Health getHealth() {
+                return null;
             }
         };
     }

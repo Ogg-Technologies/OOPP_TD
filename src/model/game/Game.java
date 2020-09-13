@@ -16,10 +16,12 @@ public class Game implements TowerService, EnemyService {
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
     private final TowerHandler towerHandler;
     private final EnemyHandler enemyHandler;
+    private final MutableHealth baseHealth;
 
     public Game() {
         towerHandler = new TowerHandler(this);
         enemyHandler = new EnemyHandler(this);
+        baseHealth = new MutableHealth(100);
     }
 
     public void update() {
@@ -48,5 +50,9 @@ public class Game implements TowerService, EnemyService {
     @Override
     public Vector getNextTargetPosition(Vector currentTargetPosition) {
         return tileMap.getNextInPath(currentTargetPosition);
+    }
+
+    public Health getBaseHealth() {
+        return baseHealth;
     }
 }

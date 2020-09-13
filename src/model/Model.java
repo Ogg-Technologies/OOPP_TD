@@ -1,6 +1,7 @@
 package model;
 
 import model.game.Game;
+import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
 import model.game.tower.Tower;
@@ -35,7 +36,7 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     }
 
     @Override
-    public float getBaseHealth() { //TODO Make this not dummy method
-        return 0.01f;
+    public Health getBaseHealth() {
+        return game.getBaseHealth();
     }
 }

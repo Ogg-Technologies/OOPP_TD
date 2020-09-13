@@ -64,7 +64,7 @@ public class SwingView implements View {
             }
         };
         this.GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f)
-                ,modelData.getBaseHealth());
+                , modelData.getBaseHealth().getFraction());
     }
 
     @Override
@@ -96,7 +96,7 @@ public class SwingView implements View {
         Vector tileSize = new Vector(modelData.getTileMap()[0].length, modelData.getTileMap().length);
 
         windowState.update(totalSize, tileSize);
-        GUIPanel.updateHp(modelData.getBaseHealth());
+        GUIPanel.updateHp(modelData.getBaseHealth().getFraction());
 
         mapPanel.setSize(window.getSize());
         towerLayer.setSize(window.getSize());
