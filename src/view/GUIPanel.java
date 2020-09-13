@@ -3,8 +3,13 @@ package view;
 import utils.Vector;
 import utils.VectorF;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 
 public class GUIPanel extends JPanel {
     private VectorF pos;
@@ -32,6 +37,6 @@ public class GUIPanel extends JPanel {
         float height = ((hpMaxHeight-y)*(1 - pos.getY()));
         g.fillRect((int)x,(int)y,(int)(hpWidth*getWidth()),(int)(height)-1);//Rounding error causes -1
         g.setColor(Color.green);
-        g.fillRect((int)x,(int)(y + ((1 - hp)*height)), (int)(hpWidth*getWidth()), (int)((height*hp)*(1 - pos.getY())));
+        g.fillRect((int)x,(int)(y + ((1 - hp)*height)), (int)(hpWidth*getWidth()), (int)((height*hp)));
     }
 }

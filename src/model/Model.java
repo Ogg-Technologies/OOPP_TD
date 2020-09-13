@@ -36,6 +36,6 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
 
     @Override
     public float getBaseHealth() { //TODO Make this not dummy method
-        return 0.5f;
+        return 0.01f;
     }
 }

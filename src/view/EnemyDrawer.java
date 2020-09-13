@@ -12,7 +12,7 @@ import java.io.IOError;
 import java.io.IOException;
 
 public class EnemyDrawer implements EnemyVisitor {
-    private static final BufferedImage image = getImage();
+    private static final BufferedImage image = getEnemyImage();
     private final Graphics graphics;
     private final WindowState windowState;
 
@@ -21,7 +21,7 @@ public class EnemyDrawer implements EnemyVisitor {
         this.windowState = windowState;
     }
 
-    private static BufferedImage getImage() {
+    private static BufferedImage getEnemyImage() {
         BufferedImage image;
         try {
             image = ImageIO.read(new File("resource/enemy.png"));
