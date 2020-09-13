@@ -27,10 +27,13 @@ public class DefaultEnemy implements Enemy {
     @Override
     public void update() {
         move();
-        System.out.println(health);
     }
 
 
+    /**
+     * Moves the enemy a number of tiles equal to its speed along the path defined by enemyService. When a target along
+     * the path is reached it will automatically fetch the next one with enemyService.getNextTargetPosition()
+     */
     private void move() {
         float moveDistance = SPEED;
         VectorF targetDelta = targetPos.minus(pos);
@@ -40,6 +43,7 @@ public class DefaultEnemy implements Enemy {
             moveDistance -= targetDistance;
             Vector nextTargetPosition = enemyService.getNextTargetPosition(targetPos);
             if (nextTargetPosition == null) {
+                enemyService.damageBase(health.getCurrent());
                 health.setZero();
                 return;
             }

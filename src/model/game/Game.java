@@ -52,6 +52,11 @@ public class Game implements TowerService, EnemyService {
         return tileMap.getNextInPath(currentTargetPosition);
     }
 
+    @Override
+    public void damageBase(int current) {
+        baseHealth.damage(current);
+    }
+
     public Health getBaseHealth() {
         return baseHealth;
     }

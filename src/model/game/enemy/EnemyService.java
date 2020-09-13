@@ -7,4 +7,6 @@ public interface EnemyService {
     Vector getFirstTargetPosition();
 
     Vector getNextTargetPosition(Vector currentTargetPosition);
+
+    void damageBase(int current);
 }

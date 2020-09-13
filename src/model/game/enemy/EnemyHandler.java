@@ -3,11 +3,13 @@ package model.game.enemy;
 import utils.VectorF;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class EnemyHandler {
     private final EnemyFactory enemyFactory;
     private final List<Enemy> enemies;
+    private int clock = 0;
 
     public EnemyHandler(EnemyService service) {
         enemyFactory = new EnemyFactory(service);
@@ -16,8 +18,22 @@ public class EnemyHandler {
     }
 
     public void update() {
-        for (Enemy e : enemies) {
+        clock++;
+        if (clock % 100 == 0) {
+            enemies.add(enemyFactory.createBasicEnemy(new VectorF(0, 1)));
+        }
+
+        for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
+            Enemy e = enemyIterator.next();
+            if (e.getHealth().isDead()) {
+                enemyIterator.remove();
+            }
+
             e.update();
+
+            if (e.getHealth().isDead()) {
+                enemyIterator.remove();
+            }
         }
     }
 
