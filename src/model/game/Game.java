@@ -25,6 +25,9 @@ public class Game implements TowerService, EnemyService {
     }
 
     public void update() {
+        if (baseHealth.isDead()) {
+            return;
+        }
         towerHandler.update();
         enemyHandler.update();
     }
