@@ -13,7 +13,10 @@ public class TowerHandler {
     public TowerHandler(TowerService towerService) {
         factory = new TowerFactory(towerService);
         towers = new ArrayList<>();
-        towers.add(factory.createBasicTower(new Vector(0, 0)));
+        towers.add(factory.createBasicTower(new Vector(0, 1)));
+        towers.add(factory.createBasicTower(new Vector(1, 0)));
+        towers.add(factory.createBasicTower(new Vector(2, 0)));
+
     }
 
     public List<? extends Tower> getTowers() {

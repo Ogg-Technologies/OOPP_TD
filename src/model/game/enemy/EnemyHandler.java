@@ -27,6 +27,7 @@ public class EnemyHandler {
             Enemy e = enemyIterator.next();
             if (e.getHealth().isDead()) {
                 enemyIterator.remove();
+                continue;
             }
 
             e.update();

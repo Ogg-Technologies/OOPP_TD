@@ -27,9 +27,7 @@ public class DefaultTower implements Tower {
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update() {}
 
     public List<? extends Enemy> getEnemiesInRange(float range) {
         List<? extends Enemy> allEnemies = towerService.getEnemies();

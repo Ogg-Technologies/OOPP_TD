@@ -68,6 +68,7 @@ public class DefaultEnemy implements Enemy {
     @Override
     public void damage(int amount) {
         health.damage(amount);
+        System.out.println(health);
     }
 
     @Override
