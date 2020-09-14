@@ -32,7 +32,7 @@ public class TowerDrawer implements TowerVisitor {
     private static BufferedImage getImage() {
         BufferedImage image;
         try {
-            image = ImageIO.read(new File("resource/tower.png"));
+            image = ImageIO.read(new File("resource/bearTower.png"));
         } catch (IOException e) {
             throw new IOError(e);
         }
