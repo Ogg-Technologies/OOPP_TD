@@ -1,5 +1,6 @@
 package view;
 
+import application.ShutDownAble;
 import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
@@ -31,13 +32,18 @@ public class SwingView implements View {
     private final Vector offset = new Vector(8, 31);
 
     private final WindowState windowState = new WindowState();
+    private final ShutDownAble shutDownAble;
 
     @Override
     public Vector getOffset() {
         return offset;
     }
 
-    public SwingView(ModelData modelData) {
+    private boolean windowHasBeenActive = false;
+
+    public SwingView(ModelData modelData, ShutDownAble shutDownAble) {
+
+        this.shutDownAble = shutDownAble;
 
         window = new Window();
         this.modelData = modelData;
@@ -71,7 +77,7 @@ public class SwingView implements View {
     public void start() {
         window.setSize(width, height);
         window.setVisible(true);
-
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.mapPanel.setSize(window.getSize());
         JLayeredPane layeredPane = new JLayeredPane();
@@ -92,6 +98,7 @@ public class SwingView implements View {
     @Override
     public void draw() {
 
+
         Vector totalSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
         Vector tileSize = new Vector(modelData.getTileMap()[0].length, modelData.getTileMap().length);
 
@@ -103,10 +110,19 @@ public class SwingView implements View {
         enemyLayer.setSize(window.getSize());
         GUIPanel.setSize(window.getSize());
         window.repaint();
+
+
+        if (!window.isActive() && windowHasBeenActive) {
+            shutDownAble.shutDown();
+        }
+        if (window.isActive()) {
+            windowHasBeenActive = true;
+        }
     }
 
     @Override
     public void addMouseListener(MouseListener mouseListener) {
         window.addMouseListener(mouseListener);
     }
+
 }

@@ -53,4 +53,9 @@ public class ApplicationLoop implements Runnable {
             }
         }
     }
+
+    public void shutDown() {
+        playing = false;
+    }
+
 }
