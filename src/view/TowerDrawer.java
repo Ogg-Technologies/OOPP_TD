@@ -1,21 +1,14 @@
 package view;
 
-import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import model.game.tower.TowerVisitor;
-import model.game.tower.concretetowers.BasicTower;
-import utils.Vector;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class TowerDrawer implements TowerVisitor {

@@ -1,15 +1,9 @@
 package view;
 
-import utils.Vector;
 import utils.VectorF;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 public class GUIPanel extends JPanel {
     private VectorF pos;
