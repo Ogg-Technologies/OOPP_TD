@@ -11,8 +11,8 @@ public class EnemyHandler {
     private final List<Enemy> enemies;
     private int clock = 0;
 
-    public EnemyHandler(EnemyService service, List<? extends Vector> path) {
-        enemyFactory = new EnemyFactory(service, path);
+    public EnemyHandler(BaseDamager baseDamager, List<? extends Vector> path) {
+        enemyFactory = new EnemyFactory(baseDamager, path);
         enemies = new ArrayList<>();
         enemies.add(enemyFactory.createFishstick());
     }

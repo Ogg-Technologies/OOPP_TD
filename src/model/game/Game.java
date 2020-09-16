@@ -2,7 +2,6 @@ package model.game;
 
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyHandler;
-import model.game.enemy.EnemyService;
 import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Game implements TowerService, EnemyService, ProjectileService {
+public class Game implements TowerService, ProjectileService {
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
     private final TowerHandler towerHandler;
     private final EnemyHandler enemyHandler;
@@ -27,8 +26,8 @@ public class Game implements TowerService, EnemyService, ProjectileService {
 
     public Game() {
         towerHandler = new TowerHandler(this);
-        enemyHandler = new EnemyHandler(this, tileMap.getPath());
         baseHealth = new MutableHealth(100);
+        enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath());
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this);
     }
@@ -68,11 +67,6 @@ public class Game implements TowerService, EnemyService, ProjectileService {
 
     public List<? extends Enemy> getEnemies() {
         return enemyHandler.getEnemies();
-    }
-
-    @Override
-    public void damageBase(int current) {
-        baseHealth.damage(current);
     }
 
     public Health getBaseHealth() {

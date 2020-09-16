@@ -1,7 +1,7 @@
 package model.game.enemy.concreteenemies;
 
 import model.game.enemy.AbstractEnemy;
-import model.game.enemy.EnemyService;
+import model.game.enemy.BaseDamager;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.PathIterator;
 
@@ -10,8 +10,8 @@ public class BasicEnemy extends AbstractEnemy {
     public static final double BASE_SPEED = 0.1;
     public final Type type;
 
-    public BasicEnemy(EnemyService service, PathIterator pathIterator, Type type) {
-        super(service, pathIterator, (int) (BASE_HEALTH * type.healthMultiplier), BASE_SPEED * type.speedMultiplier);
+    public BasicEnemy(BaseDamager baseDamager, PathIterator pathIterator, Type type) {
+        super(baseDamager, pathIterator, (int) (BASE_HEALTH * type.healthMultiplier), BASE_SPEED * type.speedMultiplier);
         this.type = type;
     }
 

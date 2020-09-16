@@ -7,16 +7,16 @@ import utils.Vector;
 import java.util.List;
 
 public class EnemyFactory {
-    private final EnemyService service;
+    private final BaseDamager baseDamager;
     private final List<? extends Vector> path;
 
-    public EnemyFactory(EnemyService service, List<? extends Vector> path) {
-        this.service = service;
+    public EnemyFactory(BaseDamager baseDamager, List<? extends Vector> path) {
+        this.baseDamager = baseDamager;
         this.path = path;
     }
 
     private BasicEnemy createBasicEnemy(Type type) {
-        return new BasicEnemy(service, new PathIterator(path), type);
+        return new BasicEnemy(baseDamager, new PathIterator(path), type);
     }
 
     public Enemy createFishstick() {
