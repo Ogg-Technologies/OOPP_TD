@@ -11,6 +11,6 @@ public class EnemyFactory {
     }
 
     public Enemy createBasicEnemy(VectorF pos) {
-        return new BasicEnemy(new DefaultEnemy(service, pos));
+        return new BasicEnemy(service, pos);
     }
 }

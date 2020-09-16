@@ -5,17 +5,17 @@ import model.game.MutableHealth;
 import utils.Vector;
 import utils.VectorF;
 
-public class DefaultEnemy implements Enemy {
+public abstract class AbstractEnemy implements Enemy {
     private final EnemyService enemyService;
     private final float SPEED = 0.115f;
     private VectorF pos;
     private Vector targetPos;
-    private final MutableHealth health;
+    protected final MutableHealth health;
 
-    public DefaultEnemy(EnemyService service, VectorF pos) {
+    public AbstractEnemy(EnemyService service, VectorF pos, int maxHealth) {
         enemyService = service;
         targetPos = enemyService.getFirstTargetPosition();
-        health = new MutableHealth(20);
+        health = new MutableHealth(maxHealth);
         this.pos = pos;
     }
 
@@ -58,11 +58,6 @@ public class DefaultEnemy implements Enemy {
     @Override
     public VectorF getPos() {
         return pos;
-    }
-
-    @Override
-    public void accept(EnemyVisitor visitor) {
-        visitor.visit(this);
     }
 
     @Override

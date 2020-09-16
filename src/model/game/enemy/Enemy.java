@@ -10,11 +10,11 @@ public interface Enemy {
 
     VectorF getPos();
 
-    void accept(EnemyVisitor visitor);
-
     void damage(int amount);
 
     void applyStatusEffect(StatusEffect effect);
 
     Health getHealth();
+
+    void accept(EnemyVisitor visitor);
 }
