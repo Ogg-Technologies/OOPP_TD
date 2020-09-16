@@ -14,13 +14,13 @@ public class EnemyHandler {
     public EnemyHandler(EnemyService service) {
         enemyFactory = new EnemyFactory(service);
         enemies = new ArrayList<>();
-        enemies.add(enemyFactory.createBasicEnemy(new VectorF(0, 1)));
+        enemies.add(enemyFactory.createFishstick(new VectorF(0, 1)));
     }
 
     public void update() {
         clock++;
         if (clock % 100 == 0) {
-            enemies.add(enemyFactory.createBasicEnemy(new VectorF(0, 1)));
+            enemies.add(enemyFactory.createFishstick(new VectorF(0, 1)));
         }
 
         for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {

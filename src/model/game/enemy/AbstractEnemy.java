@@ -7,16 +7,17 @@ import utils.VectorF;
 
 public abstract class AbstractEnemy implements Enemy {
     private final EnemyService enemyService;
-    private final float SPEED = 0.115f;
+    private final double speed;
     private VectorF pos;
     private Vector targetPos;
     protected final MutableHealth health;
 
-    public AbstractEnemy(EnemyService service, VectorF pos, int maxHealth) {
+    public AbstractEnemy(EnemyService service, VectorF pos, int maxHealth, double speed) {
         enemyService = service;
         targetPos = enemyService.getFirstTargetPosition();
         health = new MutableHealth(maxHealth);
         this.pos = pos;
+        this.speed = speed;
     }
 
     @Override
@@ -35,7 +36,7 @@ public abstract class AbstractEnemy implements Enemy {
      * the path is reached it will automatically fetch the next one with enemyService.getNextTargetPosition()
      */
     private void move() {
-        float moveDistance = SPEED;
+        float moveDistance = (float) speed;
         VectorF targetDelta = targetPos.minus(pos);
         float targetDistance = targetDelta.getDist();
         while (targetDistance < moveDistance) {
