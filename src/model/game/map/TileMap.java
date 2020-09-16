@@ -142,17 +142,15 @@ public class TileMap {
         return position;
     }
 
-    public int getWidth() {
-        if (getHeight() == 0)
-            return 0;
-        return tileGrid[0].length;
-    }
-
     public Tile[][] getTileGrid() {
         return tileGrid;
     }
 
-    public int getHeight() {
+    private int getWidth() {
+        return tileGrid[0].length;
+    }
+
+    private int getHeight() {
         return tileGrid.length;
     }
 
@@ -162,5 +160,9 @@ public class TileMap {
         if (y < 0 || y >= getHeight())
             throw new IllegalArgumentException("y: " + y + " is not within 0 to " + (getHeight() - 1));
         return tileGrid[y][x];
+    }
+
+    public Vector getSize() {
+        return new Vector(getWidth(), getHeight());
     }
 }
