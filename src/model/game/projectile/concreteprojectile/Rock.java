@@ -17,5 +17,6 @@ public class Rock extends AbstractProjectile {
     @Override
     protected void onEnemyHit(Enemy enemy) {
         enemy.damage(damage);
+        consumed = true;
     }
 }

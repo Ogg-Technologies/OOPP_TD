@@ -1,5 +1,6 @@
 package model.game.projectile;
 
+import model.game.CollisionDetector;
 import model.game.enemy.Enemy;
 import utils.Vector;
 import utils.VectorF;
@@ -25,6 +26,18 @@ public abstract class AbstractProjectile implements Projectile {
         position = position.plus(velocity);
 
         removeIfOutsideMap();
+        checkCollisions();
+    }
+
+    private void checkCollisions() {
+        for (Enemy e : service.getEnemies()) {
+            if (CollisionDetector.isEnemyAndProjectileColliding(e, this)) {
+                onEnemyHit(e);
+            }
+            if (isConsumed()) {
+                return;
+            }
+        }
     }
 
     protected abstract void onEnemyHit(Enemy enemy);
