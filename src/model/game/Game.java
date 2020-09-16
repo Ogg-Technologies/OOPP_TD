@@ -27,7 +27,7 @@ public class Game implements TowerService, EnemyService, ProjectileService {
 
     public Game() {
         towerHandler = new TowerHandler(this);
-        enemyHandler = new EnemyHandler(this);
+        enemyHandler = new EnemyHandler(this, tileMap.getPath());
         baseHealth = new MutableHealth(100);
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this);
@@ -68,16 +68,6 @@ public class Game implements TowerService, EnemyService, ProjectileService {
 
     public List<? extends Enemy> getEnemies() {
         return enemyHandler.getEnemies();
-    }
-
-    @Override
-    public Vector getFirstTargetPosition() {
-        return tileMap.getStartPosition();
-    }
-
-    @Override
-    public Vector getNextTargetPosition(Vector currentTargetPosition) {
-        return tileMap.getNextInPath(currentTargetPosition);
     }
 
     @Override

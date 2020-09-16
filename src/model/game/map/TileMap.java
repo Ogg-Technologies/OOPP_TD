@@ -1,6 +1,5 @@
 package model.game.map;
 
-import utils.ConnectedSequence;
 import utils.Vector;
 
 import java.util.ArrayList;
@@ -12,7 +11,8 @@ public class TileMap {
 
     private final Tile[][] tileGrid;
     private final List<? extends Vector> deltas;
-    private final ConnectedSequence<Vector> path;
+    //private final ConnectedSequence<Vector> path;
+    private final List<Vector> path;
 
     private TileMap(Tile[][] tileGrid) {
         this.tileGrid = tileGrid;
@@ -52,23 +52,15 @@ public class TileMap {
         };
     }
 
-    public Vector getStartPosition() {
-        return path.first();
-    }
-
-    public Vector getNextInPath(Vector previous) {
-        return path.next(previous);
-    }
-
-    private ConnectedSequence<Vector> calculatePath() {
-        ConnectedSequence<Vector> path = new ConnectedSequence<>();
+    private List<Vector> calculatePath() {
+        List<Vector> path = new ArrayList<>();
 
         Vector start = findSingleTilePosition(START);
         Vector base = findSingleTilePosition(BASE);
         path.add(start);
 
-        Vector current = path.first();
-        Vector previous = path.first();
+        Vector current = path.get(0);
+        Vector previous = path.get(0);
         while (true) {
             current = findNext(current, previous);
             if (current == null) {
@@ -77,17 +69,17 @@ public class TileMap {
             }
             path.add(current);
             if (path.size() > 2) {
-                previous = path.next(previous);
+                previous = path.get(path.size() - 2);
             }
         }
 
         // Check if the base tile is within one tile of the current last path tile
-        if (path.last().minus(base).getDist() == 1) {
+        if (path.get(path.size() - 1).minus(base).getDist() == 1) {
             path.add(base);
             return path;
         }
         throw new IllegalTileMapException("The base tile (" + base
-                + ") is not connected to the last path (" + path.last() + ") tile");
+                + ") is not connected to the last path (" + path.get(path.size() - 1) + ") tile");
     }
 
     /**
@@ -164,5 +156,9 @@ public class TileMap {
 
     public Vector getSize() {
         return new Vector(getWidth(), getHeight());
+    }
+
+    public List<? extends Vector> getPath() {
+        return path;
     }
 }

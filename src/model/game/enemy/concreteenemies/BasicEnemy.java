@@ -3,15 +3,15 @@ package model.game.enemy.concreteenemies;
 import model.game.enemy.AbstractEnemy;
 import model.game.enemy.EnemyService;
 import model.game.enemy.EnemyVisitor;
-import utils.VectorF;
+import model.game.enemy.PathIterator;
 
 public class BasicEnemy extends AbstractEnemy {
     public static final int BASE_HEALTH = 20;
     public static final double BASE_SPEED = 0.1;
     public final Type type;
 
-    public BasicEnemy(EnemyService service, VectorF pos, Type type) {
-        super(service, pos, (int) (BASE_HEALTH * type.healthMultiplier), BASE_SPEED * type.speedMultiplier);
+    public BasicEnemy(EnemyService service, PathIterator pathIterator, Type type) {
+        super(service, pathIterator, (int) (BASE_HEALTH * type.healthMultiplier), BASE_SPEED * type.speedMultiplier);
         this.type = type;
     }
 

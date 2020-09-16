@@ -1,6 +1,6 @@
 package model.game.enemy;
 
-import utils.VectorF;
+import utils.Vector;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,16 +11,16 @@ public class EnemyHandler {
     private final List<Enemy> enemies;
     private int clock = 0;
 
-    public EnemyHandler(EnemyService service) {
-        enemyFactory = new EnemyFactory(service);
+    public EnemyHandler(EnemyService service, List<? extends Vector> path) {
+        enemyFactory = new EnemyFactory(service, path);
         enemies = new ArrayList<>();
-        enemies.add(enemyFactory.createFishstick(new VectorF(0, 1)));
+        enemies.add(enemyFactory.createFishstick());
     }
 
     public void update() {
         clock++;
         if (clock % 100 == 0) {
-            enemies.add(enemyFactory.createFishstick(new VectorF(0, 1)));
+            enemies.add(enemyFactory.createFishstick());
         }
 
         for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {

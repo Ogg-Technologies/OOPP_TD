@@ -4,8 +4,6 @@ import model.game.Health;
 import utils.VectorF;
 
 public interface Enemy {
-    EnemyService getEnemyService();
-
     void update();
 
     VectorF getPos();

@@ -1,7 +1,6 @@
 package model.game;
 
 import model.game.enemy.Enemy;
-import model.game.enemy.EnemyService;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.StatusEffect;
 import model.game.projectile.Projectile;
@@ -16,11 +15,6 @@ import java.util.List;
 public class Mock {
     public static Enemy createMockEnemy(VectorF pos) {
         return new Enemy() {
-            @Override
-            public EnemyService getEnemyService() {
-                return null;
-            }
-
             @Override
             public void update() {
             }

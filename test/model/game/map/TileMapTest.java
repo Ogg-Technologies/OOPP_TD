@@ -5,8 +5,11 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import utils.Vector;
 
+import java.util.List;
+
 import static model.game.map.Tile.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TileMapTest {
 
@@ -56,13 +59,13 @@ class TileMapTest {
                 {GROUND, GROUND, GROUND},
                 {GROUND, START, GROUND},
                 {BASE, PATH, GROUND}
-        }).getStartPosition(), new Vector(1, 1));
+        }).getPath().get(0), new Vector(1, 1));
         assertEquals(TileMap.fromTileGrid(new Tile[][]{
                 {PATH, PATH, BASE},
                 {PATH, GROUND, GROUND},
                 {PATH, PATH, GROUND},
                 {GROUND, PATH, START}
-        }).getStartPosition(), new Vector(2, 3));
+        }).getPath().get(0), new Vector(2, 3));
     }
 
     @Test
@@ -90,33 +93,18 @@ class TileMapTest {
 
         @Test
         void isCreatedPathCorrect() {
-            Vector current = tileMap.getStartPosition();
+            List<? extends Vector> current = tileMap.getPath();
 
-            assertEquals(new Vector(3, 2), current);
-            current = next(current);
-            assertEquals(new Vector(3, 1), current);
-            current = next(current);
-            assertEquals(new Vector(2, 1), current);
-            current = next(current);
-            assertEquals(new Vector(2, 0), current);
-            current = next(current);
-            assertEquals(new Vector(1, 0), current);
-            current = next(current);
-            assertEquals(new Vector(0, 0), current);
-            current = next(current);
-            assertEquals(new Vector(0, 1), current);
-            current = next(current);
-            assertEquals(new Vector(0, 2), current);
-            current = next(current);
-            assertEquals(new Vector(1, 2), current);
-            current = next(current);
-            assertEquals(new Vector(2, 2), current);
-            current = next(current);
-            assertNull(current);
-        }
-
-        private Vector next(Vector current) { // Convenience method
-            return tileMap.getNextInPath(current);
+            assertEquals(new Vector(3, 2), current.get(0));
+            assertEquals(new Vector(3, 1), current.get(1));
+            assertEquals(new Vector(2, 1), current.get(2));
+            assertEquals(new Vector(2, 0), current.get(3));
+            assertEquals(new Vector(1, 0), current.get(4));
+            assertEquals(new Vector(0, 0), current.get(5));
+            assertEquals(new Vector(0, 1), current.get(6));
+            assertEquals(new Vector(0, 2), current.get(7));
+            assertEquals(new Vector(1, 2), current.get(8));
+            assertEquals(new Vector(2, 2), current.get(9));
         }
 
         @Test
