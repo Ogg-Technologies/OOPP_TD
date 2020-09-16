@@ -112,10 +112,10 @@ public class SwingView implements View {
         window.repaint();
 
 
-        if (!window.isActive() && windowHasBeenActive) {
+        if (!window.isEnabled() && windowHasBeenActive) {
             shutDownAble.shutDown();
         }
-        if (window.isActive()) {
+        if (window.isEnabled()) {
             windowHasBeenActive = true;
         }
     }
