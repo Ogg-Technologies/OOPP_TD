@@ -40,6 +40,7 @@ public class BasicTower implements Tower {
         if (charge >= MAXCHARGE) {
             attackRandomEnemy();
             charge =0;
+
         }
     }
 
@@ -57,7 +58,8 @@ public class BasicTower implements Tower {
         List<? extends Enemy> enemiesInRange = getEnemiesInRange(range);
         if (!enemiesInRange.isEmpty()) {
             Random rand = new Random();
-            enemiesInRange.get(rand.nextInt(enemiesInRange.size())).damage(1);
+            int currentIndex = rand.nextInt(enemiesInRange.size());
+            enemiesInRange.get(currentIndex).damage(1);
         }
     }
 
