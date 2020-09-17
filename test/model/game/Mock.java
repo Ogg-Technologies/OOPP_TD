@@ -4,6 +4,7 @@ import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.StatusEffect;
 import model.game.projectile.Projectile;
+import model.game.projectile.ProjectileFactory;
 import model.game.tower.DefaultTower;
 import model.game.tower.TowerService;
 import utils.Vector;
@@ -51,6 +52,15 @@ public class Mock {
                 ArrayList<Enemy> enemies = new ArrayList<>();
                 enemies.add(enemy);
                 return enemies;
+            }
+
+            @Override
+            public void addProjectile(Projectile projectile) {
+            }
+
+            @Override
+            public ProjectileFactory getProjectileFactory() {
+                return null;
             }
         }, pos);
     }

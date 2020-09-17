@@ -38,7 +38,7 @@ public class AimingTower implements Tower {
     }
 
     public void changeAngle(VectorF other) {
-        angle = pos.minus(other);
+        angle = other.minus(pos.asVectorF());
     }
 
     public VectorF getAngle() {

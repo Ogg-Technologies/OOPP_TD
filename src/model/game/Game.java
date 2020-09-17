@@ -42,7 +42,7 @@ public class Game implements TowerService, ProjectileService {
     }
 
     private void updateProjectiles() {
-        for (Iterator<Projectile> iterator = projectiles.iterator(); iterator.hasNext() ;) {
+        for (Iterator<Projectile> iterator = projectiles.iterator(); iterator.hasNext(); ) {
             Projectile p = iterator.next();
             p.update();
             if (p.isConsumed()) {
@@ -71,5 +71,15 @@ public class Game implements TowerService, ProjectileService {
 
     public Health getBaseHealth() {
         return baseHealth;
+    }
+
+    @Override
+    public void addProjectile(Projectile projectile) {
+        projectiles.add(projectile);
+    }
+
+    @Override
+    public ProjectileFactory getProjectileFactory() {
+        return projectileFactory;
     }
 }
