@@ -6,6 +6,7 @@ import model.game.tower.Tower;
 import model.game.tower.TowerService;
 import model.game.tower.TowerVisitor;
 import utils.Vector;
+import utils.VectorF;
 
 import java.util.List;
 import java.util.Random;
@@ -21,6 +22,10 @@ public class GrizzlyBear implements Tower {
         this.baseTower = baseTower;
         this.range = 5;
         this.charge = 87;
+    }
+
+    public float getAngle() {
+       return baseTower.getAngle().getAngle(); //TODO getAngle.getAngle?
     }
 
     @Override

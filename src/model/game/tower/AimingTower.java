@@ -39,7 +39,7 @@ public class AimingTower implements Tower {
 
     public void changeAngle(VectorF other) {
         angle = other.minus(pos.asVectorF());
-    }
+    } //TODO bör denna vara public?
 
     public VectorF getAngle() {
         return angle;
