@@ -3,7 +3,7 @@ package application;
 import model.Updatable;
 import view.Drawable;
 
-public class ApplicationLoop implements Runnable {
+public class ApplicationLoop implements Runnable, ShutDownAble {
 
     private Updatable updatable;
     private Drawable drawable;
@@ -54,6 +54,7 @@ public class ApplicationLoop implements Runnable {
         }
     }
 
+    @Override
     public void shutDown() {
         playing = false;
     }
