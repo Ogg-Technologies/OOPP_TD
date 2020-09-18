@@ -14,6 +14,8 @@ public class Application implements ShutDownAble {
         View view = new SwingView(model, this);
         Controller controller = new Controller(model, view);
 
+        model.setEmitterCreator(view);
+
         view.start();
         loop = new ApplicationLoop(model, view);
         loop.start();

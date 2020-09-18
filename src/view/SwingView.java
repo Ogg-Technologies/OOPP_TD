@@ -4,8 +4,10 @@ import application.ShutDownAble;
 import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
+import model.particles.ParticleType;
 import utils.Vector;
 import utils.VectorF;
+import view.particles.ParticleHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,12 +36,14 @@ public class SwingView implements View {
     private final WindowState windowState = new WindowState();
     private final ShutDownAble shutDownAble;
 
+    private boolean windowHasBeenActive = false;
+
+    private final ParticleHandler particleHandler;
+
     @Override
     public Vector getOffset() {
         return offset;
     }
-
-    private boolean windowHasBeenActive = false;
 
     public SwingView(ModelData modelData, ShutDownAble shutDownAble) {
 
@@ -69,8 +73,10 @@ public class SwingView implements View {
                 }
             }
         };
-        this.GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f)
-                , modelData.getBaseHealth().getFraction());
+        this.GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f), modelData.getBaseHealth().getFraction());
+
+        particleHandler = new ParticleHandler();
+        modelData.addOnModelUpdateObserver(particleHandler);
     }
 
     @Override
@@ -109,6 +115,7 @@ public class SwingView implements View {
         towerLayer.setSize(window.getSize());
         enemyLayer.setSize(window.getSize());
         GUIPanel.setSize(window.getSize());
+        particleHandler.draw();
         window.repaint();
 
 
@@ -125,4 +132,8 @@ public class SwingView implements View {
         window.addMouseListener(mouseListener);
     }
 
+    @Override
+    public void createEmitter(ParticleType type, VectorF position) {
+        particleHandler.createEmitter(type, position);
+    }
 }
