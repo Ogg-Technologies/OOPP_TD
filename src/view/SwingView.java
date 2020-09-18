@@ -51,7 +51,7 @@ public class SwingView implements View {
 
         window = new Window();
         this.modelData = modelData;
-        this.mapPanel = new Background(this.modelData.getTileMap(), windowState);
+        this.mapPanel = new Background(modelData, windowState);
         this.towerLayer = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -106,7 +106,7 @@ public class SwingView implements View {
 
 
         Vector totalSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
-        Vector tileSize = new Vector(modelData.getTileMap()[0].length, modelData.getTileMap().length);
+        Vector tileSize = modelData.getMapSize();
 
         windowState.update(totalSize, tileSize);
         GUIPanel.updateHp(modelData.getBaseHealth().getFraction());

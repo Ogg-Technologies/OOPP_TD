@@ -134,10 +134,6 @@ public class TileMap {
         return position;
     }
 
-    public Tile[][] getTileGrid() {
-        return tileGrid;
-    }
-
     private int getWidth() {
         return tileGrid[0].length;
     }

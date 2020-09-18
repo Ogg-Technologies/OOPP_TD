@@ -51,11 +51,6 @@ public class Game implements TowerService, ProjectileService {
         }
     }
 
-    public Tile[][] getTileMap() {
-        TileMap tileMapCopy = TileMap.fromDefaultTileGrid();
-        return tileMapCopy.getTileGrid();
-    }
-
     public List<? extends Tower> getTowers() {
         return towerHandler.getTowers();
     }
@@ -81,5 +76,12 @@ public class Game implements TowerService, ProjectileService {
     @Override
     public ProjectileFactory getProjectileFactory() {
         return projectileFactory;
+    }
+
+    /**
+     * Returns the Tile at the given position or throws an exception if it is not within map bounds
+     */
+    public Tile getTile(int x, int y) {
+        return tileMap.getTile(x, y);
     }
 }

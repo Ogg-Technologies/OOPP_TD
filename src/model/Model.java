@@ -6,6 +6,7 @@ import model.game.enemy.Enemy;
 import model.game.map.Tile;
 import model.game.tower.Tower;
 import model.particles.EmitterCreator;
+import utils.Vector;
 
 import java.util.HashSet;
 import java.util.List;
@@ -50,8 +51,13 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     }
 
     @Override
-    public Tile[][] getTileMap() {
-        return this.game.getTileMap();
+    public Vector getMapSize() {
+        return game.getMapSize();
+    }
+
+    @Override
+    public Tile getTile(int x, int y) {
+        return game.getTile(x, y);
     }
 
     @Override

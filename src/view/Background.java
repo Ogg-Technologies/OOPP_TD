@@ -1,6 +1,8 @@
 package view;
 
+import model.ModelData;
 import model.game.map.Tile;
+import utils.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,13 +13,13 @@ import java.io.IOError;
 import java.io.IOException;
 
 public class Background extends JPanel {
-    private Tile[][] tileGrid;
+    private final ModelData modelData;
     private final WindowState windowState;
 
     private static final BufferedImage baseImage = getBaseImage();
 
-    public Background(Tile[][] tileGrid, WindowState windowState) {
-        this.tileGrid = tileGrid;
+    public Background(ModelData modelData, WindowState windowState) {
+        this.modelData = modelData;
         this.windowState = windowState;
     }
 
@@ -37,10 +39,11 @@ public class Background extends JPanel {
         super.paintComponent(g);
         int baseX = -1;
         int baseY = -1;
-        for (int tileY = 0; tileY < this.tileGrid.length; tileY++) {
-            for (int tileX = 0; tileX < this.tileGrid[0].length; tileX++) {
+        Vector mapSize = modelData.getMapSize();
+        for (int tileY = 0; tileY < mapSize.getY(); tileY++) {
+            for (int tileX = 0; tileX < mapSize.getX(); tileX++) {
 
-                switch (this.tileGrid[tileY][tileX]) {
+                switch (modelData.getTile(tileX, tileY)) {
                     case START:
                     case PATH:
                         g.setColor(Color.decode("#D3D3D3"));
@@ -52,7 +55,7 @@ public class Background extends JPanel {
                         break;
                 }
 
-                if(this.tileGrid[tileY][tileX] == Tile.BASE) {
+                if(modelData.getTile(tileX, tileY) == Tile.BASE) {
                     baseX = tileX;
                     baseY = tileY;
                 }
