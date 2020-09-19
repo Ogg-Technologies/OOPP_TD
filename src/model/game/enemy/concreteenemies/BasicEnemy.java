@@ -7,7 +7,7 @@ import model.game.enemy.PathIterator;
 
 public class BasicEnemy extends AbstractEnemy {
     public static final int BASE_HEALTH = 20;
-    public static final double BASE_SPEED = 0.1;
+    public static final double BASE_SPEED = 0.01;
     public final Type type;
 
     public BasicEnemy(BaseDamager baseDamager, PathIterator pathIterator, Type type) {

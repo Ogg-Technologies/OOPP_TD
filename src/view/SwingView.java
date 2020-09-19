@@ -20,10 +20,11 @@ public class SwingView implements View {
     private final Background mapPanel;
     private final JPanel towerLayer;
     private final JPanel enemyLayer;
+    private final ProjectileDrawer projectileLayer;
     private final GUIPanel GUIPanel;
 
-    private int width = 800;
-    private int height = 1000;
+    private int width = 1000;
+    private int height = 800;
 
     final static int widthOffset = 17;//WidthOffset = Actual subtraction on width needed to get usable width
     final static int heightOffset = 40;//same goes for y
@@ -73,6 +74,7 @@ public class SwingView implements View {
                 }
             }
         };
+        this.projectileLayer = new ProjectileDrawer(modelData, windowState);
         this.GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f), modelData.getBaseHealth().getFraction());
 
         particleHandler = new ParticleHandler();
@@ -90,12 +92,14 @@ public class SwingView implements View {
 
         this.towerLayer.setOpaque(false);
         this.enemyLayer.setOpaque(false);
+        this.projectileLayer.setOpaque(false);
         this.GUIPanel.setOpaque(false);
 
         layeredPane.add(this.mapPanel, 0, 0);
         layeredPane.add(this.towerLayer, 1, 0);
         layeredPane.add(this.enemyLayer, 2, 0);
-        layeredPane.add(this.GUIPanel, 3, 0);
+        layeredPane.add(this.projectileLayer, 3, 0);
+        layeredPane.add(this.GUIPanel, 4, 0);
 
         this.window.add(layeredPane);
         draw();
@@ -114,6 +118,7 @@ public class SwingView implements View {
         mapPanel.setSize(window.getSize());
         towerLayer.setSize(window.getSize());
         enemyLayer.setSize(window.getSize());
+        projectileLayer.setSize(window.getSize());
         GUIPanel.setSize(window.getSize());
         particleHandler.draw();
         window.repaint();

@@ -4,6 +4,7 @@ import model.game.Game;
 import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
+import model.game.projectile.Projectile;
 import model.game.tower.Tower;
 import model.particles.EmitterCreator;
 import utils.Vector;
@@ -73,5 +74,10 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     @Override
     public Health getBaseHealth() {
         return game.getBaseHealth();
+    }
+
+    @Override
+    public List<? extends Projectile> getProjectiles() {
+        return game.getProjectiles();
     }
 }

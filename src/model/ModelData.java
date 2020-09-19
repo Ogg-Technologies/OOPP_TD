@@ -3,6 +3,7 @@ package model;
 import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
+import model.game.projectile.Projectile;
 import model.game.tower.Tower;
 import utils.Vector;
 
@@ -28,6 +29,8 @@ public interface ModelData {
     List<? extends Tower> getTowers();
 
     List<? extends Enemy> getEnemies();
+
+    List<? extends Projectile> getProjectiles();
 
     Health getBaseHealth();
 }

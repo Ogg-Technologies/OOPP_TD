@@ -13,6 +13,7 @@ import model.game.tower.TowerService;
 import utils.Vector;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -83,5 +84,10 @@ public class Game implements TowerService, ProjectileService {
      */
     public Tile getTile(int x, int y) {
         return tileMap.getTile(x, y);
+    }
+
+    //TODO: Change this if not compliant with what is wanted in the model
+    public List<Projectile> getProjectiles() {
+        return Collections.unmodifiableList(projectiles);
     }
 }
