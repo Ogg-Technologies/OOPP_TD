@@ -1,8 +1,9 @@
-package view;
+package view.layers;
 
 import model.ModelData;
 import model.game.map.Tile;
 import utils.Vector;
+import view.WindowState;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

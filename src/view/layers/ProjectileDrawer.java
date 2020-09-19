@@ -1,8 +1,9 @@
-package view;
+package view.layers;
 
 import model.ModelData;
 import model.game.projectile.Projectile;
 import model.game.projectile.concreteprojectile.Rock;
+import view.WindowState;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -1,7 +1,8 @@
-package view;
+package view.layers;
 
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
+import view.WindowState;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

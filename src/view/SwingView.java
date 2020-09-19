@@ -7,6 +7,7 @@ import model.game.tower.Tower;
 import model.particles.ParticleType;
 import utils.Vector;
 import utils.VectorF;
+import view.layers.*;
 import view.particles.ParticleHandler;
 
 import javax.swing.*;
@@ -15,22 +16,14 @@ import java.awt.event.MouseListener;
 
 public class SwingView implements View {
 
-    private final Window window;
+    public final static int widthOffset = 17;//WidthOffset = Actual subtraction on width needed to get usable width
+
     private final ModelData modelData;
-    private final Background mapPanel;
-    private final JPanel towerLayer;
-    private final JPanel enemyLayer;
-    private final ProjectileDrawer projectileLayer;
-    private final GUIPanel GUIPanel;
 
     private int width = 1000;
     private int height = 800;
-
-    final static int widthOffset = 17;//WidthOffset = Actual subtraction on width needed to get usable width
-    final static int heightOffset = 40;//same goes for y
-
-    private Integer tileWidth = 0;
-    private Vector pos;
+    public final static int heightOffset = 40;//same goes for y
+    private final JFrame window;
 
     private final Vector offset = new Vector(8, 31);
 
@@ -40,6 +33,7 @@ public class SwingView implements View {
     private boolean windowHasBeenActive = false;
 
     private final ParticleHandler particleHandler;
+    private final JPanel[] layers;
 
     @Override
     public Vector getOffset() {
@@ -49,11 +43,13 @@ public class SwingView implements View {
     public SwingView(ModelData modelData, ShutDownAble shutDownAble) {
 
         this.shutDownAble = shutDownAble;
-
-        window = new Window();
         this.modelData = modelData;
-        this.mapPanel = new Background(modelData, windowState);
-        this.towerLayer = new JPanel() {
+
+        //Setup for window and every layer
+        window = new JFrame();
+
+        Background mapPanel = new Background(modelData, windowState);
+        JPanel towerLayer = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -63,8 +59,7 @@ public class SwingView implements View {
                 }
             }
         };
-
-        this.enemyLayer = new JPanel() {
+        JPanel enemyLayer = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -74,8 +69,12 @@ public class SwingView implements View {
                 }
             }
         };
-        this.projectileLayer = new ProjectileDrawer(modelData, windowState);
-        this.GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f), modelData.getBaseHealth().getFraction());
+        ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
+        GUIPanel GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f), modelData);
+
+        //All layers where first element is furthest back
+        layers = new JPanel[]{mapPanel, towerLayer, enemyLayer, projectileLayer, GUIPanel};
+
 
         particleHandler = new ParticleHandler();
         modelData.addOnModelUpdateObserver(particleHandler);
@@ -87,43 +86,41 @@ public class SwingView implements View {
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.mapPanel.setSize(window.getSize());
-        JLayeredPane layeredPane = new JLayeredPane();
-
-        this.towerLayer.setOpaque(false);
-        this.enemyLayer.setOpaque(false);
-        this.projectileLayer.setOpaque(false);
-        this.GUIPanel.setOpaque(false);
-
-        layeredPane.add(this.mapPanel, 0, 0);
-        layeredPane.add(this.towerLayer, 1, 0);
-        layeredPane.add(this.enemyLayer, 2, 0);
-        layeredPane.add(this.projectileLayer, 3, 0);
-        layeredPane.add(this.GUIPanel, 4, 0);
+        setOpaqueness();
+        JLayeredPane layeredPane = createLayeredPane();
 
         this.window.add(layeredPane);
         draw();
     }
 
+    private JLayeredPane createLayeredPane() {
+        JLayeredPane returnPane = new JLayeredPane();
+        for (int i = 0; i < layers.length; i++) {
+            returnPane.add(layers[i], i, 0);
+        }
+        return returnPane;
+    }
+
+    private void setOpaqueness() {
+        for (int i = 1; i < layers.length; i++) {
+            layers[i].setOpaque(false);
+        }
+    }
+
     @Override
     public void draw() {
-
 
         Vector totalSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
         Vector tileSize = modelData.getMapSize();
 
         windowState.update(totalSize, tileSize);
-        GUIPanel.updateHp(modelData.getBaseHealth().getFraction());
 
-        mapPanel.setSize(window.getSize());
-        towerLayer.setSize(window.getSize());
-        enemyLayer.setSize(window.getSize());
-        projectileLayer.setSize(window.getSize());
-        GUIPanel.setSize(window.getSize());
+        setSizeOfLayers(window.getSize());
+
         particleHandler.draw();
         window.repaint();
 
-
+        //Checks if the window has closed
         if (!window.isEnabled() && windowHasBeenActive) {
             shutDownAble.shutDown();
         }
@@ -131,6 +128,13 @@ public class SwingView implements View {
             windowHasBeenActive = true;
         }
     }
+
+    private void setSizeOfLayers(Dimension size) {
+        for (JPanel layer : layers) {
+            layer.setSize(size);
+        }
+    }
+
 
     @Override
     public void addMouseListener(MouseListener mouseListener) {
