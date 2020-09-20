@@ -1,12 +1,13 @@
 package model.game.tower.concretetowers;
 
+import model.event.Event;
+import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.tower.AimingTower;
 import model.game.tower.Tower;
 import model.game.tower.TowerService;
 import model.game.tower.TowerVisitor;
 import utils.Vector;
-import utils.VectorF;
 
 import java.util.List;
 import java.util.Random;
@@ -14,12 +15,15 @@ import java.util.Random;
 public class GrizzlyBear implements Tower {
 
     private final static int MAXCHARGE = 88;
+
     private final AimingTower baseTower;
+    private final EventSender eventSender;
     private final float range;
     private int charge;
 
-    public GrizzlyBear(AimingTower baseTower) {
+    public GrizzlyBear(AimingTower baseTower, EventSender eventSender) {
         this.baseTower = baseTower;
+        this.eventSender = eventSender;
         this.range = 5;
         this.charge = 87;
     }
@@ -75,8 +79,10 @@ public class GrizzlyBear implements Tower {
 
     private void attackEnemy(Enemy currentEnemy) {
         baseTower.changeAngle(currentEnemy.getPos());
-        getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorF(), baseTower.getAngle().setMagnitude(0.3f), 1));
+        getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorF(),
+                baseTower.getAngle().setMagnitude(0.3f), 1));
 //        currentEnemy.damage(1);
+        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this, getPos().asVectorF(), getAngle()));
     }
 
     @Override

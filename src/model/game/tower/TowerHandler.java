@@ -1,5 +1,6 @@
 package model.game.tower;
 
+import model.event.EventSender;
 import utils.Vector;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ public class TowerHandler {
     private final TowerFactory factory;
     private final List<Tower> towers;
 
-    public TowerHandler(TowerService towerService) {
-        factory = new TowerFactory(towerService);
+    public TowerHandler(TowerService towerService, EventSender eventSender) {
+        factory = new TowerFactory(towerService, eventSender);
         towers = new ArrayList<>();
         /*towers.add(factory.createBasicTower(new Vector(0, 1)));
         towers.add(factory.createBasicTower(new Vector(1, 0)));

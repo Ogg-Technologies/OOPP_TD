@@ -1,5 +1,6 @@
 package model.game;
 
+import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyHandler;
 import model.game.map.Tile;
@@ -18,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Game implements TowerService, ProjectileService {
+    private final EventSender eventSender;
+
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
     private final TowerHandler towerHandler;
     private final EnemyHandler enemyHandler;
@@ -25,8 +28,9 @@ public class Game implements TowerService, ProjectileService {
     private final List<Projectile> projectiles;
     private final ProjectileFactory projectileFactory;
 
-    public Game() {
-        towerHandler = new TowerHandler(this);
+    public Game(EventSender eventSender) {
+        this.eventSender = eventSender;
+        towerHandler = new TowerHandler(this, eventSender);
         baseHealth = new MutableHealth(100);
         enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath());
         projectiles = new ArrayList<>();

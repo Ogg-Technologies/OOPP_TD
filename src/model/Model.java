@@ -1,6 +1,8 @@
 package model;
 
+import model.event.Event;
 import model.event.EventListener;
+import model.event.EventSender;
 import model.game.Game;
 import model.game.Health;
 import model.game.enemy.Enemy;
@@ -13,13 +15,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public final class Model implements ModelEventHandler, ModelData, Updatable {
+public final class Model implements ModelEventHandler, ModelData, Updatable, EventSender {
     private Game game;
     private final Set<OnModelUpdateObserver> updateObservers;
     private final Set<EventListener> eventListeners;
 
     public Model() {
-        game = new Game();
+        game = new Game(this);
         updateObservers = new HashSet<>();
         eventListeners = new HashSet<>();
     }
@@ -89,5 +91,12 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
             return;
         //TODO: The vector is the tile that the user clicked on. For example (1, 1)
         System.out.println("x: " + v.getX() + ", y: " + v.getY());
+    }
+
+    @Override
+    public void sendEvent(Event event) {
+        for (EventListener listener : eventListeners) {
+            listener.onEvent(event);
+        }
     }
 }
