@@ -1,5 +1,6 @@
 package model;
 
+import model.event.EventListener;
 import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
@@ -12,6 +13,8 @@ import java.util.List;
 public interface ModelData {
 
     void addOnModelUpdateObserver(OnModelUpdateObserver observer);
+
+    void addOnModelEventListener(EventListener eventListener);
 
     /**
      * @return A Vector defining the size of the tile map in tiles

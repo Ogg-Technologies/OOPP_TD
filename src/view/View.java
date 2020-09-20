@@ -1,13 +1,12 @@
 package view;
 
 import controller.MouseViewObserver;
-import model.particles.EmitterCreator;
 import utils.Vector;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public interface View extends Drawable, EmitterCreator, MouseViewObserver {
+public interface View extends Drawable, MouseViewObserver {
     void start();
 
     void draw();

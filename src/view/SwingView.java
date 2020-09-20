@@ -4,7 +4,6 @@ import application.ShutDownAble;
 import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
-import model.particles.ParticleType;
 import utils.Vector;
 import utils.VectorF;
 import view.layers.*;
@@ -74,8 +73,8 @@ public class SwingView implements View {
         GUIPanel GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f), modelData);
 
         particleHandler = new ParticleHandler(windowState);
-        particleHandler.createEmitter(ParticleType.EXPLOSION, new VectorF(5, 4));   // Temp line, remove later
         modelData.addOnModelUpdateObserver(particleHandler);
+        modelData.addOnModelEventListener(particleHandler);
 
         //All layers where first element is furthest back
         layers = new JPanel[]{background, towerLayer, enemyLayer, projectileLayer, particleHandler, GUIPanel};
@@ -149,11 +148,6 @@ public class SwingView implements View {
     @Override
     public void addMouseMotionListener(MouseMotionListener mouseMotionListener){
         window.addMouseMotionListener(mouseMotionListener);
-    }
-
-    @Override
-    public void createEmitter(ParticleType type, VectorF position) {
-        particleHandler.createEmitter(type, position);
     }
 
     @Override

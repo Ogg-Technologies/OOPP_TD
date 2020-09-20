@@ -1,12 +1,12 @@
 package model;
 
+import model.event.EventListener;
 import model.game.Game;
 import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
 import model.game.projectile.Projectile;
 import model.game.tower.Tower;
-import model.particles.EmitterCreator;
 import utils.Vector;
 
 import java.util.HashSet;
@@ -16,20 +16,12 @@ import java.util.Set;
 public final class Model implements ModelEventHandler, ModelData, Updatable {
     private Game game;
     private final Set<OnModelUpdateObserver> updateObservers;
-    private EmitterCreator emitterCreator;
+    private final Set<EventListener> eventListeners;
 
     public Model() {
         game = new Game();
         updateObservers = new HashSet<>();
-    }
-
-    /**
-     * Sets the emitter creator for the model. The model tells the EmitterCreator when and where a particle emitter
-     * should be created
-     * @param emitterCreator The emitter creator that the model should use to create particle emitters
-     */
-    public void setEmitterCreator(EmitterCreator emitterCreator) {
-        this.emitterCreator = emitterCreator;
+        eventListeners = new HashSet<>();
     }
 
     @Override
@@ -49,6 +41,11 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     @Override
     public void addOnModelUpdateObserver(OnModelUpdateObserver observer) {
         updateObservers.add(observer);
+    }
+
+    @Override
+    public void addOnModelEventListener(EventListener eventListener) {
+        eventListeners.add(eventListener);
     }
 
     @Override
