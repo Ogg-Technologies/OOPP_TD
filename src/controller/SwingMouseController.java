@@ -4,13 +4,17 @@ import utils.Vector;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class SwingMouseController implements MouseListener, MouseController {
+public class SwingMouseController implements MouseListener, MouseMotionListener, MouseController {
 
     private final Vector offset;
 
-    public SwingMouseController(Vector offset) {
+    private final MouseViewObserver viewObserver;
+
+    public SwingMouseController(Vector offset, MouseViewObserver viewObserver) {
         this.offset = offset;
+        this.viewObserver = viewObserver;
     }
 
     @Override
@@ -36,5 +40,16 @@ public class SwingMouseController implements MouseListener, MouseController {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Vector pos = new Vector(e.getX() - offset.getX(), e.getY() - offset.getY());
+        viewObserver.updateMousePosition(pos);
     }
 }

@@ -13,6 +13,7 @@ import view.particles.ParticleHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 public class SwingView implements View {
 
@@ -35,6 +36,9 @@ public class SwingView implements View {
     private final ParticleHandler particleHandler;
     private final JPanel[] layers;
 
+    private final Background background;
+
+
     @Override
     public Vector getOffset() {
         return offset;
@@ -48,7 +52,7 @@ public class SwingView implements View {
         //Setup for window and every layer
         window = new JFrame();
 
-        Background mapPanel = new Background(modelData, windowState);
+        background = new Background(modelData, windowState);
         JPanel towerLayer = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -73,7 +77,7 @@ public class SwingView implements View {
         GUIPanel GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f), modelData);
 
         //All layers where first element is furthest back
-        layers = new JPanel[]{mapPanel, towerLayer, enemyLayer, projectileLayer, GUIPanel};
+        layers = new JPanel[]{background, towerLayer, enemyLayer, projectileLayer, GUIPanel};
 
 
         particleHandler = new ParticleHandler();
@@ -142,7 +146,17 @@ public class SwingView implements View {
     }
 
     @Override
+    public void addMouseMotionListener(MouseMotionListener mouseMotionListener){
+        window.addMouseMotionListener(mouseMotionListener);
+    }
+
+    @Override
     public void createEmitter(ParticleType type, VectorF position) {
         particleHandler.createEmitter(type, position);
+    }
+
+    @Override
+    public void updateMousePosition(Vector v) {
+        background.setMousePos(v);
     }
 }

@@ -5,7 +5,8 @@ import view.View;
 
 public class Controller {
     public Controller(ModelEventHandler modelEventHandler, View view) {
-        SwingMouseController mouseController = new SwingMouseController(view.getOffset());
+        SwingMouseController mouseController = new SwingMouseController(view.getOffset(), view);
         view.addMouseListener(mouseController);
+        view.addMouseMotionListener(mouseController);
     }
 }

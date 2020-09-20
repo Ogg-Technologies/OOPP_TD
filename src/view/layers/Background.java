@@ -16,6 +16,7 @@ import java.io.IOException;
 public class Background extends JPanel {
     private final ModelData modelData;
     private final WindowState windowState;
+    private Vector pos = null;
 
     private static final BufferedImage baseImage = getBaseImage();
 
@@ -24,6 +25,9 @@ public class Background extends JPanel {
         this.windowState = windowState;
     }
 
+    public void setMousePos(Vector pos){
+        this.pos = pos;
+    }
 
     private static BufferedImage getBaseImage() {
         BufferedImage image;
@@ -66,9 +70,29 @@ public class Background extends JPanel {
                         windowState.getTileSize(), windowState.getTileSize());
             }
         }
+
+        if(pos != null){
+            int startX = pos.getX() - windowState.getOffset().getX();
+            int startY = pos.getY() - windowState.getOffset().getY();
+            if(startX >= 0 && startY >= 0){
+                paintGrayOverlay(startX, startY, g);
+            }
+        }
+
         g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getOffset().getX(),
                 baseY * windowState.getTileSize() + windowState.getOffset().getY()
                 ,windowState.getTileSize(),windowState.getTileSize(), null );
+    }
+
+    private void paintGrayOverlay(int startX, int startY, Graphics g){
+        int tileX = startX / windowState.getTileSize();
+        int tileY = startY / windowState.getTileSize();
+        if(tileX >= 0 && tileY >= 0 && tileX < modelData.getMapSize().getX() && tileY < modelData.getMapSize().getY()) {
+            g.setColor(new Color(0, 0, 0, 50));
+            g.fillRect(tileX * windowState.getTileSize() + windowState.getOffset().getX(),
+                    tileY * windowState.getTileSize() + windowState.getOffset().getY(),
+                    windowState.getTileSize(), windowState.getTileSize());
+        }
     }
 
 }
