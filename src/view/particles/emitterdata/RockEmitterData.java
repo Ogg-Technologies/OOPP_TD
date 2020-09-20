@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class RockEmitterData implements EmitterData {   // TODO: Test particle, will probably be removed later
+
     private static Image image;
 
     static {
@@ -21,15 +22,16 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
         }
     }
 
-    private Distribution<Integer> lifetimeDistribution = new LinearIntegerDistribution(100, 200);
+    private Distribution<Integer> lifetimeDistribution = new LinearIntegerDistribution(30, 60);
     private Distribution<VectorF> startPositionDistribution =
             new LinearVectorDistribution(new VectorF(-1, -1), new VectorF(1, 1));
+            //new LinearVectorDistribution(new VectorF(0, 0), new VectorF(0, 0));
     private Distribution<VectorF> startVelocityDistribution =
             new LinearVectorDistribution(new VectorF(-0.02f, -0.02f), new VectorF(0.02f, 0.02f));
 
     @Override
     public int getEmitterLifetime() {
-        return 100;
+        return 10;
     }
 
     @Override

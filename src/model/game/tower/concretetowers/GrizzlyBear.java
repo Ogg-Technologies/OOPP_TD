@@ -8,6 +8,7 @@ import model.game.tower.Tower;
 import model.game.tower.TowerService;
 import model.game.tower.TowerVisitor;
 import utils.Vector;
+import utils.VectorF;
 
 import java.util.List;
 import java.util.Random;
@@ -82,7 +83,7 @@ public class GrizzlyBear implements Tower {
         getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorF(),
                 baseTower.getAngle().setMagnitude(0.3f), 1));
 //        currentEnemy.damage(1);
-        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this, getPos().asVectorF(), getAngle()));
+        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this, getPos().plus(new VectorF(0.5f, 0.5f)), getAngle()));
     }
 
     @Override
