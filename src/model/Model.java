@@ -80,4 +80,17 @@ public final class Model implements ModelEventHandler, ModelData, Updatable {
     public List<? extends Projectile> getProjectiles() {
         return game.getProjectiles();
     }
+
+
+    /**
+     *
+     * @param v is a vector that can be null if the click event is not on the map
+     */
+    @Override
+    public void clickedTile(Vector v) {
+        if(v == null)
+            return;
+        //TODO: The vector is the tile that the user clicked on. For example (1, 1)
+        System.out.println("x: " + v.getX() + ", y: " + v.getY());
+    }
 }

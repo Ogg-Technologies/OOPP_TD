@@ -16,5 +16,6 @@ public interface View extends Drawable, EmitterCreator, MouseViewObserver {
     void addMouseMotionListener(MouseMotionListener mouseMotionListener);
 
     Vector getOffset();
+    Vector convertRealPosToTilePos(Vector v);
 
 }

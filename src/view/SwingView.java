@@ -39,10 +39,7 @@ public class SwingView implements View {
     private final Background background;
 
 
-    @Override
-    public Vector getOffset() {
-        return offset;
-    }
+
 
     public SwingView(ModelData modelData, ShutDownAble shutDownAble) {
 
@@ -146,6 +143,11 @@ public class SwingView implements View {
     }
 
     @Override
+    public Vector getOffset() {
+        return offset;
+    }
+
+    @Override
     public void addMouseMotionListener(MouseMotionListener mouseMotionListener){
         window.addMouseMotionListener(mouseMotionListener);
     }
@@ -158,5 +160,20 @@ public class SwingView implements View {
     @Override
     public void updateMousePosition(Vector v) {
         background.setMousePos(v);
+    }
+
+    @Override
+    public Vector convertRealPosToTilePos(Vector v){
+        int offsettedX = v.getX() - windowState.getOffset().getX();
+        int offsettedY = v.getY() - windowState.getOffset().getY();
+        if(offsettedX < 0 || offsettedY < 0){
+            return null;
+        }
+        int tileX = offsettedX / windowState.getTileSize();
+        int tileY = offsettedY / windowState.getTileSize();
+        if(tileX < modelData.getMapSize().getX() && tileY < modelData.getMapSize().getY()) {
+            return new Vector(tileX, tileY);
+        }
+        return null;
     }
 }

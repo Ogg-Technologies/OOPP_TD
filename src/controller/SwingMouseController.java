@@ -1,5 +1,6 @@
 package controller;
 
+import model.ModelEventHandler;
 import utils.Vector;
 
 import java.awt.event.MouseEvent;
@@ -8,18 +9,22 @@ import java.awt.event.MouseMotionListener;
 
 public class SwingMouseController implements MouseListener, MouseMotionListener, MouseController {
 
-    private final Vector offset;
+    private final ControlFacade facade;
 
     private final MouseViewObserver viewObserver;
 
-    public SwingMouseController(Vector offset, MouseViewObserver viewObserver) {
-        this.offset = offset;
+    private final ModelEventHandler modelEventHandler;
+
+    public SwingMouseController(ControlFacade facade, MouseViewObserver viewObserver, ModelEventHandler modelEventHandler) {
+        this.facade = facade;
         this.viewObserver = viewObserver;
+        this.modelEventHandler = modelEventHandler;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("x: " + (e.getX() - offset.getX()) + ", y: " + (e.getY() - offset.getY()));
+        System.out.println("x: " + (e.getX() - facade.getOffset().getX()) + ", y: " + (e.getY() - facade.getOffset().getY()));
+        modelEventHandler.clickedTile(facade.convertFromRealPosToTilePos(new Vector(e.getX() - facade.getOffset().getX(), e.getY() - facade.getOffset().getY())));
     }
 
     @Override
@@ -49,7 +54,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Vector pos = new Vector(e.getX() - offset.getX(), e.getY() - offset.getY());
+        Vector pos = new Vector(e.getX() - facade.getOffset().getX(), e.getY() - facade.getOffset().getY());
         viewObserver.updateMousePosition(pos);
     }
 }
