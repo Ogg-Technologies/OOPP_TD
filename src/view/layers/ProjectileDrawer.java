@@ -29,6 +29,7 @@ public class ProjectileDrawer extends JPanel {
         this.modelData = modelData;
         setupImages();
         imageMap.put(Rock.class, rockImage);
+        //Size parameter is percent of tileSize
         sizeMap.put(Rock.class, 0.25);
     }
 
@@ -49,6 +50,8 @@ public class ProjectileDrawer extends JPanel {
             int x = (int) ((p.getPosition().getX() + 0.5) * windowState.getTileSize() + windowState.getOffset().getX());
             int y = (int) ((p.getPosition().getY() + 0.5) * windowState.getTileSize() + windowState.getOffset().getY());
             int size = (int) (windowState.getTileSize() * sizeMap.get(p.getClass()));
+            x -= size/2;
+            y -= size/2;
             g.drawImage(img, x, y, size, size, null);
         }
     }
