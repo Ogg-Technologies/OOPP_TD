@@ -4,16 +4,22 @@ import model.OnModelUpdateObserver;
 import model.particles.EmitterCreator;
 import model.particles.ParticleType;
 import utils.VectorF;
+import view.WindowState;
+import view.particles.emitterdata.RockEmitterData;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public final class ParticleHandler implements EmitterCreator, OnModelUpdateObserver {
+public final class ParticleHandler extends JPanel implements EmitterCreator, OnModelUpdateObserver {
 
+    private final WindowState windowState;
     private final List<Emitter> emitters;
 
-    public ParticleHandler() {
+    public ParticleHandler(WindowState windowState) {
+        this.windowState = windowState;
         emitters = new ArrayList<>();
     }
 
@@ -29,9 +35,12 @@ public final class ParticleHandler implements EmitterCreator, OnModelUpdateObser
         }
     }
 
-    public void draw() {
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
         for (Emitter e : emitters) {
-            e.draw();
+            e.draw(g, windowState);
         }
     }
 
@@ -43,7 +52,7 @@ public final class ParticleHandler implements EmitterCreator, OnModelUpdateObser
     private Emitter actuallyCreateEmitter(ParticleType type, VectorF position) {
         switch (type) {
             case EXPLOSION:
-                //return new ExplosionEmitter(...);
+
             case SMOKE:
 
             case FIRE:
@@ -57,7 +66,8 @@ public final class ParticleHandler implements EmitterCreator, OnModelUpdateObser
             case ENEMY_DEATH:
 
             default:
-                throw new UnsupportedOperationException("The emitter you tried to create has no implementation yet");
+                //throw new UnsupportedOperationException("The emitter you tried to create has no implementation yet");
         }
+        return new Emitter(position, new RockEmitterData());
     }
 }

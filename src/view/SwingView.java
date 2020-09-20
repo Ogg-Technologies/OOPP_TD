@@ -73,12 +73,12 @@ public class SwingView implements View {
         ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
         GUIPanel GUIPanel = new GUIPanel(new VectorF(0.99f, 0.01f), modelData);
 
-        //All layers where first element is furthest back
-        layers = new JPanel[]{background, towerLayer, enemyLayer, projectileLayer, GUIPanel};
-
-
-        particleHandler = new ParticleHandler();
+        particleHandler = new ParticleHandler(windowState);
+        particleHandler.createEmitter(ParticleType.EXPLOSION, new VectorF(5, 4));   // Temp line, remove later
         modelData.addOnModelUpdateObserver(particleHandler);
+
+        //All layers where first element is furthest back
+        layers = new JPanel[]{background, towerLayer, enemyLayer, projectileLayer, particleHandler, GUIPanel};
     }
 
     @Override
@@ -118,7 +118,6 @@ public class SwingView implements View {
 
         setSizeOfLayers(window.getSize());
 
-        particleHandler.draw();
         window.repaint();
 
         //Checks if the window has closed

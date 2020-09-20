@@ -4,7 +4,6 @@ import utils.VectorF;
 import view.WindowState;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Particle {
 
@@ -17,9 +16,9 @@ public class Particle {
     private final double tileSize;
     private final double friction;
     private final boolean alphaDropoff;
-    private final BufferedImage image;
+    private final Image image;
 
-    public Particle(int lifetime, VectorF tilePosition, VectorF velocity, double tileSize, double friction, BufferedImage image) {
+    public Particle(int lifetime, VectorF tilePosition, VectorF velocity, double tileSize, double friction, Image image) {
         this.lifetime = lifetime;
         this.tilePosition = tilePosition;
         this.velocity = velocity;
@@ -32,7 +31,7 @@ public class Particle {
     }
 
     public Particle(int lifetime, VectorF tilePosition, VectorF velocity, double angleVelocity,
-                    double tileSize, double friction, boolean alphaDropoff, BufferedImage image) {
+                    double tileSize, double friction, boolean alphaDropoff, Image image) {
         this.lifetime = lifetime;
         this.tilePosition = tilePosition;
         this.velocity = velocity;
@@ -58,7 +57,7 @@ public class Particle {
     public void draw(Graphics graphics, WindowState windowState) {
         int x = (int) (tilePosition.getX() * windowState.getTileSize() + windowState.getOffset().getX());
         int y = (int) (tilePosition.getY() * windowState.getTileSize() + windowState.getOffset().getY());
-        int size = (int) (this.tileSize * tileSize);
+        int size = (int) (this.tileSize * windowState.getTileSize());
         graphics.drawImage(image, x, y, size, size, null);
     }
 

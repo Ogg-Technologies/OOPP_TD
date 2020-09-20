@@ -1,26 +1,66 @@
 package view.particles;
 
 import utils.VectorF;
+import view.WindowState;
+import view.particles.emitterdata.EmitterData;
 
-public abstract class Emitter {
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Emitter {
 
     private final VectorF position;
-    private boolean alive;
+    private EmitterData data;
 
-    public Emitter(VectorF position) {
+    private int emitterLifetime;
+    private final double particlesPerUpdate;
+    private final List<Particle> particles;
+
+    public Emitter(VectorF position, EmitterData emitterData) {
         this.position = position;
-        alive = true;
+        this.data = emitterData;
+
+        emitterLifetime = data.getEmitterLifetime();
+        particlesPerUpdate = data.newParticlesPerUpdate();
+        particles = new ArrayList<>();
     }
 
     public void update() {
-
+        if (emitterLifetime > 0) {
+            for (int i = 0; i < data.newParticlesPerUpdate(); i++) {
+                createNewParticle();
+            }
+            emitterLifetime--;
+        }
+        for (Iterator<Particle> iterator = particles.iterator(); iterator.hasNext(); ) {
+            Particle p = iterator.next();
+            p.update();
+            if (p.isDead()) {
+                iterator.remove();
+            }
+        }
     }
 
-    public void draw() {
+    private void createNewParticle() {
+        particles.add(new Particle(
+                data.getNewParticleLifetime(),
+                position.plus(data.getNewStartPosition()),
+                data.getNewStartVelocity(),
+                data.getNewTileSize(),
+                data.getNewFriction(),
+                data.getImage()
+        ));
+    }
 
+    public void draw(Graphics graphics, WindowState windowState) {
+        for (Particle p : particles) {
+            p.draw(graphics, windowState);
+        }
     }
 
     public boolean isAlive() {
-        return alive;
+        return emitterLifetime > 0 || !particles.isEmpty();
     }
 }
