@@ -71,21 +71,21 @@ class VectorTest {
 
         @BeforeEach
         void setUp() {
-            vec2 = new VectorD(1.1f, 1.1f);
+            vec2 = new VectorD(1.1, 1.1);
         }
 
         @Test
         void canAddVectorD() {
             VectorD vec3 = vec1.plus(vec2);
-            assertEquals(vec3.getX(), 4.1f, 0.0001);
-            assertEquals(vec3.getY(), 5.1f, 0.0001);
+            assertEquals(vec3.getX(), 4.1, 0.0001);
+            assertEquals(vec3.getY(), 5.1, 0.0001);
         }
 
         @Test
         void canSubtractVectorD() {
             VectorD vec3 = vec1.minus(vec2);
-            assertEquals(vec3.getX(), 1.9f, 0.0001);
-            assertEquals(vec3.getY(), 2.9f, 0.0001);
+            assertEquals(vec3.getX(), 1.9, 0.0001);
+            assertEquals(vec3.getY(), 2.9, 0.0001);
         }
     }
 }

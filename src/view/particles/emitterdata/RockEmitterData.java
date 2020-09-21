@@ -27,7 +27,7 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
             new LinearVectorDistribution(new VectorD(-1, -1), new VectorD(1, 1));
     //new LinearVectorDistribution(new VectorD(0, 0), new VectorD(0, 0));
     private Distribution<VectorD> startVelocityDistribution =
-            new LinearVectorDistribution(new VectorD(-0.02f, -0.02f), new VectorD(0.02f, 0.02f));
+            new LinearVectorDistribution(new VectorD(-0.02, -0.02), new VectorD(0.02, 0.02));
 
     @Override
     public int getEmitterLifetime() {

@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUIPanel extends JPanel {
-    private final double hpWidth = 0.01f;
+    private final double hpWidth = 0.01;
     private VectorD pos;
     private final ModelData modelData;
 

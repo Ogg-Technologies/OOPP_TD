@@ -5,7 +5,7 @@ import model.game.projectile.Projectile;
 import utils.VectorD;
 
 public final class CollisionDetector {
-    private static final double ENEMY_RADIUS = 0.5f;
+    private static final double ENEMY_RADIUS = 0.5;
 
     public static boolean isEnemyAndProjectileColliding(Enemy enemy, Projectile projectile) {
         return isPointInsideCircle(enemy.getPos(), ENEMY_RADIUS, projectile.getPosition());

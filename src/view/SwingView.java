@@ -70,7 +70,7 @@ public class SwingView implements View {
             }
         };
         ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
-        GUIPanel GUIPanel = new GUIPanel(new VectorD(0.99f, 0.01f), modelData);
+        GUIPanel GUIPanel = new GUIPanel(new VectorD(0.99, 0.01), modelData);
 
         particleHandler = new ParticleHandler(windowState);
         modelData.addOnModelUpdateObserver(particleHandler);
