@@ -29,7 +29,7 @@ public class DefaultTower implements Tower {
     @Override
     public void update() {}
 
-    public List<? extends Enemy> getEnemiesInRange(float range) {
+    public List<? extends Enemy> getEnemiesInRange(double range) {
         List<? extends Enemy> allEnemies = towerService.getEnemies();
         List<Enemy> enemiesInRange = new ArrayList<>();
         for (Enemy currentEnemy : allEnemies) {
@@ -40,7 +40,7 @@ public class DefaultTower implements Tower {
         return enemiesInRange;
     }
 
-    public float getRange() {
+    public double getRange() {
         return 0;
     }
 

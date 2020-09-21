@@ -3,13 +3,13 @@ package model.game.projectile.concreteprojectile;
 import model.game.enemy.Enemy;
 import model.game.projectile.AbstractProjectile;
 import model.game.projectile.ProjectileService;
-import utils.VectorF;
+import utils.VectorD;
 
 public class Rock extends AbstractProjectile {
 
     private final int damage;
 
-    public Rock(ProjectileService service, VectorF position, VectorF velocity, int damage) {
+    public Rock(ProjectileService service, VectorD position, VectorD velocity, int damage) {
         super(service, position, velocity);
         this.damage = damage;
     }

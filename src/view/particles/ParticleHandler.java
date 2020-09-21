@@ -4,7 +4,7 @@ import model.OnModelUpdateObserver;
 import model.event.Event;
 import model.event.EventListener;
 import model.game.tower.concretetowers.GrizzlyBear;
-import utils.VectorF;
+import utils.VectorD;
 import view.WindowState;
 import view.particles.emitterdata.EmitterData;
 import view.particles.emitterdata.RockEmitterData;
@@ -46,7 +46,7 @@ public final class ParticleHandler extends JPanel implements OnModelUpdateObserv
         createEmitter(event.getPosition(), data);
     }
 
-    private void createEmitter(VectorF position, EmitterData data) {
+    private void createEmitter(VectorD position, EmitterData data) {
         emitters.add(new Emitter(position, data));
     }
 

@@ -1,12 +1,12 @@
 package model.game.enemy;
 
 import model.game.Health;
-import utils.VectorF;
+import utils.VectorD;
 
 public interface Enemy {
     void update();
 
-    VectorF getPos();
+    VectorD getPos();
 
     void damage(int amount);
 

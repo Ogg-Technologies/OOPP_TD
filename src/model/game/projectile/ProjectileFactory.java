@@ -1,7 +1,7 @@
 package model.game.projectile;
 
 import model.game.projectile.concreteprojectile.Rock;
-import utils.VectorF;
+import utils.VectorD;
 
 public final class ProjectileFactory {
 
@@ -11,7 +11,7 @@ public final class ProjectileFactory {
         this.service = service;
     }
 
-    public Projectile createRock(VectorF position, VectorF velocity, int damage) {
+    public Projectile createRock(VectorD position, VectorD velocity, int damage) {
         return new Rock(service, position, velocity, damage);
     }
 }

@@ -5,7 +5,7 @@ public interface Health {
 
     int getMax();
 
-    float getFraction();
+    double getFraction();
 
     boolean isDead();
 

@@ -19,13 +19,13 @@ public class Vector {
         return y;
     }
 
-    public float getDist() {
-        return (float) Math.hypot(x, y);
+    public double getDist() {
+        return Math.hypot(x, y);
     }
 
-    public float getAngle() {
+    public double getAngle() {
         if (getDist() == 0) throw new IllegalStateException("Cannot get angle of Zero vector: " + this);
-        return (float) Math.atan2(y, x);
+        return Math.atan2(y, x);
     }
 
     @Override
@@ -58,15 +58,15 @@ public class Vector {
         return new Vector(x - other.x, y - other.y);
     }
 
-    public VectorF plus(VectorF other) {
-        return new VectorF(x + other.getX(), y + other.getY());
+    public VectorD plus(VectorD other) {
+        return new VectorD(x + other.getX(), y + other.getY());
     }
 
-    public VectorF minus(VectorF other) {
-        return new VectorF(x - other.getX(), y - other.getY());
+    public VectorD minus(VectorD other) {
+        return new VectorD(x - other.getX(), y - other.getY());
     }
 
-    public VectorF asVectorF() {
-        return new VectorF(x, y);
+    public VectorD asVectorD() {
+        return new VectorD(x, y);
     }
 }

@@ -8,20 +8,20 @@ import model.game.projectile.ProjectileFactory;
 import model.game.tower.DefaultTower;
 import model.game.tower.TowerService;
 import utils.Vector;
-import utils.VectorF;
+import utils.VectorD;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mock {
-    public static Enemy createMockEnemy(VectorF pos) {
+    public static Enemy createMockEnemy(VectorD pos) {
         return new Enemy() {
             @Override
             public void update() {
             }
 
             @Override
-            public VectorF getPos() {
+            public VectorD getPos() {
                 return pos;
             }
 
@@ -66,10 +66,10 @@ public class Mock {
     }
 
 
-    public static Projectile createStationaryProjectile(VectorF pos) {
+    public static Projectile createStationaryProjectile(VectorD pos) {
         return new Projectile() {
             @Override
-            public VectorF getPosition() {
+            public VectorD getPosition() {
                 return pos;
             }
 

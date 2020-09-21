@@ -1,6 +1,6 @@
 package view.particles;
 
-import utils.VectorF;
+import utils.VectorD;
 import view.WindowState;
 import view.particles.emitterdata.EmitterData;
 
@@ -11,14 +11,14 @@ import java.util.List;
 
 public class Emitter {
 
-    private final VectorF position;
+    private final VectorD position;
     private EmitterData data;
 
     private int emitterLifetime;
     private final double particlesPerUpdate;
     private final List<Particle> particles;
 
-    public Emitter(VectorF position, EmitterData emitterData) {
+    public Emitter(VectorD position, EmitterData emitterData) {
         this.position = position;
         this.data = emitterData;
 

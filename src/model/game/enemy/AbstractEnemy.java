@@ -3,12 +3,12 @@ package model.game.enemy;
 import model.game.Health;
 import model.game.MutableHealth;
 import utils.Vector;
-import utils.VectorF;
+import utils.VectorD;
 
 public abstract class AbstractEnemy implements Enemy {
     private final BaseDamager baseDamager;
     private final PathIterator pathIterator;
-    private VectorF pos;
+    private VectorD pos;
     private Vector targetPos;
     protected final MutableHealth health;
     private final double speed;
@@ -17,7 +17,7 @@ public abstract class AbstractEnemy implements Enemy {
         this.baseDamager = baseDamager;
         this.pathIterator = pathIterator;
         health = new MutableHealth(maxHealth);
-        pos = pathIterator.next().asVectorF();
+        pos = pathIterator.next().asVectorD();
         targetPos = pathIterator.next();
         this.speed = speed;
     }
@@ -33,11 +33,11 @@ public abstract class AbstractEnemy implements Enemy {
      * the path is reached it will automatically fetch the next one with enemyService.getNextTargetPosition()
      */
     private void move() {
-        float moveDistance = (float) speed;
-        VectorF targetDelta = targetPos.minus(pos);
-        float targetDistance = targetDelta.getDist();
+        double moveDistance = speed;
+        VectorD targetDelta = targetPos.minus(pos);
+        double targetDistance = targetDelta.getDist();
         while (targetDistance < moveDistance) {
-            pos = targetPos.asVectorF();
+            pos = targetPos.asVectorD();
             moveDistance -= targetDistance;
             if (!pathIterator.hasNext()) {
                 baseDamager.damageBase(health.getCurrent());
@@ -48,12 +48,12 @@ public abstract class AbstractEnemy implements Enemy {
             targetDelta = targetPos.minus(pos);
             targetDistance = targetDelta.getDist();
         }
-        VectorF velocity = targetDelta.setMagnitude(moveDistance);
+        VectorD velocity = targetDelta.setMagnitude(moveDistance);
         pos = pos.plus(velocity);
     }
 
     @Override
-    public VectorF getPos() {
+    public VectorD getPos() {
         return pos;
     }
 

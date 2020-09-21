@@ -12,7 +12,7 @@ import java.util.Random;
 public class BasicTower implements Tower {
 
     private final Tower baseTower;
-    private final float range;
+    private final double range;
 
     private int charge;
     private final static int MAXCHARGE = 88;
@@ -45,12 +45,12 @@ public class BasicTower implements Tower {
     }
 
     @Override
-    public float getRange() {
+    public double getRange() {
         return range;
     }
 
     @Override
-    public List<? extends Enemy> getEnemiesInRange(float range) {
+    public List<? extends Enemy> getEnemiesInRange(double range) {
         return baseTower.getEnemiesInRange(range);
     }
 

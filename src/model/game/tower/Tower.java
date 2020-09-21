@@ -12,9 +12,9 @@ public interface Tower {
 
     void update();
 
-    List<? extends Enemy> getEnemiesInRange(float range);
+    List<? extends Enemy> getEnemiesInRange(double range);
 
-    float getRange();
+    double getRange();
 
     void accept(TowerVisitor visitor);
 }

@@ -1,6 +1,6 @@
 package model.event;
 
-import utils.VectorF;
+import utils.VectorD;
 
 public class Event {
 
@@ -11,17 +11,17 @@ public class Event {
 
     private final Type type;
     private final Object sender;
-    private final VectorF position;
+    private final VectorD position;
     private final double angle;
 
-    public Event(Type type, Object sender, VectorF position, double angle) {
+    public Event(Type type, Object sender, VectorD position, double angle) {
         this.type = type;
         this.sender = sender;
         this.position = position;
         this.angle = angle;
     }
 
-    public Event(Type type, Object sender, VectorF position) {
+    public Event(Type type, Object sender, VectorD position) {
         this.type = type;
         this.sender = sender;
         this.position = position;
@@ -31,7 +31,7 @@ public class Event {
     public Event(Type type, Object sender) {
         this.type = type;
         this.sender = sender;
-        position = new VectorF(0, 0);
+        position = new VectorD(0, 0);
         angle = 0;
     }
 
@@ -43,7 +43,7 @@ public class Event {
         return sender;
     }
 
-    public VectorF getPosition() {
+    public VectorD getPosition() {
         return position;
     }
 

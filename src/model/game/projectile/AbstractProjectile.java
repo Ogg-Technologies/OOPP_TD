@@ -3,18 +3,18 @@ package model.game.projectile;
 import model.game.CollisionDetector;
 import model.game.enemy.Enemy;
 import utils.Vector;
-import utils.VectorF;
+import utils.VectorD;
 
 public abstract class AbstractProjectile implements Projectile {
 
     private static final int EDGE_DELTA = 1;
 
     protected final ProjectileService service;
-    private VectorF position;
-    protected VectorF velocity;
+    protected VectorD velocity;
+    private VectorD position;
     protected boolean consumed;
 
-    public AbstractProjectile(ProjectileService service, VectorF position, VectorF velocity) {
+    public AbstractProjectile(ProjectileService service, VectorD position, VectorD velocity) {
         this.service = service;
         this.position = position;
         this.velocity = velocity;
@@ -51,7 +51,7 @@ public abstract class AbstractProjectile implements Projectile {
     }
 
     @Override
-    public VectorF getPosition() {
+    public VectorD getPosition() {
         return position;
     }
 

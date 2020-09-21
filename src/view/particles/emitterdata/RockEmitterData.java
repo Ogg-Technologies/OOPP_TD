@@ -1,6 +1,6 @@
 package view.particles.emitterdata;
 
-import utils.VectorF;
+import utils.VectorD;
 import view.particles.distribution.Distribution;
 import view.particles.distribution.LinearIntegerDistribution;
 import view.particles.distribution.LinearVectorDistribution;
@@ -23,11 +23,11 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
     }
 
     private Distribution<Integer> lifetimeDistribution = new LinearIntegerDistribution(30, 60);
-    private Distribution<VectorF> startPositionDistribution =
-            new LinearVectorDistribution(new VectorF(-1, -1), new VectorF(1, 1));
-            //new LinearVectorDistribution(new VectorF(0, 0), new VectorF(0, 0));
-    private Distribution<VectorF> startVelocityDistribution =
-            new LinearVectorDistribution(new VectorF(-0.02f, -0.02f), new VectorF(0.02f, 0.02f));
+    private Distribution<VectorD> startPositionDistribution =
+            new LinearVectorDistribution(new VectorD(-1, -1), new VectorD(1, 1));
+    //new LinearVectorDistribution(new VectorD(0, 0), new VectorD(0, 0));
+    private Distribution<VectorD> startVelocityDistribution =
+            new LinearVectorDistribution(new VectorD(-0.02f, -0.02f), new VectorD(0.02f, 0.02f));
 
     @Override
     public int getEmitterLifetime() {
@@ -45,12 +45,12 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
     }
 
     @Override
-    public VectorF getNewStartPosition() {
+    public VectorD getNewStartPosition() {
         return startPositionDistribution.getRandom();
     }
 
     @Override
-    public VectorF getNewStartVelocity() {
+    public VectorD getNewStartVelocity() {
         return startVelocityDistribution.getRandom();
     }
 

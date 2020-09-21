@@ -1,6 +1,6 @@
 package view.particles;
 
-import utils.VectorF;
+import utils.VectorD;
 import view.WindowState;
 
 import java.awt.*;
@@ -8,8 +8,8 @@ import java.awt.*;
 public class Particle {
 
     private int lifetime;
-    private VectorF tilePosition;
-    private VectorF velocity;
+    private VectorD tilePosition;
+    private VectorD velocity;
     private double angle;
     private double angleVelocity;
 
@@ -18,7 +18,7 @@ public class Particle {
     private final boolean alphaDropoff;
     private final Image image;
 
-    public Particle(int lifetime, VectorF tilePosition, VectorF velocity, double tileSize, double friction, Image image) {
+    public Particle(int lifetime, VectorD tilePosition, VectorD velocity, double tileSize, double friction, Image image) {
         this.lifetime = lifetime;
         this.tilePosition = tilePosition;
         this.velocity = velocity;
@@ -30,7 +30,7 @@ public class Particle {
         alphaDropoff = true;
     }
 
-    public Particle(int lifetime, VectorF tilePosition, VectorF velocity, double angleVelocity,
+    public Particle(int lifetime, VectorD tilePosition, VectorD velocity, double angleVelocity,
                     double tileSize, double friction, boolean alphaDropoff, Image image) {
         this.lifetime = lifetime;
         this.tilePosition = tilePosition;
@@ -49,7 +49,7 @@ public class Particle {
         }
         lifetime--;
 
-        velocity = velocity.times((float) friction);
+        velocity = velocity.times(friction);
         tilePosition = tilePosition.plus(velocity);
         angle += angleVelocity;
     }

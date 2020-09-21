@@ -8,7 +8,7 @@ import model.game.tower.Tower;
 import model.game.tower.TowerService;
 import model.game.tower.TowerVisitor;
 import utils.Vector;
-import utils.VectorF;
+import utils.VectorD;
 
 import java.util.List;
 import java.util.Random;
@@ -19,7 +19,7 @@ public class GrizzlyBear implements Tower {
 
     private final AimingTower baseTower;
     private final EventSender eventSender;
-    private final float range;
+    private final double range;
     private int charge;
 
     public GrizzlyBear(AimingTower baseTower, EventSender eventSender) {
@@ -29,8 +29,8 @@ public class GrizzlyBear implements Tower {
         this.charge = 87;
     }
 
-    public float getAngle() {
-       return baseTower.getAngle().getAngle(); //TODO getAngle.getAngle?
+    public double getAngle() {
+        return baseTower.getAngle().getAngle(); //TODO getAngle.getAngle?
     }
 
     @Override
@@ -59,12 +59,12 @@ public class GrizzlyBear implements Tower {
     }
 
     @Override
-    public float getRange() {
+    public double getRange() {
         return range;
     }
 
     @Override
-    public List<? extends Enemy> getEnemiesInRange(float range) {
+    public List<? extends Enemy> getEnemiesInRange(double range) {
         return baseTower.getEnemiesInRange(range);
     }
 
@@ -80,10 +80,10 @@ public class GrizzlyBear implements Tower {
 
     private void attackEnemy(Enemy currentEnemy) {
         baseTower.changeAngle(currentEnemy.getPos());
-        getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorF(),
+        getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorD(),
                 baseTower.getAngle().setMagnitude(0.3f), 1));
 //        currentEnemy.damage(1);
-        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this, getPos().plus(new VectorF(0.5f, 0.5f)), getAngle()));
+        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this, getPos().plus(new VectorD(0.5f, 0.5f)), getAngle()));
     }
 
     @Override

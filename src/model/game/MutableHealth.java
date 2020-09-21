@@ -28,8 +28,8 @@ public class MutableHealth implements Health {
     }
 
     @Override
-    public float getFraction() {
-        return ((float) current) / max;
+    public double getFraction() {
+        return ((double) current) / max;
     }
 
     @Override

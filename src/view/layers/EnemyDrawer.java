@@ -16,8 +16,8 @@ public class EnemyDrawer implements EnemyVisitor {
     private final Graphics graphics;
     private final WindowState windowState;
 
-    private static final float healthHeightPercent = 0.05f; //Of tileSize
-    private static final float healthWidthPercent = 0.5f; //Of tileSize
+    private static final double healthHeightPercent = 0.05f; //Of tileSize
+    private static final double healthWidthPercent = 0.5f; //Of tileSize
 
     public EnemyDrawer(Graphics g, WindowState windowState) {
         graphics = g;

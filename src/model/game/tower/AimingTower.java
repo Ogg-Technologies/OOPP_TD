@@ -2,7 +2,7 @@ package model.game.tower;
 
 import model.game.enemy.Enemy;
 import utils.Vector;
-import utils.VectorF;
+import utils.VectorD;
 
 import java.util.List;
 
@@ -13,14 +13,14 @@ public class AimingTower implements Tower {
     private final Tower baseTower;
 
 
-    private VectorF angle;
+    private VectorD angle;
 
 
     public AimingTower(TowerService towerService, Vector pos) {
         this.towerService = towerService;
         this.pos = pos;
         this.baseTower = new DefaultTower(towerService, pos);
-        this.angle = pos.minus(new VectorF(0, 0));
+        this.angle = pos.minus(new VectorD(0, 0));
     }
 
     @Override
@@ -37,20 +37,20 @@ public class AimingTower implements Tower {
     public void update() {
     }
 
-    public void changeAngle(VectorF other) {
-        angle = other.minus(pos.asVectorF());
+    public void changeAngle(VectorD other) {
+        angle = other.minus(pos.asVectorD());
     } //TODO bör denna vara public?
 
-    public VectorF getAngle() {
+    public VectorD getAngle() {
         return angle;
     }
 
 
-    public List<? extends Enemy> getEnemiesInRange(float range) {
+    public List<? extends Enemy> getEnemiesInRange(double range) {
         return baseTower.getEnemiesInRange(range);
     }
 
-    public float getRange() {
+    public double getRange() {
         return 0;
     }
 

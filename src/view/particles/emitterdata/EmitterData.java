@@ -1,18 +1,25 @@
 package view.particles.emitterdata;
 
-import utils.VectorF;
+import utils.VectorD;
 
 import java.awt.*;
 
 public interface EmitterData {
     int getEmitterLifetime();
+
     double newParticlesPerUpdate();
 
     int getNewParticleLifetime();
-    VectorF getNewStartPosition();
-    VectorF getNewStartVelocity();
+
+    VectorD getNewStartPosition();
+
+    VectorD getNewStartVelocity();
+
     double getNewAngleVelocity();
+
     double getNewTileSize();
+
     double getNewFriction();
+
     Image getImage();
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface TowerService {
-    public List<? extends Enemy> getEnemies();
+    List<? extends Enemy> getEnemies();
 
     void addProjectile(Projectile projectile);
 
