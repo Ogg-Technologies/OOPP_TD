@@ -44,8 +44,8 @@ public abstract class AbstractProjectile implements Projectile {
 
     private void removeIfOutsideMap() {
         Vector mapSize = service.getMapSize();
-        if (position.getX() < -EDGE_DELTA || position.getY() < -EDGE_DELTA
-                || position.getX() > mapSize.getX() + EDGE_DELTA || position.getY() > mapSize.getY() + EDGE_DELTA) {
+        if (position.x < -EDGE_DELTA || position.y < -EDGE_DELTA
+                || position.x > mapSize.getX() + EDGE_DELTA || position.y > mapSize.getY() + EDGE_DELTA) {
             consumed = true;
         }
     }

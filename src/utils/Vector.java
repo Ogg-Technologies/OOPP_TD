@@ -59,11 +59,11 @@ public class Vector {
     }
 
     public VectorD plus(VectorD other) {
-        return new VectorD(x + other.getX(), y + other.getY());
+        return new VectorD(x + other.x, y + other.y);
     }
 
     public VectorD minus(VectorD other) {
-        return new VectorD(x - other.getX(), y - other.getY());
+        return new VectorD(x - other.x, y - other.y);
     }
 
     public VectorD asVectorD() {

@@ -25,8 +25,8 @@ class VectorDTest {
 
     @Test
     void vectorRemembersItsCoordinate() {
-        assertEquals(3, vec1.getX());
-        assertEquals(4, vec1.getY());
+        assertEquals(3, vec1.x);
+        assertEquals(4, vec1.y);
     }
 
     @Test
@@ -50,8 +50,8 @@ class VectorDTest {
     @Test
     void canMultiplyWithScalar() {
         VectorD v = vec1.times(2);
-        assertEquals(6, v.getX());
-        assertEquals(8, v.getY());
+        assertEquals(6, v.x);
+        assertEquals(8, v.y);
     }
 
     @Test
@@ -85,15 +85,15 @@ class VectorDTest {
         @Test
         void canAddVectorD() {
             VectorD vec3 = vec1.plus(vec2);
-            assertEquals(vec3.getX(), 4.1, 0.0001);
-            assertEquals(vec3.getY(), 5.1, 0.0001);
+            assertEquals(vec3.x, 4.1, 0.0001);
+            assertEquals(vec3.y, 5.1, 0.0001);
         }
 
         @Test
         void canSubtractVectorD() {
             VectorD vec3 = vec1.minus(vec2);
-            assertEquals(vec3.getX(), 1.9, 0.0001);
-            assertEquals(vec3.getY(), 2.9, 0.0001);
+            assertEquals(vec3.x, 1.9, 0.0001);
+            assertEquals(vec3.y, 2.9, 0.0001);
         }
     }
 }

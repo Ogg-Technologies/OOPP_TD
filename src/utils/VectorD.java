@@ -3,8 +3,8 @@ package utils;
 import java.util.Objects;
 
 public class VectorD {
-    private final double x;
-    private final double y;
+    public final double x;
+    public final double y;
 
     public VectorD(double x, double y) {
         this.x = x;
@@ -13,14 +13,6 @@ public class VectorD {
 
     public static VectorD fromPolar(double angle, double magnitude) {
         return new VectorD(Math.cos(angle), Math.sin(angle)).setMagnitude(magnitude);
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
     }
 
     public double getDist() {

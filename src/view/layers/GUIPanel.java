@@ -23,9 +23,9 @@ public class GUIPanel extends JPanel {
         double hp = modelData.getBaseHealth().getFraction();
         int hpMaxHeight = getHeight() - SwingView.heightOffset;
         g.setColor(Color.red);
-        double x = (pos.getX() * (getWidth() - SwingView.widthOffset) - (hpWidth * getWidth()));
-        double y = (pos.getY() * getHeight());
-        double height = ((hpMaxHeight - y) * (1 - pos.getY()));
+        double x = (pos.x * (getWidth() - SwingView.widthOffset) - (hpWidth * getWidth()));
+        double y = (pos.y * getHeight());
+        double height = ((hpMaxHeight - y) * (1 - pos.y));
         g.fillRect((int) x, (int) y, (int) (hpWidth * getWidth()), (int) (height) - 1);//Rounding error causes -1
         g.setColor(Color.green);
         g.fillRect((int) x, (int) (y + ((1 - hp) * height)), (int) (hpWidth * getWidth()), (int) ((height * hp)));
