@@ -73,7 +73,6 @@ public class SwingView implements View {
         GUIPanel GUIPanel = new GUIPanel(new VectorD(0.99, 0.01), modelData);
 
         particleHandler = new ParticleHandler(windowState);
-        modelData.addOnModelUpdateObserver(particleHandler);
         modelData.addOnModelEventListener(particleHandler);
 
         //All layers where first element is furthest back

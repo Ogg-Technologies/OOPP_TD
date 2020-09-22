@@ -12,8 +12,6 @@ import java.util.List;
 
 public interface ModelData {
 
-    void addOnModelUpdateObserver(OnModelUpdateObserver observer);
-
     void addOnModelEventListener(EventListener eventListener);
 
     /**

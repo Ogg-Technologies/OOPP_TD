@@ -2,9 +2,18 @@ package model.event;
 
 import utils.VectorD;
 
+/**
+ * An Event is something that has happened in the Model. The class responsible for the Event creates an instance of it
+ * and sends it via EventSender interface to the root model class (in our case, Model) where it is sent to all
+ * EventListeners to the outside. An Event always has a Type and sender (the object that caused it's class)
+ */
 public class Event {
 
+    /**
+     * Types of Events, used for easy filtering when the sender class is not important
+     */
     public enum Type {
+        UPDATE,
         TOWER_ATTACK,
         ENEMY_DEATH,
     }
@@ -14,6 +23,14 @@ public class Event {
     private final VectorD position;
     private final double angle;
 
+    /**
+     * Creates an Event, which is something that has happened in the model that either something
+     * in the model wants to find out has happened or potential event listeners
+     * @param type The type of Event
+     * @param sender The class of the object that caused the Event (send in this.getClass() as argument)
+     * @param position [Optional] Some Events has a specific position
+     * @param angle [Optional] Some Events has an angle TODO: Figure out if this should exist
+     */
     public Event(Type type, Class<?> sender, VectorD position, double angle) {
         this.type = type;
         this.sender = sender;
@@ -35,18 +52,22 @@ public class Event {
         angle = 0;
     }
 
+    /** @return The type of Event */
     public Type getType() {
         return type;
     }
 
+    /** @return The class of the object that caused the event */
     public Class<?> getSender() {
         return sender;
     }
 
+    /** @return The position of the event of zero vector if it had no position */
     public VectorD getPosition() {
         return position;
     }
 
+    /** @return The angle of the event or 0 if it had no angle */
     public double getAngle() {
         return angle;
     }

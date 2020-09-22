@@ -17,12 +17,10 @@ import java.util.Set;
 
 public final class Model implements ModelEventHandler, ModelData, Updatable, EventSender {
     private Game game;
-    private final Set<OnModelUpdateObserver> updateObservers;
     private final Set<EventListener> eventListeners;
 
     public Model() {
         game = new Game(this);
-        updateObservers = new HashSet<>();
         eventListeners = new HashSet<>();
     }
 
@@ -30,19 +28,7 @@ public final class Model implements ModelEventHandler, ModelData, Updatable, Eve
     public void update() {
         game.update();
 
-        for (OnModelUpdateObserver observer : updateObservers) {
-            observer.onUpdate();
-        }
-    }
-
-    /**
-     * Adds the observer to the list of on model update observers
-     * that gets fired whenever the model has updated
-     * @param observer Observer to be added
-     */
-    @Override
-    public void addOnModelUpdateObserver(OnModelUpdateObserver observer) {
-        updateObservers.add(observer);
+        sendEvent(new Event(Event.Type.UPDATE, this.getClass()));
     }
 
     @Override
