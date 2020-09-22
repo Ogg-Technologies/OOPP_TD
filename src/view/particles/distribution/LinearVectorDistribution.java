@@ -3,19 +3,24 @@ package view.particles.distribution;
 import utils.VectorD;
 
 public class LinearVectorDistribution implements Distribution<VectorD> {
-    private final VectorD min;
-    private final VectorD difference;
+    private final Distribution<Double> angle;
+    private final Distribution<Double> magnitude;
 
-    public LinearVectorDistribution(VectorD min, VectorD max) {
-        this.min = min;
-        this.difference = max.minus(min);
+    private LinearVectorDistribution(Distribution<Double> angle, Distribution<Double> magnitude) {
+        this.angle = angle;
+        this.magnitude = magnitude;
     }
 
-    // TODO: Fix so that random vector is within circle instead of rectangle (possibly other class?)
+    public static LinearVectorDistribution withAnyAngle(Distribution<Double> magnitude) {
+        return new LinearVectorDistribution(LinearDoubleDistribution.fromMidPoint(0, Math.PI * 2), magnitude);
+    }
+
+    public static LinearVectorDistribution fromAngleAndMagnitude(Distribution<Double> angle, Distribution<Double> magnitude) {
+        return new LinearVectorDistribution(angle, magnitude);
+    }
+
     @Override
     public VectorD getRandom() {
-        double x = min.getX() + Math.random() * difference.getX();
-        double y = min.getY() + Math.random() * difference.getY();
-        return new VectorD(x, y);
+        return VectorD.fromPolar(angle.getRandom(), magnitude.getRandom());
     }
 }

@@ -11,6 +11,10 @@ public class VectorD {
         this.y = y;
     }
 
+    public static VectorD fromPolar(double angle, double magnitude) {
+        return new VectorD(Math.cos(angle), Math.sin(angle)).setMagnitude(magnitude);
+    }
+
     public double getX() {
         return x;
     }

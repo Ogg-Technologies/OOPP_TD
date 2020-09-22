@@ -2,6 +2,7 @@ package view.particles.emitterdata;
 
 import utils.VectorD;
 import view.particles.distribution.Distribution;
+import view.particles.distribution.LinearDoubleDistribution;
 import view.particles.distribution.LinearIntegerDistribution;
 import view.particles.distribution.LinearVectorDistribution;
 
@@ -22,12 +23,11 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
         }
     }
 
-    private Distribution<Integer> lifetimeDistribution = new LinearIntegerDistribution(30, 60);
+    private Distribution<Integer> lifetimeDistribution = LinearIntegerDistribution.fromRange(30, 60);
     private Distribution<VectorD> startPositionDistribution =
-            new LinearVectorDistribution(new VectorD(-1, -1), new VectorD(1, 1));
-    //new LinearVectorDistribution(new VectorD(0, 0), new VectorD(0, 0));
+            LinearVectorDistribution.withAnyAngle(() -> 0.1);
     private Distribution<VectorD> startVelocityDistribution =
-            new LinearVectorDistribution(new VectorD(-0.02, -0.02), new VectorD(0.02, 0.02));
+            LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.02));
 
     @Override
     public int getEmitterLifetime() {

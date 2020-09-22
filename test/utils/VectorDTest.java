@@ -17,6 +17,13 @@ class VectorDTest {
     }
 
     @Test
+    void canCreateFromPolar() {
+        VectorD v = VectorD.fromPolar(2, 3);
+        assertEquals(2, v.getAngle(), 0.0001);
+        assertEquals(3, v.getDist(), 0.0001);
+    }
+
+    @Test
     void vectorRemembersItsCoordinate() {
         assertEquals(3, vec1.getX());
         assertEquals(4, vec1.getY());
