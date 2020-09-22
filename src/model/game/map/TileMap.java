@@ -3,6 +3,7 @@ package model.game.map;
 import utils.Vector;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static model.game.map.Tile.*;
@@ -155,6 +156,6 @@ public class TileMap {
     }
 
     public List<? extends Vector> getPath() {
-        return path;
+        return Collections.unmodifiableList(path);
     }
 }

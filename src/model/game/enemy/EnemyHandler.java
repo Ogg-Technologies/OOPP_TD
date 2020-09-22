@@ -3,6 +3,7 @@ package model.game.enemy;
 import utils.Vector;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,6 +40,6 @@ public class EnemyHandler {
     }
 
     public List<? extends Enemy> getEnemies() {
-        return enemies;
+        return Collections.unmodifiableList(enemies);
     }
 }

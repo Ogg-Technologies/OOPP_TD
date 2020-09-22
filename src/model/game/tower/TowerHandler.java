@@ -4,6 +4,7 @@ import model.event.EventSender;
 import utils.Vector;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TowerHandler {
@@ -25,7 +26,7 @@ public class TowerHandler {
     }
 
     public List<? extends Tower> getTowers() {
-        return towers;
+        return Collections.unmodifiableList(towers);
     }
 
     public void update() {
