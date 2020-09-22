@@ -35,6 +35,11 @@ class VectorDTest {
     }
 
     @Test
+    void vectorHasSquaredDistance() {
+        assertEquals(25, vec1.getSquaredDistance());
+    }
+
+    @Test
     void vectorHasAngle() {
         assertEquals(0, (new VectorD(1, 0)).getAngle());
         assertEquals(Math.PI, (new VectorD(-1, 0)).getAngle(), 0.001);

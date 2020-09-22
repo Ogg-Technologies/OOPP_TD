@@ -23,6 +23,10 @@ public class Vector {
         return Math.hypot(x, y);
     }
 
+    public double getSquaredDistance() {
+        return x * x + y * y;
+    }
+
     public double getAngle() {
         if (getDist() == 0) throw new IllegalStateException("Cannot get angle of Zero vector: " + this);
         return Math.atan2(y, x);
