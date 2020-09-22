@@ -147,7 +147,7 @@ public class SwingView implements View {
     }
 
     @Override
-    public Vector convertRealPosToTilePos(Vector v){
+    public Vector convertFromRealPosToTilePos(Vector v) {
         int offsettedX = v.getX() - windowState.getOffset().getX();
         int offsettedY = v.getY() - windowState.getOffset().getY();
         if (offsettedX < 0 || offsettedY < 0) {

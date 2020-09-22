@@ -10,7 +10,6 @@ import view.View;
  */
 public class Application {
 
-
     /**
      * The constructor for Application which instantiate all the necessary objects.
      */
@@ -23,4 +22,5 @@ public class Application {
         ApplicationLoop loop = new ApplicationLoop(model, view, view);
         loop.start();
     }
+
 }

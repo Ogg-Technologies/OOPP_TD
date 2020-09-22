@@ -1,11 +1,9 @@
 package view;
 
-import utils.Vector;
-
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public interface View extends Drawable, MouseViewObserver, ShutDownAble {
+public interface View extends Drawable, MouseViewObserver, ShutDownAble, WindowPositionHelper {
     void start();
 
     void draw();
@@ -13,9 +11,4 @@ public interface View extends Drawable, MouseViewObserver, ShutDownAble {
     void addMouseListener(MouseListener mouseListener);
 
     void addMouseMotionListener(MouseMotionListener mouseMotionListener);
-
-    Vector getOffset();
-
-    Vector convertRealPosToTilePos(Vector v);
-
 }

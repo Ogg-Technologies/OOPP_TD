@@ -1,8 +1,9 @@
-package controller;
+package view;
 
 import utils.Vector;
 
-public interface ControlFacade {
+public interface WindowPositionHelper {
     Vector convertFromRealPosToTilePos(Vector realPos);
+
     Vector getOffset();
 }
