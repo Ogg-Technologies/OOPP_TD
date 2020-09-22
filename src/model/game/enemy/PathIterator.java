@@ -5,6 +5,9 @@ import utils.Vector;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * PathIterator is an Iterator of Vectors which lets you go forwards and backwards in the list of Vectors
+ */
 public class PathIterator {
 
     private final List<? extends Vector> path;
@@ -12,18 +15,18 @@ public class PathIterator {
 
     public PathIterator(List<? extends Vector> path) {
         this.path = path;
-        current = 0;
+        current = -1;
     }
 
     public boolean hasNext() {
-        return current < path.size();
+        return current < path.size() - 1;
     }
 
     public Vector next() {
-        if (current + 1 > path.size()) {
+        if (!hasNext()) {
             throw new NoSuchElementException("Next element does not exist");
         }
-        return path.get(current++);
+        return path.get(++current);
     }
 
     public boolean hasPrevious() {
@@ -31,9 +34,9 @@ public class PathIterator {
     }
 
     public Vector previous() {
-        if (current - 1 < 0) {
+        if (!hasPrevious()) {
             throw new NoSuchElementException("Previous element does not exist");
         }
-        return path.get(current--);
+        return path.get(--current);
     }
 }
