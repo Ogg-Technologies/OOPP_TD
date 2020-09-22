@@ -39,11 +39,11 @@ public final class ParticleHandler extends JPanel implements OnModelUpdateObserv
      */
     @Override
     public void onEvent(Event event) {
-        EmitterData data = particleMap.get(event.getSender().getClass());
-        if (data == null) {
-            return;
+        if (particleMap.containsKey(event.getSender())) {
+
+            EmitterData data = particleMap.get(event.getSender());
+            createEmitter(event.getPosition(), data);
         }
-        createEmitter(event.getPosition(), data);
     }
 
     private void createEmitter(VectorD position, EmitterData data) {

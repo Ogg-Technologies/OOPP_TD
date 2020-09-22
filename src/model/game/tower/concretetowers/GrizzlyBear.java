@@ -83,7 +83,7 @@ public class GrizzlyBear implements Tower {
         getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorD(),
                 baseTower.getAngle().setMagnitude(0.3), 1));
 //        currentEnemy.damage(1);
-        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this, getPos().plus(new VectorD(0.5, 0.5)), getAngle()));
+        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, getClass(), getPos().plus(new VectorD(0.5, 0.5)), getAngle()));
     }
 
     @Override
