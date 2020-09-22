@@ -5,22 +5,22 @@ import model.Model;
 import view.SwingView;
 import view.View;
 
-public class Application implements ShutDownAble {
+/**
+ * The Application class is what creates all necessary objects.
+ */
+public class Application {
 
-    ApplicationLoop loop;
 
+    /**
+     * The constructor for Application which instantiate all the necessary objects.
+     */
     public Application() {
         Model model = new Model();
-        View view = new SwingView(model, this);
+        View view = new SwingView(model);
         Controller controller = new Controller(model, view);
-
         view.start();
-        loop = new ApplicationLoop(model, view);
-        loop.start();
-    }
 
-    @Override
-    public void shutDown() {
-        loop.shutDown();
+        ApplicationLoop loop = new ApplicationLoop(model, view, view);
+        loop.start();
     }
 }

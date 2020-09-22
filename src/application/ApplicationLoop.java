@@ -2,17 +2,18 @@ package application;
 
 import model.Updatable;
 import view.Drawable;
+import view.ShutDownAble;
 
-public class ApplicationLoop implements Runnable, ShutDownAble {
+public class ApplicationLoop implements Runnable {
 
     private Updatable updatable;
     private Drawable drawable;
+    private final ShutDownAble shutDownAble;
 
-    private volatile boolean playing = true;
-
-    public ApplicationLoop(Updatable updatable, Drawable drawable) {
+    public ApplicationLoop(Updatable updatable, Drawable drawable, ShutDownAble shutDownAble) {
         this.updatable = updatable;
         this.drawable = drawable;
+        this.shutDownAble = shutDownAble;
     }
 
     public void start() {
@@ -29,7 +30,7 @@ public class ApplicationLoop implements Runnable, ShutDownAble {
         int frames = 0;
         int updates = 0;
 
-        while (playing) {
+        while (!shutDownAble.isShutDown()) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -53,10 +54,4 @@ public class ApplicationLoop implements Runnable, ShutDownAble {
             }
         }
     }
-
-    @Override
-    public void shutDown() {
-        playing = false;
-    }
-
 }

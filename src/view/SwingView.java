@@ -1,6 +1,5 @@
 package view;
 
-import application.ShutDownAble;
 import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
@@ -28,7 +27,7 @@ public class SwingView implements View {
     private final Vector offset = new Vector(8, 31);
 
     private final WindowState windowState = new WindowState();
-    private final ShutDownAble shutDownAble;
+    private ShutDownAble shutDownAble = null;
 
     private boolean windowHasBeenActive = false;
 
@@ -38,11 +37,8 @@ public class SwingView implements View {
     private final Background background;
 
 
+    public SwingView(ModelData modelData) {
 
-
-    public SwingView(ModelData modelData, ShutDownAble shutDownAble) {
-
-        this.shutDownAble = shutDownAble;
         this.modelData = modelData;
 
         //Setup for window and every layer
@@ -118,10 +114,6 @@ public class SwingView implements View {
 
         window.repaint();
 
-        //Checks if the window has closed
-        if (!window.isEnabled() && windowHasBeenActive) {
-            shutDownAble.shutDown();
-        }
         if (window.isEnabled()) {
             windowHasBeenActive = true;
         }
@@ -158,14 +150,19 @@ public class SwingView implements View {
     public Vector convertRealPosToTilePos(Vector v){
         int offsettedX = v.getX() - windowState.getOffset().getX();
         int offsettedY = v.getY() - windowState.getOffset().getY();
-        if(offsettedX < 0 || offsettedY < 0){
+        if (offsettedX < 0 || offsettedY < 0) {
             return null;
         }
         int tileX = offsettedX / windowState.getTileSize();
         int tileY = offsettedY / windowState.getTileSize();
-        if(tileX < modelData.getMapSize().getX() && tileY < modelData.getMapSize().getY()) {
+        if (tileX < modelData.getMapSize().getX() && tileY < modelData.getMapSize().getY()) {
             return new Vector(tileX, tileY);
         }
         return null;
+    }
+
+    @Override
+    public boolean isShutDown() {
+        return windowHasBeenActive && !window.isEnabled();
     }
 }

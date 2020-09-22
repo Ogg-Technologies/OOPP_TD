@@ -2,6 +2,7 @@ package controller;
 
 import model.ModelEventHandler;
 import utils.Vector;
+import view.MouseViewObserver;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
