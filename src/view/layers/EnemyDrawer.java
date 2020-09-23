@@ -13,11 +13,13 @@ import java.io.IOException;
 
 public class EnemyDrawer implements EnemyVisitor {
     private static final BufferedImage image = getEnemyImage();
-    private final Graphics graphics;
-    private final WindowState windowState;
-
     private static final double healthHeightPercent = 0.05; //Of tileSize
     private static final double healthWidthPercent = 0.5; //Of tileSize
+    private static final Color HEALTH_COLOR = Color.GREEN;   // TODO: Should be the same as player health colors, should probably refactor to Color class
+    private static final Color DAMAGE_COLOR = Color.RED;
+
+    private final Graphics graphics;
+    private final WindowState windowState;
 
     public EnemyDrawer(Graphics g, WindowState windowState) {
         graphics = g;
@@ -43,16 +45,19 @@ public class EnemyDrawer implements EnemyVisitor {
         //Draws the enemy
         graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
 
-        //Draws the health bar for the enemy
+        drawHealthBar(enemy, x, y);
+    }
+
+    private void drawHealthBar(Enemy enemy, int x, int y) {
         int healthWidth = (int) (windowState.getTileSize() * enemy.getHealth().getFraction() * healthWidthPercent);
         int healthHeight = (int) (windowState.getTileSize() * healthHeightPercent);
-        int healthX = x + windowState.getTileSize() / 4;
+        int healthX = (int) (x + windowState.getTileSize() * ((1 - healthWidthPercent) / 2));
         int healthY = y - healthHeight;
-        graphics.setColor(Color.RED);
+
+        graphics.setColor(DAMAGE_COLOR);
         graphics.fillRect(healthX, healthY, (int) (windowState.getTileSize() * healthWidthPercent), healthHeight);
 
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(HEALTH_COLOR);
         graphics.fillRect(healthX, healthY, healthWidth, healthHeight);
-
     }
 }
