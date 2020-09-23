@@ -34,7 +34,12 @@ public class SwingMouseController implements MouseListener, MouseMotionListener 
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("x: " + (e.getX() - windowPositionHelper.getOffset().getX()) + ", y: " + (e.getY() - windowPositionHelper.getOffset().getY()));
-        modelEventHandler.clickedTile(windowPositionHelper.convertFromRealPosToTilePos(new Vector(e.getX() - windowPositionHelper.getOffset().getX(), e.getY() - windowPositionHelper.getOffset().getY())));
+        Vector clickedTile = windowPositionHelper.convertFromRealPosToTilePos(new Vector(
+                e.getX() - windowPositionHelper.getOffset().getX(),
+                e.getY() - windowPositionHelper.getOffset().getY()));
+        if (clickedTile != null) {
+            modelEventHandler.clickedTile(clickedTile);
+        }
     }
 
     @Override

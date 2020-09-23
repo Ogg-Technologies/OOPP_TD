@@ -68,13 +68,10 @@ public final class Model implements ModelEventHandler, ModelData, Updatable, Eve
 
 
     /**
-     *
-     * @param v is a vector that can be null if the click event is not on the map
+     * @param v is a vector that correspond to a position on the tileMap
      */
     @Override
     public void clickedTile(Vector v) {
-        if(v == null)
-            return;
         //TODO: The vector is the tile that the user clicked on. For example (1, 1)
         System.out.println("x: " + v.getX() + ", y: " + v.getY());
     }
