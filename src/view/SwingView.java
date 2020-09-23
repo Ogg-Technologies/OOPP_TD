@@ -27,7 +27,6 @@ public class SwingView implements View {
     private final Vector offset = new Vector(8, 31);
 
     private final WindowState windowState = new WindowState();
-    private ShutDownAble shutDownAble = null;
 
     private boolean windowHasBeenActive = false;
 
@@ -141,9 +140,16 @@ public class SwingView implements View {
         window.addMouseMotionListener(mouseMotionListener);
     }
 
+    private Vector prevTilePos = null;
+
     @Override
     public void updateMousePosition(Vector v) {
-        background.setMousePos(v);
+        Vector tilePos = convertFromRealPosToTilePos(v);
+        //Optimizing, doesn't call it for update if the tile hasn't changed
+        if(prevTilePos == null || !prevTilePos.equals(tilePos)){
+            background.setMousePos(tilePos, modelData.isValidTile(tilePos));
+            prevTilePos = tilePos;
+        }
     }
 
     @Override

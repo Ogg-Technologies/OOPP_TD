@@ -17,6 +17,7 @@ public class Background extends JPanel {
     private final ModelData modelData;
     private final WindowState windowState;
     private Vector pos = null;
+    private boolean validTile = true;
 
     private static final BufferedImage baseImage = getBaseImage();
 
@@ -25,8 +26,9 @@ public class Background extends JPanel {
         this.windowState = windowState;
     }
 
-    public void setMousePos(Vector pos){
+    public void setMousePos(Vector pos, boolean validTile){
         this.pos = pos;
+        this.validTile = validTile;
     }
 
     private static BufferedImage getBaseImage() {
@@ -72,11 +74,7 @@ public class Background extends JPanel {
         }
 
         if(pos != null){
-            int startX = pos.getX() - windowState.getOffset().getX();
-            int startY = pos.getY() - windowState.getOffset().getY();
-            if(startX >= 0 && startY >= 0){
-                paintGrayOverlay(startX, startY, g);
-            }
+            paintOverlay(pos, g);
         }
 
         g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getOffset().getX(),
@@ -84,13 +82,16 @@ public class Background extends JPanel {
                 ,windowState.getTileSize(),windowState.getTileSize(), null );
     }
 
-    private void paintGrayOverlay(int startX, int startY, Graphics g){
-        int tileX = startX / windowState.getTileSize();
-        int tileY = startY / windowState.getTileSize();
-        if(tileX >= 0 && tileY >= 0 && tileX < modelData.getMapSize().getX() && tileY < modelData.getMapSize().getY()) {
-            g.setColor(new Color(0, 0, 0, 50));
-            g.fillRect(tileX * windowState.getTileSize() + windowState.getOffset().getX(),
-                    tileY * windowState.getTileSize() + windowState.getOffset().getY(),
+    private void paintOverlay(Vector tilePos, Graphics g){
+
+        if(tilePos.getX() >= 0 && tilePos.getY() >= 0 && tilePos.getX() < modelData.getMapSize().getX() && tilePos.getY() < modelData.getMapSize().getY()) {
+            if(validTile){
+                g.setColor(new Color(0, 0, 0, 50));
+            }else {
+                g.setColor(new Color(255, 0, 0, 50));
+            }
+            g.fillRect(tilePos.getX() * windowState.getTileSize() + windowState.getOffset().getX(),
+                    tilePos.getY() * windowState.getTileSize() + windowState.getOffset().getY(),
                     windowState.getTileSize(), windowState.getTileSize());
         }
     }

@@ -77,6 +77,11 @@ public final class Model implements ModelEventHandler, ModelData, Updatable, Eve
     }
 
     @Override
+    public boolean isValidTile(Vector tilePos) {
+        return game.isValidTile(tilePos);
+    }
+
+    @Override
     public void sendEvent(Event event) {
         for (EventListener listener : eventListeners) {
             listener.onEvent(event);

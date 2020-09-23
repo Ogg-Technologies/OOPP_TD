@@ -34,4 +34,10 @@ public interface ModelData {
     List<? extends Projectile> getProjectiles();
 
     Health getBaseHealth();
+
+    /**
+     * @param tilePos the tileMap position
+     * @return a boolean that describes whether the game thinks it is a valid tile or not
+     */
+    boolean isValidTile(Vector tilePos);
 }

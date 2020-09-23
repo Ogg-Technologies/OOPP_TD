@@ -34,4 +34,18 @@ public class TowerHandler {
             t.update();
         }
     }
+
+    /**
+     * Checks if there is a tower on a particular tilePos
+     * @param tilePos the pos to look at
+     * @return true if there is a tower on this pos, else false
+     */
+    public boolean isTowerAt(Vector tilePos) {
+        for(Tower t : towers){
+            if(t.getPos().equals(tilePos)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

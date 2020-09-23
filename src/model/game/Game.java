@@ -94,4 +94,13 @@ public class Game implements TowerService, ProjectileService {
     public List<Projectile> getProjectiles() {
         return Collections.unmodifiableList(projectiles);
     }
+
+    /**
+     * Checks whether there are other towers or objects where other towers cannot be placed
+     * @param tilePos the tileMap pos to look att
+     * @return a boolean whether or not the tile is valid
+     */
+    public boolean isValidTile(Vector tilePos) {
+        return !towerHandler.isTowerAt(tilePos); //TODO: if we decide to have more obstacle, add it here
+    }
 }
