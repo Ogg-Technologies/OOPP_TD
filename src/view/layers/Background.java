@@ -13,7 +13,13 @@ import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 
-public class Background extends JPanel {
+public class Background extends JPanel { // TODO: Could use some functional decomposition later
+
+    private static final Color VALID_TILE_HOVER_COLOR = new Color(0, 0, 0, 50);
+    private static final Color INVALID_TILE_HOVER_COLOR = new Color(255, 0, 0, 50);
+    private static final Color PATH_COLOR = Color.decode("#91adc2");
+    private static final Color GROUND_COLOR = Color.decode("#4AA44A");
+
     private final ModelData modelData;
     private final WindowState windowState;
     private Vector pos = null;
@@ -53,13 +59,15 @@ public class Background extends JPanel {
                 switch (modelData.getTile(tileX, tileY)) {
                     case START:
                     case PATH:
-                        g.setColor(Color.decode("#D3D3D3"));
+                        g.setColor(PATH_COLOR);
                         break;
                     case GROUND:
                     case BASE:
-                    default:
-                        g.setColor(Color.decode("#FFCC99"));
+                        g.setColor(GROUND_COLOR);
                         break;
+                    default:
+                        throw new UnsupportedOperationException("The tile " + modelData.getTile(tileX, tileY)
+                                + " has no supported look in View");
                 }
 
                 if(modelData.getTile(tileX, tileY) == Tile.BASE) {
@@ -78,17 +86,17 @@ public class Background extends JPanel {
         }
 
         g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getOffset().getX(),
-                baseY * windowState.getTileSize() + windowState.getOffset().getY()
-                ,windowState.getTileSize(),windowState.getTileSize(), null );
+                baseY * windowState.getTileSize() + windowState.getOffset().getY(),
+                windowState.getTileSize(),windowState.getTileSize(), null);
     }
 
     private void paintOverlay(Vector tilePos, Graphics g){
 
         if(tilePos.getX() >= 0 && tilePos.getY() >= 0 && tilePos.getX() < modelData.getMapSize().getX() && tilePos.getY() < modelData.getMapSize().getY()) {
             if(validTile){
-                g.setColor(new Color(0, 0, 0, 50));
+                g.setColor(VALID_TILE_HOVER_COLOR);
             }else {
-                g.setColor(new Color(255, 0, 0, 50));
+                g.setColor(INVALID_TILE_HOVER_COLOR);
             }
             g.fillRect(tilePos.getX() * windowState.getTileSize() + windowState.getOffset().getX(),
                     tilePos.getY() * windowState.getTileSize() + windowState.getOffset().getY(),
