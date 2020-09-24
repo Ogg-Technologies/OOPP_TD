@@ -82,6 +82,11 @@ public final class Model implements ModelEventHandler, ModelData, Updatable, Eve
     }
 
     @Override
+    public int getMoney() {
+        return game.getMoney();
+    }
+
+    @Override
     public void sendEvent(Event event) {
         for (EventListener listener : eventListeners) {
             listener.onEvent(event);

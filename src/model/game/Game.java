@@ -11,6 +11,7 @@ import model.game.projectile.ProjectileService;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
 import model.game.tower.TowerService;
+import org.jetbrains.annotations.NotNull;
 import utils.Vector;
 
 import java.util.ArrayList;
@@ -97,13 +98,17 @@ public class Game implements TowerService, ProjectileService {
 
     /**
      * Checks whether there are other towers or objects where other towers cannot be placed
+     *
      * @param tilePos the tileMap pos to look att
      * @return a boolean whether or not the tile is valid
      */
-    public boolean isValidTile(Vector tilePos) {
-        if (tilePos == null)
-            System.out.println("WOW");
+    public boolean isValidTile(@NotNull Vector tilePos) {
         return !towerHandler.isTowerAt(tilePos) &&
                 tileMap.getTile(tilePos.getX(), tilePos.getY()) == Tile.GROUND; //TODO: if we decide to have more obstacle, add it here
+    }
+
+    //TODO: this method is what gives view the money information
+    public int getMoney() {
+        return 999999;
     }
 }

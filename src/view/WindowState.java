@@ -8,6 +8,7 @@ import utils.Vector;
 public class WindowState {
     private int tileSize = 0;
     private Vector offset;
+    private Vector windowSize;
 
     /**
      * If screen size is changed, the object needs to be updated, via this method,
@@ -16,7 +17,7 @@ public class WindowState {
      * @param totalSize   the size of the window
      * @param tileMapSize amount of tiles on the map
      */
-    public void update(Vector totalSize, Vector tileMapSize) {
+    public void update(Vector totalSize, Vector tileMapSize, Vector windowSize) {
         int divider;
         if (totalSize.getX() / tileMapSize.getX() > totalSize.getY() / tileMapSize.getY()) {
             divider = tileMapSize.getY();
@@ -33,6 +34,7 @@ public class WindowState {
         int startY = (totalSize.getY() - mapHeight) / 2;
 
         offset = new Vector(startX, startY);
+        this.windowSize = windowSize;
     }
 
     /**
@@ -48,5 +50,9 @@ public class WindowState {
      */
     public Vector getOffset() {
         return offset;
+    }
+
+    public Vector windowSize() {
+        return windowSize;
     }
 }

@@ -40,4 +40,9 @@ public interface ModelData {
      * @return a boolean that describes whether the game thinks it is a valid tile or not
      */
     boolean isValidTile(Vector tilePos);
+
+    /**
+     * @return amount of money the player has
+     */
+    int getMoney();
 }

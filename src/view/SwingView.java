@@ -107,7 +107,9 @@ public class SwingView implements View {
         Vector totalSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
         Vector tileSize = modelData.getMapSize();
 
-        windowState.update(totalSize, tileSize);
+        Vector windowSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
+
+        windowState.update(totalSize, tileSize, windowSize);
 
         setSizeOfLayers(window.getSize());
 
