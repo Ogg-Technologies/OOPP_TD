@@ -39,6 +39,10 @@ public class Background extends JPanel { // TODO: Could use some functional deco
         this.validTile = validTile;
     }
 
+    public void setMousePosToNull(){
+        this.pos = null;
+    }
+
     private static BufferedImage getBaseImage() {
         BufferedImage image;
         try {

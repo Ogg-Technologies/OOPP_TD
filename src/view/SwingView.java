@@ -144,6 +144,8 @@ public class SwingView implements View {
     public void updateMousePosition(Vector v) {
         Vector tilePos = convertFromRealPosToTilePos(v);
         if (tilePos == null) {
+            background.setMousePosToNull();
+            prevTilePos = null;
             return;
         }
         //Optimizing, doesn't call it for update if the tile hasn't changed
