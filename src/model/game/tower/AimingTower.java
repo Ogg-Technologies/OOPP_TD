@@ -38,13 +38,16 @@ public class AimingTower implements Tower {
     }
 
     public void changeAngle(VectorD other) {
+        if (angle.getDist() == 0) {
+            angle = new VectorD(-1, -1);
+        }
         angle = other.minus(pos.asVectorD());
-    } //TODO bör denna vara public?
-
-    public VectorD getAngle() {
-        return angle;
+        //TODO bör denna vara public?
     }
 
+    public double getAngle() {
+        return angle.getAngle();
+    }
 
     public List<? extends Enemy> getEnemiesInRange(double range) {
         return baseTower.getEnemiesInRange(range);
@@ -57,5 +60,10 @@ public class AimingTower implements Tower {
     @Override
     public void accept(TowerVisitor visitor) {
         visitor.visit(this);
+    }
+
+
+    public VectorD getAngleVector() {
+        return angle;
     }
 }

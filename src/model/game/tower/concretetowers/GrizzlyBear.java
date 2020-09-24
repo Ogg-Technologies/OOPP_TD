@@ -29,7 +29,7 @@ public class GrizzlyBear implements Tower {
     }
 
     public double getAngle() {
-        return baseTower.getAngle().getAngle(); //TODO getAngle.getAngle?
+        return baseTower.getAngle();
     }
 
     @Override
@@ -80,8 +80,7 @@ public class GrizzlyBear implements Tower {
     private void attackEnemy(Enemy currentEnemy) {
         baseTower.changeAngle(currentEnemy.getPos());
         getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorD(),
-                baseTower.getAngle().setMagnitude(0.3), 1));
-//        currentEnemy.damage(1); //TODO behövs ej längre?? denna rad borde kunnas ta bort helt
+                baseTower.getAngleVector().setMagnitude(0.3), 1));
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, getClass(), getPos().asVectorD()));
     }
 

@@ -101,6 +101,7 @@ public class Game implements TowerService, ProjectileService {
      * @param tilePos the tileMap pos to look att
      * @return a boolean whether or not the tile is valid
      */
+//    public boolean isValidTile(@NotNull Vector tilePos) {
     public boolean isValidTile(Vector tilePos) {
         return !towerHandler.isTowerAt(tilePos) &&
                 tileMap.getTile(tilePos.getX(), tilePos.getY()) == Tile.GROUND; //TODO: if we decide to have more obstacle, add it here
