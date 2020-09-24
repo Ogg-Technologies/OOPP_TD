@@ -8,7 +8,12 @@ import utils.Vector;
 public class WindowState {
     private int tileSize = 0;
     private Vector offset;
-    private Vector windowSize;
+
+
+    public static final double MAP_LEFT = .17;
+    public static final double MAP_UP = .02;
+    public static final double MAP_WIDTH = .66;
+    public static final double MAP_HEIGHT = .86;
 
     /**
      * If screen size is changed, the object needs to be updated, via this method,
@@ -17,24 +22,16 @@ public class WindowState {
      * @param totalSize   the size of the window
      * @param tileMapSize amount of tiles on the map
      */
-    public void update(Vector totalSize, Vector tileMapSize, Vector windowSize) {
-        int divider;
-        if (totalSize.getX() / tileMapSize.getX() > totalSize.getY() / tileMapSize.getY()) {
-            divider = tileMapSize.getY();
-            tileSize = totalSize.getY() / divider;
-        } else {
-            divider = tileMapSize.getX();
-            tileSize = totalSize.getX() / divider;
-        }
+    public void update(Vector totalSize, Vector tileMapSize) {
+        int width = (int) (MAP_WIDTH * totalSize.getX());
+        int height = (int) (MAP_HEIGHT * totalSize.getY());
 
-        int mapWidth = tileSize * tileMapSize.getX();
-        int mapHeight = tileSize * tileMapSize.getY();
+        tileSize = Math.min(width / tileMapSize.getX(), height / tileMapSize.getY());
 
-        int startX = (totalSize.getX() - mapWidth) / 2;
-        int startY = (totalSize.getY() - mapHeight) / 2;
+        int startX = (int) ((MAP_LEFT * totalSize.getX()) + (width - tileSize * tileMapSize.getX()) / 2);
+        int startY = (int) ((MAP_UP * totalSize.getY()) + (height - tileSize * tileMapSize.getY()) / 2);
 
         offset = new Vector(startX, startY);
-        this.windowSize = windowSize;
     }
 
     /**
@@ -48,11 +45,8 @@ public class WindowState {
      * @return an offset, because the tilemap is shown in the middle of the window,
      * there will be some empty spaces (this offset).
      */
-    public Vector getOffset() {
+    public Vector getTileMapOffset() {
         return offset;
     }
 
-    public Vector windowSize() {
-        return windowSize;
-    }
 }

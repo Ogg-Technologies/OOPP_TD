@@ -19,6 +19,8 @@ public class Background extends JPanel { // TODO: Could use some functional deco
     private static final Color INVALID_TILE_HOVER_COLOR = new Color(255, 0, 0, 50);
     private static final Color PATH_COLOR = Color.decode("#91adc2");
     private static final Color GROUND_COLOR = Color.decode("#4AA44A");
+    private static final Color BACKGROUND_COLOR = Color.decode("#353535");
+
 
     private final ModelData modelData;
     private final WindowState windowState;
@@ -50,6 +52,11 @@ public class Background extends JPanel { // TODO: Could use some functional deco
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        g.setColor(BACKGROUND_COLOR);
+        g.fillRect((int) (WindowState.MAP_LEFT * getWidth()), (int) (WindowState.MAP_UP * getHeight()),
+                (int) (WindowState.MAP_WIDTH * getWidth()), (int) (WindowState.MAP_HEIGHT * getHeight()));
+
         int baseX = -1;
         int baseY = -1;
         Vector mapSize = modelData.getMapSize();
@@ -70,36 +77,36 @@ public class Background extends JPanel { // TODO: Could use some functional deco
                                 + " has no supported look in View");
                 }
 
-                if(modelData.getTile(tileX, tileY) == Tile.BASE) {
+                if (modelData.getTile(tileX, tileY) == Tile.BASE) {
                     baseX = tileX;
                     baseY = tileY;
                 }
 
-                g.fillRect(tileX * windowState.getTileSize() + windowState.getOffset().getX(),
-                        tileY * windowState.getTileSize() + windowState.getOffset().getY(),
+                g.fillRect(tileX * windowState.getTileSize() + windowState.getTileMapOffset().getX(),
+                        tileY * windowState.getTileSize() + windowState.getTileMapOffset().getY(),
                         windowState.getTileSize(), windowState.getTileSize());
             }
         }
 
-        if(pos != null){
+        if (pos != null) {
             paintOverlay(pos, g);
         }
 
-        g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getOffset().getX(),
-                baseY * windowState.getTileSize() + windowState.getOffset().getY(),
-                windowState.getTileSize(),windowState.getTileSize(), null);
+        g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getTileMapOffset().getX(),
+                baseY * windowState.getTileSize() + windowState.getTileMapOffset().getY(),
+                windowState.getTileSize(), windowState.getTileSize(), null);
     }
 
     private void paintOverlay(Vector tilePos, Graphics g){
 
         if(tilePos.getX() >= 0 && tilePos.getY() >= 0 && tilePos.getX() < modelData.getMapSize().getX() && tilePos.getY() < modelData.getMapSize().getY()) {
-            if(validTile){
+            if (validTile) {
                 g.setColor(VALID_TILE_HOVER_COLOR);
-            }else {
+            } else {
                 g.setColor(INVALID_TILE_HOVER_COLOR);
             }
-            g.fillRect(tilePos.getX() * windowState.getTileSize() + windowState.getOffset().getX(),
-                    tilePos.getY() * windowState.getTileSize() + windowState.getOffset().getY(),
+            g.fillRect(tilePos.getX() * windowState.getTileSize() + windowState.getTileMapOffset().getX(),
+                    tilePos.getY() * windowState.getTileSize() + windowState.getTileMapOffset().getY(),
                     windowState.getTileSize(), windowState.getTileSize());
         }
     }

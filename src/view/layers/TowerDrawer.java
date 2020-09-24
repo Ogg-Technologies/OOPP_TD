@@ -53,8 +53,8 @@ public class TowerDrawer implements TowerVisitor {
     @Override
     public void visit(Tower tower) {
 
-        int x = windowState.getTileSize() * tower.getPos().getX() + windowState.getOffset().getX();
-        int y = windowState.getTileSize() * tower.getPos().getY() + windowState.getOffset().getY();
+        int x = windowState.getTileSize() * tower.getPos().getX() + windowState.getTileMapOffset().getX();
+        int y = windowState.getTileSize() * tower.getPos().getY() + windowState.getTileMapOffset().getY();
 
         graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
     }
@@ -76,8 +76,8 @@ public class TowerDrawer implements TowerVisitor {
     }
 
     private Vector getRealPos(Vector pos) {
-        int x = windowState.getTileSize() * pos.getX() + windowState.getOffset().getX();
-        int y = windowState.getTileSize() * pos.getY() + windowState.getOffset().getY();
+        int x = windowState.getTileSize() * pos.getX() + windowState.getTileMapOffset().getX();
+        int y = windowState.getTileSize() * pos.getY() + windowState.getTileMapOffset().getY();
         return new Vector(x, y);
     }
 

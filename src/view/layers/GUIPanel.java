@@ -1,55 +1,63 @@
 package view.layers;
 
 import model.ModelData;
-import utils.VectorD;
-import view.SwingView;
+import view.WindowState;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GUIPanel extends JPanel {
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //BaseHealth data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static final Color HEALTH_COLOR = Color.GREEN;
-    private static final Color DAMAGE_COLOR = Color.RED;
     private static final Color GUI_BACKGROUND_COLOR = new Color(196, 196, 196);
-    private static final double HEALTH_BAR_WIDTH = 0.01;
-    //Positions and size of money label, change these if you want to move money label
-    private static final double MONEY_LEFT = .01;
-    private VectorD pos;
+
     private final ModelData modelData;
-    private static final double MONEY_UP = .02;
-    private static final double MONEY_WIDTH = .12;
-
-    private void drawHealthBar(Graphics g) {
-        double hp = modelData.getBaseHealth().getFraction();
-        int hpMaxHeight = getHeight() - SwingView.heightOffset;
-        double x = (pos.x * (getWidth() - SwingView.widthOffset) - (HEALTH_BAR_WIDTH * getWidth()));
-        double y = (pos.y * getHeight());
-        double height = ((hpMaxHeight - y) * (1 - pos.y));
-
-        g.setColor(DAMAGE_COLOR);
-        g.fillRect((int) x, (int) y, (int) (HEALTH_BAR_WIDTH * getWidth()), (int) (height) - 1);//Rounding error causes -1
-
-        g.setColor(HEALTH_COLOR);
-        g.fillRect((int) x, (int) (y + ((1 - hp) * height)), (int) (HEALTH_BAR_WIDTH * getWidth()), (int) ((height * hp)));
-    }
-
-    private static final double MONEY_HEIGHT = .06;
-    private JLabel moneyLabel = new JLabel();
-
-    public GUIPanel(VectorD fractionPos, ModelData modelData) {
-        this.pos = fractionPos;
-        this.modelData = modelData;
-        setLayout(null);
-        add(moneyLabel);
-        moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    }
+    private static final double HEALTH_BAR_LEFT = .15;
+    private static final double HEALTH_BAR_UP = .02;
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawHealthBar(g);
         drawMoneyDisplay(g);
+    }
+
+    private static final double HEALTH_BAR_WIDTH = .01;
+    private static final double HEALTH_BAR_HEIGHT = .83;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //MoneyLabel data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private static final double MONEY_LEFT = .01;
+    private static final double MONEY_UP = .02;
+    private static final double MONEY_WIDTH = .12;
+    private static final double MONEY_HEIGHT = .06;
+    private final JLabel moneyLabel = new JLabel();
+    private final WindowState windowState;
+
+    public GUIPanel(ModelData modelData, WindowState windowState) {
+        this.modelData = modelData;
+        this.windowState = windowState;
+        setLayout(null);
+        add(moneyLabel);
+        moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    private void drawHealthBar(Graphics g) {
+        int x = (int) (HEALTH_BAR_LEFT * getWidth());
+        int fullY = (int) (HEALTH_BAR_UP * getHeight());
+        int width = (int) (HEALTH_BAR_WIDTH * getWidth());
+        int fullHeight = (int) (HEALTH_BAR_HEIGHT * getHeight());
+        int fractionY = (int) (fullY + fullHeight * (1 - modelData.getBaseHealth().getFraction()));
+        int fractionHeight = (int) (fullHeight * modelData.getBaseHealth().getFraction());
+
+        g.setColor(GUI_BACKGROUND_COLOR);
+        g.fillRect(x, fullY, width, fullHeight);
+
+        g.setColor(HEALTH_COLOR);
+        g.fillRect(x, fractionY, width, fractionHeight);
     }
 
     private void drawMoneyDisplay(Graphics g) {

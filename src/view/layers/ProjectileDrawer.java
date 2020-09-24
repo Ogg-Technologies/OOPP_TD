@@ -47,8 +47,8 @@ public class ProjectileDrawer extends JPanel {
         List<? extends Projectile> pList = modelData.getProjectiles();
         for (Projectile p : pList) {
             BufferedImage img = imageMap.get(p.getClass());
-            int x = (int) ((p.getPosition().x + 0.5) * windowState.getTileSize() + windowState.getOffset().getX());
-            int y = (int) ((p.getPosition().y + 0.5) * windowState.getTileSize() + windowState.getOffset().getY());
+            int x = (int) ((p.getPosition().x + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().getX());
+            int y = (int) ((p.getPosition().y + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().getY());
             int size = (int) (windowState.getTileSize() * sizeMap.get(p.getClass()));
             x -= size / 2;
             y -= size / 2;

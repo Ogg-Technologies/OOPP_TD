@@ -4,7 +4,6 @@ import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import utils.Vector;
-import utils.VectorD;
 import view.layers.*;
 import view.particles.ParticleHandler;
 
@@ -19,7 +18,7 @@ public class SwingView implements View {
 
     private final ModelData modelData;
 
-    private int width = 1000;
+    private int width = 800;
     private int height = 800;
     public final static int heightOffset = 40;//same goes for y
     private final JFrame window;
@@ -34,7 +33,6 @@ public class SwingView implements View {
     private final JPanel[] layers;
 
     private final Background background;
-
 
     public SwingView(ModelData modelData) {
 
@@ -65,7 +63,7 @@ public class SwingView implements View {
             }
         };
         ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
-        GUIPanel GUIPanel = new GUIPanel(new VectorD(0.99, 0.01), modelData);
+        GUIPanel GUIPanel = new GUIPanel(modelData, windowState);
 
         particleHandler = new ParticleHandler(windowState);
         modelData.addOnModelEventListener(particleHandler);
@@ -104,12 +102,10 @@ public class SwingView implements View {
     @Override
     public void draw() {
 
-        Vector totalSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
+        Vector totalSize = new Vector(window.getWidth(), window.getHeight());
         Vector tileSize = modelData.getMapSize();
 
-        Vector windowSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
-
-        windowState.update(totalSize, tileSize, windowSize);
+        windowState.update(totalSize, tileSize);
 
         setSizeOfLayers(window.getSize());
 
@@ -159,8 +155,8 @@ public class SwingView implements View {
 
     @Override
     public Vector convertFromRealPosToTilePos(Vector v) {
-        int offsettedX = v.getX() - windowState.getOffset().getX();
-        int offsettedY = v.getY() - windowState.getOffset().getY();
+        int offsettedX = v.getX() - windowState.getTileMapOffset().getX();
+        int offsettedY = v.getY() - windowState.getTileMapOffset().getY();
         if (offsettedX < 0 || offsettedY < 0) {
             return null;
         }
