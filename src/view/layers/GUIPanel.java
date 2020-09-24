@@ -1,22 +1,19 @@
 package view.layers;
 
 import model.ModelData;
-import view.WindowState;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GUIPanel extends JPanel {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //BaseHealth data
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static final Color HEALTH_COLOR = Color.GREEN;
+
     private static final Color GUI_BACKGROUND_COLOR = new Color(196, 196, 196);
 
     private final ModelData modelData;
-    private static final double HEALTH_BAR_LEFT = .15;
-    private static final double HEALTH_BAR_UP = .02;
+    private final JLabel moneyLabel = new JLabel();
+    private final JLabel healthBarLabel = new JLabel();
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -25,25 +22,29 @@ public class GUIPanel extends JPanel {
         drawMoneyDisplay(g);
     }
 
-    private static final double HEALTH_BAR_WIDTH = .01;
-    private static final double HEALTH_BAR_HEIGHT = .83;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //MoneyLabel data
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static final double MONEY_LEFT = .01;
-    private static final double MONEY_UP = .02;
-    private static final double MONEY_WIDTH = .12;
-    private static final double MONEY_HEIGHT = .06;
-    private final JLabel moneyLabel = new JLabel();
-    private final WindowState windowState;
 
-    public GUIPanel(ModelData modelData, WindowState windowState) {
+    public GUIPanel(ModelData modelData) {
         this.modelData = modelData;
-        this.windowState = windowState;
         setLayout(null);
         add(moneyLabel);
+        add(healthBarLabel);
         moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        healthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //BaseHealth data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private static final Color HEALTH_COLOR = Color.GREEN;
+
+    private static final double HEALTH_BAR_LEFT = .15;
+    private static final double HEALTH_BAR_UP = .02;
+    private static final double HEALTH_BAR_WIDTH = .01;
+    private static final double HEALTH_BAR_HEIGHT = .83;
+    private static final double HEALTH_LABEL_LEFT = HEALTH_BAR_LEFT - .01;
+    private static final double HEALTH_LABEL_UP = HEALTH_BAR_UP + HEALTH_BAR_HEIGHT + 0.01;
+    private static final double HEALTH_LABEL_WIDTH = HEALTH_BAR_WIDTH + .02;
+    private static final double HEALTH_LABEL_HEIGHT = .02;
 
     private void drawHealthBar(Graphics g) {
         int x = (int) (HEALTH_BAR_LEFT * getWidth());
@@ -58,7 +59,22 @@ public class GUIPanel extends JPanel {
 
         g.setColor(HEALTH_COLOR);
         g.fillRect(x, fractionY, width, fractionHeight);
+
+        int healthBarLabelWidth = (int)(HEALTH_LABEL_WIDTH * getWidth());
+        healthBarLabel.setLocation((int) (HEALTH_LABEL_LEFT * getWidth()), (int) (HEALTH_LABEL_UP * getHeight()));
+        healthBarLabel.setSize(healthBarLabelWidth, (int)(HEALTH_LABEL_HEIGHT * getHeight()));
+        healthBarLabel.setText("" + (int)(Math.round(modelData.getBaseHealth().getFraction() * 100)) + "%");
+        int fontSize = (int) (healthBarLabelWidth / 2.3);
+        healthBarLabel.setFont(new Font("serif", Font.PLAIN, fontSize));
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //MoneyLabel data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private static final double MONEY_LEFT = .01;
+    private static final double MONEY_UP = .02;
+    private static final double MONEY_WIDTH = .12;
+    private static final double MONEY_HEIGHT = .06;
 
     private void drawMoneyDisplay(Graphics g) {
         int x = (int) (MONEY_LEFT * getWidth());
