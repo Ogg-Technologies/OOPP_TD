@@ -101,6 +101,9 @@ public class Game implements TowerService, ProjectileService {
      * @return a boolean whether or not the tile is valid
      */
     public boolean isValidTile(Vector tilePos) {
-        return !towerHandler.isTowerAt(tilePos); //TODO: if we decide to have more obstacle, add it here
+        if (tilePos == null)
+            System.out.println("WOW");
+        return !towerHandler.isTowerAt(tilePos) &&
+                tileMap.getTile(tilePos.getX(), tilePos.getY()) == Tile.GROUND; //TODO: if we decide to have more obstacle, add it here
     }
 }
