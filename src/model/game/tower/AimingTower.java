@@ -38,14 +38,15 @@ public class AimingTower implements Tower {
     }
 
     public void changeAngle(VectorD other) {
-        if (angle.getDist() == 0) {
-            angle = new VectorD(-1, -1);
-        }
+
         angle = other.minus(pos.asVectorD());
         //TODO bör denna vara public?
     }
 
     public double getAngle() {
+        if (angle.getDist() == 0) {
+            angle = new VectorD(-1, -1);
+        }
         return angle.getAngle();
     }
 
