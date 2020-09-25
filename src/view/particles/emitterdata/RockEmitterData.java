@@ -23,7 +23,7 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
         }
     }
 
-    private Distribution<Integer> lifetimeDistribution = LinearIntegerDistribution.fromRange(30, 60);
+    private Distribution<Integer> lifetimeDistribution = LinearIntegerDistribution.fromRange(10, 20);
     private Distribution<VectorD> startPositionDistribution =
             LinearVectorDistribution.withAnyAngle(() -> 0.1);
     private Distribution<VectorD> startVelocityDistribution =
@@ -36,7 +36,7 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
 
     @Override
     public double newParticlesPerUpdate() {
-        return 2;
+        return 1;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class RockEmitterData implements EmitterData {   // TODO: Test particle, 
 
     @Override
     public double getNewTileSize() {
-        return 0.1;
+        return 0.05;
     }
 
     @Override

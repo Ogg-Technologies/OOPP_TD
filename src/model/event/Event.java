@@ -16,6 +16,7 @@ public class Event {
         UPDATE,
         TOWER_ATTACK,
         ENEMY_DEATH,
+        ROCK_HIT,
     }
 
     private final Type type;

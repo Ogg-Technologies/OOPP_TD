@@ -34,7 +34,7 @@ public class Game implements TowerService, ProjectileService {
         baseHealth = new MutableHealth(100);
         enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath());
         projectiles = new ArrayList<>();
-        projectileFactory = new ProjectileFactory(this);
+        projectileFactory = new ProjectileFactory(this, eventSender);
     }
 
     public void update() {
