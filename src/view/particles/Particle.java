@@ -10,35 +10,21 @@ public class Particle {
     private int lifetime;
     private VectorD tilePosition;
     private VectorD velocity;
-    private double angle;
+    private double angle; // TODO: Support angles
     private double angleVelocity;
 
     private final double tileSize;
     private final double friction;
-    private final boolean alphaDropoff;
     private final Image image;
 
-    public Particle(int lifetime, VectorD tilePosition, VectorD velocity, double tileSize, double friction, Image image) {
-        this.lifetime = lifetime;
-        this.tilePosition = tilePosition;
-        this.velocity = velocity;
-        this.tileSize = tileSize;
-        this.friction = friction;
-        this.image = image;
-        angle = randomAngle();
-        angleVelocity = 0;
-        alphaDropoff = true;
-    }
-
     public Particle(int lifetime, VectorD tilePosition, VectorD velocity, double angleVelocity,
-                    double tileSize, double friction, boolean alphaDropoff, Image image) {
+                    double tileSize, double friction, Image image) {
         this.lifetime = lifetime;
         this.tilePosition = tilePosition;
         this.velocity = velocity;
         this.angleVelocity = angleVelocity;
         this.tileSize = tileSize;
         this.friction = friction;
-        this.alphaDropoff = alphaDropoff;
         this.image = image;
         angle = randomAngle();
     }

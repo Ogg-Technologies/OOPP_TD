@@ -52,7 +52,9 @@ public final class ParticleHandler extends JPanel implements EventListener {
     }
 
     private void createEmitter(VectorD position, EmitterData data) {
-        emitters.add(new Emitter(position, data));
+        Emitter.Builder builder = new Emitter.Builder();
+        Emitter emitter = builder.setEmitterPosition(position).setImage(data.getImage()).build();
+        emitters.add(emitter);
     }
 
     private void update() {
