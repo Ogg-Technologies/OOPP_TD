@@ -12,8 +12,8 @@ public class TowerHandler {
     private final TowerFactory factory;
     private final List<Tower> towers;
 
-    public TowerHandler(TowerService towerService, EventSender eventSender) {
-        factory = new TowerFactory(towerService, eventSender);
+    public TowerHandler(EnemyGetter enemyGetter, ProjectileCreator projectileCreator, EventSender eventSender) {
+        factory = new TowerFactory(enemyGetter, projectileCreator, eventSender);
         towers = new ArrayList<>();
         /*towers.add(factory.createBasicTower(new Vector(0, 1)));
         towers.add(factory.createBasicTower(new Vector(1, 0)));

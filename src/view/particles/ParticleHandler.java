@@ -3,7 +3,6 @@ package view.particles;
 import model.event.Event;
 import model.event.EventListener;
 import model.game.projectile.concreteprojectile.Rock;
-import model.game.tower.concretetowers.GrizzlyBear;
 import utils.VectorD;
 import view.WindowState;
 import view.particles.emitterdata.EmitterData;

@@ -3,90 +3,33 @@ package model.game.tower.concretetowers;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
-import model.game.tower.AimingTower;
-import model.game.tower.Tower;
-import model.game.tower.TowerService;
-import model.game.tower.TowerVisitor;
+import model.game.projectile.Projectile;
+import model.game.tower.*;
 import utils.Vector;
 
-import java.util.List;
-import java.util.Random;
+public class GrizzlyBear extends AbstractAttackingTower {
 
-public class GrizzlyBear implements Tower {
+    private static final int RANGE = 5;
+    private static final int UPDATES_BETWEEN_ATTACKS = 88;
+    private static final int BASE_DAMAGE = 1;
+    private ProjectileCreator projectileCreator;
+    private EventSender eventSender;
 
-    private final static int MAXCHARGE = 88;
-
-    private final AimingTower baseTower;
-    private final EventSender eventSender;
-    private final double range;
-    private int charge;
-
-    public GrizzlyBear(AimingTower baseTower, EventSender eventSender) {
-        this.baseTower = baseTower;
+    public GrizzlyBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
+        super(pos, RANGE, new ConstantChargeStrategy(UPDATES_BETWEEN_ATTACKS), enemyTargeter);
+        this.projectileCreator = projectileCreator;
         this.eventSender = eventSender;
-        this.range = 5;
-        this.charge = 87;
-    }
-
-    public double getAngle() {
-        return baseTower.getAngle();
     }
 
     @Override
-    public TowerService getTowerService() {
-        return baseTower.getTowerService();
-    }
-
-    @Override
-    public Vector getPos() {
-        return baseTower.getPos();
-    }
-
-    @Override
-    public void update() {
-        charge++;
-        baseTower.update();
-        if (charge >= MAXCHARGE) {
-            Enemy currentEnemy = getEnemyToBeAttacked();
-            if (currentEnemy != null) {
-                attackEnemy(currentEnemy);
-                charge = 0;
-            } else {
-                charge--;
-            }
-        }
-    }
-
-    @Override
-    public double getRange() {
-        return range;
-    }
-
-    @Override
-    public List<? extends Enemy> getEnemiesInRange(double range) {
-        return baseTower.getEnemiesInRange(range);
-    }
-
-    private Enemy getEnemyToBeAttacked() {
-        List<? extends Enemy> enemiesInRange = getEnemiesInRange(range);
-        if (!enemiesInRange.isEmpty()) {
-            Random rand = new Random();
-            int currentIndex = rand.nextInt(enemiesInRange.size());
-            return enemiesInRange.get(currentIndex);
-        }
-        return null;
-    }
-
-    private void attackEnemy(Enemy currentEnemy) {
-        baseTower.changeAngle(currentEnemy.getPos());
-        getTowerService().addProjectile(getTowerService().getProjectileFactory().createRock(getPos().asVectorD(),
-                baseTower.getAngleVector().setMagnitude(0.3), 1));
+    protected void attack(Enemy e) {
+        Projectile rock = projectileCreator.getProjectileFactory().createRock(getPos().asVectorD(), e.getPos(), BASE_DAMAGE);
+        projectileCreator.addProjectile(rock);
+        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos().asVectorD(), getAngle()));
     }
 
     @Override
     public void accept(TowerVisitor visitor) {
         visitor.visit(this);
     }
-
-
 }

@@ -8,9 +8,10 @@ import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
 import model.game.projectile.ProjectileService;
+import model.game.tower.EnemyGetter;
+import model.game.tower.ProjectileCreator;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
-import model.game.tower.TowerService;
 import utils.Vector;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Game implements TowerService, ProjectileService {
+public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
     private final EventSender eventSender;
 
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
@@ -30,7 +31,7 @@ public class Game implements TowerService, ProjectileService {
 
     public Game(EventSender eventSender) {
         this.eventSender = eventSender;
-        towerHandler = new TowerHandler(this, eventSender);
+        towerHandler = new TowerHandler(this, this, eventSender);
         baseHealth = new MutableHealth(100);
         enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath());
         projectiles = new ArrayList<>();

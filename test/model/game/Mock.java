@@ -4,14 +4,7 @@ import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.StatusEffect;
 import model.game.projectile.Projectile;
-import model.game.projectile.ProjectileFactory;
-import model.game.tower.DefaultTower;
-import model.game.tower.TowerService;
-import utils.Vector;
 import utils.VectorD;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Mock {
     public static Enemy createMockEnemy(VectorD pos) {
@@ -44,27 +37,6 @@ public class Mock {
             }
         };
     }
-
-    public static DefaultTower createMockTower(Enemy enemy, Vector pos) {
-        return new DefaultTower(new TowerService() {
-            @Override
-            public List<? extends Enemy> getEnemies() {
-                ArrayList<Enemy> enemies = new ArrayList<>();
-                enemies.add(enemy);
-                return enemies;
-            }
-
-            @Override
-            public void addProjectile(Projectile projectile) {
-            }
-
-            @Override
-            public ProjectileFactory getProjectileFactory() {
-                return null;
-            }
-        }, pos);
-    }
-
 
     public static Projectile createStationaryProjectile(VectorD pos) {
         return new Projectile() {

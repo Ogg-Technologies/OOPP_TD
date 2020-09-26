@@ -14,7 +14,7 @@ public final class ProjectileFactory {
         this.eventSender = eventSender;
     }
 
-    public Projectile createRock(VectorD position, VectorD velocity, int damage) {
-        return new Rock(service, position, velocity, damage, this.eventSender);
+    public Projectile createRock(VectorD position, VectorD target, int damage) {
+        return new Rock(service, position, target.minus(position).setMagnitude(0.3), damage, this.eventSender);
     }
 }

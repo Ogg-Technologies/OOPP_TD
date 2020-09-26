@@ -1,17 +1,11 @@
 package model.game.tower;
 
-import model.game.enemy.Enemy;
 import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
 
-import java.util.List;
 
-
-public interface TowerService {
-    List<? extends Enemy> getEnemies();
-
+public interface ProjectileCreator {
     void addProjectile(Projectile projectile);
 
     ProjectileFactory getProjectileFactory();
-
 }
