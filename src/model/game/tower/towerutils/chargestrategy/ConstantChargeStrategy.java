@@ -1,4 +1,4 @@
-package model.game.tower;
+package model.game.tower.towerutils.chargestrategy;
 
 public class ConstantChargeStrategy implements ChargeStrategy {
     private final int maxCharge;

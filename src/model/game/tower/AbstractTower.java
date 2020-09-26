@@ -1,5 +1,6 @@
 package model.game.tower;
 
+import model.game.tower.towerutils.chargestrategy.ChargeStrategy;
 import utils.Vector;
 
 public abstract class AbstractTower implements Tower {

@@ -1,4 +1,4 @@
-package model.game.tower;
+package model.game.tower.towerutils.chargestrategy;
 
 public interface ChargeStrategy {
     void update();

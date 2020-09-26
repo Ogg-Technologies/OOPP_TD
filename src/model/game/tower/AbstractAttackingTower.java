@@ -1,6 +1,8 @@
 package model.game.tower;
 
 import model.game.enemy.Enemy;
+import model.game.tower.towerutils.EnemyTargeter;
+import model.game.tower.towerutils.chargestrategy.ChargeStrategy;
 import utils.Vector;
 import utils.VectorD;
 

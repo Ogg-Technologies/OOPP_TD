@@ -4,7 +4,11 @@ import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.projectile.Projectile;
-import model.game.tower.*;
+import model.game.tower.AbstractAttackingTower;
+import model.game.tower.TowerVisitor;
+import model.game.tower.towerutils.EnemyTargeter;
+import model.game.tower.towerutils.ProjectileCreator;
+import model.game.tower.towerutils.chargestrategy.ConstantChargeStrategy;
 import utils.Vector;
 
 public class GrizzlyBear extends AbstractAttackingTower {

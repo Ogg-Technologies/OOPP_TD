@@ -8,10 +8,10 @@ import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
 import model.game.projectile.ProjectileService;
-import model.game.tower.EnemyGetter;
-import model.game.tower.ProjectileCreator;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
+import model.game.tower.towerutils.EnemyGetter;
+import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
 import java.util.ArrayList;

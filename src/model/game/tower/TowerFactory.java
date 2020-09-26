@@ -2,6 +2,9 @@ package model.game.tower;
 
 import model.event.EventSender;
 import model.game.tower.concretetowers.GrizzlyBear;
+import model.game.tower.towerutils.EnemyGetter;
+import model.game.tower.towerutils.EnemyTargeter;
+import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
 public class TowerFactory {

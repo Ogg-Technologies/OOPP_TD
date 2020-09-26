@@ -1,4 +1,4 @@
-package model.game.tower;
+package model.game.tower.towerutils;
 
 import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
