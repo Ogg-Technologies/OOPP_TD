@@ -3,10 +3,7 @@ package view.particles;
 import model.event.Event;
 import model.event.EventListener;
 import model.game.projectile.concreteprojectile.Rock;
-import utils.VectorD;
 import view.WindowState;
-import view.particles.emitterdata.EmitterData;
-import view.particles.emitterdata.RockEmitterData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +16,9 @@ import java.util.*;
  */
 public final class ParticleHandler extends JPanel implements EventListener {
 
+    // Break up into multiple maps to have different particle emitters for the same sender class
+    private final Map<Class<?>, EmitterCreator> particleMap;
     private final WindowState windowState;
-    private final Map<Class<?>, EmitterData> particleMap;
 
     private final List<Emitter> emitters;
 
@@ -29,11 +27,11 @@ public final class ParticleHandler extends JPanel implements EventListener {
         particleMap = new HashMap<>();
         emitters = new ArrayList<>();
 
-        linkEventCauseToParticleType();
+        linkEventToFactoryMethod();
     }
 
-    private void linkEventCauseToParticleType() {
-        particleMap.put(Rock.class, new RockEmitterData());
+    private void linkEventToFactoryMethod() {
+        particleMap.put(Rock.class, EmitterFactory::createRockEmitter);
     }
 
     /**
@@ -45,16 +43,9 @@ public final class ParticleHandler extends JPanel implements EventListener {
         if (event.getType() == Event.Type.UPDATE) {
             update();
         } else if (particleMap.containsKey(event.getSender())) {
-
-            EmitterData data = particleMap.get(event.getSender());
-            createEmitter(event.getPosition(), data);
+            EmitterCreator emitterCreator = particleMap.get(event.getSender());
+            emitters.add(emitterCreator.createEmitter(event.getPosition()));
         }
-    }
-
-    private void createEmitter(VectorD position, EmitterData data) {
-        Emitter.Builder builder = new Emitter.Builder();
-        Emitter emitter = builder.setEmitterPosition(position).setImage(data.getImage()).build();
-        emitters.add(emitter);
     }
 
     private void update() {
