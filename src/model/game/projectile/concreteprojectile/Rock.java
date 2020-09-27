@@ -21,7 +21,7 @@ public class Rock extends AbstractProjectile {
     @Override
     protected void onEnemyHit(Enemy enemy) {
         enemy.damage(damage);
-        eventSender.sendEvent(new Event(Event.Type.ROCK_HIT, getClass(), this.getPosition()));
+        eventSender.sendEvent(new Event(Event.Type.PROJECTILE_HIT, getClass(), this.getPosition()));
         consumed = true;
     }
 }
