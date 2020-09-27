@@ -2,7 +2,7 @@ package model.game;
 
 import model.game.enemy.Enemy;
 import model.game.projectile.Projectile;
-import utils.VectorD;
+import utils.Vector;
 
 public final class CollisionDetector {
     private static final double ENEMY_RADIUS = 0.5;
@@ -11,8 +11,8 @@ public final class CollisionDetector {
         return isPointInsideCircle(enemy.getPos(), ENEMY_RADIUS, projectile.getPosition());
     }
 
-    private static boolean isPointInsideCircle(VectorD circlePos, double radius, VectorD pointPos) {
-        VectorD delta = circlePos.minus(pointPos);
+    private static boolean isPointInsideCircle(Vector circlePos, double radius, Vector pointPos) {
+        Vector delta = circlePos.minus(pointPos);
         return delta.getDist() < radius;
     }
 }

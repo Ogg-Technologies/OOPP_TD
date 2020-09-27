@@ -5,14 +5,14 @@ import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.projectile.AbstractProjectile;
 import model.game.projectile.ProjectileService;
-import utils.VectorD;
+import utils.Vector;
 
 public class Rock extends AbstractProjectile {
 
     private final int damage;
     private final EventSender eventSender;
 
-    public Rock(ProjectileService service, VectorD position, VectorD velocity, int damage, EventSender eventSender) {
+    public Rock(ProjectileService service, Vector position, Vector velocity, int damage, EventSender eventSender) {
         super(service, position, velocity);
         this.damage = damage;
         this.eventSender = eventSender;

@@ -1,8 +1,8 @@
 package view.particles.distribution;
 
-import utils.VectorD;
+import utils.Vector;
 
-public class LinearVectorDistribution implements Distribution<VectorD> {
+public class LinearVectorDistribution implements Distribution<Vector> {
     private final Distribution<Double> angle;
     private final Distribution<Double> magnitude;
 
@@ -20,7 +20,7 @@ public class LinearVectorDistribution implements Distribution<VectorD> {
     }
 
     @Override
-    public VectorD getRandom() {
-        return VectorD.fromPolar(angle.getRandom(), magnitude.getRandom());
+    public Vector getRandom() {
+        return Vector.fromPolar(angle.getRandom(), magnitude.getRandom());
     }
 }

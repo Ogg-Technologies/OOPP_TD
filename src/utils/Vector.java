@@ -3,20 +3,16 @@ package utils;
 import java.util.Objects;
 
 public class Vector {
-    private final int x;
-    private final int y;
+    public final double x;
+    public final double y;
 
-    public Vector(int x, int y) {
+    public Vector(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public static Vector fromPolar(double angle, double magnitude) {
+        return new Vector(Math.cos(angle), Math.sin(angle)).setMagnitude(magnitude);
     }
 
     public double getDist() {
@@ -62,15 +58,26 @@ public class Vector {
         return new Vector(x - other.x, y - other.y);
     }
 
-    public VectorD plus(VectorD other) {
-        return new VectorD(x + other.x, y + other.y);
+    public Vector times(double scalar) {
+        return new Vector(x * scalar, y * scalar);
     }
 
-    public VectorD minus(VectorD other) {
-        return new VectorD(x - other.x, y - other.y);
+    public Vector setMagnitude(double scalar) {
+        double magnitude = getDist();
+        if (magnitude == 0)
+            throw new IllegalStateException("Zero vector: " + this + " cannot be projected to another magnitude");
+        return times(scalar / magnitude);
     }
 
-    public VectorD asVectorD() {
-        return new VectorD(x, y);
+    public Vector asUnitVector() {
+        return setMagnitude(1);
+    }
+
+    public int getIntX() {
+        return (int) Math.floor(x);
+    }
+
+    public int getIntY() {
+        return (int) Math.floor(y);
     }
 }

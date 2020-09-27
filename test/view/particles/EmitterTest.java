@@ -2,7 +2,7 @@ package view.particles;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import utils.VectorD;
+import utils.Vector;
 import view.particles.distribution.LinearIntegerDistribution;
 
 import java.awt.*;
@@ -16,7 +16,7 @@ class EmitterTest {
     @Test
     void defaultEmitterWorks() {
         Emitter e = new Emitter.Builder()
-                .setEmitterPosition(new VectorD(0, 0))
+                .setEmitterPosition(new Vector(0, 0))
                 .setImage(createMockImage())
                 .build();
 
@@ -28,7 +28,7 @@ class EmitterTest {
     @Test
     void changedLifetimeWorks() {
         Emitter e = new Emitter.Builder()
-                .setEmitterPosition(new VectorD(0, 0))
+                .setEmitterPosition(new Vector(0, 0))
                 .setImage(createMockImage())
                 .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(100, 100))
                 .setEmitterLifetime(1)
@@ -53,14 +53,14 @@ class EmitterTest {
         @Test
         void builderThrowsExceptionWithoutImage() {
             Emitter.Builder builder = new Emitter.Builder();
-            builder.setEmitterPosition(new VectorD(2, 2));
+            builder.setEmitterPosition(new Vector(2, 2));
             assertThrows(RuntimeException.class, builder::build);
         }
 
         @Test
         void builderCreatesEmitter() {
             assertDoesNotThrow(() -> new Emitter.Builder()
-                    .setEmitterPosition(new VectorD(0, 0))
+                    .setEmitterPosition(new Vector(0, 0))
                     .setImage(createMockImage())
                     .build());
         }

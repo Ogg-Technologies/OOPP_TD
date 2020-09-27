@@ -39,8 +39,8 @@ public class EnemyDrawer implements EnemyVisitor {
     @Override
     public void visit(Enemy enemy) {
 
-        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().getX());
-        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().getY());
+        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
 
         //Draws the enemy
         graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);

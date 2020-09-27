@@ -1,9 +1,9 @@
 package model.game.projectile;
 
-import utils.VectorD;
+import utils.Vector;
 
 public interface Projectile {
-    VectorD getPosition();
+    Vector getPosition();
 
     void update();
 

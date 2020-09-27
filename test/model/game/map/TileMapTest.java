@@ -109,8 +109,8 @@ class TileMapTest {
 
         @Test
         void createdMapHasCorrectSize() {
-            assertEquals(tileMap.getSize().getX(), 4);
-            assertEquals(tileMap.getSize().getY(), 3);
+            assertEquals(tileMap.getSize().getIntX(), 4);
+            assertEquals(tileMap.getSize().getIntY(), 3);
         }
 
         @Test

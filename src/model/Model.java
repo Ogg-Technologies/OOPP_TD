@@ -73,7 +73,7 @@ public final class Model implements ModelEventHandler, ModelData, Updatable, Eve
     @Override
     public void clickedTile(Vector v) {
         //TODO: The vector is the tile that the user clicked on. For example (1, 1)
-        System.out.println("x: " + v.getX() + ", y: " + v.getY());
+        System.out.println("x: " + v.getIntX() + ", y: " + v.getIntY());
     }
 
     @Override

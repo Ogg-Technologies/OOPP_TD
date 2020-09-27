@@ -33,10 +33,11 @@ public class SwingMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("x: " + (e.getX() - windowPositionHelper.getOffset().getX()) + ", y: " + (e.getY() - windowPositionHelper.getOffset().getY()));
+        System.out.println("x: " + (e.getX() - windowPositionHelper.getOffset().x) + ", y: " + (e.getY() - windowPositionHelper.getOffset().y));
         Vector clickedTile = windowPositionHelper.convertFromRealPosToTilePos(new Vector(
-                e.getX() - windowPositionHelper.getOffset().getX(),
-                e.getY() - windowPositionHelper.getOffset().getY()));
+                e.getX() - windowPositionHelper.getOffset().x,
+                e.getY() - windowPositionHelper.getOffset().y)
+        );
         if (clickedTile != null) {
             modelEventHandler.clickedTile(clickedTile);
         }
@@ -69,7 +70,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Vector pos = new Vector(e.getX() - windowPositionHelper.getOffset().getX(), e.getY() - windowPositionHelper.getOffset().getY());
+        Vector pos = new Vector(e.getX() - windowPositionHelper.getOffset().x, e.getY() - windowPositionHelper.getOffset().y);
         viewObserver.updateMousePosition(pos);
     }
 }

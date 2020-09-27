@@ -1,6 +1,6 @@
 package view.particles;
 
-import utils.VectorD;
+import utils.Vector;
 import view.WindowState;
 
 import java.awt.*;
@@ -12,8 +12,8 @@ import java.awt.*;
 class Particle {
 
     private int lifetime;
-    private VectorD tilePosition;
-    private VectorD velocity;
+    private Vector tilePosition;
+    private Vector velocity;
     private double angle; // TODO: Support angles
     private double angleVelocity;
 
@@ -21,7 +21,7 @@ class Particle {
     private final double friction;
     private final Image image;
 
-    public Particle(int lifetime, VectorD tilePosition, VectorD velocity, double angleVelocity,
+    public Particle(int lifetime, Vector tilePosition, Vector velocity, double angleVelocity,
                     double tileSize, double friction, Image image) {
         this.lifetime = lifetime;
         this.tilePosition = tilePosition;
@@ -45,8 +45,8 @@ class Particle {
     }
 
     public void draw(Graphics graphics, WindowState windowState) {
-        int x = (int) ((tilePosition.x + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().getX());
-        int y = (int) ((tilePosition.y + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().getY());
+        int x = (int) ((tilePosition.x + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().x);
+        int y = (int) ((tilePosition.y + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().y);
         int size = (int) (this.tileSize * windowState.getTileSize());
         graphics.drawImage(image, x, y, size, size, null);
     }

@@ -102,11 +102,11 @@ public class TileMap {
 
     private boolean isPath(Vector position) {
         // Check if outside grid
-        if (position.getX() < 0 || position.getX() >= tileGrid[0].length
-                || position.getY() < 0 || position.getY() >= tileGrid.length) {
+        if (position.x < 0 || position.x >= tileGrid[0].length
+                || position.y < 0 || position.y >= tileGrid.length) {
             return false;
         }
-        return tileGrid[position.getY()][position.getX()] == PATH;
+        return tileGrid[position.getIntY()][position.getIntX()] == PATH;
     }
 
 

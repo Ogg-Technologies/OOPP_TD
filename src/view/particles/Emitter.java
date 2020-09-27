@@ -1,6 +1,6 @@
 package view.particles;
 
-import utils.VectorD;
+import utils.Vector;
 import view.WindowState;
 import view.particles.distribution.Distribution;
 import view.particles.distribution.LinearDoubleDistribution;
@@ -20,15 +20,15 @@ public class Emitter {
     /**
      * Fields describing the Emitter
      */
-    private final VectorD emitterPosition;
+    private final Vector emitterPosition;
     private int emitterLifetime;
 
     /**
      * Fields describing the particles the Emitter emits. Distribution class is used to make values randomised
      */
     private final Distribution<Integer> lifetime;
-    private final Distribution<VectorD> startPosition;
-    private final Distribution<VectorD> startVelocity;
+    private final Distribution<Vector> startPosition;
+    private final Distribution<Vector> startVelocity;
     private final Distribution<Integer> newParticlesPerUpdate;
     private final Distribution<Double> angleVelocity;
     private final Distribution<Double> tileSize;
@@ -107,11 +107,11 @@ public class Emitter {
      */
     public static class Builder {
         private int emitterLifetime = 10;
-        private VectorD emitterPosition;
+        private Vector emitterPosition;
         private Distribution<Integer> lifetime = LinearIntegerDistribution.fromRange(5, 15);
-        private Distribution<VectorD> startPosition =
+        private Distribution<Vector> startPosition =
                 LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0, 0));
-        private Distribution<VectorD> startVelocity =
+        private Distribution<Vector> startVelocity =
                 LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromMidPoint(0, 0.075));
         private Distribution<Integer> newParticlesPerUpdate = LinearIntegerDistribution.fromRange(3, 5);
         private Distribution<Double> angleVelocity = LinearDoubleDistribution.fromRange(-0.1, 0.1);
@@ -141,7 +141,7 @@ public class Emitter {
             return this;
         }
 
-        public Builder setEmitterPosition(VectorD emitterPosition) {
+        public Builder setEmitterPosition(Vector emitterPosition) {
             this.emitterPosition = emitterPosition;
             return this;
         }
@@ -151,12 +151,12 @@ public class Emitter {
             return this;
         }
 
-        public Builder setStartPosition(Distribution<VectorD> startPosition) {
+        public Builder setStartPosition(Distribution<Vector> startPosition) {
             this.startPosition = startPosition;
             return this;
         }
 
-        public Builder setStartVelocity(Distribution<VectorD> startVelocity) {
+        public Builder setStartVelocity(Distribution<Vector> startVelocity) {
             this.startVelocity = startVelocity;
             return this;
         }

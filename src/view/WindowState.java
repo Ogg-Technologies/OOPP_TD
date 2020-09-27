@@ -23,13 +23,13 @@ public class WindowState {
      * @param tileMapSize amount of tiles on the map
      */
     public void update(Vector totalSize, Vector tileMapSize) {
-        int width = (int) (MAP_WIDTH * totalSize.getX());
-        int height = (int) (MAP_HEIGHT * totalSize.getY());
+        int width = (int) (MAP_WIDTH * totalSize.x);
+        int height = (int) (MAP_HEIGHT * totalSize.y);
 
-        tileSize = Math.min(width / tileMapSize.getX(), height / tileMapSize.getY());
+        tileSize = (int) Math.min(width / tileMapSize.x, height / tileMapSize.y);
 
-        int startX = (int) ((MAP_LEFT * totalSize.getX()) + (width - tileSize * tileMapSize.getX()) / 2);
-        int startY = (int) ((MAP_UP * totalSize.getY()) + (height - tileSize * tileMapSize.getY()) / 2);
+        int startX = (int) ((MAP_LEFT * totalSize.x) + (width - tileSize * tileMapSize.x) / 2);
+        int startY = (int) ((MAP_UP * totalSize.y) + (height - tileSize * tileMapSize.y) / 2);
 
         offset = new Vector(startX, startY);
     }

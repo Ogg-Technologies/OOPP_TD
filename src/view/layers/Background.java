@@ -64,8 +64,8 @@ public class Background extends JPanel { // TODO: Could use some functional deco
         int baseX = -1;
         int baseY = -1;
         Vector mapSize = modelData.getMapSize();
-        for (int tileY = 0; tileY < mapSize.getY(); tileY++) {
-            for (int tileX = 0; tileX < mapSize.getX(); tileX++) {
+        for (int tileY = 0; tileY < mapSize.getIntY(); tileY++) {
+            for (int tileX = 0; tileX < mapSize.getIntX(); tileX++) {
 
                 switch (modelData.getTile(tileX, tileY)) {
                     case START:
@@ -86,8 +86,8 @@ public class Background extends JPanel { // TODO: Could use some functional deco
                     baseY = tileY;
                 }
 
-                g.fillRect(tileX * windowState.getTileSize() + windowState.getTileMapOffset().getX(),
-                        tileY * windowState.getTileSize() + windowState.getTileMapOffset().getY(),
+                g.fillRect(tileX * windowState.getTileSize() + windowState.getTileMapOffset().getIntX(),
+                        tileY * windowState.getTileSize() + windowState.getTileMapOffset().getIntY(),
                         windowState.getTileSize(), windowState.getTileSize());
             }
         }
@@ -96,21 +96,21 @@ public class Background extends JPanel { // TODO: Could use some functional deco
             paintOverlay(pos, g);
         }
 
-        g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getTileMapOffset().getX(),
-                baseY * windowState.getTileSize() + windowState.getTileMapOffset().getY(),
+        g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getTileMapOffset().getIntX(),
+                baseY * windowState.getTileSize() + windowState.getTileMapOffset().getIntY(),
                 windowState.getTileSize(), windowState.getTileSize(), null);
     }
 
     private void paintOverlay(Vector tilePos, Graphics g){
 
-        if(tilePos.getX() >= 0 && tilePos.getY() >= 0 && tilePos.getX() < modelData.getMapSize().getX() && tilePos.getY() < modelData.getMapSize().getY()) {
+        if(tilePos.x >= 0 && tilePos.y >= 0 && tilePos.x < modelData.getMapSize().x && tilePos.y < modelData.getMapSize().y) {
             if (validTile) {
                 g.setColor(VALID_TILE_HOVER_COLOR);
             } else {
                 g.setColor(INVALID_TILE_HOVER_COLOR);
             }
-            g.fillRect(tilePos.getX() * windowState.getTileSize() + windowState.getTileMapOffset().getX(),
-                    tilePos.getY() * windowState.getTileSize() + windowState.getTileMapOffset().getY(),
+            g.fillRect(tilePos.getIntX() * windowState.getTileSize() + windowState.getTileMapOffset().getIntX(),
+                    tilePos.getIntY() * windowState.getTileSize() + windowState.getTileMapOffset().getIntY(),
                     windowState.getTileSize(), windowState.getTileSize());
         }
     }

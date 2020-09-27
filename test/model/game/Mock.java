@@ -4,17 +4,17 @@ import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.StatusEffect;
 import model.game.projectile.Projectile;
-import utils.VectorD;
+import utils.Vector;
 
 public class Mock {
-    public static Enemy createMockEnemy(VectorD pos) {
+    public static Enemy createMockEnemy(Vector pos) {
         return new Enemy() {
             @Override
             public void update() {
             }
 
             @Override
-            public VectorD getPos() {
+            public Vector getPos() {
                 return pos;
             }
 
@@ -38,10 +38,10 @@ public class Mock {
         };
     }
 
-    public static Projectile createStationaryProjectile(VectorD pos) {
+    public static Projectile createStationaryProjectile(Vector pos) {
         return new Projectile() {
             @Override
-            public VectorD getPosition() {
+            public Vector getPosition() {
                 return pos;
             }
 

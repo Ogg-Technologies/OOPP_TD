@@ -41,8 +41,8 @@ public class TowerDrawer implements TowerVisitor {
     @Override
     public void visit(Tower tower) {
 
-        int x = windowState.getTileSize() * tower.getPos().getX() + windowState.getTileMapOffset().getX();
-        int y = windowState.getTileSize() * tower.getPos().getY() + windowState.getTileMapOffset().getY();
+        int x = (int) (windowState.getTileSize() * tower.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * tower.getPos().y + windowState.getTileMapOffset().y);
 
         graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
     }
@@ -60,12 +60,12 @@ public class TowerDrawer implements TowerVisitor {
         double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
         int offset = (int) ((width - windowState.getTileSize()) / 2);
 
-        graphics.drawImage(rotatedImage, pos.getX() - offset, pos.getY() - offset, (int) width, (int) width, null);
+        graphics.drawImage(rotatedImage, pos.getIntX() - offset, pos.getIntY() - offset, (int) width, (int) width, null);
     }
 
     private Vector getRealPos(Vector pos) {
-        int x = windowState.getTileSize() * pos.getX() + windowState.getTileMapOffset().getX();
-        int y = windowState.getTileSize() * pos.getY() + windowState.getTileMapOffset().getY();
+        int x = (int) (windowState.getTileSize() * pos.x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * pos.y + windowState.getTileMapOffset().y);
         return new Vector(x, y);
     }
 

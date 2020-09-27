@@ -3,18 +3,17 @@ package model.game.projectile;
 import model.game.CollisionDetector;
 import model.game.enemy.Enemy;
 import utils.Vector;
-import utils.VectorD;
 
 public abstract class AbstractProjectile implements Projectile {
 
     private static final int EDGE_DELTA = 1;
 
     protected final ProjectileService service;
-    protected VectorD velocity;
-    private VectorD position;
+    protected Vector velocity;
+    private Vector position;
     protected boolean consumed;
 
-    public AbstractProjectile(ProjectileService service, VectorD position, VectorD velocity) {
+    public AbstractProjectile(ProjectileService service, Vector position, Vector velocity) {
         this.service = service;
         this.position = position;
         this.velocity = velocity;
@@ -45,13 +44,13 @@ public abstract class AbstractProjectile implements Projectile {
     private void removeIfOutsideMap() {
         Vector mapSize = service.getMapSize();
         if (position.x < -EDGE_DELTA || position.y < -EDGE_DELTA
-                || position.x > mapSize.getX() + EDGE_DELTA || position.y > mapSize.getY() + EDGE_DELTA) {
+                || position.x > mapSize.x + EDGE_DELTA || position.y > mapSize.y + EDGE_DELTA) {
             consumed = true;
         }
     }
 
     @Override
-    public VectorD getPosition() {
+    public Vector getPosition() {
         return position;
     }
 

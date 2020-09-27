@@ -4,12 +4,11 @@ import model.game.enemy.Enemy;
 import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.chargestrategy.ChargeStrategy;
 import utils.Vector;
-import utils.VectorD;
 
 public abstract class AbstractAttackingTower extends AbstractTower {
-    public static final VectorD DEFAULT_AIM = new VectorD(0, 1);
+    public static final Vector DEFAULT_AIM = new Vector(0, 1);
     private final EnemyTargeter enemyTargeter;
-    private VectorD aim = DEFAULT_AIM;
+    private Vector aim = DEFAULT_AIM;
 
     public AbstractAttackingTower(Vector pos, double range, ChargeStrategy chargeStrategy, EnemyTargeter enemyTargeter) {
         super(pos, range, chargeStrategy);
@@ -27,8 +26,8 @@ public abstract class AbstractAttackingTower extends AbstractTower {
         return true;
     }
 
-    private void setAimTo(VectorD targetPos) {
-        aim = targetPos.minus(getPos().asVectorD());
+    private void setAimTo(Vector targetPos) {
+        aim = targetPos.minus(getPos());
     }
 
     protected abstract void attack(Enemy e);

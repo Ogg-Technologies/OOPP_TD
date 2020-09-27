@@ -3,12 +3,11 @@ package model.game.enemy;
 import model.game.Health;
 import model.game.MutableHealth;
 import utils.Vector;
-import utils.VectorD;
 
 public abstract class AbstractEnemy implements Enemy {
     private final BaseDamager baseDamager;
     private final PathIterator pathIterator;
-    private VectorD pos;
+    private Vector pos;
     private Vector targetPos;
     protected final MutableHealth health;
     private final double speed;
@@ -17,7 +16,7 @@ public abstract class AbstractEnemy implements Enemy {
         this.baseDamager = baseDamager;
         this.pathIterator = pathIterator;
         health = new MutableHealth(maxHealth);
-        pos = pathIterator.next().asVectorD();
+        pos = pathIterator.next();
         targetPos = pathIterator.next();
         this.speed = speed;
     }
@@ -34,10 +33,10 @@ public abstract class AbstractEnemy implements Enemy {
      */
     private void move() {
         double moveDistance = speed;
-        VectorD targetDelta = targetPos.minus(pos);
+        Vector targetDelta = targetPos.minus(pos);
         double targetDistance = targetDelta.getDist();
         while (targetDistance < moveDistance) {
-            pos = targetPos.asVectorD();
+            pos = targetPos;
             moveDistance -= targetDistance;
             if (!pathIterator.hasNext()) {
                 baseDamager.damageBase(health.getCurrent());
@@ -48,12 +47,12 @@ public abstract class AbstractEnemy implements Enemy {
             targetDelta = targetPos.minus(pos);
             targetDistance = targetDelta.getDist();
         }
-        VectorD velocity = targetDelta.setMagnitude(moveDistance);
+        Vector velocity = targetDelta.setMagnitude(moveDistance);
         pos = pos.plus(velocity);
     }
 
     @Override
-    public VectorD getPos() {
+    public Vector getPos() {
         return pos;
     }
 

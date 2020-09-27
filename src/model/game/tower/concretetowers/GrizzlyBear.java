@@ -27,9 +27,9 @@ public class GrizzlyBear extends AbstractAttackingTower {
 
     @Override
     protected void attack(Enemy e) {
-        Projectile rock = projectileCreator.getProjectileFactory().createRock(getPos().asVectorD(), e.getPos(), BASE_DAMAGE);
+        Projectile rock = projectileCreator.getProjectileFactory().createRock(getPos(), e.getPos(), BASE_DAMAGE);
         projectileCreator.addProjectile(rock);
-        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos().asVectorD(), getAngle()));
+        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
     }
 
     @Override

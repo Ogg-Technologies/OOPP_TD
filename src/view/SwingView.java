@@ -157,14 +157,14 @@ public class SwingView implements View {
 
     @Override
     public Vector convertFromRealPosToTilePos(Vector v) {
-        int offsettedX = v.getX() - windowState.getTileMapOffset().getX();
-        int offsettedY = v.getY() - windowState.getTileMapOffset().getY();
+        int offsettedX = v.getIntX() - windowState.getTileMapOffset().getIntX();
+        int offsettedY = v.getIntY() - windowState.getTileMapOffset().getIntY();
         if (offsettedX < 0 || offsettedY < 0) {
             return null;
         }
         int tileX = offsettedX / windowState.getTileSize();
         int tileY = offsettedY / windowState.getTileSize();
-        if (tileX < modelData.getMapSize().getX() && tileY < modelData.getMapSize().getY()) {
+        if (tileX < modelData.getMapSize().x && tileY < modelData.getMapSize().y) {
             return new Vector(tileX, tileY);
         }
         return null;

@@ -105,7 +105,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
 //    public boolean isValidTile(@NotNull Vector tilePos) {
     public boolean isValidTile(Vector tilePos) {
         return !towerHandler.isTowerAt(tilePos) &&
-                tileMap.getTile(tilePos.getX(), tilePos.getY()) == Tile.GROUND; //TODO: if we decide to have more obstacle, add it here
+                tileMap.getTile(tilePos.getIntX(), tilePos.getIntY()) == Tile.GROUND; //TODO: if we decide to have more obstacle, add it here
     }
 
     //TODO: this method is what gives view the money information

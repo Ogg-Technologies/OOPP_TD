@@ -1,6 +1,6 @@
 package view.particles;
 
-import utils.VectorD;
+import utils.Vector;
 import view.particles.distribution.LinearDoubleDistribution;
 import view.particles.distribution.LinearIntegerDistribution;
 import view.particles.distribution.LinearVectorDistribution;
@@ -28,7 +28,7 @@ public final class EmitterFactory {
         }
     }
 
-    static Emitter createRockEmitter(VectorD position) {
+    static Emitter createRockEmitter(Vector position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
                 .setImage(rockImage)

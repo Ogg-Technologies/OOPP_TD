@@ -1,6 +1,6 @@
 package model.event;
 
-import utils.VectorD;
+import utils.Vector;
 
 /**
  * An Event is something that has happened in the Model. The class responsible for the Event creates an instance of it
@@ -21,7 +21,7 @@ public class Event {
 
     private final Type type;
     private final Class<?> sender;
-    private final VectorD position;
+    private final Vector position;
     private final double angle;
 
     /**
@@ -32,14 +32,14 @@ public class Event {
      * @param position [Optional] Some Events has a specific position
      * @param angle [Optional] Some Events has an angle TODO: Figure out if this should exist
      */
-    public Event(Type type, Class<?> sender, VectorD position, double angle) {
+    public Event(Type type, Class<?> sender, Vector position, double angle) {
         this.type = type;
         this.sender = sender;
         this.position = position;
         this.angle = angle;
     }
 
-    public Event(Type type, Class<?> sender, VectorD position) {
+    public Event(Type type, Class<?> sender, Vector position) {
         this.type = type;
         this.sender = sender;
         this.position = position;
@@ -49,7 +49,7 @@ public class Event {
     public Event(Type type, Class<?> sender) {
         this.type = type;
         this.sender = sender;
-        position = new VectorD(0, 0);
+        position = new Vector(0, 0);
         angle = 0;
     }
 
@@ -64,7 +64,7 @@ public class Event {
     }
 
     /** @return The position of the event of zero vector if it had no position */
-    public VectorD getPosition() {
+    public Vector getPosition() {
         return position;
     }
 
