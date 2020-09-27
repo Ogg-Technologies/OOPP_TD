@@ -1,6 +1,7 @@
 package view.texture;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -56,15 +57,22 @@ public final class ImageHandler {
     private static BufferedImage rotate(BufferedImage image, double angle) {
         final double sin = Math.abs(Math.sin(angle));
         final double cos = Math.abs(Math.cos(angle));
-        final int width = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
-        final int height = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
-        final BufferedImage rotatedImage = new BufferedImage(width, height, image.getType());
-        final AffineTransform at = new AffineTransform();
-        at.translate(width / 2, height / 2);
-        at.rotate(angle, 0, 0);
-        at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
-        final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        rotateOp.filter(image, rotatedImage);
-        return rotatedImage;
+        int w = image.getWidth(), h = image.getHeight();
+        int neww = (int)Math.floor(w*cos+h*sin), newh = (int) Math.floor(h * cos + w * sin);
+        GraphicsConfiguration gc = getDefaultConfiguration();
+        BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
+        Graphics2D g = result.createGraphics();
+        g.translate((neww - w) / 2, (newh - h) / 2);
+        g.rotate(angle, w / 2, h / 2);
+        g.drawRenderedImage(image, null);
+        g.dispose();
+        return result;
     }
+
+    private static GraphicsConfiguration getDefaultConfiguration() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        return gd.getDefaultConfiguration();
+    }
+
 }

@@ -38,19 +38,6 @@ public class TowerDrawer implements TowerVisitor {
         return image;
     }
 
-    private static BufferedImage rotate(BufferedImage image, double angle, double sin, double cos) {
-        final int width = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
-        final int height = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
-        final BufferedImage rotatedImage = new BufferedImage(width, height, image.getType());
-        final AffineTransform at = new AffineTransform();
-        at.translate(width / 2, height / 2);
-        at.rotate(angle, 0, 0);
-        at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
-        final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        rotateOp.filter(image, rotatedImage);
-        return rotatedImage;
-    }
-
     @Override
     public void visit(Tower tower) {
 
@@ -68,12 +55,12 @@ public class TowerDrawer implements TowerVisitor {
         final double sin = Math.abs(Math.sin(tower.getAngle()));
         final double cos = Math.abs(Math.cos(tower.getAngle()));
 
-        BufferedImage tempImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
+        BufferedImage rotatedImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
 
         double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
         int offset = (int) ((width - windowState.getTileSize()) / 2);
 
-        graphics.drawImage(tempImage, pos.getX() - offset, pos.getY() - offset, (int) width, (int) width, null);
+        graphics.drawImage(rotatedImage, pos.getX() - offset, pos.getY() - offset, (int) width, (int) width, null);
     }
 
     private Vector getRealPos(Vector pos) {
