@@ -1,6 +1,6 @@
 package controller;
 
-import model.ModelEventHandler;
+import model.ModelInputListener;
 import view.View;
 
 /**
@@ -10,11 +10,11 @@ public class Controller {
     /**
      * Initiate all the controllers
      *
-     * @param modelEventHandler handler of events for model
-     * @param view              a view that need input from controller
+     * @param modelInputListener handler of events for model
+     * @param view               a view that need input from controller
      */
-    public Controller(ModelEventHandler modelEventHandler, View view) {
-        SwingMouseController mouseController = new SwingMouseController(view, view, modelEventHandler);
+    public Controller(ModelInputListener modelInputListener, View view) {
+        SwingMouseController mouseController = new SwingMouseController(view, view, modelInputListener);
         view.addMouseListener(mouseController);
         view.addMouseMotionListener(mouseController);
     }

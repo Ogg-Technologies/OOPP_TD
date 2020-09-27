@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public final class Model implements ModelEventHandler, ModelData, Updatable, EventSender {
+public final class Model implements ModelInputListener, ModelData, Updatable, EventSender {
     private Game game;
     private final Set<EventListener> eventListeners;
 
@@ -71,7 +71,7 @@ public final class Model implements ModelEventHandler, ModelData, Updatable, Eve
      * @param v is a vector that correspond to a position on the tileMap
      */
     @Override
-    public void clickedTile(Vector v) {
+    public void onTileClick(Vector v) {
         //TODO: The vector is the tile that the user clicked on. For example (1, 1)
         System.out.println("x: " + v.getIntX() + ", y: " + v.getIntY());
     }

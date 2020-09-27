@@ -1,6 +1,6 @@
 package controller;
 
-import model.ModelEventHandler;
+import model.ModelInputListener;
 import utils.Vector;
 import view.MouseViewObserver;
 import view.WindowPositionHelper;
@@ -18,17 +18,17 @@ public class SwingMouseController implements MouseListener, MouseMotionListener 
 
     private final MouseViewObserver viewObserver;
 
-    private final ModelEventHandler modelEventHandler;
+    private final ModelInputListener modelInputListener;
 
     /**
      * @param windowPositionHelper a helper class, that convert a "real" position to a wanted position
      * @param viewObserver         an observer for mouse actions for the view
-     * @param modelEventHandler    an event handler that activate for some mouse action
+     * @param modelInputListener   an event handler that activate for some mouse action
      */
-    public SwingMouseController(WindowPositionHelper windowPositionHelper, MouseViewObserver viewObserver, ModelEventHandler modelEventHandler) {
+    public SwingMouseController(WindowPositionHelper windowPositionHelper, MouseViewObserver viewObserver, ModelInputListener modelInputListener) {
         this.windowPositionHelper = windowPositionHelper;
         this.viewObserver = viewObserver;
-        this.modelEventHandler = modelEventHandler;
+        this.modelInputListener = modelInputListener;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener 
                 e.getY() - windowPositionHelper.getOffset().y)
         );
         if (clickedTile != null) {
-            modelEventHandler.clickedTile(clickedTile);
+            modelInputListener.onTileClick(clickedTile);
         }
     }
 
