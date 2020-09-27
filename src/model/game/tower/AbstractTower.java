@@ -26,6 +26,8 @@ public abstract class AbstractTower implements Tower {
             boolean success = tryFire();
             if (success) {
                 chargeStrategy.didFire();
+            } else {
+                break;
             }
         }
     }
