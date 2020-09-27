@@ -5,7 +5,11 @@ import view.WindowState;
 
 import java.awt.*;
 
-public class Particle {
+/**
+ * A Particle is a small image that are usually clustered together with changes in attributes to make a visually
+ * appealing effect. Every particle is created from an Emitter
+ */
+class Particle {
 
     private int lifetime;
     private VectorD tilePosition;
@@ -47,6 +51,7 @@ public class Particle {
         graphics.drawImage(image, x, y, size, size, null);
     }
 
+    /** @return True if the particle is dead, meaning it should be removed */
     public boolean isDead() {
         return lifetime <= 0;
     }

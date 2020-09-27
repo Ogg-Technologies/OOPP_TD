@@ -37,7 +37,7 @@ public class Emitter {
 
     private final List<Particle> particles;
 
-
+    /** Creates an Emitter from a Builder. Private constructor to force use of Builder */
     private Emitter(Builder builder) {
         this.emitterPosition = builder.emitterPosition;
         this.emitterLifetime = builder.emitterLifetime;
@@ -54,7 +54,10 @@ public class Emitter {
         this.particles = new ArrayList<>();
     }
 
-
+    /**
+     * Creates new particles if the emitter lifetime > 0, then updates each particle.
+     * If the particle is dead it is removed
+     */
     public void update() {
         if (emitterLifetime > 0) {
             for (int i = 0; i < newParticlesPerUpdate.getRandom(); i++) {
@@ -83,19 +86,24 @@ public class Emitter {
         ));
     }
 
+    /** Draws each particle on the screen */
     public void draw(Graphics graphics, WindowState windowState) {
         for (Particle p : particles) {
             p.draw(graphics, windowState);
         }
     }
 
+    /**
+     * @return True if the emitter is still active, meaning still creating particles or having particles that are still
+     * alive, false otherwise. When false is returned the purpose of the emitter is finished and it can be removed
+     */
     public boolean isAlive() {
         return emitterLifetime > 0 || !particles.isEmpty();
     }
 
     /**
      * Inner class Builder for building instances of Emitters. Every attribute not set when building will use the
-     * default value with the exception of emitter position which must be set (otherwise it throws an exception)
+     * default value with the exception of emitter position and image which must be set (otherwise it throws an exception)
      */
     public static class Builder {
         private int emitterLifetime = 10;
@@ -111,13 +119,18 @@ public class Emitter {
         private Distribution<Double> friction = LinearDoubleDistribution.fromRange(0.98, 0.99);
         private Image image;
 
+        /**
+         * Builds an emitter from the attributes given set in the builder. If position or image has not been set it will
+         * throw exceptions
+         * @return An Emitter
+         */
         public Emitter build() {
             if (emitterPosition == null) {
-                throw new IllegalStateException(this.getClass().getSimpleName()
+                throw new RuntimeException(this.getClass().getSimpleName()
                         + " must have emitter position set before building " + Emitter.class.getSimpleName());
             }
             if (image == null) {
-                throw new IllegalStateException(this.getClass().getSimpleName()
+                throw new RuntimeException(this.getClass().getSimpleName()
                         + " must have image set before building " + Emitter.class.getSimpleName());
             }
             return new Emitter(this);

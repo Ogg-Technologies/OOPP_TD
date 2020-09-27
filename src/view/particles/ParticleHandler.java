@@ -35,6 +35,7 @@ public final class ParticleHandler extends JPanel implements EventListener {
     }
 
     /**
+     * Updates the particles if the model sent an update event.
      * Creates a particle effect if the particular event is tied to an emitter data
      * @param event Event sent from the model
      */

@@ -28,7 +28,7 @@ public final class EmitterFactory {
         }
     }
 
-    public static Emitter createRockEmitter(VectorD position) {
+    static Emitter createRockEmitter(VectorD position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
                 .setImage(rockImage)
