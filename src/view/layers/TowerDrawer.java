@@ -5,6 +5,7 @@ import model.game.tower.TowerVisitor;
 import model.game.tower.concretetowers.GrizzlyBear;
 import utils.Vector;
 import view.WindowState;
+import view.texture.ImageHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -67,7 +68,7 @@ public class TowerDrawer implements TowerVisitor {
         final double sin = Math.abs(Math.sin(tower.getAngle()));
         final double cos = Math.abs(Math.cos(tower.getAngle()));
 
-        BufferedImage tempImage = rotate(image, tower.getAngle(), sin, cos);
+        BufferedImage tempImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
 
         double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
         int offset = (int) ((width - windowState.getTileSize()) / 2);
