@@ -10,6 +10,7 @@ import model.game.projectile.ProjectileFactory;
 import model.game.projectile.ProjectileService;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
+import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
@@ -28,6 +29,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
     private final MutableHealth baseHealth;
     private final Collection<Projectile> projectiles;
     private final ProjectileFactory projectileFactory;
+    private final Economy economy;
 
     public Game(EventSender eventSender) {
         this.eventSender = eventSender;
@@ -36,6 +38,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
         enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath());
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this, eventSender);
+        economy = new Economy(1000);
     }
 
     public void update() {
@@ -110,7 +113,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
 
     //TODO: this method is what gives view the money information
     public int getMoney() {
-        return 999999;
+        return economy.getMoney();
     }
 
     /**
@@ -122,7 +125,9 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
     public void placeTower(Vector v) {
         //TODO: Logic for if the tower can be placed, and what tower to place
         if(isValidTile(v)){
-            towerHandler.createGrizzlyBear(v);
+            if(economy.buyTower(GrizzlyBear.class)){
+                towerHandler.createGrizzlyBear(v);
+            }
         }
     }
 }

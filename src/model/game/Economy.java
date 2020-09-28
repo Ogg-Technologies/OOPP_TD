@@ -28,6 +28,11 @@ public class Economy {
         setupBasicEnemyMap();
     }
 
+    public Economy(int startMoney){
+        this();
+        money = startMoney;
+    }
+
     private void setupBasicEnemyMap() {
         basicEnemyMap.put(BasicEnemy.Type.FISH_AND_CHIPS, 1);
         basicEnemyMap.put(BasicEnemy.Type.FISH_IN_A_BOAT, 2);
@@ -54,7 +59,7 @@ public class Economy {
      * Adds money to the player
      * @param money amount of money to add.
      */
-    public void addMoney(int money) {
+    public void addMoney(int money) { //TODO: use this method to add money at end of turn, or create a new method for it.
         if(money < 0){
             throw new IllegalArgumentException("Cannot add negative amount of money");
         }
@@ -84,7 +89,7 @@ public class Economy {
      * This method gives money equal to the predefined value of the parameter.
      * @param type a BasicEnemy.Type, which value adds to the players money,
      */
-    public void addMoney(BasicEnemy.Type type) {
+    public void addMoney(BasicEnemy.Type type) { //TODO: use this method to add money when basic enemies dies.
         Integer value = basicEnemyMap.get(type);
         if(value == null){
             throw new IllegalArgumentException("This basic enemy type is not in economy class");

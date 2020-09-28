@@ -17,9 +17,6 @@ public class TowerHandler {
     public TowerHandler(EnemyGetter enemyGetter, ProjectileCreator projectileCreator, EventSender eventSender) {
         factory = new TowerFactory(enemyGetter, projectileCreator, eventSender);
         towers = new ArrayList<>();
-        towers.add(factory.createGrizzlyBear(new Vector(0, 0)));
-        towers.add(factory.createGrizzlyBear(new Vector(1, 0)));
-        towers.add(factory.createGrizzlyBear(new Vector(2, 0)));
     }
 
     public Collection<? extends Tower> getTowers() {
