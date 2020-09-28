@@ -112,4 +112,17 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
     public int getMoney() {
         return 999999;
     }
+
+    /**
+     * Method for collecting position to place tower at.
+     * Only places towers if requirement are fulfilled, such as no other tower on this tile
+     * @see #isValidTile(Vector) for requirements
+     * @param v, the position to place the tower
+     */
+    public void placeTower(Vector v) {
+        //TODO: Logic for if the tower can be placed, and what tower to place
+        if(isValidTile(v)){
+            towerHandler.createGrizzlyBear(v);
+        }
+    }
 }

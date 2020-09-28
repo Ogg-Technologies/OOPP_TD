@@ -68,12 +68,12 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
 
 
     /**
+     * This method sends the vector through to the {@code Game} object
      * @param v is a vector that correspond to a position on the tileMap
      */
     @Override
     public void onTileClick(Vector v) {
-        //TODO: The vector is the tile that the user clicked on. For example (1, 1)
-        System.out.println("x: " + v.getIntX() + ", y: " + v.getIntY());
+        game.placeTower(v);
     }
 
     @Override

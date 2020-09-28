@@ -45,4 +45,12 @@ public class TowerHandler {
         }
         return false;
     }
+
+    /**
+     * Creates a grizzly tower at position v
+     * @param v, a {@code Vector} that describes position
+     */
+    public void createGrizzlyBear(Vector v) {
+        towers.add(factory.createGrizzlyBear(v));
+    }
 }
