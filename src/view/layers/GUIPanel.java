@@ -37,14 +37,14 @@ public class GUIPanel extends JPanel {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static final Color HEALTH_COLOR = Color.GREEN;
 
-    private static final double HEALTH_BAR_LEFT = .15;
+    private static final double HEALTH_BAR_LEFT = .145;
     private static final double HEALTH_BAR_UP = .02;
     private static final double HEALTH_BAR_WIDTH = .01;
     private static final double HEALTH_BAR_HEIGHT = .83;
-    private static final double HEALTH_LABEL_LEFT = HEALTH_BAR_LEFT - .01;
-    private static final double HEALTH_LABEL_UP = HEALTH_BAR_UP + HEALTH_BAR_HEIGHT + 0.01;
-    private static final double HEALTH_LABEL_WIDTH = HEALTH_BAR_WIDTH + .02;
-    private static final double HEALTH_LABEL_HEIGHT = .02;
+    private static final double HEALTH_LABEL_LEFT = HEALTH_BAR_LEFT - .02;
+    private static final double HEALTH_LABEL_UP = HEALTH_BAR_UP + HEALTH_BAR_HEIGHT;
+    private static final double HEALTH_LABEL_WIDTH = HEALTH_BAR_WIDTH + .04;
+    private static final double HEALTH_LABEL_HEIGHT = .04;
 
     private void drawHealthBar(Graphics g) {
         int x = (int) (HEALTH_BAR_LEFT * getWidth());
@@ -64,7 +64,7 @@ public class GUIPanel extends JPanel {
         healthBarLabel.setLocation((int) (HEALTH_LABEL_LEFT * getWidth()), (int) (HEALTH_LABEL_UP * getHeight()));
         healthBarLabel.setSize(healthBarLabelWidth, (int)(HEALTH_LABEL_HEIGHT * getHeight()));
         healthBarLabel.setText("" + (int)(Math.round(modelData.getBaseHealth().getFraction() * 100)) + "%");
-        int fontSize = (int) (healthBarLabelWidth / 2.3);
+        int fontSize = (int) (HEALTH_LABEL_HEIGHT * getHeight() / 2);
         healthBarLabel.setFont(new Font("serif", Font.PLAIN, fontSize));
     }
 
