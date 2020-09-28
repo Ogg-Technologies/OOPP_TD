@@ -15,10 +15,10 @@ import java.awt.event.MouseMotionListener;
 public class SwingMouseController implements MouseListener, MouseMotionListener {
 
     private final WindowPositionHelper windowPositionHelper;
-
     private final MouseViewObserver viewObserver;
-
     private final ModelInputListener modelInputListener;
+
+    private Vector tilePressed;
 
     /**
      * @param windowPositionHelper a helper class, that convert a "real" position to a wanted position
@@ -33,24 +33,51 @@ public class SwingMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("x: " + (e.getX() - windowPositionHelper.getOffset().x) + ", y: " + (e.getY() - windowPositionHelper.getOffset().y));
-        Vector clickedTile = windowPositionHelper.convertFromRealPosToTilePos(new Vector(
-                e.getX() - windowPositionHelper.getOffset().x,
-                e.getY() - windowPositionHelper.getOffset().y)
-        );
-        if (clickedTile != null) {
+
+    }
+
+    /**
+     * Saves the tile position at which the mouse was pressed down
+     */
+    @Override
+    public void mousePressed(MouseEvent e) {
+        tilePressed = getClickedTile(e);
+    }
+
+    /**
+     * Compares if the mouse release was at the same tile as mouse pressed. If yes, send input to model
+     */
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //System.out.println("x: " + (e.getX() - windowPositionHelper.getOffset().x) + ", y: " + (e.getY() - windowPositionHelper.getOffset().y));
+        Vector clickedTile = getClickedTile(e);
+        if (clickedTile != null && clickedTile.equals(tilePressed)) {
             modelInputListener.onTileClick(clickedTile);
         }
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
+    /**
+     * Given a MouseEvent it calculates which tile was clicked and returns it, or null if none was
+     *
+     * @param e The MouseEvent created by Swing
+     * @return The tile position clicked
+     */
+    private Vector getClickedTile(MouseEvent e) {
+        return windowPositionHelper.convertFromRealPosToTilePos(
+                new Vector(
+                        e.getX() - windowPositionHelper.getOffset().x,
+                        e.getY() - windowPositionHelper.getOffset().y
+                )
+        );
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
+    /**
+     * Sends the mouse position from the MouseEvent to View to make View update its displaying of mouse position
+     * @param e The MouseEvent that triggered the call
+     */
+    private void updateViewMousePosition(MouseEvent e) {
+        Vector pos = new Vector(e.getX() - windowPositionHelper.getOffset().x, e.getY() - windowPositionHelper.getOffset().y);
+        viewObserver.updateMousePosition(pos);
     }
 
     @Override
@@ -65,12 +92,11 @@ public class SwingMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        updateViewMousePosition(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Vector pos = new Vector(e.getX() - windowPositionHelper.getOffset().x, e.getY() - windowPositionHelper.getOffset().y);
-        viewObserver.updateMousePosition(pos);
+        updateViewMousePosition(e);
     }
 }
