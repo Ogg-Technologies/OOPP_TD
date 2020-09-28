@@ -93,7 +93,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
 
     //TODO: Change this if not compliant with what is wanted in the model
     public Collection<Projectile> getProjectiles() {
-        return Collections.unmodifiableCollection(projectiles);
+        return Collections.unmodifiableCollection(new ArrayList<>(projectiles));
     }
 
     /**

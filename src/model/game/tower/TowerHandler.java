@@ -23,7 +23,7 @@ public class TowerHandler {
     }
 
     public Collection<? extends Tower> getTowers() {
-        return Collections.unmodifiableCollection(towers);
+        return Collections.unmodifiableCollection(new ArrayList<>(towers));
     }
 
     public void update() {

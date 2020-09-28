@@ -63,7 +63,9 @@ public final class ParticleHandler extends JPanel implements EventListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (Emitter e : emitters) {
+        Collection<Emitter> copyEmitters = new ArrayList<>(emitters);
+
+        for (Emitter e : copyEmitters) {
             e.draw(g, windowState);
         }
     }

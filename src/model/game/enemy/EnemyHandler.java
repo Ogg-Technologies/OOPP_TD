@@ -37,6 +37,6 @@ public class EnemyHandler {
     }
 
     public Collection<? extends Enemy> getEnemies() {
-        return Collections.unmodifiableCollection(enemies);
+        return Collections.unmodifiableCollection(new ArrayList<>(enemies));
     }
 }
