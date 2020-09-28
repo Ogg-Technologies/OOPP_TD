@@ -2,8 +2,6 @@ package view.texture;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOError;
@@ -12,13 +10,21 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class ImageHandler {
-    // TODO: periodically remove old images from both images and rotatedImages. Currently this class creates a memory leak.
-    // We might be able to remove images if we store the base images in rotatedImages with angle=0?
+    private static final int ROTATED_IMAGES_CACHE_SIZE = 300;
 
-    private static Map<String, BufferedImage> images = new LinkedHashMap<>();
-    private static Map<ImageInfo, BufferedImage> rotatedImages = new LinkedHashMap<>();
+    private static final Map<String, BufferedImage> images = new LinkedHashMap<>();
+    private static final Map<ImageInfo, BufferedImage> rotatedImages = new LinkedHashMap<>();
 
+    /**
+     * Fetches a reference to the given image from cache if it exists,
+     * else it loads it and puts it in the list of loaded images
+     * @param path  The path to the image
+     * @param angle The angle
+     * @return A reference to the image with the correct angle
+     */
     public static BufferedImage getImage(String path, double angle) {
+        discardOldRotatedImagesIfFull();
+
         if (angle == 0) {
             return getImage(path);
         }
@@ -36,6 +42,12 @@ public final class ImageHandler {
         return rotatedImage;
     }
 
+    /**
+     * Fetches a reference to the given image from cache if it exists,
+     * else it loads it and puts it in the list of loaded images
+     * @param path  The path to the image
+     * @return A reference to the image
+     */
     public static BufferedImage getImage(String path) {
         if (images.containsKey(path)) {
             return images.get(path);
@@ -44,6 +56,16 @@ public final class ImageHandler {
         BufferedImage image = readImageFromFile(path);
         images.put(path, image);
         return image;
+    }
+
+    /**
+     * Continuously removes the first image in the list to avoid memory leak
+     */
+    private static void discardOldRotatedImagesIfFull() {
+        while (rotatedImages.size() > ROTATED_IMAGES_CACHE_SIZE) {
+            ImageInfo first = rotatedImages.keySet().iterator().next();
+            rotatedImages.remove(first);
+        }
     }
 
     private static BufferedImage readImageFromFile(String path) {
@@ -63,7 +85,7 @@ public final class ImageHandler {
         BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
         Graphics2D g = result.createGraphics();
         g.translate((neww - w) / 2, (newh - h) / 2);
-        g.rotate(angle, w / 2, h / 2);
+        g.rotate(angle, w / 2.0, h / 2.0);
         g.drawRenderedImage(image, null);
         g.dispose();
         return result;
@@ -74,5 +96,4 @@ public final class ImageHandler {
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         return gd.getDefaultConfiguration();
     }
-
 }
