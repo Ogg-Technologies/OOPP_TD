@@ -2,10 +2,10 @@ package model.game.tower.towerutils;
 
 import model.game.enemy.Enemy;
 
-import java.util.List;
+import java.util.Collection;
 
 
 @FunctionalInterface
 public interface EnemyGetter {
-    List<? extends Enemy> getEnemies();
+    Collection<? extends Enemy> getEnemies();
 }

@@ -7,7 +7,6 @@ import view.WindowState;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.util.*;
 
 /**
@@ -20,7 +19,7 @@ public final class ParticleHandler extends JPanel implements EventListener {
     private final Map<Class<?>, EmitterCreator> particleMap;
     private final WindowState windowState;
 
-    private final List<Emitter> emitters;
+    private final Collection<Emitter> emitters;
 
     public ParticleHandler(WindowState windowState) {   // TODO: Decide if ParticleHandler should add itself as listener or if its creator should
         this.windowState = windowState;

@@ -11,8 +11,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ProjectileDrawer extends JPanel {
@@ -44,7 +44,7 @@ public class ProjectileDrawer extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        List<? extends Projectile> pList = modelData.getProjectiles();
+        Collection<? extends Projectile> pList = modelData.getProjectiles();
         for (Projectile p : pList) {
             BufferedImage img = imageMap.get(p.getClass());
             int x = (int) ((p.getPosition().x + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().x);

@@ -9,8 +9,8 @@ import view.particles.distribution.LinearVectorDistribution;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * An Emitter is a position where particles are emitted from and are created from its inner Builder class.
@@ -35,7 +35,7 @@ public class Emitter {
     private final Distribution<Double> friction;
     private final Image image;
 
-    private final List<Particle> particles;
+    private final Collection<Particle> particles;
 
     /** Creates an Emitter from a Builder. Private constructor to force use of Builder */
     private Emitter(Builder builder) {

@@ -2,14 +2,11 @@ package model.game.enemy;
 
 import utils.Vector;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class EnemyHandler {
     private final EnemyFactory enemyFactory;
-    private final List<Enemy> enemies;
+    private final Collection<Enemy> enemies;
     private int clock = 0;
 
     public EnemyHandler(BaseDamager baseDamager, List<? extends Vector> path) {
@@ -39,7 +36,7 @@ public class EnemyHandler {
         }
     }
 
-    public List<? extends Enemy> getEnemies() {
-        return Collections.unmodifiableList(enemies);
+    public Collection<? extends Enemy> getEnemies() {
+        return Collections.unmodifiableCollection(enemies);
     }
 }

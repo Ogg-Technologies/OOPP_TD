@@ -3,11 +3,11 @@ package model.game.projectile;
 import model.game.enemy.Enemy;
 import utils.Vector;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface ProjectileService {
 
     Vector getMapSize();
 
-    List<? extends Enemy> getEnemies();
+    Collection<? extends Enemy> getEnemies();
 }

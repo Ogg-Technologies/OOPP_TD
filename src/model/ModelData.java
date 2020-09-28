@@ -8,7 +8,7 @@ import model.game.projectile.Projectile;
 import model.game.tower.Tower;
 import utils.Vector;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface ModelData {
 
@@ -27,11 +27,11 @@ public interface ModelData {
      */
     Tile getTile(int x, int y);
 
-    List<? extends Tower> getTowers();
+    Collection<? extends Tower> getTowers();
 
-    List<? extends Enemy> getEnemies();
+    Collection<? extends Enemy> getEnemies();
 
-    List<? extends Projectile> getProjectiles();
+    Collection<? extends Projectile> getProjectiles();
 
     Health getBaseHealth();
 

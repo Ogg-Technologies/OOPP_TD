@@ -11,8 +11,8 @@ import model.game.projectile.Projectile;
 import model.game.tower.Tower;
 import utils.Vector;
 
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public final class Model implements ModelInputListener, ModelData, Updatable, EventSender {
@@ -47,12 +47,12 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
     @Override
-    public List<? extends Tower> getTowers() {
+    public Collection<? extends Tower> getTowers() {
         return game.getTowers();
     }
 
     @Override
-    public List<? extends Enemy> getEnemies() {
+    public Collection<? extends Enemy> getEnemies() {
         return game.getEnemies();
     }
 
@@ -62,7 +62,7 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
     @Override
-    public List<? extends Projectile> getProjectiles() {
+    public Collection<? extends Projectile> getProjectiles() {
         return game.getProjectiles();
     }
 

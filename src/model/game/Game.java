@@ -15,9 +15,9 @@ import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
 public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
     private final EventSender eventSender;
@@ -26,7 +26,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
     private final TowerHandler towerHandler;
     private final EnemyHandler enemyHandler;
     private final MutableHealth baseHealth;
-    private final List<Projectile> projectiles;
+    private final Collection<Projectile> projectiles;
     private final ProjectileFactory projectileFactory;
 
     public Game(EventSender eventSender) {
@@ -57,7 +57,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
         }
     }
 
-    public List<? extends Tower> getTowers() {
+    public Collection<? extends Tower> getTowers() {
         return towerHandler.getTowers();
     }
 
@@ -66,7 +66,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
         return tileMap.getSize();
     }
 
-    public List<? extends Enemy> getEnemies() {
+    public Collection<? extends Enemy> getEnemies() {
         return enemyHandler.getEnemies();
     }
 
@@ -92,8 +92,8 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
     }
 
     //TODO: Change this if not compliant with what is wanted in the model
-    public List<Projectile> getProjectiles() {
-        return Collections.unmodifiableList(projectiles);
+    public Collection<Projectile> getProjectiles() {
+        return Collections.unmodifiableCollection(projectiles);
     }
 
     /**

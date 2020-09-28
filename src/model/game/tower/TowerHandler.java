@@ -6,13 +6,13 @@ import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class TowerHandler {
 
     private final TowerFactory factory;
-    private final List<Tower> towers;
+    private final Collection<Tower> towers;
 
     public TowerHandler(EnemyGetter enemyGetter, ProjectileCreator projectileCreator, EventSender eventSender) {
         factory = new TowerFactory(enemyGetter, projectileCreator, eventSender);
@@ -22,8 +22,8 @@ public class TowerHandler {
         towers.add(factory.createGrizzlyBear(new Vector(2, 0)));
     }
 
-    public List<? extends Tower> getTowers() {
-        return Collections.unmodifiableList(towers);
+    public Collection<? extends Tower> getTowers() {
+        return Collections.unmodifiableCollection(towers);
     }
 
     public void update() {
