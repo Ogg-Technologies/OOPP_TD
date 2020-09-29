@@ -1,7 +1,6 @@
 package model.game.enemy;
 
 import model.game.enemy.concreteenemies.BasicEnemy;
-import model.game.enemy.concreteenemies.BasicEnemy.Type;
 import utils.Vector;
 
 import java.util.List;
@@ -15,35 +14,31 @@ public class EnemyFactory {
         this.path = path;
     }
 
-    private BasicEnemy createBasicEnemy(Type type) {
-        return new BasicEnemy(baseDamager, new PathIterator(path), type);
-    }
-
     public Enemy createFishstick() {
-        return createBasicEnemy(Type.FISHSTICK);
+        return new BasicEnemy.Fishstick(baseDamager, new PathIterator(path));
     }
 
     public Enemy createSwordfish() {
-        return createBasicEnemy(Type.SWORDFISH);
+        return new BasicEnemy.Swordfish(baseDamager, new PathIterator(path));
     }
 
     public Enemy createFishAndChips() {
-        return createBasicEnemy(Type.FISH_AND_CHIPS);
+        return new BasicEnemy.FishAndChips(baseDamager, new PathIterator(path));
     }
 
     public Enemy createFishInABoat() {
-        return createBasicEnemy(Type.FISH_IN_A_BOAT);
+        return new BasicEnemy.FishInABoat(baseDamager, new PathIterator(path));
     }
 
     public Enemy createSailfish() {
-        return createBasicEnemy(Type.SAILFISH);
+        return new BasicEnemy.Sailfish(baseDamager, new PathIterator(path));
     }
 
     public Enemy createShark() {
-        return createBasicEnemy(Type.SHARK);
+        return new BasicEnemy.Shark(baseDamager, new PathIterator(path));
     }
 
     public Enemy createFishInFishTank() {
-        return createBasicEnemy(Type.FISH_IN_FISH_TANK);
+        return new BasicEnemy.FishInAFishTank(baseDamager, new PathIterator(path));
     }
 }

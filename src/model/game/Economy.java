@@ -1,6 +1,7 @@
 package model.game;
 
 
+import model.game.enemy.Enemy;
 import model.game.enemy.concreteenemies.BasicEnemy;
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.GrizzlyBear;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class Economy {
 
     private final Map<Class<? extends Tower>, Integer> towerMap = new HashMap<>();
-    private final Map<BasicEnemy.Type, Integer> basicEnemyMap = new HashMap<>();
+    private final Map<Class<? extends Enemy>, Integer> enemyMap = new HashMap<>();
     private int money = 0;
 
     /**
@@ -34,13 +35,13 @@ public class Economy {
     }
 
     private void setupBasicEnemyMap() {
-        basicEnemyMap.put(BasicEnemy.Type.FISH_AND_CHIPS, 1);
-        basicEnemyMap.put(BasicEnemy.Type.FISH_IN_A_BOAT, 2);
-        basicEnemyMap.put(BasicEnemy.Type.FISHSTICK, 1);
-        basicEnemyMap.put(BasicEnemy.Type.FISH_IN_FISH_TANK, 10);
-        basicEnemyMap.put(BasicEnemy.Type.SAILFISH, 5);
-        basicEnemyMap.put(BasicEnemy.Type.SHARK, 5);
-        basicEnemyMap.put(BasicEnemy.Type.SWORDFISH, 3);
+        enemyMap.put(BasicEnemy.Fishstick.class, 1);
+        enemyMap.put(BasicEnemy.Swordfish.class, 2);
+        enemyMap.put(BasicEnemy.FishAndChips.class, 4);
+        enemyMap.put(BasicEnemy.FishInABoat.class, 8);
+        enemyMap.put(BasicEnemy.Sailfish.class, 16);
+        enemyMap.put(BasicEnemy.Shark.class, 32);
+        enemyMap.put(BasicEnemy.FishInAFishTank.class, 64);
     }
 
     private void setupTowerPriceMap() {
@@ -87,10 +88,10 @@ public class Economy {
 
     /**
      * This method gives money equal to the predefined value of the parameter.
-     * @param type a BasicEnemy.Type, which value adds to the players money,
+     * @param type a class of the enemy.
      */
-    public void addMoney(BasicEnemy.Type type) { //TODO: use this method to add money when basic enemies dies.
-        Integer value = basicEnemyMap.get(type);
+    public void addMoney(Class<?> type) {
+        Integer value = enemyMap.get(type);
         if(value == null){
             throw new IllegalArgumentException("This basic enemy type is not in economy class");
         }

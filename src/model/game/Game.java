@@ -1,5 +1,7 @@
 package model.game;
 
+import model.event.Event;
+import model.event.EventListener;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyHandler;
@@ -20,7 +22,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
+public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, EventListener {
     private final EventSender eventSender;
 
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
@@ -35,7 +37,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
         this.eventSender = eventSender;
         towerHandler = new TowerHandler(this, this, eventSender);
         baseHealth = new MutableHealth(100);
-        enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath());
+        enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath(), eventSender);
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this, eventSender);
         economy = new Economy(1000);
@@ -128,6 +130,13 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService {
             if(economy.buyTower(GrizzlyBear.class)){
                 towerHandler.createGrizzlyBear(v);
             }
+        }
+    }
+
+    @Override
+    public void onEvent(Event event) {
+        if(event.getType() == Event.Type.ENEMY_DEATH) {
+            economy.addMoney(event.getSender());
         }
     }
 }

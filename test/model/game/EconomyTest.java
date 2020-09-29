@@ -81,7 +81,7 @@ class EconomyTest {
     @Test
     void canGetMoreMoneyIfBasicEnemyIsInArgument(){
         int curMoney = economy.getMoney();
-        economy.addMoney(BasicEnemy.Type.FISH_AND_CHIPS);
+        economy.addMoney(BasicEnemy.FishAndChips.class);
         assertTrue(curMoney < economy.getMoney());
     }
 

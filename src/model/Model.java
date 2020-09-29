@@ -22,6 +22,7 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     public Model() {
         game = new Game(this);
         eventListeners = new HashSet<>();
+        addOnModelEventListener(game);
     }
 
     @Override
