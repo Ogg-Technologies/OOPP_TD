@@ -88,8 +88,9 @@ public class Emitter {
 
     /** Draws each particle on the screen */
     public void draw(Graphics graphics, WindowState windowState) {
-        for (Particle p : particles) {
-            p.draw(graphics, windowState);
+        ArrayList<Particle> copyParticles = new ArrayList<>(particles);
+        for (Particle particle : copyParticles){
+            particle.draw(graphics, windowState);
         }
     }
 
