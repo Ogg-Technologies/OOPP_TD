@@ -2,6 +2,7 @@ package view.layers;
 
 import model.ModelData;
 import model.game.projectile.Projectile;
+import model.game.projectile.concreteprojectile.BombardaCharm;
 import model.game.projectile.concreteprojectile.Rock;
 import view.WindowState;
 
@@ -29,8 +30,10 @@ public class ProjectileDrawer extends JPanel {
         this.modelData = modelData;
         setupImages();
         imageMap.put(Rock.class, rockImage);
+        imageMap.put(BombardaCharm.class, rockImage); // TODO: Replace with more appropriate graphics
         //Size parameter is percent of tileSize
         sizeMap.put(Rock.class, 0.25);
+        sizeMap.put(BombardaCharm.class, 0.33);
     }
 
     private void setupImages() {

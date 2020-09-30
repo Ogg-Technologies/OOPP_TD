@@ -54,4 +54,13 @@ public class TowerHandler {
     public void createGrizzlyBear(Vector v) {
         towers.add(factory.createGrizzlyBear(v));
     }
+
+    /**
+     * Creates a mage bear tower at position v
+     * @param v, a {@code Vector} that describes position
+     */
+    public void createMageBear(Vector v) {
+        // TODO: Should probably not have methods for each tower, just give Game a reference to TowerFactory
+        towers.add(factory.createMageBear(v));
+    }
 }

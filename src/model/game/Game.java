@@ -13,14 +13,12 @@ import model.game.projectile.ProjectileService;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
 import model.game.tower.concretetowers.GrizzlyBear;
+import model.game.tower.concretetowers.MageBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, EventListener {
     private final EventSender eventSender;
@@ -127,8 +125,14 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     public void placeTower(Vector v) {
         //TODO: Logic for if the tower can be placed, and what tower to place
         if(isValidTile(v)){
-            if(economy.buyTower(GrizzlyBear.class)){
-                towerHandler.createGrizzlyBear(v);
+            if (new Random().nextBoolean()) {
+                if(economy.buyTower(GrizzlyBear.class)){
+                    towerHandler.createGrizzlyBear(v);
+                }
+            } else {
+                if(economy.buyTower(MageBear.class)){
+                    towerHandler.createMageBear(v);
+                }
             }
         }
     }
