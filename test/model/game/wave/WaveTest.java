@@ -4,8 +4,6 @@ import model.game.Mock;
 import model.game.enemy.Enemy;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class WaveTest {
@@ -71,13 +69,16 @@ class WaveTest {
         assertThrows(IllegalArgumentException.class, () -> e.spawn(null));
     }
 
+    private static void assertNumberOfNewEnemies(int amount, Wave wave) {
+        assertEquals(amount, wave.getNewEnemies().size());
+    }
+
     @Test
     void getNewEnemiesOnNonUpdatedWaveReturnsEmptyCollection() {
         Wave w = seq()
                 .spawn(this::firstEnemy)
                 .toWave();
-        Collection<Enemy> enemies = w.getNewEnemies();
-        assertEquals(0, enemies.size());
+        assertNumberOfNewEnemies(0, w);
     }
 
     @Test
@@ -86,8 +87,7 @@ class WaveTest {
                 .spawn(this::firstEnemy)
                 .toWave();
         w.update();
-        Collection<Enemy> enemies = w.getNewEnemies();
-        assertEquals(1, enemies.size());
+        assertNumberOfNewEnemies(1, w);
         assertTrue(w.isFinished());
     }
 
@@ -100,8 +100,7 @@ class WaveTest {
                 .spawn(this::firstEnemy)
                 .toWave();
         w.update();
-        Collection<Enemy> enemies = w.getNewEnemies();
-        assertEquals(4, enemies.size());
+        assertNumberOfNewEnemies(4, w);
         assertTrue(w.isFinished());
     }
 
@@ -113,12 +112,10 @@ class WaveTest {
                 .toWave();
         for (int i = 0; i < 4; i++) {
             w.update();
-            Collection<Enemy> enemies = w.getNewEnemies();
-            assertEquals(0, enemies.size());
+            assertNumberOfNewEnemies(0, w);
         }
         w.update();
-        Collection<Enemy> enemies = w.getNewEnemies();
-        assertEquals(1, enemies.size());
+        assertNumberOfNewEnemies(1, w);
         assertTrue(w.isFinished());
     }
 
@@ -134,21 +131,21 @@ class WaveTest {
                 .toWave();
 
         w.update();
-        assertEquals(1, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(1, w);
         w.update();
-        assertEquals(0, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(0, w);
         w.update();
-        assertEquals(1, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(1, w);
         w.update();
-        assertEquals(0, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(0, w);
         w.update();
-        assertEquals(0, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(0, w);
         w.update();
-        assertEquals(0, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(0, w);
         w.update();
-        assertEquals(1, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(1, w);
         w.update();
-        assertEquals(0, w.getNewEnemies().size());
+        assertNumberOfNewEnemies(0, w);
         assertTrue(w.isFinished());
     }
 }
