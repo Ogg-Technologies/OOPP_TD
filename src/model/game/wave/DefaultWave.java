@@ -21,8 +21,7 @@ class DefaultWave implements Wave {
             throw new IllegalStateException("Cannot update a finished Wave");
         }
         if (currentWaveSegment == null || currentWaveSegment.isFinished()) {
-            index += 1;
-            currentWaveSegment = sequence.waveSegments.get(index);
+            nextWaveSegment();
         } else {
             currentWaveSegment.update();
         }
@@ -35,7 +34,17 @@ class DefaultWave implements Wave {
             return enemies;
         }
         enemies.addAll(currentWaveSegment.getNewEnemies());
+        while (!isFinished() && currentWaveSegment.isFinished()) {
+            nextWaveSegment();
+            enemies.addAll(currentWaveSegment.getNewEnemies());
+        }
         return enemies;
+    }
+
+    private void nextWaveSegment() {
+        index += 1;
+        currentWaveSegment = sequence.waveSegments.get(index);
+        currentWaveSegment.update();
     }
 
     @Override

@@ -7,6 +7,8 @@ public interface EnemySequence {
 
     EnemySequence delay(int numberOfUpdates);
 
+    EnemySequence repeat(EnemySequence sequence, int times);
+
     Wave toWave();
 
     @FunctionalInterface

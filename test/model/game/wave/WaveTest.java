@@ -2,6 +2,7 @@ package model.game.wave;
 
 import model.game.Mock;
 import model.game.enemy.Enemy;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -88,5 +89,57 @@ class WaveTest {
         w.update();
         Collection<Enemy> enemies = w.getNewEnemies();
         assertEquals(1, enemies.size());
+        assertTrue(w.isFinished());
+    }
+
+    @Test
+    void canSpawnMultipleEnemiesAtOnce() {
+        Wave w = seq()
+                .spawn(this::firstEnemy)
+                .spawn(this::firstEnemy)
+                .spawn(this::firstEnemy)
+                .spawn(this::firstEnemy)
+                .toWave();
+        w.update();
+        Collection<Enemy> enemies = w.getNewEnemies();
+        assertEquals(4, enemies.size());
+        assertTrue(w.isFinished());
+    }
+
+    @Test
+    void canSpawnAfterDelay() {
+        Wave w = seq()
+                .delay(3)
+                .spawn(this::firstEnemy)
+                .toWave();
+        for (int i = 0; i < 3; i++) {
+            w.update();
+            Collection<Enemy> enemies = w.getNewEnemies();
+            assertEquals(0, enemies.size());
+        }
+        w.update();
+        Collection<Enemy> enemies = w.getNewEnemies();
+        assertEquals(1, enemies.size());
+        assertTrue(w.isFinished());
+    }
+
+    @Disabled
+    @Test
+    void canRepeatAnEnemySequence() {
+        EnemySequence e = seq()
+                .spawn(this::firstEnemy)
+                .delay(2);
+        EnemySequence repeated = seq()
+                .repeat(e, 4);
+        Wave w = repeated.toWave();
+        for (int i = 0; i < 4; i++) {
+            w.update();
+            assertEquals(1, w.getNewEnemies().size());
+            w.update();
+            assertEquals(0, w.getNewEnemies().size());
+            w.update();
+            assertEquals(0, w.getNewEnemies().size());
+        }
+        assertTrue(w.isFinished());
     }
 }

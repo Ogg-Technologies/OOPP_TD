@@ -31,6 +31,14 @@ class DefaultEnemySequence implements EnemySequence {
         return this;
     }
 
+    @Override
+    public EnemySequence repeat(EnemySequence sequence, int times) {
+        for (int i = 0; i < times; i++) {
+            waveSegments.add(sequence.toWave());
+        }
+        return this;
+    }
+
     private Wave createSpawnWaveSegment(Spawner spawner) {
         return new Wave() {
             @Override
@@ -58,7 +66,7 @@ class DefaultEnemySequence implements EnemySequence {
 
     private Wave createDelayWaveSegment(int numberOfUpdates) {
         return new Wave() {
-            int i = 0;
+            int i = -1;
 
             @Override
             public void update() {
@@ -67,8 +75,7 @@ class DefaultEnemySequence implements EnemySequence {
 
             @Override
             public Collection<Enemy> getNewEnemies() {
-                HashSet<Enemy> enemies = new HashSet<>();
-                return enemies;
+                return new HashSet<>();
             }
 
             @Override
