@@ -7,6 +7,9 @@ import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
+/**
+ * Factory for all towers in the game
+ */
 public class TowerFactory {
 
     private final EnemyGetter enemyGetter;

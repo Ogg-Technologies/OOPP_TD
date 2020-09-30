@@ -4,7 +4,11 @@ import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.StatusEffect;
 import model.game.projectile.Projectile;
+import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Mock {
     public static Enemy createMockEnemy(Vector pos) {
@@ -54,5 +58,12 @@ public class Mock {
                 return false;
             }
         };
+    }
+
+    public static EnemyTargeter createMockEnemyTargeter() {
+        Collection<Enemy> enemies = new ArrayList<>();
+        enemies.add(Mock.createMockEnemy(new Vector(0, 0)));
+
+        return new EnemyTargeter(() -> enemies);
     }
 }

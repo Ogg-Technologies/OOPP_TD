@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * Handles everything to do with towers
+ * Exists to unload Game class
+ */
 public class TowerHandler {
 
     private final TowerFactory factory;

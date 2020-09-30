@@ -1,5 +1,8 @@
 package model.game.tower.towerutils.chargestrategy;
 
+/**
+ * Charge strategy for a constant interval between fires
+ */
 public class ConstantChargeStrategy implements ChargeStrategy {
     private final int maxCharge;
     private int charge = 0;

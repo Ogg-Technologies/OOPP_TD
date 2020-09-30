@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class used by towers that need to find an enemy to target
+ */
 public class EnemyTargeter {
     private final static Random random = new Random();
     private final EnemyGetter enemyGetter;
@@ -16,6 +19,13 @@ public class EnemyTargeter {
         this.enemyGetter = enemyGetter;
     }
 
+    /**
+     * Will find a random enemy within the given range and return it
+     *
+     * @param pos   The position of the attacker
+     * @param range The range of the attack in tiles
+     * @return A random enemy within the range or null if there are none
+     */
     public Enemy getEnemyToAttack(Vector pos, double range) {
         List<? extends Enemy> enemiesInRange = getEnemiesInRange(pos, range);
         if (!enemiesInRange.isEmpty()) {

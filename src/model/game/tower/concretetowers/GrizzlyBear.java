@@ -11,11 +11,15 @@ import model.game.tower.towerutils.ProjectileCreator;
 import model.game.tower.towerutils.chargestrategy.ConstantChargeStrategy;
 import utils.Vector;
 
+/**
+ * Weak early-game tower that throws rocks
+ */
 public class GrizzlyBear extends AbstractAttackingTower {
 
     private static final int RANGE = 5;
     private static final int UPDATES_BETWEEN_ATTACKS = 88;
     private static final int BASE_DAMAGE = 1;
+
     private ProjectileCreator projectileCreator;
     private EventSender eventSender;
 
