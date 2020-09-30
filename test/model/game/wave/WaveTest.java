@@ -79,4 +79,14 @@ class WaveTest {
         Collection<Enemy> enemies = w.getNewEnemies();
         assertEquals(0, enemies.size());
     }
+
+    @Test
+    void waveWithOneEnemyReturnsThatEnemyOnFirstUpdate() {
+        Wave w = seq()
+                .spawn(this::firstEnemy)
+                .toWave();
+        w.update();
+        Collection<Enemy> enemies = w.getNewEnemies();
+        assertEquals(1, enemies.size());
+    }
 }
