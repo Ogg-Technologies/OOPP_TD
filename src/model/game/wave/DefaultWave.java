@@ -20,11 +20,14 @@ class DefaultWave implements Wave {
         if (isFinished()) {
             throw new IllegalStateException("Cannot update a finished Wave");
         }
-        if (currentWaveSegment == null || currentWaveSegment.isFinished()) {
+        if (currentWaveSegment == null) {
             nextWaveSegment();
-        } else {
-            currentWaveSegment.update();
+            return;
         }
+        if (currentWaveSegment.isFinished() && !isFinished()) {
+            nextWaveSegment();
+        }
+        currentWaveSegment.update();
     }
 
     @Override
@@ -34,29 +37,24 @@ class DefaultWave implements Wave {
             return enemies;
         }
         enemies.addAll(currentWaveSegment.getNewEnemies());
-        while (!isFinished() && currentWaveSegment.isFinished()) {
-            nextWaveSegment();
-            enemies.addAll(currentWaveSegment.getNewEnemies());
-        }
         return enemies;
     }
 
     private void nextWaveSegment() {
-        index += 1;
-        currentWaveSegment = sequence.waveSegments.get(index);
-        currentWaveSegment.update();
+        index++;
+        currentWaveSegment = sequence.getWaveSegment(index);
     }
 
     @Override
     public boolean isFinished() {
-        if (sequence.waveSegments.isEmpty()) {
+        if (sequence.segments.isEmpty()) {
             return true; // This wave is empty so it is always finished
-        }
-        if (sequence.waveSegments.size() > index + 1) {
-            return false; // There are still waveSegments left in the enemySequence
         }
         if (currentWaveSegment == null) {
             return false; // Update has never been called yet
+        }
+        if (sequence.segments.size() > index + 1) {
+            return false; // There are still waveSegments left in the enemySequence
         }
         return currentWaveSegment.isFinished();
     }

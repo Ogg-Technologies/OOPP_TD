@@ -8,15 +8,29 @@ import java.util.HashSet;
 import java.util.List;
 
 class DefaultEnemySequence implements EnemySequence {
-    List<Wave> waveSegments = new ArrayList<>();
+    List<Segment> segments = new ArrayList<>();
+    int currentDelay = 0;
+    Collection<Spawner> currentSpawners = new ArrayList<>();
+
+    public Wave getWaveSegment(int index) {
+        return segments.get(index).toWave();
+    }
 
     @Override
     public EnemySequence spawn(Spawner spawner) {
         if (spawner == null) {
             throw new IllegalArgumentException("spawner can not be null");
         }
-        waveSegments.add(createSpawnWaveSegment(spawner));
+        flushDelay();
+        currentSpawners.add(spawner);
         return this;
+    }
+
+    private void flushDelay() {
+        if (currentDelay != 0) {
+            segments.add(createDelayWaveSegment(currentDelay));
+            currentDelay = 0;
+        }
     }
 
     @Override
@@ -27,20 +41,27 @@ class DefaultEnemySequence implements EnemySequence {
         if (numberOfUpdates == 0) {
             return this;
         }
-        waveSegments.add(createDelayWaveSegment(numberOfUpdates));
+        flushSpawners();
+        currentDelay += numberOfUpdates;
         return this;
+    }
+
+    private void flushSpawners() {
+        if (currentSpawners.size() > 0) {
+            segments.add(createSpawnWaveSegment(currentSpawners));
+            currentSpawners = new ArrayList<>();
+        }
     }
 
     @Override
-    public EnemySequence repeat(EnemySequence sequence, int times) {
-        for (int i = 0; i < times; i++) {
-            waveSegments.add(sequence.toWave());
-        }
-        return this;
+    public Wave toWave() {
+        flushDelay();
+        flushSpawners();
+        return new DefaultWave(this);
     }
 
-    private Wave createSpawnWaveSegment(Spawner spawner) {
-        return new Wave() {
+    private Segment createSpawnWaveSegment(Collection<Spawner> spawners) {
+        return () -> new Wave() {
             @Override
             public void update() {
             }
@@ -48,7 +69,9 @@ class DefaultEnemySequence implements EnemySequence {
             @Override
             public Collection<Enemy> getNewEnemies() {
                 HashSet<Enemy> enemies = new HashSet<>();
-                enemies.add(spawner.spawn());
+                for (Spawner s : spawners) {
+                    enemies.add(s.spawn());
+                }
                 return enemies;
             }
 
@@ -59,14 +82,14 @@ class DefaultEnemySequence implements EnemySequence {
 
             @Override
             public int getRemainingHealth() {
-                return spawner.spawn().getHealth().getCurrent();
+                return 0;
             }
         };
     }
 
-    private Wave createDelayWaveSegment(int numberOfUpdates) {
-        return new Wave() {
-            int i = -1;
+    private Segment createDelayWaveSegment(int numberOfUpdates) {
+        return () -> new Wave() {
+            int i = 0;
 
             @Override
             public void update() {
@@ -90,8 +113,7 @@ class DefaultEnemySequence implements EnemySequence {
         };
     }
 
-    @Override
-    public Wave toWave() {
-        return new DefaultWave(this);
+    private interface Segment {
+        Wave toWave();
     }
 }

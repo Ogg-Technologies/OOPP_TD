@@ -2,7 +2,6 @@ package model.game.wave;
 
 import model.game.Mock;
 import model.game.enemy.Enemy;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -112,7 +111,7 @@ class WaveTest {
                 .delay(3)
                 .spawn(this::firstEnemy)
                 .toWave();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             w.update();
             Collection<Enemy> enemies = w.getNewEnemies();
             assertEquals(0, enemies.size());
@@ -123,23 +122,33 @@ class WaveTest {
         assertTrue(w.isFinished());
     }
 
-    @Disabled
     @Test
-    void canRepeatAnEnemySequence() {
-        EnemySequence e = seq()
+    void canAlternateSpawningAndDelaying() {
+        Wave w = seq()
                 .spawn(this::firstEnemy)
-                .delay(2);
-        EnemySequence repeated = seq()
-                .repeat(e, 4);
-        Wave w = repeated.toWave();
-        for (int i = 0; i < 4; i++) {
-            w.update();
-            assertEquals(1, w.getNewEnemies().size());
-            w.update();
-            assertEquals(0, w.getNewEnemies().size());
-            w.update();
-            assertEquals(0, w.getNewEnemies().size());
-        }
+                .delay(1)
+                .spawn(this::firstEnemy)
+                .delay(3)
+                .spawn(this::firstEnemy)
+                .delay(1)
+                .toWave();
+
+        w.update();
+        assertEquals(1, w.getNewEnemies().size());
+        w.update();
+        assertEquals(0, w.getNewEnemies().size());
+        w.update();
+        assertEquals(1, w.getNewEnemies().size());
+        w.update();
+        assertEquals(0, w.getNewEnemies().size());
+        w.update();
+        assertEquals(0, w.getNewEnemies().size());
+        w.update();
+        assertEquals(0, w.getNewEnemies().size());
+        w.update();
+        assertEquals(1, w.getNewEnemies().size());
+        w.update();
+        assertEquals(0, w.getNewEnemies().size());
         assertTrue(w.isFinished());
     }
 }
