@@ -34,11 +34,13 @@ public class BombardaCharm extends AbstractProjectile {
     @Override
     public void update() {
         // If the targeted enemy is dead, don't change velocity, keep going straight
-        if (target.getHealth().isDead()) {
-            target = null;
+        if(target != null) {
+            if (target.getHealth().isDead()) {
+                target = null;
 
-        } else {
-            velocity = target.getPos().minus(getPosition()).setMagnitude(SPEED);
+            } else {
+                velocity = target.getPos().minus(getPosition()).setMagnitude(SPEED);
+            }
         }
         super.update();
     }
