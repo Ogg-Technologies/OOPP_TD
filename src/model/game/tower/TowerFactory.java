@@ -3,6 +3,7 @@ package model.game.tower;
 import model.event.EventSender;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.MageBear;
+import model.game.tower.concretetowers.SniperBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.ProjectileCreator;
@@ -27,8 +28,14 @@ public class TowerFactory {
         return new GrizzlyBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
     }
 
+
     // TODO: Decide if this should be called something else (like Bearry Potter idk)
     public Tower createMageBear(Vector pos) {
         return new MageBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
+    }
+
+    public Tower createSniperBear(Vector pos) {
+        return new SniperBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
+
     }
 }

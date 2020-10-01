@@ -35,12 +35,13 @@ public class TowerHandler {
 
     /**
      * Checks if there is a tower on a particular tilePos
+     *
      * @param tilePos the pos to look at
      * @return true if there is a tower on this pos, else false
      */
     public boolean isTowerAt(Vector tilePos) {
-        for(Tower t : towers){
-            if(t.getPos().equals(tilePos)){
+        for (Tower t : towers) {
+            if (t.getPos().equals(tilePos)) {
                 return true;
             }
         }
@@ -49,6 +50,7 @@ public class TowerHandler {
 
     /**
      * Creates a grizzly tower at position v
+     *
      * @param v, a {@code Vector} that describes position
      */
     public void createGrizzlyBear(Vector v) {
@@ -57,10 +59,22 @@ public class TowerHandler {
 
     /**
      * Creates a mage bear tower at position v
+     *
      * @param v, a {@code Vector} that describes position
      */
     public void createMageBear(Vector v) {
         // TODO: Should probably not have methods for each tower, just give Game a reference to TowerFactory
         towers.add(factory.createMageBear(v));
     }
+
+    /**
+     * Creates a sniper tower at position v
+     *
+     * @param v, a {@code Vector} that describes position
+     */
+    public void createSniperBear(Vector v) {
+        towers.add(factory.createSniperBear(v));
+    }
+
+
 }
