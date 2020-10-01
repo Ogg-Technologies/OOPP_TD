@@ -102,7 +102,7 @@ public class SwingView implements View {
     @Override
     public void draw() {
 
-        Vector totalSize = new Vector(window.getWidth(), window.getHeight());
+        Vector totalSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
         Vector tileSize = modelData.getMapSize();
 
         windowState.update(totalSize, tileSize);
@@ -117,8 +117,10 @@ public class SwingView implements View {
     }
 
     private void setSizeOfLayers(Dimension size) {
+        int width = size.width - widthOffset;
+        int height = size.height - heightOffset;
         for (JPanel layer : layers) {
-            layer.setSize(size);
+            layer.setSize(width, height);
         }
     }
 
