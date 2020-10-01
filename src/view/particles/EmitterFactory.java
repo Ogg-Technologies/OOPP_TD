@@ -20,11 +20,13 @@ public final class EmitterFactory {
 
     private static Image rockImage;
     private static Image boltImage;
+    private static Image sniperSmoke;
 
     static {
         try {
             rockImage = ImageIO.read(new File("resource/stone.png"));
             boltImage = ImageIO.read(new File("resource/bombardaCharm.png"));
+            sniperSmoke = ImageIO.read(new File("resource/sniperSmoke.png"));
 
         } catch (IOException e) {
             throw new IOError(e);
@@ -53,6 +55,19 @@ public final class EmitterFactory {
                 .setEmitterLifetime(3)
                 .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(4, 10))
                 .setTileSize(LinearDoubleDistribution.fromRange(0.05,0.2))
+                .build();
+    }
+
+    static Emitter createSniperSmokeEmitter(Vector position) { //TODO make actuall effect that had the correct angle etc...
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImage(sniperSmoke)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001,0.01)))
+                .setEmitterLifetime(1)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(10, 10))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.05,0.3))
                 .build();
     }
 }

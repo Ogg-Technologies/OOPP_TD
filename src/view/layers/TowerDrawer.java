@@ -89,7 +89,7 @@ public class TowerDrawer implements TowerVisitor {
         final double sin = Math.abs(Math.sin(tower.getAngle()));
         final double cos = Math.abs(Math.cos(tower.getAngle()));
 
-        BufferedImage rotatedImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
+        BufferedImage rotatedImage = ImageHandler.getImage("resource/sniperBear.png", tower.getAngle());
 
         double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
         int offset = (int) ((width - windowState.getTileSize()) / 2);

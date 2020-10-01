@@ -31,7 +31,7 @@ public class ProjectileDrawer extends JPanel {
         this.modelData = modelData;
         setupImages();
         imageMap.put(Rock.class, rockImage);
-        imageMap.put(BombardaCharm.class, bombardaImage); // TODO: Replace with more appropriate graphics
+        imageMap.put(BombardaCharm.class, bombardaImage);
         //Size parameter is percent of tileSize
         sizeMap.put(Rock.class, 0.25);
         sizeMap.put(BombardaCharm.class, 0.33);
