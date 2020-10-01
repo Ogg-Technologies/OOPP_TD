@@ -34,7 +34,7 @@ public class BombardaCharm extends AbstractProjectile {
     @Override
     public void update() {
         // If the targeted enemy is dead, don't change velocity, keep going straight
-        if(target != null) {
+        if(target != null) {//TODO temp fix?
             if (target.getHealth().isDead()) {
                 target = null;
 
