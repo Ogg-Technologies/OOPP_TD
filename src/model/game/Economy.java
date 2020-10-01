@@ -6,6 +6,7 @@ import model.game.enemy.concreteenemies.BasicEnemy;
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.MageBear;
+import model.game.tower.concretetowers.SniperBear;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +49,7 @@ public class Economy {
     private void setupTowerPriceMap() {
         towerMap.put(GrizzlyBear.class, 100);
         towerMap.put(MageBear.class, 68);
+        towerMap.put(SniperBear.class, 40);
     }
 
 

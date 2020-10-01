@@ -14,6 +14,7 @@ import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.MageBear;
+import model.game.tower.concretetowers.SniperBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
@@ -119,27 +120,37 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     /**
      * Method for collecting position to place tower at.
      * Only places towers if requirement are fulfilled, such as no other tower on this tile
-     * @see #isValidTile(Vector) for requirements
+     *
      * @param v, the position to place the tower
+     * @see #isValidTile(Vector) for requirements
      */
     public void placeTower(Vector v) {
         //TODO: Logic for if the tower can be placed, and what tower to place
-        if(isValidTile(v)){
-            if (new Random().nextBoolean()) {
-                if(economy.buyTower(GrizzlyBear.class)){
-                    towerHandler.createGrizzlyBear(v);
-                }
-            } else {
-                if(economy.buyTower(MageBear.class)){
-                    towerHandler.createMageBear(v);
-                }
+        if (isValidTile(v)) {
+            switch (new Random().nextInt(3)) {
+                case 0:
+                    if (economy.buyTower(GrizzlyBear.class)) {
+                        towerHandler.createGrizzlyBear(v);
+                    }
+                    break;
+                case 1:
+                    if (economy.buyTower(MageBear.class)) {
+                        towerHandler.createMageBear(v);
+                    }
+                    break;
+                case 2:
+                    if (economy.buyTower(SniperBear.class)) {
+                        towerHandler.createSniperBear(v);
+                    }
+                    break;
             }
+
         }
     }
 
     @Override
     public void onEvent(Event event) {
-        if(event.getType() == Event.Type.ENEMY_DEATH) {
+        if (event.getType() == Event.Type.ENEMY_DEATH) {
             economy.addMoney(event.getSender());
         }
     }

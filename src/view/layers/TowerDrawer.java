@@ -4,6 +4,7 @@ import model.game.tower.Tower;
 import model.game.tower.TowerVisitor;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.MageBear;
+import model.game.tower.concretetowers.SniperBear;
 import utils.Vector;
 import view.WindowState;
 import view.texture.ImageHandler;
@@ -64,6 +65,23 @@ public class TowerDrawer implements TowerVisitor {
 
     @Override
     public void visit(MageBear tower) {
+        // TODO: Refactor this so that it is not just copy paste of GrizzlyBear tower
+
+        Vector pos = getRealPos(tower.getPos());
+
+        final double sin = Math.abs(Math.sin(tower.getAngle()));
+        final double cos = Math.abs(Math.cos(tower.getAngle()));
+
+        BufferedImage rotatedImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
+
+        double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
+        int offset = (int) ((width - windowState.getTileSize()) / 2);
+
+        graphics.drawImage(rotatedImage, pos.getIntX() - offset, pos.getIntY() - offset, (int) width, (int) width, null);
+    }
+
+    @Override
+    public void visit(SniperBear tower) {
         // TODO: Refactor this so that it is not just copy paste of GrizzlyBear tower
 
         Vector pos = getRealPos(tower.getPos());
