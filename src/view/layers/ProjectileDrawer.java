@@ -24,13 +24,14 @@ public class ProjectileDrawer extends JPanel {
     private final ModelData modelData;
     private final WindowState windowState;
     private BufferedImage rockImage;
+    private BufferedImage bombardaImage;
 
     public ProjectileDrawer(ModelData modelData, WindowState windowState) {
         this.windowState = windowState;
         this.modelData = modelData;
         setupImages();
         imageMap.put(Rock.class, rockImage);
-        imageMap.put(BombardaCharm.class, rockImage); // TODO: Replace with more appropriate graphics
+        imageMap.put(BombardaCharm.class, bombardaImage); // TODO: Replace with more appropriate graphics
         //Size parameter is percent of tileSize
         sizeMap.put(Rock.class, 0.25);
         sizeMap.put(BombardaCharm.class, 0.33);
@@ -39,6 +40,8 @@ public class ProjectileDrawer extends JPanel {
     private void setupImages() {
         try {
             rockImage = ImageIO.read(new File("resource/stone.png"));
+            bombardaImage = ImageIO.read(new File("resource/bombardaCharm.png"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
