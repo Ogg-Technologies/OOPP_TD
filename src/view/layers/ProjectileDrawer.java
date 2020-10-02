@@ -16,6 +16,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Sebastian, Samuel, Erik
+ * Display projectiles.
+ * Is used by swingView.
+ */
 public class ProjectileDrawer extends JPanel {
 
 

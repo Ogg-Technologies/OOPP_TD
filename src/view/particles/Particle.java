@@ -6,8 +6,10 @@ import view.WindowState;
 import java.awt.*;
 
 /**
+ * @author Erik
  * A Particle is a small image that are usually clustered together with changes in attributes to make a visually
  * appealing effect. Every particle is created from an Emitter
+ * Is used by Emitter.
  */
 class Particle {
 

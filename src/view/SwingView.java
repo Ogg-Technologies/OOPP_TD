@@ -12,6 +12,11 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * @author Sebastian, Samuel, Erik
+ * Main view component, where it displays everything that should be displayable.
+ * Is created in Applicaton, and updated by applicationLoop
+ */
 public class SwingView implements View {
 
     public final static int widthOffset = 17;//WidthOffset = Actual subtraction on width needed to get usable width

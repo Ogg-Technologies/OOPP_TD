@@ -12,8 +12,10 @@ import java.awt.*;
 import java.util.*;
 
 /**
+ * @author Samuel, Erik
  * Class used for handling everything that has to do with emitters and particles
  * Listens for specific events and creates particle emitters from that
+ * Is used by swingView
  */
 public final class ParticleHandler extends JPanel implements EventListener {
 

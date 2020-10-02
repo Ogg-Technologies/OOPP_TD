@@ -3,7 +3,9 @@ package view;
 import utils.Vector;
 
 /**
+ * @author Sebastian, Samuel
  * An interface for components that needs to get info about a position on the window
+ * Is implemented by view, and is used by controller
  */
 public interface WindowPositionHelper {
     /**

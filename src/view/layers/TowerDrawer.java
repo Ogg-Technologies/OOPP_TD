@@ -16,6 +16,11 @@ import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 
+/**
+ * @author Oskar, Sebastian, Samuel, Erik
+ * Display towers.
+ * Is used by swingView.
+ */
 
 public class TowerDrawer implements TowerVisitor {
 

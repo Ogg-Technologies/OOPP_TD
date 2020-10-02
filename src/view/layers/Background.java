@@ -13,6 +13,11 @@ import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 
+/**
+ * @author Sebastian, Samuel, Erik
+ * Displays the map.
+ * Is used by Swingview.
+ */
 public class Background extends JPanel { // TODO: Could use some functional decomposition later
 
     private static final Color VALID_TILE_HOVER_COLOR = new Color(0, 0, 0, 50);

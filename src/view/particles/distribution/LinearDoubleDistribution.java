@@ -1,5 +1,10 @@
 package view.particles.distribution;
 
+/**
+ * @author Oskar
+ * Linear distribution with doubles.
+ * Is used by EmitterFactory, Emitter and LinearVectorDistribution
+ */
 public class LinearDoubleDistribution implements Distribution<Double> {
     private final double min;
     private final double max;

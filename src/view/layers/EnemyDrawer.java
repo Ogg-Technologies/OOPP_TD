@@ -11,6 +11,12 @@ import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 
+/**
+ * @author Oskar, Sebastian, Samuel, Erik
+ * Displays all the Enemies.
+ * Is used by swingView.
+ */
+
 public class EnemyDrawer implements EnemyVisitor {
     private static final BufferedImage image = getEnemyImage();
     private static final double healthHeightPercent = 0.05; //Of tileSize
