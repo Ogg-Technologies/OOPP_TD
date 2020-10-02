@@ -8,55 +8,41 @@ import java.util.HashSet;
 class DefaultWave implements Wave {
 
     private DefaultEnemySequence sequence;
+    private int delay = 0;
     private int index = -1;
-    private Wave currentWaveSegment = null;
 
     public DefaultWave(DefaultEnemySequence sequence) {
         this.sequence = sequence;
     }
 
     @Override
-    public void update() {
-        if (isFinished()) {
+    public Collection<Enemy> next() {
+        if (!hasNext()) {
             throw new IllegalStateException("Cannot update a finished Wave");
         }
-        if (currentWaveSegment == null) {
-            nextWaveSegment();
-            return;
-        }
-        if (currentWaveSegment.isFinished() && !isFinished()) {
-            nextWaveSegment();
-        }
-        currentWaveSegment.update();
-    }
-
-    @Override
-    public Collection<Enemy> getNewEnemies() {
-        HashSet<Enemy> enemies = new HashSet<>();
-        if (currentWaveSegment == null) {
+        Collection<Enemy> enemies = new HashSet<>();
+        if (delay > 0) {
+            delay--;
             return enemies;
         }
-        enemies.addAll(currentWaveSegment.getNewEnemies());
+        while (hasNext() && delay <= 0) {
+            index++;
+            Command c = sequence.commands.get(index);
+            if (c instanceof Spawn) {
+                for (EnemySequence.Spawner s : ((Spawn) c).spawners) {
+                    enemies.add(s.spawn());
+                }
+            } else if (c instanceof Delay) {
+                delay += ((Delay) c).updates;
+            }
+        }
         return enemies;
     }
 
-    private void nextWaveSegment() {
-        index++;
-        currentWaveSegment = sequence.getWaveSegment(index);
-    }
 
     @Override
-    public boolean isFinished() {
-        if (sequence.segments.isEmpty()) {
-            return true; // This wave is empty so it is always finished
-        }
-        if (currentWaveSegment == null) {
-            return false; // Update has never been called yet
-        }
-        if (sequence.segments.size() > index + 1) {
-            return false; // There are still waveSegments left in the enemySequence
-        }
-        return currentWaveSegment.isFinished();
+    public boolean hasNext() {
+        return sequence.commands.size() > index + 1;
     }
 
     @Override

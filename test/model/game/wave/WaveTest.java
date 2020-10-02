@@ -20,17 +20,21 @@ class WaveTest {
         return Mock.createMockEnemy(null);
     }
 
+    private static void assertNumberOfNewEnemies(int amount, Wave wave) {
+        assertEquals(amount, wave.next().size());
+    }
+
     @Test
     void emptyWaveIsFinished() {
-        Wave v = createEmptyWave();
-        assertTrue(v.isFinished());
+        Wave w = createEmptyWave();
+        assertFalse(w.hasNext());
     }
 
     @Test
     void updatingFinishedWaveThrowsException() {
-        Wave v = createEmptyWave();
-        assertTrue(v.isFinished());
-        assertThrows(IllegalStateException.class, () -> v.update());
+        Wave w = createEmptyWave();
+        assertFalse(w.hasNext());
+        assertThrows(IllegalStateException.class, () -> w.next());
     }
 
     @Test
@@ -38,7 +42,7 @@ class WaveTest {
         Wave w = seq()
                 .spawn(this::firstEnemy)
                 .toWave();
-        assertFalse(w.isFinished());
+        assertTrue(w.hasNext());
     }
 
     @Test
@@ -46,15 +50,7 @@ class WaveTest {
         Wave w = seq()
                 .delay(1)
                 .toWave();
-        assertFalse(w.isFinished());
-    }
-
-    @Test
-    void waveWith0UpdateDelayIsFinished() {
-        Wave w = seq()
-                .delay(0)
-                .toWave();
-        assertTrue(w.isFinished());
+        assertTrue(w.hasNext());
     }
 
     @Test
@@ -69,26 +65,21 @@ class WaveTest {
         assertThrows(IllegalArgumentException.class, () -> e.spawn(null));
     }
 
-    private static void assertNumberOfNewEnemies(int amount, Wave wave) {
-        assertEquals(amount, wave.getNewEnemies().size());
+    @Test
+    void waveWith0UpdateDelayIsFinished() {
+        Wave w = seq()
+                .delay(0)
+                .toWave();
+        assertFalse(w.hasNext());
     }
 
     @Test
-    void getNewEnemiesOnNonUpdatedWaveReturnsEmptyCollection() {
+    void waveWithOneEnemyReturnsThatEnemyOnFirstNext() {
         Wave w = seq()
                 .spawn(this::firstEnemy)
                 .toWave();
-        assertNumberOfNewEnemies(0, w);
-    }
-
-    @Test
-    void waveWithOneEnemyReturnsThatEnemyOnFirstUpdate() {
-        Wave w = seq()
-                .spawn(this::firstEnemy)
-                .toWave();
-        w.update();
         assertNumberOfNewEnemies(1, w);
-        assertTrue(w.isFinished());
+        assertFalse(w.hasNext());
     }
 
     @Test
@@ -99,9 +90,8 @@ class WaveTest {
                 .spawn(this::firstEnemy)
                 .spawn(this::firstEnemy)
                 .toWave();
-        w.update();
         assertNumberOfNewEnemies(4, w);
-        assertTrue(w.isFinished());
+        assertFalse(w.hasNext());
     }
 
     @Test
@@ -111,12 +101,10 @@ class WaveTest {
                 .spawn(this::firstEnemy)
                 .toWave();
         for (int i = 0; i < 4; i++) {
-            w.update();
             assertNumberOfNewEnemies(0, w);
         }
-        w.update();
         assertNumberOfNewEnemies(1, w);
-        assertTrue(w.isFinished());
+        assertFalse(w.hasNext());
     }
 
     @Test
@@ -130,22 +118,13 @@ class WaveTest {
                 .delay(1)
                 .toWave();
 
-        w.update();
         assertNumberOfNewEnemies(1, w);
-        w.update();
         assertNumberOfNewEnemies(0, w);
-        w.update();
         assertNumberOfNewEnemies(1, w);
-        w.update();
         assertNumberOfNewEnemies(0, w);
-        w.update();
         assertNumberOfNewEnemies(0, w);
-        w.update();
         assertNumberOfNewEnemies(0, w);
-        w.update();
         assertNumberOfNewEnemies(1, w);
-        w.update();
-        assertNumberOfNewEnemies(0, w);
-        assertTrue(w.isFinished());
+        assertFalse(w.hasNext());
     }
 }
