@@ -38,6 +38,16 @@ public interface EnemySequence {
     EnemySequence delay(int numberOfUpdates);
 
     /**
+     * Spawns a series of enemies spaced out by a given delay
+     *
+     * @param spawner         a method for which enemy to spawn
+     * @param numberOfEnemies how many enemies to spawn in total
+     * @param delayInBetween  the number of updates to delay between each enemy spawning
+     * @return
+     */
+    EnemySequence spawnMultipleWithDelay(Spawner spawner, int numberOfEnemies, int delayInBetween);
+
+    /**
      * Finalizes the sequence to a Wave.
      *
      * @return a Wave of this sequence

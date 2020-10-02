@@ -40,6 +40,19 @@ class DefaultEnemySequence implements EnemySequence {
         return this;
     }
 
+    @Override
+    public EnemySequence spawnMultipleWithDelay(Spawner spawner, int numberOfEnemies, int delayInBetween) {
+        if (numberOfEnemies < 0) {
+            throw new IllegalArgumentException("numberOfEnemies: " + numberOfEnemies + " can not be a negative number");
+        }
+        spawn(spawner);
+        for (int i = 0; i < numberOfEnemies - 1; i++) {
+            delay(delayInBetween);
+            spawn(spawner);
+        }
+        return this;
+    }
+
     private void flushSpawners() {
         if (currentEnemies.size() > 0) {
             commands.add(new Spawn(currentEnemies));
@@ -60,4 +73,5 @@ class DefaultEnemySequence implements EnemySequence {
         flushSpawners();
         return new DefaultWave(commands);
     }
+
 }

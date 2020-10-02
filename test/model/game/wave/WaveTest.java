@@ -151,4 +151,21 @@ class WaveTest {
         assertEquals(0, w.getRemainingHealth());
         assertFalse(w.hasNext());
     }
+
+    @Test
+    void canSpawnMultipleEnemiesWithGivenDelay() {
+        Wave w = seq()
+                .spawnMultipleWithDelay(this::firstEnemy, 4, 2)
+                .toWave();
+        assertNumberOfNewEnemies(1, w);
+        assertNumberOfNewEnemies(0, w);
+        assertNumberOfNewEnemies(0, w);
+        assertNumberOfNewEnemies(1, w);
+        assertNumberOfNewEnemies(0, w);
+        assertNumberOfNewEnemies(0, w);
+        assertNumberOfNewEnemies(1, w);
+        assertNumberOfNewEnemies(0, w);
+        assertNumberOfNewEnemies(0, w);
+        assertNumberOfNewEnemies(1, w);
+    }
 }
