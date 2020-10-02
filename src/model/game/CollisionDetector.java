@@ -4,6 +4,10 @@ import model.game.enemy.Enemy;
 import model.game.projectile.Projectile;
 import utils.Vector;
 
+/**
+ * @author Oskar, Erik
+ * Util class with static methods for calculating collisions.
+ */
 public final class CollisionDetector {
     private static final double ENEMY_RADIUS = 0.5;
 

@@ -6,6 +6,11 @@ import utils.Vector;
 
 import java.util.*;
 
+/**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
+ * Class for handling everything to do with enemies
+ * Used and created by Game
+ */
 public class EnemyHandler {
     private final EnemyFactory enemyFactory;
     private final Collection<Enemy> enemies;

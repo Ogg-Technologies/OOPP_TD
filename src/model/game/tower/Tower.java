@@ -3,6 +3,7 @@ package model.game.tower;
 import utils.Vector;
 
 /**
+ * @author Oskar, Sebastian, Behroz, Erik
  * Super type of all towers
  */
 public interface Tower {

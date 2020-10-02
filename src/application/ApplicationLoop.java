@@ -5,6 +5,7 @@ import view.Drawable;
 import view.ShutDownAble;
 
 /**
+ * @author Oskar, Sebastian, Erik
  * This class is for creating a loop that call update on an updatable and drawable
  */
 public class ApplicationLoop implements Runnable {

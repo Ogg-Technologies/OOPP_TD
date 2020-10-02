@@ -4,6 +4,7 @@ import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
 
 /**
+ * @author Oskar, Behroz, Erik
  * Interface used by towers for them to be able to create projectile attacks
  */
 public interface ProjectileCreator {

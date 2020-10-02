@@ -5,6 +5,7 @@ import model.game.enemy.Enemy;
 import java.util.Collection;
 
 /**
+ * @author Oskar, Erik
  * Functional interface used by EnemyTargeter to obtain the ability to iterate over enemies
  */
 @FunctionalInterface

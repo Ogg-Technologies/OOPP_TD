@@ -1,5 +1,10 @@
 package model.game;
 
+/**
+ * @author Oskar
+ * Represents the current health and a max health of something.
+ * Used by enemies and game
+ */
 public class MutableHealth implements Health {
     private final int max;
     private int current;

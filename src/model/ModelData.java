@@ -10,6 +10,11 @@ import utils.Vector;
 
 import java.util.Collection;
 
+/**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
+ * An interface for fetching information about the program state or adding eventListeners without being able to modify it.
+ * Implemented by the Model. Used by View.
+ */
 public interface ModelData {
 
     void addOnModelEventListener(EventListener eventListener);

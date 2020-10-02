@@ -12,6 +12,7 @@ import model.game.tower.towerutils.chargestrategy.ConstantChargeStrategy;
 import utils.Vector;
 
 /**
+ * @author Oskar, Behroz, Erik
  * Weak early-game tower that throws rocks
  */
 public class GrizzlyBear extends AbstractAttackingTower {

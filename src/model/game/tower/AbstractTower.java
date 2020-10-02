@@ -4,8 +4,8 @@ import model.game.tower.towerutils.chargestrategy.ChargeStrategy;
 import utils.Vector;
 
 /**
- * Common super type for all towers
- * Every tower in the game needs everything in this class
+ * @author Oskar, Samuel, Erik
+ * A subtype to Tower which implements common functionality for all Towers
  */
 public abstract class AbstractTower implements Tower {
     private final Vector pos;

@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 /**
+ * @author Sebastian, Samuel, Erik
  * A class that trigger events in other classes if a specific mouse action has happened
  */
 public class SwingMouseController implements MouseListener, MouseMotionListener {

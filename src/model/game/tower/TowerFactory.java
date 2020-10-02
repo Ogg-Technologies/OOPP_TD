@@ -10,6 +10,7 @@ import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
 /**
+ * @author Oskar, Behroz, Erik
  * Factory for all towers in the game
  */
 public class TowerFactory {

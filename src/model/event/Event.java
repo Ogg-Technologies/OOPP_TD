@@ -3,6 +3,7 @@ package model.event;
 import utils.Vector;
 
 /**
+ * @author Samuel, Erik
  * An Event is something that has happened in the Model. The class responsible for the Event creates an instance of it
  * and sends it via EventSender interface to the root model class (in our case, Model) where it is sent to all
  * EventListeners to the outside. An Event always has a Type and sender (the object that caused it's class)

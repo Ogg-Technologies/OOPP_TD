@@ -4,6 +4,10 @@ import model.game.Health;
 import model.game.MutableHealth;
 import utils.Vector;
 
+/**
+ * @author Oskar, Behroz, Erik
+ * A subtype of Enemy which implements common functionality for all enemies.
+ */
 public abstract class AbstractEnemy implements Enemy {
     private final BaseDamager baseDamager;
     private final PathIterator pathIterator;

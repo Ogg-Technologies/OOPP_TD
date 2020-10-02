@@ -6,6 +6,7 @@ import view.SwingView;
 import view.View;
 
 /**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * The Application class is what creates all necessary objects.
  */
 public class Application {

@@ -15,6 +15,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
+ * This represents the inner logic of the program. It keeps track of the state of the application.
+ */
 public final class Model implements ModelInputListener, ModelData, Updatable, EventSender {
     private Game game;
     private final Set<EventListener> eventListeners;

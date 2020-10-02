@@ -8,6 +8,7 @@ import model.game.projectile.ProjectileService;
 import utils.Vector;
 
 /**
+ * @author Erik
  * BombardaCharm is a heat seeking charm/projectile cast by the MageBear that causes a small explosion
  * Source: https://harrypotter.fandom.com/wiki/Exploding_Charm
  * It was only recently that wizard bears learned to harness the dark arts and make the Bombarda charm seek out their target

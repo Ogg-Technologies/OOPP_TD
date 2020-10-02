@@ -1,6 +1,7 @@
 package model.game.tower.towerutils.chargestrategy;
 
 /**
+ * @author Oskar, Erik
  * Strategy pattern used by towers for how they charge between fires
  */
 public interface ChargeStrategy {

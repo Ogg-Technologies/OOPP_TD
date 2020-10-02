@@ -3,6 +3,10 @@ package model.game.enemy;
 import model.game.Health;
 import utils.Vector;
 
+/**
+ * @author Oskar, Behroz, Erik
+ * Super type of all Enemies
+ */
 public interface Enemy {
     void update();
 

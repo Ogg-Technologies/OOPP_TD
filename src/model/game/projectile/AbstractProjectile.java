@@ -4,6 +4,10 @@ import model.game.CollisionDetector;
 import model.game.enemy.Enemy;
 import utils.Vector;
 
+/**
+ * @author Oskar, Erik
+ * A subtype of Projectile which contains common functionality for all projectiles
+ */
 public abstract class AbstractProjectile implements Projectile {
 
     private static final int EDGE_DELTA = 1;

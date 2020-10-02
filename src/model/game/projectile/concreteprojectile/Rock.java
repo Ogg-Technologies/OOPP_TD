@@ -7,6 +7,10 @@ import model.game.projectile.AbstractProjectile;
 import model.game.projectile.ProjectileService;
 import utils.Vector;
 
+/**
+ * @author Oskar, Samuel, Erik
+ * Projectile used by GrizzlyBear
+ */
 public class Rock extends AbstractProjectile {
 
     private final int damage;

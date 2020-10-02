@@ -2,6 +2,10 @@ package utils;
 
 import java.util.Objects;
 
+/**
+ * @author Oskar, Erik
+ * A class that represents a 2d vector with an x and a y component.
+ */
 public class Vector {
     public final double x;
     public final double y;

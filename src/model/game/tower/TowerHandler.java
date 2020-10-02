@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
+ * @author Oskar, Sebastian, Behroz, Erik
  * Handles everything to do with towers
  * Exists to unload Game class
  */

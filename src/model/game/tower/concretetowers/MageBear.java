@@ -12,6 +12,7 @@ import model.game.tower.towerutils.chargestrategy.ConstantChargeStrategy;
 import utils.Vector;
 
 /**
+ * @author Erik
  * Magician Bear that attacks with spells or charms
  */
 public class MageBear extends AbstractAttackingTower {

@@ -11,6 +11,10 @@ import model.game.tower.towerutils.ProjectileCreator;
 import model.game.tower.towerutils.chargestrategy.ConstantChargeStrategy;
 import utils.Vector;
 
+/**
+ * @author Behroz
+ * A tower with long range and slow attack speed. Uses hitscan to damage enemies instead of creating a projectile
+ */
 public class SniperBear extends AbstractAttackingTower {
 
     private static final int RANGE = 40;

@@ -6,6 +6,10 @@ import model.game.projectile.concreteprojectile.BombardaCharm;
 import model.game.projectile.concreteprojectile.Rock;
 import utils.Vector;
 
+/**
+ * @author Oskar, Behroz, Samuel, Erik
+ * Factory for creating Projectiles. Used by Game.
+ */
 public final class ProjectileFactory {
 
     private final ProjectileService service;

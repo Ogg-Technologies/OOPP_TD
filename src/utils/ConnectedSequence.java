@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @param <E> The type of elements stored in the sequence
+ * @author Erik
  * Class representing a sequence of (unique, non-null) elements where each element is connected to the next one in
  * the sequence, making functionality where asking for the next element by giving the previous as argument possible.
- * @param <E> The type of elements stored in the sequence
  */
 public class ConnectedSequence<E> {
 

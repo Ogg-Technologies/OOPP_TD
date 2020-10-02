@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * @author Oskar, Erik
  * Class used by towers that need to find an enemy to target
  */
 public class EnemyTargeter {

@@ -6,7 +6,8 @@ import model.game.tower.towerutils.chargestrategy.ChargeStrategy;
 import utils.Vector;
 
 /**
- * Common super type for all attacking towers
+ * @author Oskar, Behroz, Erik
+ * Common supertype for all towers that attack enemies.
  */
 public abstract class AbstractAttackingTower extends AbstractTower {
     public static final Vector DEFAULT_AIM = new Vector(0, 1);

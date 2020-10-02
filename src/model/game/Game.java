@@ -21,6 +21,11 @@ import utils.Vector;
 
 import java.util.*;
 
+/**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
+ * The class representing the whole TowerDefenseGame with a given map.
+ * It is created and used by Model
+ */
 public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, EventListener {
     private final EventSender eventSender;
 

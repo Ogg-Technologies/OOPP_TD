@@ -5,6 +5,11 @@ import utils.Vector;
 
 import java.util.List;
 
+/**
+ * @author Oskar, Behroz, Samuel, Erik
+ * A Factory pattern for creating enemies.
+ * Used by EnemyHandler
+ */
 public class EnemyFactory {
     private final BaseDamager baseDamager;
     private final List<? extends Vector> path;

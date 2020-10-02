@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
+ * @author Oskar, Erik
  * PathIterator is an Iterator of Vectors which lets you go forwards and backwards in the list of Vectors
+ * Used by enemies
  */
 public class PathIterator {
 

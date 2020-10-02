@@ -5,6 +5,10 @@ import model.game.enemy.BaseDamager;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.PathIterator;
 
+/**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
+ * A class for all enemies which only differ in health and speed.
+ */
 public abstract class BasicEnemy extends AbstractEnemy {
     public static final int BASE_HEALTH = 20;
     public static final double BASE_SPEED = 0.01;
@@ -24,6 +28,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
             visitor.visit(this);
         }
     }
+
     public static class Swordfish extends BasicEnemy {
 
         public Swordfish(BaseDamager baseDamager, PathIterator pathIterator) {

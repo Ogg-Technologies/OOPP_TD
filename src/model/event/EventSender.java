@@ -1,6 +1,7 @@
 package model.event;
 
 /**
+ * @author Erik
  * Used for sending events from different parts of the model to all its listeners (which are stored in one place)
  */
 @FunctionalInterface

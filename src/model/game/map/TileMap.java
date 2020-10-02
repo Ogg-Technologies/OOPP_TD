@@ -8,6 +8,10 @@ import java.util.List;
 
 import static model.game.map.Tile.*;
 
+/**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
+ * Represents the a map in the game with the path for the enemies, the spawn and the base.
+ */
 public class TileMap {
 
     private final Tile[][] tileGrid;

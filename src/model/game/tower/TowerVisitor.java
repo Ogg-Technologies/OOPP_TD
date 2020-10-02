@@ -5,6 +5,7 @@ import model.game.tower.concretetowers.MageBear;
 import model.game.tower.concretetowers.SniperBear;
 
 /**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * Visitor pattern for towers
  */
 public interface TowerVisitor {

@@ -4,6 +4,7 @@ import model.ModelInputListener;
 import view.View;
 
 /**
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * This class is setting up all the other, more specific, controllers.
  */
 public class Controller {

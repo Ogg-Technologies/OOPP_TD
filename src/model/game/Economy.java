@@ -12,9 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @author Sebastian, Behroz, Samuel, Erik
  * A class that take care of all the prices and values of towers and enemies.
  * It also stores the amount of money the player has, and will tell if the player can
  * afford different towers.
+ * Used by Game to keep track of the economy in the game.
  */
 public class Economy {
 
