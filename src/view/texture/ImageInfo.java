@@ -2,6 +2,10 @@ package view.texture;
 
 import java.util.Objects;
 
+/**
+ * @author Oskar, Samuel
+ * Saves a path and an angle together, to check if the correlation exists in imageHandler
+ */
 public class ImageInfo {
     public final String path;
     public final double angle;

@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * @author Oskar, Samuel, Erik
+ * Saves images for a while, and deletes them when probably obsolete
+ * Is used by towerHandler
+ */
 public final class ImageHandler {
     private static final int ROTATED_IMAGES_CACHE_SIZE = 300;
 

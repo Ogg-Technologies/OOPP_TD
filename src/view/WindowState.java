@@ -3,7 +3,9 @@ package view;
 import utils.Vector;
 
 /**
+ * @author Oskar, Sebastian, Samuel, Erik
  * A helper class that give view components some data to know where to draw themselves
+ * Is used by swingView and all objects in package layers.
  */
 public class WindowState {
     private int tileSize = 0;

@@ -5,6 +5,12 @@ import model.ModelData;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Sebastian, Samuel, Erik
+ * Display gui elemets.
+ * Is used by SwingView.
+ */
+
 public class GUIPanel extends JPanel {
 
 

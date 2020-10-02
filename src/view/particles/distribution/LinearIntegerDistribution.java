@@ -1,5 +1,11 @@
 package view.particles.distribution;
 
+/**
+ * @author Oskar
+ * Linear distribution with ints
+ * Is used by Emitter, EmitterFactory, LinearVectorDistribution
+ */
+
 public class LinearIntegerDistribution implements Distribution<Integer> {
     private final int min;
     private final int difference;

@@ -13,7 +13,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
+ * @author Erik
  * An Emitter is a position where particles are emitted from and are created from its inner Builder class.
+ * Is used by particleHandler, emitterCreator and emitterFactory
  */
 public class Emitter {
 

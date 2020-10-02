@@ -12,7 +12,9 @@ import java.io.IOError;
 import java.io.IOException;
 
 /**
+ * @author Samuel, Erik
  * Factory for creating particle emitters
+ * Is used by particleHandler
  */
 public final class EmitterFactory {
 

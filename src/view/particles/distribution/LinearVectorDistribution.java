@@ -2,6 +2,11 @@ package view.particles.distribution;
 
 import utils.Vector;
 
+/**
+ * @author Oskar
+ * Linear distribution with Vector
+ * Is used by Emitter and EmitterFactory
+ */
 public class LinearVectorDistribution implements Distribution<Vector> {
     private final Distribution<Double> angle;
     private final Distribution<Double> magnitude;
