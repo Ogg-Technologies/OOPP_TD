@@ -127,4 +127,28 @@ class WaveTest {
         assertNumberOfNewEnemies(1, w);
         assertFalse(w.hasNext());
     }
+
+    @Test
+    void canGetHealthOfRemainingEnemies() {
+        Wave w = seq()
+                .spawn(this::firstEnemy)
+                .delay(1)
+                .spawn(this::firstEnemy)
+                .spawn(this::firstEnemy)
+                .delay(1)
+                .spawn(this::firstEnemy)
+                .toWave();
+        assertEquals(4, w.getRemainingHealth());
+        w.next();
+        assertEquals(3, w.getRemainingHealth());
+        w.next();
+        assertEquals(3, w.getRemainingHealth());
+        w.next();
+        assertEquals(1, w.getRemainingHealth());
+        w.next();
+        assertEquals(1, w.getRemainingHealth());
+        w.next();
+        assertEquals(0, w.getRemainingHealth());
+        assertFalse(w.hasNext());
+    }
 }

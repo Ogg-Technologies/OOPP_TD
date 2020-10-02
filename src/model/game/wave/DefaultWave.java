@@ -2,8 +2,10 @@ package model.game.wave;
 
 import model.game.enemy.Enemy;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 class DefaultWave implements Wave {
 
@@ -42,9 +44,7 @@ class DefaultWave implements Wave {
 
                 @Override
                 public void visit(Spawn spawnCommand) {
-                    for (EnemySequence.Spawner s : spawnCommand.spawners) {
-                        enemies.add(s.spawn());
-                    }
+                    enemies.addAll(spawnCommand.enemies);
                 }
             });
         }
@@ -58,6 +58,31 @@ class DefaultWave implements Wave {
 
     @Override
     public int getRemainingHealth() {
-        return 0;
+        if (!hasNext()) {
+            return 0;
+        }
+
+        List<Command> remainingCommands = sequence.commands.subList(index + 1, sequence.commands.size());
+        return getAllEnemies(remainingCommands)
+                .stream()
+                .map(enemy -> enemy.getHealth().getCurrent())
+                .reduce(0, Integer::sum);
+    }
+
+    private Collection<Enemy> getAllEnemies(Collection<Command> commands) {
+        Collection<Enemy> enemies = new ArrayList<>();
+        for (Command c : commands) {
+            c.accept(new CommandVisitor() {
+                @Override
+                public void visit(Delay delayCommand) {
+                }
+
+                @Override
+                public void visit(Spawn spawnCommand) {
+                    enemies.addAll(spawnCommand.enemies);
+                }
+            });
+        }
+        return enemies;
     }
 }

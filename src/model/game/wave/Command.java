@@ -1,5 +1,7 @@
 package model.game.wave;
 
+import model.game.enemy.Enemy;
+
 import java.util.Collection;
 
 interface CommandVisitor {
@@ -26,10 +28,10 @@ class Delay implements Command {
 }
 
 class Spawn implements Command {
-    final Collection<EnemySequence.Spawner> spawners;
+    final Collection<Enemy> enemies;
 
-    Spawn(Collection<EnemySequence.Spawner> spawners) {
-        this.spawners = spawners;
+    Spawn(Collection<Enemy> enemies) {
+        this.enemies = enemies;
     }
 
     @Override

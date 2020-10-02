@@ -1,5 +1,7 @@
 package model.game.wave;
 
+import model.game.enemy.Enemy;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -8,7 +10,7 @@ class DefaultEnemySequence implements EnemySequence {
 
     List<Command> commands = new ArrayList<>();
     int currentDelay = 0;
-    Collection<Spawner> currentSpawners = new ArrayList<>();
+    Collection<Enemy> currentEnemies = new ArrayList<>();
 
     @Override
     public EnemySequence spawn(Spawner spawner) {
@@ -16,7 +18,7 @@ class DefaultEnemySequence implements EnemySequence {
             throw new IllegalArgumentException("spawner can not be null");
         }
         flushDelay();
-        currentSpawners.add(spawner);
+        currentEnemies.add(spawner.spawn());
         return this;
     }
 
@@ -34,9 +36,9 @@ class DefaultEnemySequence implements EnemySequence {
     }
 
     private void flushSpawners() {
-        if (currentSpawners.size() > 0) {
-            commands.add(new Spawn(currentSpawners));
-            currentSpawners = new ArrayList<>();
+        if (currentEnemies.size() > 0) {
+            commands.add(new Spawn(currentEnemies));
+            currentEnemies = new ArrayList<>();
         }
     }
 

@@ -37,7 +37,7 @@ public class Mock {
 
             @Override
             public Health getHealth() {
-                return null;
+                return new MutableHealth(1);
             }
         };
     }
