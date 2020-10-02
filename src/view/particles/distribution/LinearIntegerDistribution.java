@@ -1,7 +1,7 @@
 package view.particles.distribution;
 
 /**
- * @author Oskar
+ * @author Oskar, Erik
  * Linear distribution with ints
  * Is used by Emitter, EmitterFactory, LinearVectorDistribution
  */

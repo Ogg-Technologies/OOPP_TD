@@ -3,7 +3,7 @@ package view.particles.distribution;
 import utils.Vector;
 
 /**
- * @author Oskar
+ * @author Oskar, Erik
  * Linear distribution with Vector
  * Is used by Emitter and EmitterFactory
  */
