@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author Oskar
+ * An implementation of EnemySequence which uses a list of Commands.
+ * It also groups directly following spawn() or delay() calls into a single command.
+ */
 class DefaultEnemySequence implements EnemySequence {
 
     List<Command> commands = new ArrayList<>();
@@ -53,6 +58,6 @@ class DefaultEnemySequence implements EnemySequence {
     public Wave toWave() {
         flushDelay();
         flushSpawners();
-        return new DefaultWave(this);
+        return new DefaultWave(commands);
     }
 }

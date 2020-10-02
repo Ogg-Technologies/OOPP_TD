@@ -4,16 +4,28 @@ import model.game.enemy.Enemy;
 
 import java.util.Collection;
 
+/**
+ * @author Oskar
+ * A class describing something to do in an EnemySequence
+ */
+interface Command {
+    void accept(CommandVisitor visitor);
+}
+
+/**
+ * @author Oskar
+ * Visitor for Delay and Spawn commands
+ */
 interface CommandVisitor {
     void visit(Delay delayCommand);
 
     void visit(Spawn spawnCommand);
 }
 
-interface Command {
-    void accept(CommandVisitor visitor);
-}
-
+/**
+ * @author Oskar
+ * The action of waiting a number of updates
+ */
 class Delay implements Command {
     final int updates;
 
@@ -25,8 +37,13 @@ class Delay implements Command {
     public void accept(CommandVisitor visitor) {
         visitor.visit(this);
     }
+
 }
 
+/**
+ * @author Oskar
+ * The action of spawning enemies
+ */
 class Spawn implements Command {
     final Collection<Enemy> enemies;
 
@@ -38,4 +55,5 @@ class Spawn implements Command {
     public void accept(CommandVisitor visitor) {
         visitor.visit(this);
     }
+
 }

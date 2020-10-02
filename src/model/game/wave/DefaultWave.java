@@ -7,14 +7,18 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * @author Oskar
+ * An implementation of Wave built up by commands in a list
+ */
 class DefaultWave implements Wave {
 
-    private DefaultEnemySequence sequence;
+    private List<Command> commands;
     private int currentDelay = 0;
     private int index = -1;
 
-    public DefaultWave(DefaultEnemySequence sequence) {
-        this.sequence = sequence;
+    public DefaultWave(List<Command> commands) {
+        this.commands = commands;
     }
 
     @Override
@@ -35,7 +39,7 @@ class DefaultWave implements Wave {
         Collection<Enemy> enemies = new HashSet<>();
         while (hasNext() && currentDelay <= 0) {
             index++;
-            Command c = sequence.commands.get(index);
+            Command c = commands.get(index);
             c.accept(new CommandVisitor() {
                 @Override
                 public void visit(Delay delayCommand) {
@@ -53,7 +57,7 @@ class DefaultWave implements Wave {
 
     @Override
     public boolean hasNext() {
-        return sequence.commands.size() > index + 1;
+        return commands.size() > index + 1;
     }
 
     @Override
@@ -62,7 +66,7 @@ class DefaultWave implements Wave {
             return 0;
         }
 
-        List<Command> remainingCommands = sequence.commands.subList(index + 1, sequence.commands.size());
+        List<Command> remainingCommands = commands.subList(index + 1, commands.size());
         return getAllEnemies(remainingCommands)
                 .stream()
                 .map(enemy -> enemy.getHealth().getCurrent())

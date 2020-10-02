@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WaveTest {
     private EnemySequence seq() {
-        return EnemySequence.Factory.create();
+        return EnemySequenceFactory.create();
     }
 
     private Wave createEmptyWave() {
