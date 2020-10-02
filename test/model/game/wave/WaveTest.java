@@ -100,7 +100,7 @@ class WaveTest {
                 .delay(3)
                 .spawn(this::firstEnemy)
                 .toWave();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             assertNumberOfNewEnemies(0, w);
         }
         assertNumberOfNewEnemies(1, w);
@@ -119,13 +119,10 @@ class WaveTest {
                 .toWave();
 
         assertNumberOfNewEnemies(1, w);
-        assertNumberOfNewEnemies(0, w);
         assertNumberOfNewEnemies(1, w);
         assertNumberOfNewEnemies(0, w);
         assertNumberOfNewEnemies(0, w);
-        assertNumberOfNewEnemies(0, w);
         assertNumberOfNewEnemies(1, w);
-        assertFalse(w.hasNext());
     }
 
     @Test
@@ -142,10 +139,6 @@ class WaveTest {
         w.next();
         assertEquals(3, w.getRemainingHealth());
         w.next();
-        assertEquals(3, w.getRemainingHealth());
-        w.next();
-        assertEquals(1, w.getRemainingHealth());
-        w.next();
         assertEquals(1, w.getRemainingHealth());
         w.next();
         assertEquals(0, w.getRemainingHealth());
@@ -159,12 +152,9 @@ class WaveTest {
                 .toWave();
         assertNumberOfNewEnemies(1, w);
         assertNumberOfNewEnemies(0, w);
-        assertNumberOfNewEnemies(0, w);
         assertNumberOfNewEnemies(1, w);
         assertNumberOfNewEnemies(0, w);
-        assertNumberOfNewEnemies(0, w);
         assertNumberOfNewEnemies(1, w);
-        assertNumberOfNewEnemies(0, w);
         assertNumberOfNewEnemies(0, w);
         assertNumberOfNewEnemies(1, w);
     }

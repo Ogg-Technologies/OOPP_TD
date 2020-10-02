@@ -37,7 +37,7 @@ class DefaultWave implements Wave {
 
     private Collection<Enemy> getEnemiesUntilNextDelay() {
         Collection<Enemy> enemies = new HashSet<>();
-        while (hasNext() && currentDelay <= 0) {
+        while (hasNext()) {
             index++;
             Command c = commands.get(index);
             c.accept(new CommandVisitor() {
@@ -51,6 +51,10 @@ class DefaultWave implements Wave {
                     enemies.addAll(spawnCommand.enemies);
                 }
             });
+            if (currentDelay > 0) {
+                currentDelay--;
+                break;
+            }
         }
         return enemies;
     }
