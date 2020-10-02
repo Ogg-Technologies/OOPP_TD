@@ -8,7 +8,7 @@ import java.util.HashSet;
 class DefaultWave implements Wave {
 
     private DefaultEnemySequence sequence;
-    private int delay = 0;
+    private int currentDelay = 0;
     private int index = -1;
 
     public DefaultWave(DefaultEnemySequence sequence) {
@@ -20,25 +20,36 @@ class DefaultWave implements Wave {
         if (!hasNext()) {
             throw new IllegalStateException("Cannot update a finished Wave");
         }
-        Collection<Enemy> enemies = new HashSet<>();
-        if (delay > 0) {
-            delay--;
-            return enemies;
+
+        if (currentDelay > 0) {
+            currentDelay--;
+            return new HashSet<>();
         }
-        while (hasNext() && delay <= 0) {
+
+        return getEnemiesUntilNextDelay();
+    }
+
+    private Collection<Enemy> getEnemiesUntilNextDelay() {
+        Collection<Enemy> enemies = new HashSet<>();
+        while (hasNext() && currentDelay <= 0) {
             index++;
             Command c = sequence.commands.get(index);
-            if (c instanceof Spawn) {
-                for (EnemySequence.Spawner s : ((Spawn) c).spawners) {
-                    enemies.add(s.spawn());
+            c.accept(new CommandVisitor() {
+                @Override
+                public void visit(Delay delayCommand) {
+                    currentDelay += delayCommand.updates;
                 }
-            } else if (c instanceof Delay) {
-                delay += ((Delay) c).updates;
-            }
+
+                @Override
+                public void visit(Spawn spawnCommand) {
+                    for (EnemySequence.Spawner s : spawnCommand.spawners) {
+                        enemies.add(s.spawn());
+                    }
+                }
+            });
         }
         return enemies;
     }
-
 
     @Override
     public boolean hasNext() {

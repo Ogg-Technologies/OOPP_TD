@@ -4,17 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-interface Command {
-}
-
 class DefaultEnemySequence implements EnemySequence {
+
     List<Command> commands = new ArrayList<>();
     int currentDelay = 0;
     Collection<Spawner> currentSpawners = new ArrayList<>();
-
-    public Command getCommand(int index) {
-        return commands.get(index);
-    }
 
     @Override
     public EnemySequence spawn(Spawner spawner) {
@@ -58,21 +52,5 @@ class DefaultEnemySequence implements EnemySequence {
         flushDelay();
         flushSpawners();
         return new DefaultWave(this);
-    }
-}
-
-class Delay implements Command {
-    final int updates;
-
-    Delay(int updates) {
-        this.updates = updates;
-    }
-}
-
-class Spawn implements Command {
-    final Collection<EnemySequence.Spawner> spawners;
-
-    Spawn(Collection<EnemySequence.Spawner> spawners) {
-        this.spawners = spawners;
     }
 }
