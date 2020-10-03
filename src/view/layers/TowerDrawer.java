@@ -2,8 +2,8 @@ package view.layers;
 
 import model.game.tower.Tower;
 import model.game.tower.TowerVisitor;
+import model.game.tower.concretetowers.BearryPotter;
 import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.MageBear;
 import model.game.tower.concretetowers.SniperBear;
 import utils.Vector;
 import view.WindowState;
@@ -69,7 +69,7 @@ public class TowerDrawer implements TowerVisitor {
     }
 
     @Override
-    public void visit(MageBear tower) {
+    public void visit(BearryPotter tower) {
         // TODO: Refactor this so that it is not just copy paste of GrizzlyBear tower
 
         Vector pos = getRealPos(tower.getPos());

@@ -12,8 +12,8 @@ import model.game.projectile.ProjectileFactory;
 import model.game.projectile.ProjectileService;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
+import model.game.tower.concretetowers.BearryPotter;
 import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.MageBear;
 import model.game.tower.concretetowers.SniperBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
@@ -139,7 +139,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
                     }
                     break;
                 case 1:
-                    if (economy.buyTower(MageBear.class)) {
+                    if (economy.buyTower(BearryPotter.class)) {
                         towerHandler.createMageBear(v);
                     }
                     break;

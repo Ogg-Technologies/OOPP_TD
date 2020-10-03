@@ -13,9 +13,9 @@ import utils.Vector;
 
 /**
  * @author Erik
- * Magician Bear that attacks with spells or charms
+ * Magician Bear that attacks with BombardaCharm projectiles
  */
-public class MageBear extends AbstractAttackingTower {
+public class BearryPotter extends AbstractAttackingTower {
 
     private static final double RANGE = 6.5;
     private static final int UPDATES_BETWEEN_ATTACKS = 100;
@@ -24,7 +24,7 @@ public class MageBear extends AbstractAttackingTower {
     private ProjectileCreator projectileCreator;
     private EventSender eventSender;
 
-    public MageBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
+    public BearryPotter(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
         super(pos, RANGE, new ConstantChargeStrategy(UPDATES_BETWEEN_ATTACKS), enemyTargeter);
         this.projectileCreator = projectileCreator;
         this.eventSender = eventSender;
