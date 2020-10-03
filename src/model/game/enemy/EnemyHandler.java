@@ -29,10 +29,6 @@ public class EnemyHandler implements EnemyAdder {
     public void update() {
         waveHandler.update();
 
-        if (enemies.size() == 0) {
-            waveHandler.startNextWave();
-        }
-
         for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
             Enemy e = enemyIterator.next();
             if (e.getHealth().isDead()) { //When enemy dies from tower
@@ -60,5 +56,9 @@ public class EnemyHandler implements EnemyAdder {
     @Override
     public void addEnemy(Enemy enemy) {
         enemies.add(enemy);
+    }
+
+    public void startNewWave(){
+        waveHandler.startNextWave();
     }
 }

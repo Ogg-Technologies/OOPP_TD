@@ -159,4 +159,9 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
             economy.addMoney(event.getSender());
         }
     }
+
+    public void startNewWave(){
+        enemyHandler.startNewWave();
+    }
+
 }
