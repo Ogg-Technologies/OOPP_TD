@@ -50,4 +50,11 @@ public interface ModelData {
      * @return amount of money the player has
      */
     int getMoney();
+
+    /**
+     * Gets the price of desired tower.
+     * @param towerClass desired tower.
+     * @return returns the price.
+     */
+    int getTowerPrice(Class<?extends Tower> towerClass);
 }

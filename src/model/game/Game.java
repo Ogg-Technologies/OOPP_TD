@@ -164,4 +164,12 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         enemyHandler.startNewWave();
     }
 
+    /**
+     * Gets the price of desired tower.
+     * @param towerClass desired tower.
+     * @return returns the price.
+     */
+    public int getTowerPrice(Class<? extends Tower> towerClass) {
+        return economy.getTowerPrice(towerClass);
+    }
 }

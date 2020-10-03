@@ -92,6 +92,11 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
     @Override
+    public int getTowerPrice(Class<?extends Tower> towerClass) {
+        return game.getTowerPrice(towerClass);
+    }
+
+    @Override
     public void sendEvent(Event event) {
         for (EventListener listener : eventListeners) {
             listener.onEvent(event);

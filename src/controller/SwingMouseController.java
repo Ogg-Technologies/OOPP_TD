@@ -1,6 +1,7 @@
 package controller;
 
 import model.ModelInputListener;
+import model.game.tower.Tower;
 import utils.Vector;
 import view.ButtonClickHandler;
 import view.MouseViewObserver;
@@ -23,6 +24,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     private final WindowPositionHelper windowPositionHelper;
     private final MouseViewObserver viewObserver;
     private final ModelInputListener modelInputListener;
+
 
     private Vector tilePressed;
     private Button buttonPressed;
@@ -52,6 +54,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     public void mousePressed(MouseEvent e) {
         tilePressed = getClickedTile(e);
         buttonPressed = getClickedButton(e);
+        ControllerState.selectedTower = null;
     }
 
 
@@ -132,6 +135,12 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     @Override
     public void addButtonWithoutArgument(Vector percentStartPos, Vector percentSize, OnClickWithoutArgument onClickWithoutArgument) {
         buttonList.add(new Button(percentStartPos, percentSize, onClickWithoutArgument));
+    }
+
+    @Override
+    public void setSelectedTower(Class<? extends Tower> towerClass) {
+        ControllerState.selectedTower = towerClass;
+        System.out.println(towerClass.getSimpleName());
     }
 
     /**

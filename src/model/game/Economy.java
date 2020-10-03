@@ -103,4 +103,13 @@ public class Economy {
         }
         money += value;
     }
+    
+    /**
+     * Gets the price of desired tower.
+     * @param towerClass desired tower.
+     * @return returns the price.
+     */
+    public int getTowerPrice(Class<? extends Tower> towerClass) {
+        return towerMap.get(towerClass);
+    }
 }
