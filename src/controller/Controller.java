@@ -9,8 +9,8 @@ import view.View;
  */
 public class Controller {
     /**
-     * Initiate all the controllers
-     *
+     * Initiate all the controllers and sets up all listeners to view.
+     * Is used by Application.
      * @param modelInputListener handler of events for model
      * @param view               a view that need input from controller
      */
@@ -18,6 +18,7 @@ public class Controller {
         SwingMouseController mouseController = new SwingMouseController(view, view, modelInputListener);
         view.addMouseListener(mouseController);
         view.addMouseMotionListener(mouseController);
+        view.addButtonAndMethodHandler(mouseController, modelInputListener);
     }
 
 }

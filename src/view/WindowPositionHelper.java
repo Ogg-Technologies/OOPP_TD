@@ -20,4 +20,10 @@ public interface WindowPositionHelper {
      * @return the offset of what is described above
      */
     Vector getOffset();
+
+    /**
+     * Gets the size of the window
+     * @return the size of the window in pixels, saved in a vector.
+     */
+    Vector getWindowSize();
 }

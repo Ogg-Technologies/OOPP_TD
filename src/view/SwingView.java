@@ -1,6 +1,7 @@
 package view;
 
 import model.ModelData;
+import model.ModelInputListener;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import utils.Vector;
@@ -38,6 +39,7 @@ public class SwingView implements View {
     private final JPanel[] layers;
 
     private final Background background;
+    private final GUIPanel GUIPanel;
 
     public SwingView(ModelData modelData) {
 
@@ -68,7 +70,7 @@ public class SwingView implements View {
             }
         };
         ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
-        GUIPanel GUIPanel = new GUIPanel(modelData);
+        this.GUIPanel = new GUIPanel(modelData);
 
         particleHandler = new ParticleHandler(windowState);
         modelData.addOnModelEventListener(particleHandler);
@@ -141,8 +143,18 @@ public class SwingView implements View {
     }
 
     @Override
+    public Vector getWindowSize() {
+        return new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
+    }
+
+    @Override
     public void addMouseMotionListener(MouseMotionListener mouseMotionListener){
         window.addMouseMotionListener(mouseMotionListener);
+    }
+
+    @Override
+    public void addButtonAndMethodHandler(ButtonClickHandler buttonClickHandler, ModelInputListener methodGiver) {
+        GUIPanel.setupButtons(buttonClickHandler, methodGiver);
     }
 
     private Vector prevTilePos = null;

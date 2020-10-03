@@ -1,6 +1,9 @@
 package view.layers;
 
 import model.ModelData;
+import model.ModelInputListener;
+import utils.Vector;
+import view.ButtonClickHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,15 +23,19 @@ public class GUIPanel extends JPanel {
     private final JLabel moneyLabel = new JLabel();
     private final JLabel healthBarLabel = new JLabel();
 
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawHealthBar(g);
         drawMoneyDisplay(g);
+        drawNextWaveButton(g);
     }
 
 
+    /**
+     * Sets up every gui element, except button controller part
+     * @param modelData data from model that gui needs.
+     */
     public GUIPanel(ModelData modelData) {
         this.modelData = modelData;
         setLayout(null);
@@ -36,6 +43,17 @@ public class GUIPanel extends JPanel {
         add(healthBarLabel);
         moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
         healthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    /**
+     * Sets up all buttons to talk with a controller
+     * @param buttonClickHandler the controller that handles the onClicks.
+     * @param methodGiver methods from model that will happen when button is clicked.
+     */
+    public void setupButtons(ButtonClickHandler buttonClickHandler, ModelInputListener methodGiver){
+        //nextWaveButton
+        buttonClickHandler.addButtonWithoutArgument(new Vector(WAVE_BUTTON_LEFT, WAVE_BUTTON_UP),
+                new Vector(WAVE_BUTTON_WIDTH, WAVE_BUTTON_HEIGHT), methodGiver::onStartNewWave);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +77,6 @@ public class GUIPanel extends JPanel {
         int fullHeight = (int) (HEALTH_BAR_HEIGHT * getHeight());
         int fractionY = (int) (fullY + fullHeight * (1 - modelData.getBaseHealth().getFraction()));
         int fractionHeight = (int) (fullHeight * modelData.getBaseHealth().getFraction());
-
         g.setColor(GUI_BACKGROUND_COLOR);
         g.fillRect(x, fullY, width, fullHeight);
 
@@ -94,5 +111,23 @@ public class GUIPanel extends JPanel {
         moneyLabel.setSize(width, height);
         moneyLabel.setText("$ " + modelData.getMoney());
         moneyLabel.setFont(new Font("serif", Font.BOLD, fontSize));
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //NextWaveButton data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private static final double WAVE_BUTTON_LEFT = .87;
+    private static final double WAVE_BUTTON_UP = .77;
+    private static final double WAVE_BUTTON_WIDTH = .12;
+    private static final double WAVE_BUTTON_HEIGHT = .11;
+    private static final Color BACKGROUND_WAVE_BUTTON = Color.decode("#979797");
+
+    private void drawNextWaveButton(Graphics g){
+        int startX = (int) (WAVE_BUTTON_LEFT * getWidth());
+        int startY = (int) (WAVE_BUTTON_UP * getHeight());
+        int width = (int) (WAVE_BUTTON_WIDTH*getWidth());
+        int height = (int) (WAVE_BUTTON_HEIGHT*getHeight());
+        g.setColor(BACKGROUND_WAVE_BUTTON);
+        g.fillRect(startX, startY, width, height);
     }
 }

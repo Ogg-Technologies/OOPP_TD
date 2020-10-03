@@ -97,4 +97,10 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
             listener.onEvent(event);
         }
     }
+
+    @Override
+    public void onStartNewWave() {
+        //TODO:
+        System.out.println("NEXT WAVE");
+    }
 }
