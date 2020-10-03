@@ -1,6 +1,8 @@
-package model.game.wave;
+package model.game.wave.waveimplementation;
 
 import model.game.enemy.Enemy;
+import model.game.wave.EnemySequence;
+import model.game.wave.Wave;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +13,7 @@ import java.util.List;
  * An implementation of EnemySequence which uses a list of Commands.
  * It also groups directly following spawn() or delay() calls into a single command.
  */
-class DefaultEnemySequence implements EnemySequence {
+public class DefaultEnemySequence implements EnemySequence {
 
     List<Command> commands = new ArrayList<>();
     int currentDelay = 0;

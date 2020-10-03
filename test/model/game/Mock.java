@@ -1,6 +1,7 @@
 package model.game;
 
 import model.game.enemy.Enemy;
+import model.game.enemy.EnemyFactory;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.StatusEffect;
 import model.game.projectile.Projectile;
@@ -9,8 +10,18 @@ import utils.Vector;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Mock {
+
+    public static EnemyFactory createMockEnemyFactory() {
+        List<Vector> path = new ArrayList<>();
+        path.add(new Vector(0, 0));
+        path.add(new Vector(1, 0));
+        return new EnemyFactory(amount -> {
+        }, path);
+    }
+
     public static Enemy createMockEnemy(Vector pos) {
         return new Enemy() {
             @Override

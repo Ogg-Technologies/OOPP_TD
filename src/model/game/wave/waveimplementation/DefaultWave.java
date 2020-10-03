@@ -1,6 +1,7 @@
-package model.game.wave;
+package model.game.wave.waveimplementation;
 
 import model.game.enemy.Enemy;
+import model.game.wave.Wave;
 
 import java.util.ArrayList;
 import java.util.Collection;

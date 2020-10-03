@@ -1,4 +1,4 @@
-package model.game.wave;
+package model.game.wave.waveimplementation;
 
 import model.game.enemy.Enemy;
 

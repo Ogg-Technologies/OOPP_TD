@@ -2,6 +2,7 @@ package model.game.enemy;
 
 import model.event.Event;
 import model.event.EventSender;
+import model.game.wave.WaveHandler;
 import utils.Vector;
 
 import java.util.*;
@@ -11,22 +12,25 @@ import java.util.*;
  * Class for handling everything to do with enemies
  * Used and created by Game
  */
-public class EnemyHandler {
+public class EnemyHandler implements EnemyAdder {
     private final EnemyFactory enemyFactory;
     private final Collection<Enemy> enemies;
     private int clock = 0;
     private final EventSender eventSender;
+    private final WaveHandler waveHandler;
 
     public EnemyHandler(BaseDamager baseDamager, List<? extends Vector> path, EventSender eventSender) {
         enemyFactory = new EnemyFactory(baseDamager, path);
         enemies = new ArrayList<>();
         this.eventSender = eventSender;
+        waveHandler = new WaveHandler(enemyFactory, this);
     }
 
     public void update() {
-        clock++;
-        if (clock % 100 == 0) {
-            enemies.add(enemyFactory.createFishstick());
+        waveHandler.update();
+
+        if (enemies.size() == 0) {
+            waveHandler.startNextWave();
         }
 
         for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
@@ -51,5 +55,10 @@ public class EnemyHandler {
 
     public Collection<? extends Enemy> getEnemies() {
         return Collections.unmodifiableCollection(new ArrayList<>(enemies));
+    }
+
+    @Override
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
     }
 }
