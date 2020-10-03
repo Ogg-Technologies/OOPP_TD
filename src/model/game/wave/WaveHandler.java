@@ -23,7 +23,6 @@ public class WaveHandler {
     public WaveHandler(EnemyFactory enemyFactory, EnemyAdder enemyAdder) {
         this.enemyAdder = enemyAdder;
         waveData = new WaveData(enemyFactory);
-        startNextWave();
     }
 
     /**
