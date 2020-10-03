@@ -4,7 +4,7 @@ import model.ModelData;
 import model.ModelInputListener;
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.MageBear;
+import model.game.tower.concretetowers.BearryPotter;
 import model.game.tower.concretetowers.SniperBear;
 import utils.Vector;
 import view.ButtonClickHandler;
@@ -193,7 +193,7 @@ public class GUIPanel extends JPanel {
     private static final Color TOWER_BACKGROUND = Color.decode("#ecd9c6");
     private final int maxTowers = 8;
     private final Class<? extends Tower>[] towerClasses = new Class[]{
-            GrizzlyBear.class, MageBear.class, SniperBear.class
+            GrizzlyBear.class, BearryPotter.class, SniperBear.class
     };
     private final String[] towerImagePaths = new String[]{
             "grizzlyBear.png", "mageBear.png", "sniperBear.png"
