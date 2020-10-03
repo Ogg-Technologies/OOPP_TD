@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * @Author Oskar
+ * @author Oskar
  * An interface representing a Wave of enemies in the Game.
  * Each element in the iterator represents the enemies that should spawn that update in the game.
  * When hasNext() == false, the wave has finished
