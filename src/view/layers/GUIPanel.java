@@ -3,10 +3,9 @@ package view.layers;
 import model.ModelData;
 import model.ModelInputListener;
 import model.game.tower.Tower;
-import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.BearryPotter;
+import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.SniperBear;
-import utils.Vector;
 import view.ButtonClickHandler;
 import view.WindowState;
 import view.texture.ImageHandler;
@@ -58,7 +57,13 @@ public class GUIPanel extends JPanel {
         towerPrices = towerPricesSetup();
         towerPriceLabels = towerPriceLabelSetup();
         towerButtons = createTowerButtons();
+        createButtons();
+    }
 
+    private void createButtons() {
+        nextWaveButton.setBorder(BorderFactory.createEmptyBorder());
+        nextWaveButton.setContentAreaFilled(false);
+        add(nextWaveButton);
     }
 
     private JButton[] createTowerButtons() {
@@ -103,8 +108,7 @@ public class GUIPanel extends JPanel {
      */
     public void setupButtons(ButtonClickHandler buttonClickHandler, ModelInputListener methodGiver) {
         //nextWaveButton
-        buttonClickHandler.addButtonWithoutArgument(new Vector(WAVE_BUTTON_LEFT, WAVE_BUTTON_UP),
-                new Vector(WAVE_BUTTON_WIDTH, WAVE_BUTTON_HEIGHT), methodGiver::onStartNewWave);
+        nextWaveButton.addActionListener(e -> buttonClickHandler.onNextWaveClicked());
         for (int i = 0; i < towerClasses.length; i++) {
             int finalI = i;
             towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTower(towerClasses[finalI])));
@@ -176,12 +180,15 @@ public class GUIPanel extends JPanel {
     private static final double WAVE_BUTTON_WIDTH = .12;
     private static final double WAVE_BUTTON_HEIGHT = .11;
     private static final Color BACKGROUND_WAVE_BUTTON = Color.decode("#979797");
+    private final JButton nextWaveButton = new JButton();
 
     private void drawNextWaveButton(Graphics g) {
         int startX = (int) (WAVE_BUTTON_LEFT * getWidth());
         int startY = (int) (WAVE_BUTTON_UP * getHeight());
         int width = (int) (WAVE_BUTTON_WIDTH * getWidth());
         int height = (int) (WAVE_BUTTON_HEIGHT * getHeight());
+        nextWaveButton.setSize(width, height);
+        nextWaveButton.setLocation(startX, startY);
         g.setColor(BACKGROUND_WAVE_BUTTON);
         g.fillRect(startX, startY, width, height);
     }
