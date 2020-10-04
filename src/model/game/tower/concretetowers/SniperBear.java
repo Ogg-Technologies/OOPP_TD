@@ -17,7 +17,7 @@ import utils.Vector;
  */
 public class SniperBear extends AbstractAttackingTower {
 
-    private static final int RANGE = 40;
+    public static final int RANGE = 40;
     private static final int UPDATES_BETWEEN_ATTACKS = 176;
     private static final int BASE_DAMAGE = 4;
     private ProjectileCreator projectileCreator;

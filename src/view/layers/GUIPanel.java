@@ -105,13 +105,21 @@ public class GUIPanel extends JPanel {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //GhostTower data
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private static final Color GHOST_RANGE_COLOR = new Color(128, 128, 128, 80);
     private void drawGhostTower(Graphics g){
         Class<? extends Tower> ghostTower = controllerStateValue.getSelectedTower();
         if(ghostTower == null || mousePos == null){
             return;
         }
+        double range = modelData.getRangeOfTower(ghostTower);
+
+        g.setColor(GHOST_RANGE_COLOR);
+        int realRangeRadius = (int) (windowState.getTileSize() * range);
+        g.fillOval(mousePos.getIntX() - realRangeRadius, mousePos.getIntY() - realRangeRadius,
+                realRangeRadius * 2, realRangeRadius * 2);
+
         Graphics2D g2 = (Graphics2D)g;
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 
         String path = "";
 
@@ -122,9 +130,12 @@ public class GUIPanel extends JPanel {
         }
 
         BufferedImage ghostImage = ImageHandler.getImage(path, Math.toRadians(90));
-        g.drawImage(ghostImage, mousePos.getIntX() - windowState.getTileSize() / 2, mousePos.getIntY() - windowState.getTileSize() / 2,
-                windowState.getTileSize(), windowState.getTileSize(), null);
+        int centerX = mousePos.getIntX() - windowState.getTileSize() / 2;
+        int centerY = mousePos.getIntY() - windowState.getTileSize() / 2;
+        g.drawImage(ghostImage, centerX, centerY, windowState.getTileSize(), windowState.getTileSize(), null);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -57,4 +57,11 @@ public interface ModelData {
      * @return returns the price.
      */
     int getTowerPrice(Class<?extends Tower> towerClass);
+
+    /**
+     * Get start range of specified tower
+     * @param towerClass the specified tower
+     * @return the range
+     */
+    double getRangeOfTower(Class<? extends Tower> towerClass);
 }

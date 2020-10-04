@@ -98,6 +98,11 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
     @Override
+    public double getRangeOfTower(Class<? extends Tower> towerClass) {
+        return game.getRangeOfTower(towerClass);
+    }
+
+    @Override
     public void sendEvent(Event event) {
         for (EventListener listener : eventListeners) {
             listener.onEvent(event);

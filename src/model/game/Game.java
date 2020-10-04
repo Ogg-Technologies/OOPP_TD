@@ -12,9 +12,6 @@ import model.game.projectile.ProjectileFactory;
 import model.game.projectile.ProjectileService;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
-import model.game.tower.concretetowers.BearryPotter;
-import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.SniperBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
@@ -157,5 +154,14 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
      */
     public int getTowerPrice(Class<? extends Tower> towerClass) {
         return economy.getTowerPrice(towerClass);
+    }
+
+    /**
+     * Get start range of specified tower
+     * @param towerClass the specified tower
+     * @return the range
+     */
+    public double getRangeOfTower(Class<? extends Tower> towerClass) {
+        return towerHandler.getRangeOfTower(towerClass);
     }
 }

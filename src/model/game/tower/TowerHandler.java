@@ -1,6 +1,9 @@
 package model.game.tower;
 
 import model.event.EventSender;
+import model.game.tower.concretetowers.BearryPotter;
+import model.game.tower.concretetowers.GrizzlyBear;
+import model.game.tower.concretetowers.SniperBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
@@ -84,5 +87,23 @@ public class TowerHandler {
      */
     public void createTower(Vector pos, Class<? extends Tower> towerClass) {
         towers.add(factory.createTower(pos, towerClass));
+    }
+
+    /**
+     * Get start range of specified tower
+     * @param towerClass the specified tower
+     * @return the range
+     */
+    public double getRangeOfTower(Class<? extends Tower> towerClass) {
+        if(towerClass == GrizzlyBear.class){
+            return GrizzlyBear.RANGE;
+        }
+        if(towerClass == BearryPotter.class){
+            return BearryPotter.RANGE;
+        }
+        if(towerClass == SniperBear.class){
+            return SniperBear.RANGE;
+        }
+        throw new IllegalArgumentException("The towerClass: " + towerClass + " is not recognized");
     }
 }

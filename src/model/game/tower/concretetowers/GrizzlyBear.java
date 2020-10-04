@@ -17,7 +17,7 @@ import utils.Vector;
  */
 public class GrizzlyBear extends AbstractAttackingTower {
 
-    private static final int RANGE = 5;
+    public static final int RANGE = 5;
     private static final int UPDATES_BETWEEN_ATTACKS = 88;
     private static final int BASE_DAMAGE = 1;
 
