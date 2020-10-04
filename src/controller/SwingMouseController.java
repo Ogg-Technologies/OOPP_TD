@@ -47,7 +47,6 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     @Override
     public void mousePressed(MouseEvent e) {
         tilePressed = getClickedTile(e);
-        ControllerState.selectedTower = null;
     }
 
 
@@ -60,8 +59,11 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
         //System.out.println("x: " + (e.getX() - windowPositionHelper.getOffset().x) + ", y: " + (e.getY() - windowPositionHelper.getOffset().y));
         Vector clickedTile = getClickedTile(e);
         if (clickedTile != null && clickedTile.equals(tilePressed)) {
-            modelInputListener.onTileClick(clickedTile);
+            if(ControllerState.selectedTower != null){
+                modelInputListener.onTileClick(clickedTile, ControllerState.selectedTower);
+            }
         }
+        ControllerState.selectedTower = null;
     }
 
     /**
@@ -112,7 +114,6 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     @Override
     public void setSelectedTower(Class<? extends Tower> towerClass) {
         ControllerState.selectedTower = towerClass;
-        System.out.println(towerClass.getSimpleName());
     }
 
     @Override

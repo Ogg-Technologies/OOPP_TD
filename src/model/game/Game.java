@@ -127,29 +127,15 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
      * Only places towers if requirement are fulfilled, such as no other tower on this tile
      *
      * @param v, the position to place the tower
+     * @param towerClass, the tower to be placed
      * @see #isValidTile(Vector) for requirements
      */
-    public void placeTower(Vector v) {
+    public void placeTower(Vector v, Class<? extends Tower> towerClass) {
         //TODO: Logic for if the tower can be placed, and what tower to place
         if (isValidTile(v)) {
-            switch (new Random().nextInt(3)) {
-                case 0:
-                    if (economy.buyTower(GrizzlyBear.class)) {
-                        towerHandler.createGrizzlyBear(v);
-                    }
-                    break;
-                case 1:
-                    if (economy.buyTower(BearryPotter.class)) {
-                        towerHandler.createMageBear(v);
-                    }
-                    break;
-                case 2:
-                    if (economy.buyTower(SniperBear.class)) {
-                        towerHandler.createSniperBear(v);
-                    }
-                    break;
+            if(economy.buyTower(towerClass)){
+                towerHandler.createTower(v, towerClass);
             }
-
         }
     }
 

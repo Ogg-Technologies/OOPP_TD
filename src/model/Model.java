@@ -75,10 +75,11 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     /**
      * This method sends the vector through to the {@code Game} object
      * @param v is a vector that correspond to a position on the tileMap
+     * @param towerClass the type of the tower to place in game
      */
     @Override
-    public void onTileClick(Vector v) {
-        game.placeTower(v);
+    public void onTileClick(Vector v, Class<? extends Tower> towerClass) {
+        game.placeTower(v, towerClass);
     }
 
     @Override

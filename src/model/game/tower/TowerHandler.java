@@ -77,5 +77,12 @@ public class TowerHandler {
         towers.add(factory.createSniperBear(v));
     }
 
-
+    /**
+     * Creates a tower based on the tower class
+     * @param pos of tower
+     * @param towerClass the class that represent the concrete tower
+     */
+    public void createTower(Vector pos, Class<? extends Tower> towerClass) {
+        towers.add(factory.createTower(pos, towerClass));
+    }
 }
