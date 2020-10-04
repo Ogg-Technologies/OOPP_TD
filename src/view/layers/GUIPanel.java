@@ -6,7 +6,9 @@ import model.game.tower.Tower;
 import model.game.tower.concretetowers.BearryPotter;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.SniperBear;
+import utils.Vector;
 import view.ButtonClickHandler;
+import view.ControllerStateValue;
 import view.WindowState;
 import view.texture.ImageHandler;
 
@@ -27,9 +29,16 @@ public class GUIPanel extends JPanel {
 
     private final ModelData modelData;
 
+    private Vector mousePos;
+
+    private ControllerStateValue controllerStateValue;
+
+    private WindowState windowState;
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        drawGhostTower(g);
         drawHealthBar(g);
         drawMoneyDisplay(g);
         drawNextWaveButton(g);
@@ -40,13 +49,23 @@ public class GUIPanel extends JPanel {
      * Sets up every gui element, except button controller part
      *
      * @param modelData data from model that gui needs.
+     * @param windowState the state of window
      */
-    public GUIPanel(ModelData modelData) {
+    public GUIPanel(ModelData modelData, WindowState windowState) {
         this.modelData = modelData;
+        this.windowState = windowState;
         setLayout(null);
         createButtons();
         setupLabels();
         valueSetups();
+    }
+
+    /**
+     * Update the saved value of mouse pos
+     * @param mousePos new mouse pos
+     */
+    public void updateMousePos(Vector mousePos){
+        this.mousePos = mousePos;
     }
 
     private void valueSetups() {
@@ -81,6 +100,31 @@ public class GUIPanel extends JPanel {
             int finalI = i;
             towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTower(towerClasses[finalI])));
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //GhostTower data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void drawGhostTower(Graphics g){
+        Class<? extends Tower> ghostTower = controllerStateValue.getSelectedTower();
+        if(ghostTower == null || mousePos == null){
+            return;
+        }
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+
+        String path = "";
+
+        for(int i = 0; i < towerClasses.length; i++){
+            if(ghostTower == towerClasses[i]){
+                path = "resource/" + towerImagePaths[i];
+            }
+        }
+
+        BufferedImage ghostImage = ImageHandler.getImage(path, Math.toRadians(90));
+        g.drawImage(ghostImage, mousePos.getIntX() - windowState.getTileSize() / 2, mousePos.getIntY() - windowState.getTileSize() / 2,
+                windowState.getTileSize(), windowState.getTileSize(), null);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -270,5 +314,13 @@ public class GUIPanel extends JPanel {
         for (int i = 0; i < towerClasses.length; i++) {
             towerPrices[i] = modelData.getTowerPrice(towerClasses[i]);
         }
+    }
+
+    /**
+     * Adds a state for some controller values
+     * @param controllerStateValue the state
+     */
+    public void addState(ControllerStateValue controllerStateValue) {
+        this.controllerStateValue = controllerStateValue;
     }
 }

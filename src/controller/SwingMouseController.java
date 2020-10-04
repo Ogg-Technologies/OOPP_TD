@@ -23,6 +23,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     private final ModelInputListener modelInputListener;
 
 
+    private final ControllerState controllerState;
     private Vector tilePressed;
 
     /**
@@ -30,10 +31,12 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
      * @param viewObserver         an observer for mouse actions for the view
      * @param modelInputListener   an event handler that activate for some mouse action
      */
-    public SwingMouseController(WindowPositionHelper windowPositionHelper, MouseViewObserver viewObserver, ModelInputListener modelInputListener) {
+    public SwingMouseController(WindowPositionHelper windowPositionHelper, MouseViewObserver viewObserver,
+                                ModelInputListener modelInputListener, ControllerState controllerState) {
         this.windowPositionHelper = windowPositionHelper;
         this.viewObserver = viewObserver;
         this.modelInputListener = modelInputListener;
+        this.controllerState = controllerState;
     }
 
     @Override
@@ -59,11 +62,11 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
         //System.out.println("x: " + (e.getX() - windowPositionHelper.getOffset().x) + ", y: " + (e.getY() - windowPositionHelper.getOffset().y));
         Vector clickedTile = getClickedTile(e);
         if (clickedTile != null && clickedTile.equals(tilePressed)) {
-            if(ControllerState.selectedTower != null){
-                modelInputListener.onTileClick(clickedTile, ControllerState.selectedTower);
+            if(controllerState.selectedTower != null){
+                modelInputListener.onTileClick(clickedTile, controllerState.selectedTower);
             }
         }
-        ControllerState.selectedTower = null;
+        controllerState.selectedTower = null;
     }
 
     /**
@@ -113,7 +116,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
 
     @Override
     public void setSelectedTower(Class<? extends Tower> towerClass) {
-        ControllerState.selectedTower = towerClass;
+        controllerState.selectedTower = towerClass;
     }
 
     @Override

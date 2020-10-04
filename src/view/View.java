@@ -34,4 +34,11 @@ public interface View extends Drawable, MouseViewObserver, ShutDownAble, WindowP
      * @param modelInputListener the method handler
      */
     void addButtonAndMethodHandler(ButtonClickHandler buttonClickHandler, ModelInputListener modelInputListener);
+
+    /**
+     * Adds a state from controller to get some data from.
+     * Is used in view.
+     * @param controllerStateValue the state.
+     */
+    void addState(ControllerStateValue controllerStateValue);
 }

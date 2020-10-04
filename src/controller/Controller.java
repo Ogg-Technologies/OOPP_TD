@@ -15,10 +15,12 @@ public class Controller {
      * @param view               a view that need input from controller
      */
     public Controller(ModelInputListener modelInputListener, View view) {
-        SwingMouseController mouseController = new SwingMouseController(view, view, modelInputListener);
+        ControllerState controllerState = new ControllerState();
+        SwingMouseController mouseController = new SwingMouseController(view, view, modelInputListener, controllerState);
         view.addMouseListener(mouseController);
         view.addMouseMotionListener(mouseController);
         view.addButtonAndMethodHandler(mouseController, modelInputListener);
+        view.addState(controllerState);
     }
 
 }

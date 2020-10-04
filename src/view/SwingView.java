@@ -70,7 +70,7 @@ public class SwingView implements View {
             }
         };
         ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
-        this.GUIPanel = new GUIPanel(modelData);
+        this.GUIPanel = new GUIPanel(modelData, windowState);
 
         particleHandler = new ParticleHandler(windowState);
         modelData.addOnModelEventListener(particleHandler);
@@ -157,12 +157,18 @@ public class SwingView implements View {
         GUIPanel.setupButtons(buttonClickHandler, methodGiver);
     }
 
+    @Override
+    public void addState(ControllerStateValue controllerStateValue) {
+        GUIPanel.addState(controllerStateValue);
+    }
+
     private Vector prevTilePos = null;
 
     @Override
     public void updateMousePosition(Vector v) {
         Vector tilePos = convertFromRealPosToTilePos(v);
         if (tilePos == null) {
+            GUIPanel.updateMousePos(null);
             background.setMousePosToNull();
             prevTilePos = null;
             return;
@@ -172,6 +178,7 @@ public class SwingView implements View {
             background.setMousePos(tilePos, modelData.isValidTile(tilePos));
             prevTilePos = tilePos;
         }
+        GUIPanel.updateMousePos(v);
     }
 
     @Override
