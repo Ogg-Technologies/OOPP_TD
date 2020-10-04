@@ -9,6 +9,9 @@ import model.game.tower.concretetowers.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static application.PropertyValues.EnemyValues.*;
+import static application.PropertyValues.TowerPrices.*;
+
 /**
  * @author Sebastian, Behroz, Samuel, Erik
  * A class that take care of all the prices and values of towers and enemies.

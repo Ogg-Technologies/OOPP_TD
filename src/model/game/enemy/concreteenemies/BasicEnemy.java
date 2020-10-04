@@ -5,6 +5,8 @@ import model.game.enemy.BaseDamager;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.PathIterator;
 
+import static application.PropertyValues.EnemyStats.*;
+
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * A class for all enemies which only differ in health and speed.
@@ -20,7 +22,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Fishstick extends BasicEnemy {
 
         public Fishstick(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 1, 1);
+            super(baseDamager, pathIterator, FISHSTICK_HEALTH, FISHSTICK_SPEED);
         }
 
         @Override
@@ -32,7 +34,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Swordfish extends BasicEnemy {
 
         public Swordfish(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 1.5, 1.1);
+            super(baseDamager, pathIterator, SWORDFISH_HEALTH, SWORDFISH_SPEED);
         }
 
         @Override
@@ -44,7 +46,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class FishAndChips extends BasicEnemy {
 
         public FishAndChips(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 2, 1.2);
+            super(baseDamager, pathIterator, FISH_AND_CHIPS_HEALTH, FISH_AND_CHIPS_SPEED);
         }
 
         @Override
@@ -56,7 +58,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class FishInABoat extends BasicEnemy {
 
         public FishInABoat(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 3, 1.3);
+            super(baseDamager, pathIterator, FISH_IN_A_BOAT_HEALTH, FISH_IN_A_BOAT_SPEED);
         }
 
         @Override
@@ -68,7 +70,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Sailfish extends BasicEnemy {
 
         public Sailfish(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 1, 3.5);
+            super(baseDamager, pathIterator, SAILFISH_HEALTH, SAILFISH_SPEED);
         }
 
         @Override
@@ -80,7 +82,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Shark extends BasicEnemy {
 
         public Shark(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 5, 1.7);
+            super(baseDamager, pathIterator, SHARK_HEALTH, SHARK_SPEED);
         }
 
         @Override
@@ -92,7 +94,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class FishInAFishTank extends BasicEnemy {
 
         public FishInAFishTank(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 10, 0.9);
+            super(baseDamager, pathIterator, FISH_IN_A_FISH_TANK_HEALTH, FISH_IN_A_FISH_TANK_SPEED);
         }
 
         @Override
