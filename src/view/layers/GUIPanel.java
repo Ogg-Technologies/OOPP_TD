@@ -161,6 +161,17 @@ public class GUIPanel extends JPanel {
         nextWaveButton.setLocation(startX, startY);
         g.setColor(BACKGROUND_WAVE_BUTTON);
         g.fillRect(startX, startY, width, height);
+        g.setColor(Color.RED);
+        double yPercent = (1 - 0.7) / 2;
+        int realY1 = (int) (startY + height * yPercent);
+        int realY2 = (int) (startY + (1 - yPercent) * height);
+        int realY3 = (realY1 + realY2) / 2;
+
+        double xPercent = (1 - .3) / 2;
+        int realX12 = (int) (xPercent * width + startX);
+        int realX3 = (int) ((1 - xPercent) * width + startX);
+
+        g.fillPolygon(new int[]{realX12, realX12, realX3}, new int[]{realY1, realY2, realY3}, 3);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
