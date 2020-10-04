@@ -26,11 +26,6 @@ public class GUIPanel extends JPanel {
     private static final Color GUI_BACKGROUND_COLOR = new Color(196, 196, 196);
 
     private final ModelData modelData;
-    private final JLabel moneyLabel = new JLabel();
-    private final JLabel healthBarLabel = new JLabel();
-    private final JLabel[] towerPriceLabels;
-    private final JButton[] towerButtons;
-    private final int[] towerPrices;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -41,7 +36,6 @@ public class GUIPanel extends JPanel {
         drawTowerPanel(g);
     }
 
-
     /**
      * Sets up every gui element, except button controller part
      *
@@ -50,54 +44,28 @@ public class GUIPanel extends JPanel {
     public GUIPanel(ModelData modelData) {
         this.modelData = modelData;
         setLayout(null);
-        add(moneyLabel);
-        add(healthBarLabel);
-        moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        healthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        towerPrices = towerPricesSetup();
-        towerPriceLabels = towerPriceLabelSetup();
-        towerButtons = createTowerButtons();
         createButtons();
+        setupLabels();
+        valueSetups();
+    }
+
+    private void valueSetups() {
+        towerPricesSetup();
+    }
+
+    private void setupLabels() {
+        moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(moneyLabel);
+        healthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(healthBarLabel);
+        towerPriceLabelSetup();
     }
 
     private void createButtons() {
         nextWaveButton.setBorder(BorderFactory.createEmptyBorder());
         nextWaveButton.setContentAreaFilled(false);
         add(nextWaveButton);
-    }
-
-    private JButton[] createTowerButtons() {
-        JButton[] tempArray = new JButton[maxTowers];
-        for (int i = 0; i < tempArray.length; i++) {
-            JButton tempButton = new JButton();
-            tempButton.setBorder(BorderFactory.createEmptyBorder());
-            tempButton.setContentAreaFilled(false);
-            add(tempButton);
-            tempArray[i] = tempButton;
-
-        }
-        return tempArray;
-    }
-
-    private int[] towerPricesSetup() {
-        int[] tempArray = new int[towerImagePaths.length];
-        for (int i = 0; i < tempArray.length; i++) {
-            tempArray[i] = modelData.getTowerPrice(towerClasses[i]);
-        }
-        return tempArray;
-    }
-
-    private JLabel[] towerPriceLabelSetup() {
-        JLabel[] tempArray = new JLabel[maxTowers];
-        for (int i = 0; i < tempArray.length; i++) {
-            JLabel tempLabel = new JLabel();
-            tempLabel.setVerticalAlignment(SwingConstants.CENTER);
-            tempLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            tempLabel.setOpaque(true);
-            tempArray[i] = tempLabel;
-            add(tempLabel);
-        }
-        return tempArray;
+        createTowerButtons();
     }
 
     /**
@@ -128,6 +96,7 @@ public class GUIPanel extends JPanel {
     private static final double HEALTH_LABEL_UP = HEALTH_BAR_UP + HEALTH_BAR_HEIGHT;
     private static final double HEALTH_LABEL_WIDTH = HEALTH_BAR_WIDTH + .04;
     private static final double HEALTH_LABEL_HEIGHT = .04;
+    private final JLabel healthBarLabel = new JLabel();
 
     private void drawHealthBar(Graphics g) {
         int x = (int) (HEALTH_BAR_LEFT * getWidth());
@@ -157,6 +126,7 @@ public class GUIPanel extends JPanel {
     private static final double MONEY_UP = .02;
     private static final double MONEY_WIDTH = .12;
     private static final double MONEY_HEIGHT = .06;
+    private final JLabel moneyLabel = new JLabel();
 
     private void drawMoneyDisplay(Graphics g) {
         int x = (int) (MONEY_LEFT * getWidth());
@@ -198,7 +168,10 @@ public class GUIPanel extends JPanel {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static final Color BACKGROUND_TOWER_PANEL = Color.decode("#CC9966");
     private static final Color TOWER_BACKGROUND = Color.decode("#ecd9c6");
-    private final int maxTowers = 8;
+    private static final int MAX_TOWERS = 8;
+    private final JLabel[] towerPriceLabels = new JLabel[MAX_TOWERS];
+    private final JButton[] towerButtons = new JButton[MAX_TOWERS];
+    private final int[] towerPrices = new int[MAX_TOWERS];
     private final Class<? extends Tower>[] towerClasses = new Class[]{
             GrizzlyBear.class, BearryPotter.class, SniperBear.class
     };
@@ -217,22 +190,27 @@ public class GUIPanel extends JPanel {
         g.fillRect(startX, startY, width, height);
 
         double towerHeightPercent = 0.90;
-        double towerWidth = (WindowState.MAP_WIDTH * getWidth() / maxTowers) - 2;
+        double towerWidth = (WindowState.MAP_WIDTH * getWidth() / MAX_TOWERS) - 2;
         double towerHeight = height * towerHeightPercent;
         double towerSize = Math.min(towerWidth, towerHeight);
         double towerStartY = (startY + (height - towerSize) / 2);
-        double gap = (WindowState.MAP_WIDTH * getWidth() - towerSize * maxTowers) / (maxTowers - 1);
+        double gap = (WindowState.MAP_WIDTH * getWidth() - towerSize * MAX_TOWERS) / (MAX_TOWERS - 1);
         g.setColor(TOWER_BACKGROUND);
-        for (int nr = 0; nr < maxTowers; nr++) {
+        for (int nr = 0; nr < MAX_TOWERS; nr++) {
+            //Calculates the xPos for the towerButton
             int towerStartX = (int) (percentStartX * getWidth() + startX + gap * nr + nr * towerSize);
+            //Sets the button on the right spot
             towerButtons[nr].setSize((int) (towerSize), (int) (towerSize));
             towerButtons[nr].setLocation(towerStartX, (int) (towerStartY));
+            //Adds a background
             g.fillRect(towerStartX, (int) towerStartY, (int) towerSize, (int) towerSize);
+            //Paints a tower if there is a sprite for it
             if (nr < towerImagePaths.length) {
                 BufferedImage tempImage = ImageHandler.getImage("resource/" + towerImagePaths[nr], Math.toRadians(90));
                 g.drawImage(tempImage, (int) (towerStartX + towerSize * 0.05), (int) (towerStartY + towerSize * 0.05),
                         (int) (towerSize * 0.9), (int) (towerSize * 0.9), null);
             }
+            //Populate the label if there is a tower there
             drawPriceLabel(towerStartX, towerStartY, towerSize, nr);
         }
     }
@@ -253,5 +231,33 @@ public class GUIPanel extends JPanel {
         towerPriceLabels[index].setLocation(towerStartX, (int) (towerStartY + towerSize * 0.8));
         towerPriceLabels[index].setFont(new Font("serif", Font.BOLD, (int) (towerSize * 0.2)));
         towerPriceLabels[index].setSize((int) towerSize, (int) (Math.round(towerSize * 0.2)));
+    }
+
+    private void createTowerButtons() {
+        for (int i = 0; i < towerButtons.length; i++) {
+            JButton tempButton = new JButton();
+            tempButton.setBorder(BorderFactory.createEmptyBorder());
+            tempButton.setContentAreaFilled(false);
+            add(tempButton);
+            towerButtons[i] = tempButton;
+
+        }
+    }
+
+    private void towerPriceLabelSetup() {
+        for (int i = 0; i < towerPriceLabels.length; i++) {
+            JLabel tempLabel = new JLabel();
+            tempLabel.setVerticalAlignment(SwingConstants.CENTER);
+            tempLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            tempLabel.setOpaque(true);
+            towerPriceLabels[i] = tempLabel;
+            add(tempLabel);
+        }
+    }
+
+    private void towerPricesSetup() {
+        for (int i = 0; i < towerClasses.length; i++) {
+            towerPrices[i] = modelData.getTowerPrice(towerClasses[i]);
+        }
     }
 }
