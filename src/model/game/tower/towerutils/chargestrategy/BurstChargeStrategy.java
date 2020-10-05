@@ -30,7 +30,7 @@ public class BurstChargeStrategy implements ChargeStrategy {
 
     @Override
     public boolean isReadyToFire() {
-        return charge == maxCharge;
+        return charge >= maxCharge;
     }
 
     @Override
