@@ -36,7 +36,7 @@ public class BurstChargeStrategy implements ChargeStrategy {
     @Override
     public void didFire() {
         attacksLeft--;
-        if (attacksPerCharge == 0) {
+        if (attacksLeft == 0) {
             attacksLeft = attacksPerCharge;
             charge = 0;
         }
