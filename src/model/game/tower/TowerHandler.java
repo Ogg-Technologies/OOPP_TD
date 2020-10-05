@@ -4,6 +4,7 @@ import model.event.EventSender;
 import model.game.tower.concretetowers.BearryPotter;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.SniperBear;
+import model.game.tower.concretetowers.SovietBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
@@ -95,14 +96,17 @@ public class TowerHandler {
      * @return the range
      */
     public double getRangeOfTower(Class<? extends Tower> towerClass) {
-        if(towerClass == GrizzlyBear.class){
+        if (towerClass == GrizzlyBear.class) {
             return GrizzlyBear.RANGE;
         }
-        if(towerClass == BearryPotter.class){
+        if (towerClass == BearryPotter.class) {
             return BearryPotter.RANGE;
         }
-        if(towerClass == SniperBear.class){
+        if (towerClass == SniperBear.class) {
             return SniperBear.RANGE;
+        }
+        if (towerClass == SovietBear.class) {
+            return SovietBear.RANGE;
         }
         throw new IllegalArgumentException("The towerClass: " + towerClass + " is not recognized");
     }

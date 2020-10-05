@@ -4,6 +4,7 @@ import model.event.EventSender;
 import model.game.tower.concretetowers.BearryPotter;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.SniperBear;
+import model.game.tower.concretetowers.SovietBear;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.ProjectileCreator;
@@ -37,24 +38,31 @@ public class TowerFactory {
 
     public Tower createSniperBear(Vector pos) {
         return new SniperBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
+    }
 
+    public Tower createSovietBear(Vector pos) {
+        return new SovietBear(pos, new EnemyTargeter(enemyGetter), eventSender);
     }
 
     /**
      * Returns a concrete tower based on the class of that tower.
-     * @param pos the pos where the tower should be
+     *
+     * @param pos        the pos where the tower should be
      * @param towerClass the class that represent the concrete tower
      * @return the concrete tower
      */
     public Tower createTower(Vector pos, Class<? extends Tower> towerClass) {
-        if(towerClass == GrizzlyBear.class){
+        if (towerClass == GrizzlyBear.class) {
             return createGrizzlyBear(pos);
         }
-        if(towerClass == BearryPotter.class){
+        if (towerClass == BearryPotter.class) {
             return createMageBear(pos);
         }
-        if(towerClass == SniperBear.class){
+        if (towerClass == SniperBear.class) {
             return createSniperBear(pos);
+        }
+        if (towerClass == SovietBear.class) {
+            return createSovietBear(pos);
         }
         throw new IllegalArgumentException("Tower class: " + towerClass + " is not recognized");
     }
