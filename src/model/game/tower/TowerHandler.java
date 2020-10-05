@@ -1,10 +1,7 @@
 package model.game.tower;
 
 import model.event.EventSender;
-import model.game.tower.concretetowers.BearryPotter;
-import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.SniperBear;
-import model.game.tower.concretetowers.SovietBear;
+import model.game.tower.concretetowers.*;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
@@ -107,6 +104,9 @@ public class TowerHandler {
         }
         if (towerClass == SovietBear.class) {
             return SovietBear.RANGE;
+        }
+        if (towerClass == Barbearian.class) {
+            return Barbearian.RANGE;
         }
         throw new IllegalArgumentException("The towerClass: " + towerClass + " is not recognized");
     }

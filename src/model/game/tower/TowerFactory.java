@@ -1,10 +1,7 @@
 package model.game.tower;
 
 import model.event.EventSender;
-import model.game.tower.concretetowers.BearryPotter;
-import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.SniperBear;
-import model.game.tower.concretetowers.SovietBear;
+import model.game.tower.concretetowers.*;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.ProjectileCreator;
@@ -44,6 +41,10 @@ public class TowerFactory {
         return new SovietBear(pos, new EnemyTargeter(enemyGetter), eventSender);
     }
 
+    public Tower createBarbearian(Vector pos) {
+        return new Barbearian(pos, new EnemyTargeter(enemyGetter), eventSender);
+    }
+
     /**
      * Returns a concrete tower based on the class of that tower.
      *
@@ -63,6 +64,9 @@ public class TowerFactory {
         }
         if (towerClass == SovietBear.class) {
             return createSovietBear(pos);
+        }
+        if (towerClass == Barbearian.class) {
+            return createBarbearian(pos);
         }
         throw new IllegalArgumentException("Tower class: " + towerClass + " is not recognized");
     }
