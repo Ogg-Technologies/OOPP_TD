@@ -2,7 +2,9 @@ package view.layers;
 
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
+import model.game.enemy.concreteenemies.BasicEnemy;
 import view.WindowState;
+import view.texture.ImageHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -49,6 +51,90 @@ public class EnemyDrawer implements EnemyVisitor {
         int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
 
         //Draws the enemy
+        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
+
+        drawHealthBar(enemy, x, y);
+    }
+
+    @Override
+    public void visit(BasicEnemy.Swordfish enemy) {
+
+        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
+
+        BufferedImage image = ImageHandler.getImage("resource/swordfish.png");
+
+        //Draws the Swordfish
+        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
+
+        drawHealthBar(enemy, x, y);
+    }
+
+    @Override
+    public void visit(BasicEnemy.FishAndChips enemy) {
+
+        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
+
+        BufferedImage image = ImageHandler.getImage("resource/fishAndChips.png");
+
+        //Draws the FishAndChips
+        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
+
+        drawHealthBar(enemy, x, y);
+    }
+
+    @Override
+    public void visit(BasicEnemy.FishInABoat enemy) {
+
+        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
+
+        BufferedImage image = ImageHandler.getImage("resource/fishInABoat.png");
+
+        //Draws the FishInABoat
+        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
+
+        drawHealthBar(enemy, x, y);
+    }
+
+    @Override
+    public void visit(BasicEnemy.Sailfish enemy) {
+
+        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
+
+        BufferedImage image = ImageHandler.getImage("resource/sailfish.png");
+
+        //Draws the Sailfish
+        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
+
+        drawHealthBar(enemy, x, y);
+    }
+
+    @Override
+    public void visit(BasicEnemy.Shark enemy) {
+
+        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
+
+        BufferedImage image = ImageHandler.getImage("resource/shark.png");
+
+        //Draws the Shark
+        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
+
+        drawHealthBar(enemy, x, y);
+    }
+
+    @Override
+    public void visit(BasicEnemy.FishInAFishTank enemy) {
+
+        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
+        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
+
+        BufferedImage image = ImageHandler.getImage("resource/fishInAFishTank.png");
+
+        //Draws the FishInAFishTank
         graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
 
         drawHealthBar(enemy, x, y);

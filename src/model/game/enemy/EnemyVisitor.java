@@ -1,5 +1,7 @@
 package model.game.enemy;
 
+import model.game.enemy.concreteenemies.BasicEnemy;
+
 /**
  * @author Oskar, Erik
  * An interface for the Visitor pattern for Enemies
@@ -11,4 +13,16 @@ public interface EnemyVisitor {
      * @param enemy A reference to the enemy that will be visited
      */
     void visit(Enemy enemy);
+
+    /**
+     * The visit methods for each BasicEnemy type
+     * @param enemy A reference to the enemy that will be visited
+     */
+    void visit(BasicEnemy.Swordfish enemy);
+    void visit(BasicEnemy.FishAndChips enemy);
+    void visit(BasicEnemy.FishInABoat enemy);
+    void visit(BasicEnemy.Sailfish enemy);
+    void visit(BasicEnemy.Shark enemy);
+    void visit(BasicEnemy.FishInAFishTank enemy);
+
 }
