@@ -54,18 +54,33 @@ class TileMapTest {
     }
 
     @Test
-    void startPositionIsCorrect() {
-        assertEquals(TileMap.fromTileGrid(new Tile[][]{
+    void spawnPositionIsCorrect() {
+        assertEquals(new Vector(1, 0), TileMap.fromTileGrid(new Tile[][] {
                 {GROUND, GROUND, GROUND},
                 {GROUND, START, GROUND},
                 {BASE, PATH, GROUND}
-        }).getPath().get(0), new Vector(1, 1));
-        assertEquals(TileMap.fromTileGrid(new Tile[][]{
+        }).getPath().get(0));
+        assertEquals(new Vector(3, 3), TileMap.fromTileGrid(new Tile[][] {
                 {PATH, PATH, BASE},
                 {PATH, GROUND, GROUND},
                 {PATH, PATH, GROUND},
                 {GROUND, PATH, START}
-        }).getPath().get(0), new Vector(2, 3));
+        }).getPath().get(0));
+    }
+
+    @Test
+    void startPositionIsCorrect() {
+        assertEquals(new Vector(1, 1), TileMap.fromTileGrid(new Tile[][] {
+                {GROUND, GROUND, GROUND},
+                {GROUND, START, GROUND},
+                {BASE, PATH, GROUND}
+        }).getPath().get(1));
+        assertEquals(new Vector(2, 3), TileMap.fromTileGrid(new Tile[][] {
+                {PATH, PATH, BASE},
+                {PATH, GROUND, GROUND},
+                {PATH, PATH, GROUND},
+                {GROUND, PATH, START}
+        }).getPath().get(1));
     }
 
     @Test
@@ -84,7 +99,7 @@ class TileMapTest {
 
         @BeforeEach
         void setUp() {
-            tileMap = TileMap.fromTileGrid(new Tile[][]{
+            tileMap = TileMap.fromTileGrid(new Tile[][] {
                     {PATH, PATH, PATH, GROUND},
                     {PATH, GROUND, PATH, PATH},
                     {PATH, PATH, BASE, START}
@@ -95,30 +110,31 @@ class TileMapTest {
         void isCreatedPathCorrect() {
             List<? extends Vector> current = tileMap.getPath();
 
-            assertEquals(new Vector(3, 2), current.get(0));
-            assertEquals(new Vector(3, 1), current.get(1));
-            assertEquals(new Vector(2, 1), current.get(2));
-            assertEquals(new Vector(2, 0), current.get(3));
-            assertEquals(new Vector(1, 0), current.get(4));
-            assertEquals(new Vector(0, 0), current.get(5));
-            assertEquals(new Vector(0, 1), current.get(6));
-            assertEquals(new Vector(0, 2), current.get(7));
-            assertEquals(new Vector(1, 2), current.get(8));
-            assertEquals(new Vector(2, 2), current.get(9));
+            assertEquals(new Vector(3, 3), current.get(0));
+            assertEquals(new Vector(3, 2), current.get(1));
+            assertEquals(new Vector(3, 1), current.get(2));
+            assertEquals(new Vector(2, 1), current.get(3));
+            assertEquals(new Vector(2, 0), current.get(4));
+            assertEquals(new Vector(1, 0), current.get(5));
+            assertEquals(new Vector(0, 0), current.get(6));
+            assertEquals(new Vector(0, 1), current.get(7));
+            assertEquals(new Vector(0, 2), current.get(8));
+            assertEquals(new Vector(1, 2), current.get(9));
+            assertEquals(new Vector(2, 2), current.get(10));
         }
 
         @Test
         void createdMapHasCorrectSize() {
-            assertEquals(tileMap.getSize().getIntX(), 4);
-            assertEquals(tileMap.getSize().getIntY(), 3);
+            assertEquals(4, tileMap.getSize().getIntX());
+            assertEquals(3, tileMap.getSize().getIntY());
         }
 
         @Test
         void getTileGivesCorrectTile() {
-            assertEquals(tileMap.getTile(0, 0), PATH);
-            assertEquals(tileMap.getTile(1, 1), GROUND);
-            assertEquals(tileMap.getTile(3, 2), START);
-            assertEquals(tileMap.getTile(2, 2 ), BASE);
+            assertEquals(PATH, tileMap.getTile(0, 0));
+            assertEquals(GROUND, tileMap.getTile(1, 1));
+            assertEquals(START, tileMap.getTile(3, 2));
+            assertEquals(BASE, tileMap.getTile(2, 2 ));
         }
 
         @Test

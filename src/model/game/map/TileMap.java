@@ -62,10 +62,12 @@ public class TileMap {
 
         Vector start = findSingleTilePosition(START);
         Vector base = findSingleTilePosition(BASE);
+
+        path.add(calculateSpawnTile(start));
         path.add(start);
 
-        Vector current = path.get(0);
-        Vector previous = path.get(0);
+        Vector current = start;
+        Vector previous = start;
         while (true) {
             current = findNext(current, previous);
             if (current == null) {
@@ -88,9 +90,24 @@ public class TileMap {
     }
 
     /**
+     * Calculates the tile at which enemies appear. This position is off-screen (provided that START tile is on the border).
+     * The reason this exists is to not have enemies just appear on the start tile - instead having them enter the map.
+     * @param startPosition The marked start position of the map
+     * @return The position one tile backwards from where the next tile after the start tile is
+     */
+    private Vector calculateSpawnTile(Vector startPosition) {
+        Vector next = findNext(startPosition, null);
+        if (next == null) {
+            throw new IllegalTileMapException("The marked path is not connected to the START tile");
+        }
+        Vector delta = next.minus(startPosition);
+        return startPosition.minus(delta);
+    }
+
+    /**
      * Goes through all deltas (unit vectors in each direction) and finds out which one is the next in the path
      * @param current The current grid position as starting point
-     * @param previous The previous grid position to stop backtracking
+     * @param previous The previous grid position to stop backtracking, can be null if there was no previous
      * @return The next grid position in the path as a vector or null if its the end of the path
      */
     private Vector findNext(Vector current, Vector previous) {
