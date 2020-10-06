@@ -5,6 +5,7 @@ import model.game.tower.TowerVisitor;
 import model.game.tower.concretetowers.BearryPotter;
 import model.game.tower.concretetowers.GrizzlyBear;
 import model.game.tower.concretetowers.SniperBear;
+import model.game.tower.concretetowers.SovietBear;
 import utils.Vector;
 import view.WindowState;
 import view.texture.ImageHandler;
@@ -73,6 +74,13 @@ public class TowerDrawer implements TowerVisitor {
 
         Vector pos = getRealPos(tower.getPos());
         BufferedImage rotatedImage = ImageHandler.getImage("resource/sniperBear.png", tower.getAngle());
+        drawTower(rotatedImage, pos, tower.getAngle());
+    }
+
+    public void visit(SovietBear tower) {
+
+        Vector pos = getRealPos(tower.getPos());
+        BufferedImage rotatedImage = ImageHandler.getImage("resource/sovietBear.png", tower.getAngle());
         drawTower(rotatedImage, pos, tower.getAngle());
     }
 
