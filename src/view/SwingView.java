@@ -168,7 +168,7 @@ public class SwingView implements View {
     public void updateMousePosition(Vector v) {
         Vector tilePos = convertFromRealPosToTilePos(v);
         if (tilePos == null) {
-            GUIPanel.updateMousePos(null);
+            GUIPanel.updateMouseTilePos(null);
             background.setMousePosToNull();
             prevTilePos = null;
             return;
@@ -177,8 +177,8 @@ public class SwingView implements View {
         if (prevTilePos == null || !prevTilePos.equals(tilePos)) {
             background.setMousePos(tilePos, modelData.isValidTile(tilePos));
             prevTilePos = tilePos;
+            GUIPanel.updateMouseTilePos(tilePos);
         }
-        GUIPanel.updateMousePos(v);
     }
 
     @Override

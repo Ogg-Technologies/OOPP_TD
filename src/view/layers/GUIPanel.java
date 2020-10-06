@@ -27,7 +27,7 @@ public class GUIPanel extends JPanel {
 
     private final ModelData modelData;
 
-    private Vector mousePos;
+    private Vector mouseTilePos;
 
     private ControllerStateValue controllerStateValue;
 
@@ -46,7 +46,7 @@ public class GUIPanel extends JPanel {
     /**
      * Sets up every gui element, except button controller part
      *
-     * @param modelData data from model that gui needs.
+     * @param modelData   data from model that gui needs.
      * @param windowState the state of window
      */
     public GUIPanel(ModelData modelData, WindowState windowState) {
@@ -60,10 +60,11 @@ public class GUIPanel extends JPanel {
 
     /**
      * Update the saved value of mouse pos
-     * @param mousePos new mouse pos
+     *
+     * @param mouseTilePos new mouse tilePos
      */
-    public void updateMousePos(Vector mousePos){
-        this.mousePos = mousePos;
+    public void updateMouseTilePos(Vector mouseTilePos) {
+        this.mouseTilePos = mouseTilePos;
     }
 
     private void valueSetups() {
@@ -104,36 +105,40 @@ public class GUIPanel extends JPanel {
     //GhostTower data
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static final Color GHOST_RANGE_COLOR = new Color(128, 128, 128, 80);
-    private void drawGhostTower(Graphics g){
+
+    private void drawGhostTower(Graphics g) {
         Class<? extends Tower> ghostTower = controllerStateValue.getSelectedTower();
-        if(ghostTower == null || mousePos == null){
+        if (ghostTower == null || mouseTilePos == null) {
             return;
         }
+
+        int tilePosX = mouseTilePos.getIntX() * windowState.getTileSize() + windowState.getTileMapOffset().getIntX();
+        int tilePosY = mouseTilePos.getIntY() * windowState.getTileSize() + windowState.getTileMapOffset().getIntY();
+
+        int tileCenterX = tilePosX + windowState.getTileSize() / 2;
+        int tileCenterY = tilePosY + windowState.getTileSize() / 2;
+
         double range = modelData.getRangeOfTower(ghostTower);
+        int realRangeRadius = (int) (windowState.getTileSize() * range);
 
         g.setColor(GHOST_RANGE_COLOR);
-        int realRangeRadius = (int) (windowState.getTileSize() * range);
-        g.fillOval(mousePos.getIntX() - realRangeRadius, mousePos.getIntY() - realRangeRadius,
+        g.fillOval(tileCenterX - realRangeRadius, tileCenterY - realRangeRadius,
                 realRangeRadius * 2, realRangeRadius * 2);
 
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 
         String path = "";
 
-        for(int i = 0; i < towerClasses.length; i++){
-            if(ghostTower == towerClasses[i]){
+        for (int i = 0; i < towerClasses.length; i++) {
+            if (ghostTower == towerClasses[i]) {
                 path = "resource/" + towerImagePaths[i];
             }
         }
 
         BufferedImage ghostImage = ImageHandler.getImage(path, Math.toRadians(90));
-        int centerX = mousePos.getIntX() - windowState.getTileSize() / 2;
-        int centerY = mousePos.getIntY() - windowState.getTileSize() / 2;
-        g.drawImage(ghostImage, centerX, centerY, windowState.getTileSize(), windowState.getTileSize(), null);
+        g.drawImage(ghostImage, tilePosX, tilePosY, windowState.getTileSize(), windowState.getTileSize(), null);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -327,6 +332,7 @@ public class GUIPanel extends JPanel {
 
     /**
      * Adds a state for some controller values
+     *
      * @param controllerStateValue the state
      */
     public void addState(ControllerStateValue controllerStateValue) {
