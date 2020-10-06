@@ -78,7 +78,7 @@ public final class EmitterFactory {
                 .build();
     }
 
-    public static Emitter createBulletEmitter(Vector position) {
+    static Emitter createBulletEmitter(Vector position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
                 .setImage(bulletImage)
@@ -91,7 +91,7 @@ public final class EmitterFactory {
                 .build();
     }
 
-    public static Emitter createSwingEmitter(Vector position) {
+    static Emitter createSwingEmitter(Vector position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
                 .setImage(axeImage)
