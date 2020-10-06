@@ -109,6 +109,9 @@ public class Economy {
      * @param type a class of the enemy.
      */
     public void addMoney(Class<?> type) {
+        if (type == null) {
+            return;
+        }
         Integer value = enemyMap.get(type);
         if(value == null){
             throw new UnsupportedOperationException("This enemy type (" + type.getSimpleName() + ") has not yet been added in Economy class");

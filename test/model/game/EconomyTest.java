@@ -1,5 +1,6 @@
 package model.game;
 
+import model.game.enemy.Enemy;
 import model.game.enemy.concreteenemies.BasicEnemy;
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.GrizzlyBear;
@@ -75,7 +76,7 @@ class EconomyTest {
 
     @Test
     void cannotBuyNotPricedTowers(){
-        assertThrows(IllegalArgumentException.class, () -> economy.buyTower(Tower.class));
+        assertThrows(UnsupportedOperationException.class, () -> economy.buyTower(Tower.class));
     }
 
     @Test
@@ -86,8 +87,8 @@ class EconomyTest {
     }
 
     @Test
-    void canOnlyTakeInKnownTypesOfBasicEnemy(){
-        assertThrows(IllegalArgumentException.class, () -> economy.addMoney(null));
+    void canOnlyTakeInKnownTypesOfEnemy(){
+        assertThrows(UnsupportedOperationException.class, () -> economy.addMoney(Enemy.class));
     }
 
 }
