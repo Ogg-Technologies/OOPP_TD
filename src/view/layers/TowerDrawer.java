@@ -56,50 +56,35 @@ public class TowerDrawer implements TowerVisitor {
     public void visit(GrizzlyBear tower) {
 
         Vector pos = getRealPos(tower.getPos());
-
-        final double sin = Math.abs(Math.sin(tower.getAngle()));
-        final double cos = Math.abs(Math.cos(tower.getAngle()));
-
         BufferedImage rotatedImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
-
-        double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
-        int offset = (int) ((width - windowState.getTileSize()) / 2);
-
-        graphics.drawImage(rotatedImage, pos.getIntX() - offset, pos.getIntY() - offset, (int) width, (int) width, null);
+        drawTower(rotatedImage, pos, tower.getAngle());
     }
 
     @Override
     public void visit(BearryPotter tower) {
-        // TODO: Refactor this so that it is not just copy paste of GrizzlyBear tower
 
         Vector pos = getRealPos(tower.getPos());
-
-        final double sin = Math.abs(Math.sin(tower.getAngle()));
-        final double cos = Math.abs(Math.cos(tower.getAngle()));
-
         BufferedImage rotatedImage = ImageHandler.getImage("resource/mageBear.png", tower.getAngle());
-
-        double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
-        int offset = (int) ((width - windowState.getTileSize()) / 2);
-
-        graphics.drawImage(rotatedImage, pos.getIntX() - offset, pos.getIntY() - offset, (int) width, (int) width, null);
+        drawTower(rotatedImage, pos, tower.getAngle());
     }
 
     @Override
     public void visit(SniperBear tower) {
-        // TODO: Refactor this so that it is not just copy paste of GrizzlyBear tower
 
         Vector pos = getRealPos(tower.getPos());
-
-        final double sin = Math.abs(Math.sin(tower.getAngle()));
-        final double cos = Math.abs(Math.cos(tower.getAngle()));
-
         BufferedImage rotatedImage = ImageHandler.getImage("resource/sniperBear.png", tower.getAngle());
+        drawTower(rotatedImage, pos, tower.getAngle());
+    }
+
+    private void drawTower(Image image, Vector pos, double angle) {
+
+        final double sin = Math.abs(Math.sin(angle));
+        final double cos = Math.abs(Math.cos(angle));
 
         double width = windowState.getTileSize() * cos + windowState.getTileSize() * sin;
         int offset = (int) ((width - windowState.getTileSize()) / 2);
 
-        graphics.drawImage(rotatedImage, pos.getIntX() - offset, pos.getIntY() - offset, (int) width, (int) width, null);
+        graphics.drawImage(image, pos.getIntX() - offset, pos.getIntY() - offset, (int) width, (int) width, null);
     }
 
     private Vector getRealPos(Vector pos) {
