@@ -4,10 +4,7 @@ package model.game;
 import model.game.enemy.Enemy;
 import model.game.enemy.concreteenemies.BasicEnemy;
 import model.game.tower.Tower;
-import model.game.tower.concretetowers.BearryPotter;
-import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.SniperBear;
-import model.game.tower.concretetowers.SovietBear;
+import model.game.tower.concretetowers.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +32,7 @@ public class Economy {
         map.put(BearryPotter.class, 68);
         map.put(SniperBear.class, 40);
         map.put(SovietBear.class, 80);
+        map.put(Barbearian.class, 90);
 
         return map;
     }

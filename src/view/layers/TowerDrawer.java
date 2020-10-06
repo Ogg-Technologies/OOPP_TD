@@ -2,10 +2,7 @@ package view.layers;
 
 import model.game.tower.Tower;
 import model.game.tower.TowerVisitor;
-import model.game.tower.concretetowers.BearryPotter;
-import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.SniperBear;
-import model.game.tower.concretetowers.SovietBear;
+import model.game.tower.concretetowers.*;
 import utils.Vector;
 import view.WindowState;
 import view.texture.ImageHandler;
@@ -54,7 +51,7 @@ public class TowerDrawer implements TowerVisitor {
     }
 
     @Override
-    public void visit(GrizzlyBear tower) {
+    public void visit(GrizzlyBear tower) { //TODO Possible more refactoring by adding a getAngle to tower interface
 
         Vector pos = getRealPos(tower.getPos());
         BufferedImage rotatedImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
@@ -77,10 +74,18 @@ public class TowerDrawer implements TowerVisitor {
         drawTower(rotatedImage, pos, tower.getAngle());
     }
 
+    @Override
     public void visit(SovietBear tower) {
 
         Vector pos = getRealPos(tower.getPos());
         BufferedImage rotatedImage = ImageHandler.getImage("resource/sovietBear.png", tower.getAngle());
+        drawTower(rotatedImage, pos, tower.getAngle());
+    }
+
+    @Override
+    public void visit(Barbearian tower) {
+        Vector pos = getRealPos(tower.getPos());
+        BufferedImage rotatedImage = ImageHandler.getImage("resource/barbearian.png", tower.getAngle());
         drawTower(rotatedImage, pos, tower.getAngle());
     }
 

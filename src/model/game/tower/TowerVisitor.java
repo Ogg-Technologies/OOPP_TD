@@ -1,9 +1,6 @@
 package model.game.tower;
 
-import model.game.tower.concretetowers.BearryPotter;
-import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.SniperBear;
-import model.game.tower.concretetowers.SovietBear;
+import model.game.tower.concretetowers.*;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -26,4 +23,5 @@ public interface TowerVisitor {
     void visit(BearryPotter tower);
     void visit(SniperBear tower);
     void visit(SovietBear tower);
+    void visit(Barbearian tower);
 }

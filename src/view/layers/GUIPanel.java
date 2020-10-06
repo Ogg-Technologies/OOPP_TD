@@ -3,10 +3,7 @@ package view.layers;
 import model.ModelData;
 import model.ModelInputListener;
 import model.game.tower.Tower;
-import model.game.tower.concretetowers.BearryPotter;
-import model.game.tower.concretetowers.GrizzlyBear;
-import model.game.tower.concretetowers.SniperBear;
-import model.game.tower.concretetowers.SovietBear;
+import model.game.tower.concretetowers.*;
 import utils.Vector;
 import view.ButtonClickHandler;
 import view.ControllerStateValue;
@@ -240,10 +237,10 @@ public class GUIPanel extends JPanel {
     private final JButton[] towerButtons = new JButton[MAX_TOWERS];
     private final int[] towerPrices = new int[MAX_TOWERS];
     private final Class<? extends Tower>[] towerClasses = new Class[]{
-            GrizzlyBear.class, BearryPotter.class, SniperBear.class, SovietBear.class
+            GrizzlyBear.class, BearryPotter.class, SniperBear.class, SovietBear.class, Barbearian.class
     };
     private final String[] towerImagePaths = new String[]{
-            "grizzlyBear.png", "mageBear.png", "sniperBear.png", "sovietBear.png"
+            "grizzlyBear.png", "mageBear.png", "sniperBear.png", "sovietBear.png", "barbearian.png"
     };
 
     private void drawTowerPanel(Graphics g) {

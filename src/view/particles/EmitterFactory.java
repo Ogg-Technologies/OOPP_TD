@@ -23,15 +23,17 @@ public final class EmitterFactory {
 
     private static Image rockImage;
     private static Image boltImage;
-    private static Image sniperSmoke;
+    private static Image sniperSmokeImage;
     private static Image bulletImage;
+    private static Image axeImage;
 
     static {
         try {
             rockImage = ImageIO.read(new File("resource/stone.png"));
             boltImage = ImageIO.read(new File("resource/bombardaCharm.png"));
-            sniperSmoke = ImageIO.read(new File("resource/sniperSmoke.png"));
+            sniperSmokeImage = ImageIO.read(new File("resource/sniperSmoke.png"));
             bulletImage = ImageIO.read(new File("resource/bullet.png"));
+            axeImage = ImageIO.read(new File("resource/axe.png"));
 
         } catch (IOException e) {
             throw new IOError(e);
@@ -66,7 +68,7 @@ public final class EmitterFactory {
     static Emitter createSniperSmokeEmitter(Vector position) { //TODO make actuall effect that had the correct angle etc...
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImage(sniperSmoke)
+                .setImage(sniperSmokeImage)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.01)))
@@ -86,6 +88,19 @@ public final class EmitterFactory {
                 .setEmitterLifetime(1)
                 .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(1, 1))
                 .setTileSize(LinearDoubleDistribution.fromRange(0.05, 0.05))
+                .build();
+    }
+
+    public static Emitter createSwingEmitter(Vector position) {
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImage(axeImage)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(20, 20))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.5))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.01)))
+                .setEmitterLifetime(1)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(1, 1))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.3, 0.3))
                 .build();
     }
 }
