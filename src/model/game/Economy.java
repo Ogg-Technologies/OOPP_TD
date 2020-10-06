@@ -20,40 +20,52 @@ import java.util.Map;
  */
 public class Economy {
 
-    private final Map<Class<? extends Tower>, Integer> towerMap = new HashMap<>();
-    private final Map<Class<? extends Enemy>, Integer> enemyMap = new HashMap<>();
+    private static final Map<Class<? extends Tower>, Integer> towerMap = setupTowerCostMap();
+    private static final Map<Class<? extends Enemy>, Integer> enemyMap = setupEnemyDeathRewardMap();
+
+    /**
+     * Defines the cost of each tower as key/value pairs in a map
+     * @return The map mapping each tower to its cost
+     */
+    private static Map<Class<? extends Tower>, Integer> setupTowerCostMap() {
+        Map<Class<? extends Tower>, Integer> map = new HashMap<>();
+
+        map.put(GrizzlyBear.class, 100);
+        map.put(BearryPotter.class, 68);
+        map.put(SniperBear.class, 40);
+
+        return map;
+    }
+
+    /**
+     * Defines the reward for killing each enemy as key/value pairs in a map
+     * @return The map mapping each enemy to the reward to get when killed
+     */
+    private static Map<Class<? extends Enemy>, Integer> setupEnemyDeathRewardMap() {
+        Map<Class<? extends Enemy>, Integer> map = new HashMap<>();
+
+        map.put(BasicEnemy.Fishstick.class, 1);
+        map.put(BasicEnemy.Swordfish.class, 2);
+        map.put(BasicEnemy.FishAndChips.class, 4);
+        map.put(BasicEnemy.FishInABoat.class, 8);
+        map.put(BasicEnemy.Sailfish.class, 16);
+        map.put(BasicEnemy.Shark.class, 32);
+        map.put(BasicEnemy.FishInAFishTank.class, 64);
+
+        return map;
+    }
+
     private int money = 0;
 
     /**
-     * Creates an instance of the economy class, while also
-     * sets up hashMaps that hold the values of the objects.
+     * Creates an instance of the economy class with money equal to zero
      */
-    public Economy(){
-        setupTowerPriceMap();
-        setupBasicEnemyMap();
-    }
+    public Economy() { }
 
     public Economy(int startMoney){
         this();
         money = startMoney;
     }
-
-    private void setupBasicEnemyMap() {
-        enemyMap.put(BasicEnemy.Fishstick.class, 1);
-        enemyMap.put(BasicEnemy.Swordfish.class, 2);
-        enemyMap.put(BasicEnemy.FishAndChips.class, 4);
-        enemyMap.put(BasicEnemy.FishInABoat.class, 8);
-        enemyMap.put(BasicEnemy.Sailfish.class, 16);
-        enemyMap.put(BasicEnemy.Shark.class, 32);
-        enemyMap.put(BasicEnemy.FishInAFishTank.class, 64);
-    }
-
-    private void setupTowerPriceMap() {
-        towerMap.put(GrizzlyBear.class, 100);
-        towerMap.put(BearryPotter.class, 68);
-        towerMap.put(SniperBear.class, 40);
-    }
-
 
     /**
      * @return amount of money the player has
@@ -66,7 +78,7 @@ public class Economy {
      * Adds money to the player
      * @param money amount of money to add.
      */
-    public void addMoney(int money) { //TODO: use this method to add money at end of turn, or create a new method for it.
+    public void addMoney(int money) {
         if(money < 0){
             throw new IllegalArgumentException("Cannot add negative amount of money");
         }
@@ -81,10 +93,10 @@ public class Economy {
      * @return a boolean that says if the tower has been bought.
      */
     public boolean buyTower(Class<? extends Tower> towerToBuy) {
-        Integer price = towerMap.get(towerToBuy);
-        if(towerMap.get(towerToBuy) == null){
-            throw new IllegalArgumentException("This tower does not exists in economy class");
+        if (!towerMap.containsKey(towerToBuy)) {
+            throw new UnsupportedOperationException("This tower (" + towerToBuy.getSimpleName() + ") has not yet been added in economy class");
         }
+        Integer price = towerMap.get(towerToBuy);
         if(money >= price) {
             money -= price;
             return true;
@@ -99,7 +111,7 @@ public class Economy {
     public void addMoney(Class<?> type) {
         Integer value = enemyMap.get(type);
         if(value == null){
-            throw new IllegalArgumentException("This basic enemy type is not in economy class");
+            throw new UnsupportedOperationException("This enemy type (" + type.getSimpleName() + ") has not yet been added in Economy class");
         }
         money += value;
     }
@@ -110,6 +122,9 @@ public class Economy {
      * @return returns the price.
      */
     public int getTowerPrice(Class<? extends Tower> towerClass) {
+        if (!towerMap.containsKey(towerClass)) {
+            throw new UnsupportedOperationException("This tower (" + towerClass.getSimpleName() + ") has not yet been added in economy class");
+        }
         return towerMap.get(towerClass);
     }
 }
