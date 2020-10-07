@@ -1,17 +1,15 @@
 package view.layers;
 
+import application.Constant;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.concreteenemies.BasicEnemy;
+import view.ColorHandler;
 import view.WindowState;
 import view.texture.ImageHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 /**
  * @author Oskar, Sebastian, Samuel, Erik
@@ -23,8 +21,6 @@ public class EnemyDrawer implements EnemyVisitor {
     private static final BufferedImage image = getEnemyImage();
     private static final double healthHeightPercent = 0.05; //Of tileSize
     private static final double healthWidthPercent = 0.5; //Of tileSize
-    private static final Color HEALTH_COLOR = Color.GREEN;   // TODO: Should be the same as player health colors, should probably refactor to Color class
-    private static final Color DAMAGE_COLOR = Color.RED;
 
     private final Graphics graphics;
     private final WindowState windowState;
@@ -35,13 +31,7 @@ public class EnemyDrawer implements EnemyVisitor {
     }
 
     private static BufferedImage getEnemyImage() {
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File("resource/enemy.png"));
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-        return image;
+        return ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.FISHSTICK);
     }
 
     @Override
@@ -146,10 +136,7 @@ public class EnemyDrawer implements EnemyVisitor {
         int healthX = (int) (x + windowState.getTileSize() * ((1 - healthWidthPercent) / 2));
         int healthY = y - healthHeight;
 
-        graphics.setColor(DAMAGE_COLOR);
-        graphics.fillRect(healthX, healthY, (int) (windowState.getTileSize() * healthWidthPercent), healthHeight);
-
-        graphics.setColor(HEALTH_COLOR);
+        graphics.setColor(ColorHandler.ENEMY_HEALTH);
         graphics.fillRect(healthX, healthY, healthWidth, healthHeight);
     }
 }

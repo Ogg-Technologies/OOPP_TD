@@ -8,6 +8,7 @@ import model.game.tower.concretetowers.*;
 import utils.Vector;
 import view.ButtonClickHandler;
 import view.ControllerStateValue;
+import view.ColorHandler;
 import view.WindowState;
 import view.texture.ImageHandler;
 
@@ -22,9 +23,6 @@ import java.awt.image.BufferedImage;
  */
 
 public class GUIPanel extends JPanel {
-
-
-    private static final Color GUI_BACKGROUND_COLOR = new Color(196, 196, 196);
 
     private final ModelData modelData;
 
@@ -145,8 +143,6 @@ public class GUIPanel extends JPanel {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //BaseHealth data
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static final Color HEALTH_COLOR = Color.GREEN;
-
     private static final double HEALTH_BAR_LEFT = .145;
     private static final double HEALTH_BAR_UP = .02;
     private static final double HEALTH_BAR_WIDTH = .01;
@@ -164,10 +160,10 @@ public class GUIPanel extends JPanel {
         int fullHeight = (int) (HEALTH_BAR_HEIGHT * getHeight());
         int fractionY = (int) (fullY + fullHeight * (1 - modelData.getBaseHealth().getFraction()));
         int fractionHeight = (int) (fullHeight * modelData.getBaseHealth().getFraction());
-        g.setColor(GUI_BACKGROUND_COLOR);
+        g.setColor(ColorHandler.STANDARD_GUI_BACKGROUND);
         g.fillRect(x, fullY, width, fullHeight);
 
-        g.setColor(HEALTH_COLOR);
+        g.setColor(ColorHandler.PLAYER_HEALTH);
         g.fillRect(x, fractionY, width, fractionHeight);
 
         int healthBarLabelWidth = (int) (HEALTH_LABEL_WIDTH * getWidth());
@@ -193,7 +189,7 @@ public class GUIPanel extends JPanel {
         int width = (int) (MONEY_WIDTH * getWidth());
         int height = (int) (MONEY_HEIGHT * getHeight());
         int fontSize = (int) (width / 4.2); //.2 because some sort of margin
-        g.setColor(GUI_BACKGROUND_COLOR);
+        g.setColor(ColorHandler.STANDARD_GUI_BACKGROUND);
         g.fillRect(x, y, width, height);
         moneyLabel.setLocation(x, y);
         moneyLabel.setSize(width, height);
@@ -208,7 +204,6 @@ public class GUIPanel extends JPanel {
     private static final double WAVE_BUTTON_UP = .77;
     private static final double WAVE_BUTTON_WIDTH = .12;
     private static final double WAVE_BUTTON_HEIGHT = .11;
-    private static final Color BACKGROUND_WAVE_BUTTON = Color.decode("#979797");
     private final JButton nextWaveButton = new JButton();
 
     private void drawNextWaveButton(Graphics g) {
@@ -218,7 +213,7 @@ public class GUIPanel extends JPanel {
         int height = (int) (WAVE_BUTTON_HEIGHT * getHeight());
         nextWaveButton.setSize(width, height);
         nextWaveButton.setLocation(startX, startY);
-        g.setColor(BACKGROUND_WAVE_BUTTON);
+        g.setColor(ColorHandler.STANDARD_GUI_BACKGROUND);
         g.fillRect(startX, startY, width, height);
         g.setColor(Color.RED);
         double yPercent = (1 - 0.7) / 2;
@@ -236,8 +231,6 @@ public class GUIPanel extends JPanel {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //TowerPanel data
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static final Color BACKGROUND_TOWER_PANEL = Color.decode("#CC9966");
-    private static final Color TOWER_BACKGROUND = Color.decode("#ecd9c6");
     private static final int MAX_TOWERS = 8;
     private final JLabel[] towerPriceLabels = new JLabel[MAX_TOWERS];
     private final JButton[] towerButtons = new JButton[MAX_TOWERS];
@@ -257,7 +250,7 @@ public class GUIPanel extends JPanel {
         int startY = (int) (percentStartY * getHeight());
         int width = (int) ((WindowState.MAP_WIDTH + 2 * percentStartX) * getWidth());
         int height = (int) ((1 - percentStartY) * getHeight());
-        g.setColor(BACKGROUND_TOWER_PANEL);
+        g.setColor(ColorHandler.TOWER_PANEL);
         g.fillRect(startX, startY, width, height);
 
         double towerHeightPercent = 0.90;
@@ -266,7 +259,7 @@ public class GUIPanel extends JPanel {
         double towerSize = Math.min(towerWidth, towerHeight);
         double towerStartY = (startY + (height - towerSize) / 2);
         double gap = (WindowState.MAP_WIDTH * getWidth() - towerSize * MAX_TOWERS) / (MAX_TOWERS - 1);
-        g.setColor(TOWER_BACKGROUND);
+        g.setColor(ColorHandler.TOWER_BUTTON_BACKGROUND);
         for (int nr = 0; nr < MAX_TOWERS; nr++) {
             //Calculates the xPos for the towerButton
             int towerStartX = (int) (percentStartX * getWidth() + startX + gap * nr + nr * towerSize);
@@ -286,17 +279,14 @@ public class GUIPanel extends JPanel {
         }
     }
 
-    private static final Color TOWER_MONEY_LABEL_BACKGROUND = new Color(196, 196, 196, 180);
-    private static final Color INVISIBLE_COLOR = new Color(0, 0, 0, 0);
-
     //TODO make this compatible for more than maxTowers
     private void drawPriceLabel(int towerStartX, double towerStartY, double towerSize, int index) {
         if (index < towerPrices.length) {
             towerPriceLabels[index].setText("$" + towerPrices[index]);
-            towerPriceLabels[index].setBackground(TOWER_MONEY_LABEL_BACKGROUND);
+            towerPriceLabels[index].setBackground(ColorHandler.TOWER_BUTTON_LABEL);
         } else {
             towerPriceLabels[index].setText("");
-            towerPriceLabels[index].setBackground(INVISIBLE_COLOR);
+            towerPriceLabels[index].setBackground(ColorHandler.INVISIBLE);
 
         }
         towerPriceLabels[index].setLocation(towerStartX, (int) (towerStartY + towerSize * 0.8));

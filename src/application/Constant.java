@@ -274,7 +274,7 @@ public final class Constant {
         }
     }
 
-    public static class ColorCode {
+    public class ColorCode {
         public final String VALID_TILE_HOVER;
         public final int VALID_TILE_HOVER_ALPHA;
         public final String INVALID_TILE_HOVER;
