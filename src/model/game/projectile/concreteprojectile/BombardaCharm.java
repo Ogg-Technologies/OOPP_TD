@@ -1,5 +1,6 @@
 package model.game.projectile.concreteprojectile;
 
+import application.Constant;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -16,7 +17,6 @@ import utils.Vector;
  */
 public class BombardaCharm extends AbstractProjectile {
 
-    private static final double SPEED = 0.06;
     public static final double EXPLOSION_RADIUS = 1.3;
 
     private final int damage;
@@ -25,7 +25,7 @@ public class BombardaCharm extends AbstractProjectile {
     private final EnemyTargeter enemyTargeter;
 
     public BombardaCharm(ProjectileService service, Vector position, Enemy target, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
-        super(service, position, target.getPos().minus(position).setMagnitude(SPEED));
+        super(service, position, target.getPos().minus(position).setMagnitude(Constant.getInstance().PROJECTILE_SPEED.BOMBARDA_CHARM));
         this.damage = damage;
         this.eventSender = eventSender;
         this.target = target;
@@ -43,7 +43,7 @@ public class BombardaCharm extends AbstractProjectile {
             if (target.getHealth().isDead()) {
                 target = null;
             } else {
-                velocity = target.getPos().minus(getPosition()).setMagnitude(SPEED);
+                velocity = target.getPos().minus(getPosition()).setMagnitude(Constant.getInstance().PROJECTILE_SPEED.BOMBARDA_CHARM);
             }
         }
         super.update();

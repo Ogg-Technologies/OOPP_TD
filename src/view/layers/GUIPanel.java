@@ -1,5 +1,6 @@
 package view.layers;
 
+import application.Constant;
 import model.ModelData;
 import model.ModelInputListener;
 import model.game.tower.Tower;
@@ -132,7 +133,7 @@ public class GUIPanel extends JPanel {
 
         for (int i = 0; i < towerClasses.length; i++) {
             if (ghostTower == towerClasses[i]) {
-                path = "resource/" + towerImagePaths[i];
+                path = towerImagePaths[i];
             }
         }
 
@@ -245,7 +246,8 @@ public class GUIPanel extends JPanel {
             GrizzlyBear.class, BearryPotter.class, SniperBear.class, SovietBear.class, Barbearian.class
     };
     private final String[] towerImagePaths = new String[]{
-            "grizzlyBear.png", "mageBear.png", "sniperBear.png", "sovietBear.png", "barbearian.png"
+            Constant.getInstance().IMAGE_PATH.GRIZZLY_BEAR, Constant.getInstance().IMAGE_PATH.BEARRY_POTTER,
+            Constant.getInstance().IMAGE_PATH.SNIPER_BEAR, "resource/sovietBear.png", "resource/barbearian.png"
     };
 
     private void drawTowerPanel(Graphics g) {
@@ -275,7 +277,7 @@ public class GUIPanel extends JPanel {
             g.fillRect(towerStartX, (int) towerStartY, (int) towerSize, (int) towerSize);
             //Paints a tower if there is a sprite for it
             if (nr < towerImagePaths.length) {
-                BufferedImage tempImage = ImageHandler.getImage("resource/" + towerImagePaths[nr], Math.toRadians(90));
+                BufferedImage tempImage = ImageHandler.getImage(towerImagePaths[nr], Math.toRadians(90));
                 g.drawImage(tempImage, (int) (towerStartX + towerSize * 0.05), (int) (towerStartY + towerSize * 0.05),
                         (int) (towerSize * 0.9), (int) (towerSize * 0.9), null);
             }

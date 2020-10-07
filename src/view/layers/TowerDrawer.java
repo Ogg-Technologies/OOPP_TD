@@ -1,5 +1,6 @@
 package view.layers;
 
+import application.Constant;
 import model.game.tower.Tower;
 import model.game.tower.TowerVisitor;
 import model.game.tower.concretetowers.*;
@@ -7,12 +8,8 @@ import utils.Vector;
 import view.WindowState;
 import view.texture.ImageHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 /**
  * @author Oskar, Sebastian, Samuel, Erik
@@ -22,7 +19,6 @@ import java.io.IOException;
 
 public class TowerDrawer implements TowerVisitor {
 
-    private static final BufferedImage image = getImage();
     private final Graphics graphics;
     private final WindowState windowState;
 
@@ -31,30 +27,17 @@ public class TowerDrawer implements TowerVisitor {
         this.windowState = windowState;
     }
 
-    private static BufferedImage getImage() {
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File("resource/grizzlyBear.png"));
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-        return image;
-    }
 
     @Override
     public void visit(Tower tower) {
-
-        int x = (int) (windowState.getTileSize() * tower.getPos().x + windowState.getTileMapOffset().x);
-        int y = (int) (windowState.getTileSize() * tower.getPos().y + windowState.getTileMapOffset().y);
-
-        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
+        throw new RuntimeException("This tower: " + tower.getClass().getSimpleName() + " is not implemented in view");
     }
 
     @Override
     public void visit(GrizzlyBear tower) { //TODO Possible more refactoring by adding a getAngle to tower interface
 
         Vector pos = getRealPos(tower.getPos());
-        BufferedImage rotatedImage = ImageHandler.getImage("resource/grizzlyBear.png", tower.getAngle());
+        BufferedImage rotatedImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.GRIZZLY_BEAR, tower.getAngle());
         drawTower(rotatedImage, pos, tower.getAngle());
     }
 
@@ -62,7 +45,7 @@ public class TowerDrawer implements TowerVisitor {
     public void visit(BearryPotter tower) {
 
         Vector pos = getRealPos(tower.getPos());
-        BufferedImage rotatedImage = ImageHandler.getImage("resource/mageBear.png", tower.getAngle());
+        BufferedImage rotatedImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BEARRY_POTTER, tower.getAngle());
         drawTower(rotatedImage, pos, tower.getAngle());
     }
 
@@ -70,7 +53,7 @@ public class TowerDrawer implements TowerVisitor {
     public void visit(SniperBear tower) {
 
         Vector pos = getRealPos(tower.getPos());
-        BufferedImage rotatedImage = ImageHandler.getImage("resource/sniperBear.png", tower.getAngle());
+        BufferedImage rotatedImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.SNIPER_BEAR, tower.getAngle());
         drawTower(rotatedImage, pos, tower.getAngle());
     }
 

@@ -1,17 +1,16 @@
 package view.layers;
 
+import application.Constant;
 import model.ModelData;
 import model.game.projectile.Projectile;
 import model.game.projectile.concreteprojectile.BombardaCharm;
 import model.game.projectile.concreteprojectile.Rock;
 import view.WindowState;
+import view.texture.ImageHandler;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,18 +37,13 @@ public class ProjectileDrawer extends JPanel {
         imageMap.put(Rock.class, rockImage);
         imageMap.put(BombardaCharm.class, bombardaImage);
         //Size parameter is percent of tileSize
-        sizeMap.put(Rock.class, 0.25);
-        sizeMap.put(BombardaCharm.class, 0.33);
+        sizeMap.put(Rock.class, Constant.getInstance().PROJECTILE_SIZE.ROCK);
+        sizeMap.put(BombardaCharm.class, Constant.getInstance().PROJECTILE_SIZE.BOMBARDA_CHARM);
     }
 
     private void setupImages() {
-        try {
-            rockImage = ImageIO.read(new File("resource/stone.png"));
-            bombardaImage = ImageIO.read(new File("resource/bombardaCharm.png"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        rockImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.ROCK);
+        bombardaImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BOMBARDA_CHARM);
     }
 
     @Override

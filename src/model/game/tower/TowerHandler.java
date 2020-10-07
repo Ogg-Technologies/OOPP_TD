@@ -1,5 +1,6 @@
 package model.game.tower;
 
+import application.Constant;
 import model.event.EventSender;
 import model.game.tower.concretetowers.*;
 import model.game.tower.towerutils.EnemyGetter;
@@ -92,15 +93,15 @@ public class TowerHandler {
      * @param towerClass the specified tower
      * @return the range
      */
-    public double getRangeOfTower(Class<? extends Tower> towerClass) {
+    public double getRangeOfTower(Class<? extends Tower> towerClass) {//TODO: Remove from model, should get from Constant
         if (towerClass == GrizzlyBear.class) {
-            return GrizzlyBear.RANGE;
+            return Constant.getInstance().TOWER_RANGE.GRIZZLY_BEAR;
         }
         if (towerClass == BearryPotter.class) {
-            return BearryPotter.RANGE;
+            return Constant.getInstance().TOWER_RANGE.BEARRY_POTTER;
         }
         if (towerClass == SniperBear.class) {
-            return SniperBear.RANGE;
+            return Constant.getInstance().TOWER_RANGE.SNIPER_BEAR;
         }
         if (towerClass == SovietBear.class) {
             return SovietBear.RANGE;

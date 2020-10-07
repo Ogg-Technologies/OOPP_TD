@@ -1,17 +1,15 @@
 package view.layers;
 
+import application.Constant;
 import model.ModelData;
 import model.game.map.Tile;
 import utils.Vector;
 import view.WindowState;
+import view.texture.ImageHandler;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 /**
  * @author Sebastian, Samuel, Erik
@@ -49,13 +47,7 @@ public class Background extends JPanel { // TODO: Could use some functional deco
     }
 
     private static BufferedImage getBaseImage() {
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File("resource/base.png"));
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-        return image;
+        return ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BASE);
     }
 
     @Override

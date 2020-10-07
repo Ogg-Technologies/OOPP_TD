@@ -11,8 +11,8 @@ import java.util.Properties;
  * This class stores all the values from a config file, and also fetch all the data from the same config file.
  * This is used in a lot of classes that need constants, for example the economy class with the cost of towers,
  * and values of enemies.
- * It is also used in application to populate all the values, before the other modules are created.
  * This class also has a lot of nested classes, to categorize the stored values.
+ * This class is also a Singleton, because no more copies than one will ever be needed.
  */
 public final class Constant {
 
@@ -34,6 +34,10 @@ public final class Constant {
     public final ColorCode COLOR_CODE;
     public final ImagePath IMAGE_PATH;
 
+    /**
+     * Sets up a Properties object for handling the properties file, and also assign all the data to the proper
+     * nested class.
+     */
     private Constant() {
         Properties prop;
         try {
@@ -56,6 +60,11 @@ public final class Constant {
         IMAGE_PATH = new ImagePath(prop);
     }
 
+    /**
+     * Gets the only instance of this class
+     *
+     * @return a singleton of this class
+     */
     public static Constant getInstance() {
         if (instance == null) {
             instance = new Constant();
@@ -65,9 +74,10 @@ public final class Constant {
 
 
     /**
-     * This method populate all the values from the property file.
+     * This method creates the Properties object that takes care of the properties file.
      *
-     * @throws IOException if the file is not found
+     * @return A properties object that takes care of the properties file
+     * @throws IOException if the fileInputStream cannot be closed
      */
     private Properties readPropertyFile() throws IOException {
         Properties prop;
@@ -86,9 +96,16 @@ public final class Constant {
         return prop;
     }
 
+    /**
+     * This method is for reading a double value (or int if casted) from property.
+     *
+     * @param prop     The Properties class, that takes care of reading from the properties file.
+     * @param propName The name of the key
+     * @return the value from properties as a double
+     */
     private static double readDoubleValue(Properties prop, String propName) {
         String propVal = prop.getProperty(propName);
-        if(propVal == null){
+        if (propVal == null) {
             throw new NoSuchPropertyException(propName);
         }
         try {
@@ -98,9 +115,16 @@ public final class Constant {
         }
     }
 
-    private static String readStringValue(Properties prop, String propName){
+    /**
+     * This method is for reading a String value.
+     *
+     * @param prop     The Properties class, that takes care of reading from the properties file.
+     * @param propName The name of the key
+     * @return the value from properties as a String
+     */
+    private static String readStringValue(Properties prop, String propName) {
         String propVal = prop.getProperty(propName);
-        if(propVal == null){
+        if (propVal == null) {
             throw new NoSuchPropertyException(propName);
         }
         return propVal;
@@ -305,7 +329,10 @@ public final class Constant {
         }
     }
 
-    private static class NoSuchPropertyException extends RuntimeException{
+    /**
+     * An Exception for the case where the property is not defined in the properties file.
+     */
+    private static class NoSuchPropertyException extends RuntimeException {
         public NoSuchPropertyException(String propName) {
             super("The property " + propName + " was not found in config file");
         }
