@@ -13,10 +13,14 @@ import model.game.projectile.ProjectileService;
 import model.game.tower.Tower;
 import model.game.tower.TowerHandler;
 import model.game.tower.towerutils.EnemyGetter;
+import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -40,7 +44,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         baseHealth = new MutableHealth(100);
         enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath(), eventSender);
         projectiles = new ArrayList<>();
-        projectileFactory = new ProjectileFactory(this, eventSender);
+        projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
         economy = new Economy(1000);
     }
 

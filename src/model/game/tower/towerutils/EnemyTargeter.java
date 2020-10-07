@@ -28,7 +28,7 @@ public class EnemyTargeter {
      * @return A random enemy within the range or null if there are none
      */
     public Enemy getEnemyToAttack(Vector pos, double range) {
-        List<? extends Enemy> enemiesInRange = getEnemiesInRange(pos, range);
+        List<? extends Enemy> enemiesInRange = getEnemiesInRadius(pos, range);
         if (!enemiesInRange.isEmpty()) {
             int currentIndex = random.nextInt(enemiesInRange.size());
             return enemiesInRange.get(currentIndex);
@@ -36,11 +36,11 @@ public class EnemyTargeter {
         return null;
     }
 
-    private List<? extends Enemy> getEnemiesInRange(Vector pos, double range) {
+    public List<? extends Enemy> getEnemiesInRadius(Vector pos, double radius) {
         Collection<? extends Enemy> allEnemies = enemyGetter.getEnemies();
         List<Enemy> enemiesInRange = new ArrayList<>(); // Must be List<E> and not Collection<E> because get() call
         for (Enemy currentEnemy : allEnemies) {
-            if (pos.minus(currentEnemy.getPos()).getDist() <= range) {
+            if (pos.minus(currentEnemy.getPos()).getDist() <= radius) {
                 enemiesInRange.add(currentEnemy);
             }
         }

@@ -25,7 +25,7 @@ class WaveDataTest {
 
     @Test
     void noWavesAreNullOrEmpty() {
-        for (int level = 0; level < waveData.numberOfDefinedWaves() + 10; level++) {
+        for (int level = 0; level < waveData.numberOfDefinedWaves() + 1000; level++) {
             Wave w = waveData.getWave(1);
             assertNotNull(w);
             assertTrue(w.hasNext());

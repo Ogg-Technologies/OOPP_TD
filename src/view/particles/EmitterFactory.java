@@ -58,10 +58,10 @@ public final class EmitterFactory {
                 .setImage(boltImage)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(10, 20))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
-                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.02, 0.03)))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.08, 0.1)))
                 .setEmitterLifetime(3)
-                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(4, 10))
-                .setTileSize(LinearDoubleDistribution.fromRange(0.05, 0.2))
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(10, 20))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.1, 0.2))
                 .build();
     }
 
