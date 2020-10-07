@@ -31,11 +31,11 @@ public class Economy {
         Map<Class<? extends Tower>, Integer> map = new HashMap<>();
 
         Constant constant = Constant.getInstance();
-        map.put(GrizzlyBear.class, constant.PRICE.GRIZZLY_BEAR);
-        map.put(BearryPotter.class, constant.PRICE.BEARRY_POTTER);
-        map.put(SniperBear.class, constant.PRICE.SNIPER_BEAR);
-        map.put(SovietBear.class, constant.PRICE.SOVIET_BEAR);
-        map.put(Barbearian.class, constant.PRICE.BARBEARIAN);
+        map.put(GrizzlyBear.class, constant.TOWER_PRICE.GRIZZLY_BEAR);
+        map.put(BearryPotter.class, constant.TOWER_PRICE.BEARRY_POTTER);
+        map.put(SniperBear.class, constant.TOWER_PRICE.SNIPER_BEAR);
+        map.put(SovietBear.class, constant.TOWER_PRICE.SOVIET_BEAR);
+        map.put(Barbearian.class, constant.TOWER_PRICE.BARBEARIAN);
 
         return map;
     }

@@ -1,6 +1,9 @@
 package application;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -17,10 +20,19 @@ public final class Constant {
 
     private static Constant instance;
 
-    public final Price PRICE;
+    public final int ROTATED_IMAGE_CACHE_SIZE;
+    public final Player PLAYER;
+    public final TowerDamage TOWER_DAMAGE;
+    public final TowerRange TOWER_RANGE;
+    public final TowerUpdatesBetweenAttacks TOWER_ATTACK_DELAY;
+    public final TowerPrice TOWER_PRICE;
+    public final ProjectileSpeed PROJECTILE_SPEED;
+    public final ProjectileSize PROJECTILE_SIZE;
     public final EnemyDeathReward ENEMY_DEATH_REWARD;
     public final EnemySpeed ENEMY_SPEED;
     public final EnemyHealth ENEMY_HEALTH;
+    public final ColorCode COLOR_CODE;
+    public final ImagePath IMAGE_PATH;
 
     private Constant() {
         Properties prop;
@@ -29,12 +41,20 @@ public final class Constant {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        PRICE = new Price(prop);
+        ROTATED_IMAGE_CACHE_SIZE = (int) readDoubleValue(prop, "rotated_image_cache_size");
+        TOWER_PRICE = new TowerPrice(prop);
+        TOWER_DAMAGE = new TowerDamage(prop);
+        TOWER_RANGE = new TowerRange(prop);
         ENEMY_DEATH_REWARD = new EnemyDeathReward(prop);
         ENEMY_SPEED = new EnemySpeed(prop);
         ENEMY_HEALTH = new EnemyHealth(prop);
+        PLAYER = new Player(prop);
+        PROJECTILE_SPEED = new ProjectileSpeed(prop);
+        PROJECTILE_SIZE = new ProjectileSize(prop);
+        TOWER_ATTACK_DELAY = new TowerUpdatesBetweenAttacks(prop);
+        COLOR_CODE = new ColorCode(prop);
+        IMAGE_PATH = new ImagePath(prop);
     }
-
 
     public static Constant getInstance() {
         if (instance == null) {
@@ -50,16 +70,18 @@ public final class Constant {
      * @throws IOException if the file is not found
      */
     private Properties readPropertyFile() throws IOException {
-        Properties prop = null;
+        Properties prop;
         InputStream inputStream = null;
         try {
             prop = new Properties();
             inputStream = new FileInputStream(new File(propertyPath));
             prop.load(inputStream);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Property file could not be loaded");
         } finally {
-            inputStream.close();
+            if (inputStream != null) {
+                inputStream.close();
+            }
         }
         return prop;
     }
@@ -84,19 +106,85 @@ public final class Constant {
         return propVal;
     }
 
-    public static class Price {
+    public static class Player {
+        public final int START_MONEY;
+        public final int START_HEALTH;
+
+        private Player(Properties prop) {
+            START_MONEY = (int) readDoubleValue(prop, "player_start_money");
+            START_HEALTH = (int) readDoubleValue(prop, "player_start_health");
+        }
+    }
+
+    public static class TowerDamage {
+        public final int BEARRY_POTTER;
+        public final int GRIZZLY_BEAR;
+        public final int SNIPER_BEAR;
+
+        private TowerDamage(Properties prop) {
+            BEARRY_POTTER = (int) readDoubleValue(prop, "bearry_potter_base_damage");
+            GRIZZLY_BEAR = (int) readDoubleValue(prop, "grizzly_bear_base_damage");
+            SNIPER_BEAR = (int) readDoubleValue(prop, "sniper_bear_base_damage");
+        }
+    }
+
+    public static class TowerRange {
+        public final double BEARRY_POTTER;
+        public final double GRIZZLY_BEAR;
+        public final double SNIPER_BEAR;
+
+        private TowerRange(Properties prop) {
+            BEARRY_POTTER = readDoubleValue(prop, "bearry_potter_range");
+            GRIZZLY_BEAR = readDoubleValue(prop, "grizzly_bear_range");
+            SNIPER_BEAR = readDoubleValue(prop, "sniper_bear_range");
+        }
+    }
+
+    public static class TowerUpdatesBetweenAttacks {
+        public final int BEARRY_POTTER;
+        public final int GRIZZLY_BEAR;
+        public final int SNIPER_BEAR;
+
+        private TowerUpdatesBetweenAttacks(Properties prop) {
+            BEARRY_POTTER = (int) readDoubleValue(prop, "bearry_potter_updates_between_attacks");
+            GRIZZLY_BEAR = (int) readDoubleValue(prop, "grizzly_bear_updates_between_attacks");
+            SNIPER_BEAR = (int) readDoubleValue(prop, "sniper_bear_updates_between_attacks");
+        }
+    }
+
+    public static class TowerPrice {
         public final int BEARRY_POTTER;
         public final int GRIZZLY_BEAR;
         public final int SNIPER_BEAR;
         public final int SOVIET_BEAR;
         public final int BARBEARIAN;
 
-        private Price(Properties prop) {
+        private TowerPrice(Properties prop) {
             BEARRY_POTTER = (int) readDoubleValue(prop, "bearry_potter_cost");
             GRIZZLY_BEAR = (int) readDoubleValue(prop, "grizzly_bear_cost");
             SNIPER_BEAR = (int) readDoubleValue(prop, "sniper_bear_cost");
             SOVIET_BEAR = (int) readDoubleValue(prop, "soviet_bear_cost");
             BARBEARIAN = (int) readDoubleValue(prop, "barbearian_cost");
+        }
+    }
+
+    public static class ProjectileSpeed {
+        public final double ROCK;
+        public final double BOMBARDA_CHARM;
+
+        private ProjectileSpeed(Properties prop) {
+            ROCK = readDoubleValue(prop, "rock_speed");
+            BOMBARDA_CHARM = readDoubleValue(prop, "bombarda_charm_speed");
+        }
+    }
+
+    public static class ProjectileSize {
+        public final double ROCK;
+        public final double BOMBARDA_CHARM;
+
+        private ProjectileSize(Properties prop) {
+            ROCK = readDoubleValue(prop, "rock_size");
+            BOMBARDA_CHARM = readDoubleValue(prop, "bombarda_charm_size");
         }
     }
 
@@ -162,10 +250,64 @@ public final class Constant {
         }
     }
 
+    public static class ColorCode {
+        public final String VALID_TILE_HOVER;
+        public final int VALID_TILE_HOVER_ALPHA;
+        public final String INVALID_TILE_HOVER;
+        public final int INVALID_TILE_HOVER_ALPHA;
+        public final String PATH;
+        public final String GROUND;
+        public final String BACKGROUND;
+        public final String STANDARD_GUI_BACKGROUND;
+        public final String PLAYER_HEALTH;
+        public final String ENEMY_HEALTH;
+        public final String TOWER_PANEL;
+        public final String TOWER_BUTTON_BACKGROUND;
+        public final int TOWER_BUTTON_LABEL_ALPHA;
+
+        private ColorCode(Properties prop) {
+            VALID_TILE_HOVER = readStringValue(prop, "color_valid_tile_hover");
+            VALID_TILE_HOVER_ALPHA = (int) readDoubleValue(prop, "color_valid_tile_hover_alpha");
+            INVALID_TILE_HOVER = readStringValue(prop, "color_invalid_tile_hover");
+            INVALID_TILE_HOVER_ALPHA = (int) readDoubleValue(prop, "color_invalid_tile_hover_alpha");
+            PATH = readStringValue(prop, "color_path");
+            GROUND = readStringValue(prop, "color_ground");
+            BACKGROUND = readStringValue(prop, "color_background");
+            STANDARD_GUI_BACKGROUND = readStringValue(prop, "color_standard_gui_background");
+            PLAYER_HEALTH = readStringValue(prop, "color_player_health");
+            ENEMY_HEALTH = readStringValue(prop, "color_enemy_health");
+            TOWER_PANEL = readStringValue(prop, "color_tower_panel");
+            TOWER_BUTTON_BACKGROUND = readStringValue(prop, "color_tower_button_background");
+            TOWER_BUTTON_LABEL_ALPHA = (int) readDoubleValue(prop, "color_tower_button_label_alpha");
+        }
+    }
+
+    public static class ImagePath {
+
+        public final String GRIZZLY_BEAR;
+        public final String BEARRY_POTTER;
+        public final String SNIPER_BEAR;
+        public final String ROCK;
+        public final String BOMBARDA_CHARM;
+        public final String SMOKE;
+        public final String FISHSTICK;
+        public final String BASE;
+
+        private ImagePath(Properties prop) {
+            GRIZZLY_BEAR = readStringValue(prop, "grizzly_bear_path");
+            BEARRY_POTTER = readStringValue(prop, "bearry_potter_path");
+            SNIPER_BEAR = readStringValue(prop, "sniper_bear_path");
+            ROCK = readStringValue(prop, "stone_path");
+            BOMBARDA_CHARM = readStringValue(prop, "bombarda_charm_path");
+            SMOKE = readStringValue(prop, "smoke_path");
+            FISHSTICK = readStringValue(prop, "fishstick_path");
+            BASE = readStringValue(prop, "base_path");
+        }
+    }
+
     private static class NoSuchPropertyException extends RuntimeException{
         public NoSuchPropertyException(String propName) {
             super("The property " + propName + " was not found in config file");
         }
     }
-
 }
