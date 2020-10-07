@@ -1,5 +1,6 @@
 package model.game.tower.concretetowers;
 
+import application.Constant;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -17,22 +18,20 @@ import utils.Vector;
  */
 public class BearryPotter extends AbstractAttackingTower {
 
-    public static final double RANGE = 6.5;
-    private static final int UPDATES_BETWEEN_ATTACKS = 100;
-    private static final int BASE_DAMAGE = 5;
-
     private ProjectileCreator projectileCreator;
     private EventSender eventSender;
 
     public BearryPotter(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
-        super(pos, RANGE, new ConstantChargeStrategy(UPDATES_BETWEEN_ATTACKS), enemyTargeter);
+        super(pos, Constant.getInstance().TOWER_RANGE.BEARRY_POTTER,
+                new ConstantChargeStrategy(Constant.getInstance().TOWER_ATTACK_DELAY.BEARRY_POTTER), enemyTargeter);
         this.projectileCreator = projectileCreator;
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        Projectile bombarda = projectileCreator.getProjectileFactory().createExplodingCharm(getPos(), e, BASE_DAMAGE);
+        int damage = Constant.getInstance().TOWER_DAMAGE.BEARRY_POTTER;
+        Projectile bombarda = projectileCreator.getProjectileFactory().createExplodingCharm(getPos(), e, damage);
         projectileCreator.addProjectile(bombarda);
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
     }

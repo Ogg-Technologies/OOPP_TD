@@ -1,5 +1,7 @@
 package view.texture;
 
+import application.Constant;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,7 +17,7 @@ import java.util.Map;
  * Is used by towerHandler
  */
 public final class ImageHandler {
-    private static final int ROTATED_IMAGES_CACHE_SIZE = 300;
+    private static final int ROTATED_IMAGES_CACHE_SIZE = Constant.getInstance().ROTATED_IMAGE_CACHE_SIZE;
 
     private static final Map<String, BufferedImage> images = new LinkedHashMap<>();
     private static final Map<ImageInfo, BufferedImage> rotatedImages = new LinkedHashMap<>();
@@ -23,6 +25,7 @@ public final class ImageHandler {
     /**
      * Fetches a reference to the given image from cache if it exists,
      * else it loads it and puts it in the list of loaded images
+     *
      * @param path  The path to the image
      * @param angle The angle
      * @return A reference to the image with the correct angle
@@ -50,7 +53,8 @@ public final class ImageHandler {
     /**
      * Fetches a reference to the given image from cache if it exists,
      * else it loads it and puts it in the list of loaded images
-     * @param path  The path to the image
+     *
+     * @param path The path to the image
      * @return A reference to the image
      */
     public static BufferedImage getImage(String path) {
@@ -85,7 +89,7 @@ public final class ImageHandler {
         final double sin = Math.abs(Math.sin(angle));
         final double cos = Math.abs(Math.cos(angle));
         int w = image.getWidth(), h = image.getHeight();
-        int neww = (int)Math.floor(w*cos+h*sin), newh = (int) Math.floor(h * cos + w * sin);
+        int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h * cos + w * sin);
         GraphicsConfiguration gc = getDefaultConfiguration();
         BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
         Graphics2D g = result.createGraphics();

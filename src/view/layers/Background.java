@@ -1,17 +1,16 @@
 package view.layers;
 
+import application.Constant;
 import model.ModelData;
 import model.game.map.Tile;
 import utils.Vector;
+import view.ColorHandler;
 import view.WindowState;
+import view.texture.ImageHandler;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 /**
  * @author Sebastian, Samuel, Erik
@@ -19,13 +18,6 @@ import java.io.IOException;
  * Is used by Swingview.
  */
 public class Background extends JPanel { // TODO: Could use some functional decomposition later
-
-    private static final Color VALID_TILE_HOVER_COLOR = new Color(0, 0, 0, 50);
-    private static final Color INVALID_TILE_HOVER_COLOR = new Color(255, 0, 0, 50);
-    private static final Color PATH_COLOR = Color.decode("#91adc2");
-    private static final Color GROUND_COLOR = Color.decode("#4AA44A");
-    private static final Color BACKGROUND_COLOR = Color.decode("#353535");
-
 
     private final ModelData modelData;
     private final WindowState windowState;
@@ -49,20 +41,14 @@ public class Background extends JPanel { // TODO: Could use some functional deco
     }
 
     private static BufferedImage getBaseImage() {
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File("resource/base.png"));
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-        return image;
+        return ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BASE);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(BACKGROUND_COLOR);
+        g.setColor(ColorHandler.BACKGROUND);
         g.fillRect((int) (WindowState.MAP_LEFT * getWidth()), (int) (WindowState.MAP_UP * getHeight()),
                 (int) (WindowState.MAP_WIDTH * getWidth()), (int) (WindowState.MAP_HEIGHT * getHeight()));
 
@@ -75,11 +61,11 @@ public class Background extends JPanel { // TODO: Could use some functional deco
                 switch (modelData.getTile(tileX, tileY)) {
                     case START:
                     case PATH:
-                        g.setColor(PATH_COLOR);
+                        g.setColor(ColorHandler.PATH);
                         break;
                     case GROUND:
                     case BASE:
-                        g.setColor(GROUND_COLOR);
+                        g.setColor(ColorHandler.GROUND);
                         break;
                     default:
                         throw new UnsupportedOperationException("The tile " + modelData.getTile(tileX, tileY)
@@ -110,9 +96,9 @@ public class Background extends JPanel { // TODO: Could use some functional deco
 
         if(tilePos.x >= 0 && tilePos.y >= 0 && tilePos.x < modelData.getMapSize().x && tilePos.y < modelData.getMapSize().y) {
             if (validTile) {
-                g.setColor(VALID_TILE_HOVER_COLOR);
+                g.setColor(ColorHandler.VALID_TILE_HOVER);
             } else {
-                g.setColor(INVALID_TILE_HOVER_COLOR);
+                g.setColor(ColorHandler.INVALID_TILE_HOVER);
             }
             g.fillRect(tilePos.getIntX() * windowState.getTileSize() + windowState.getTileMapOffset().getIntX(),
                     tilePos.getIntY() * windowState.getTileSize() + windowState.getTileMapOffset().getIntY(),

@@ -1,6 +1,7 @@
 package model.game;
 
 
+import application.Constant;
 import model.game.enemy.Enemy;
 import model.game.enemy.concreteenemies.BasicEnemy;
 import model.game.tower.Tower;
@@ -8,6 +9,7 @@ import model.game.tower.concretetowers.*;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * @author Sebastian, Behroz, Samuel, Erik
@@ -28,11 +30,12 @@ public class Economy {
     private static Map<Class<? extends Tower>, Integer> setupTowerCostMap() {
         Map<Class<? extends Tower>, Integer> map = new HashMap<>();
 
-        map.put(GrizzlyBear.class, 100);
-        map.put(BearryPotter.class, 68);
-        map.put(SniperBear.class, 40);
-        map.put(SovietBear.class, 80);
-        map.put(Barbearian.class, 90);
+        Constant constant = Constant.getInstance();
+        map.put(GrizzlyBear.class, constant.TOWER_PRICE.GRIZZLY_BEAR);
+        map.put(BearryPotter.class, constant.TOWER_PRICE.BEARRY_POTTER);
+        map.put(SniperBear.class, constant.TOWER_PRICE.SNIPER_BEAR);
+        map.put(SovietBear.class, constant.TOWER_PRICE.SOVIET_BEAR);
+        map.put(Barbearian.class, constant.TOWER_PRICE.BARBEARIAN);
 
         return map;
     }
@@ -44,13 +47,14 @@ public class Economy {
     private static Map<Class<? extends Enemy>, Integer> setupEnemyDeathRewardMap() {
         Map<Class<? extends Enemy>, Integer> map = new HashMap<>();
 
-        map.put(BasicEnemy.Fishstick.class, 1);
-        map.put(BasicEnemy.Swordfish.class, 2);
-        map.put(BasicEnemy.FishAndChips.class, 4);
-        map.put(BasicEnemy.FishInABoat.class, 8);
-        map.put(BasicEnemy.Sailfish.class, 16);
-        map.put(BasicEnemy.Shark.class, 32);
-        map.put(BasicEnemy.FishInAFishTank.class, 64);
+        Constant constant = Constant.getInstance();
+        map.put(BasicEnemy.Fishstick.class, constant.ENEMY_DEATH_REWARD.FISHSTICK);
+        map.put(BasicEnemy.Swordfish.class, constant.ENEMY_DEATH_REWARD.SWORDFISH);
+        map.put(BasicEnemy.FishAndChips.class, constant.ENEMY_DEATH_REWARD.FISH_AND_CHIPS);
+        map.put(BasicEnemy.FishInABoat.class, constant.ENEMY_DEATH_REWARD.FISH_IN_A_BOAT);
+        map.put(BasicEnemy.Sailfish.class, constant.ENEMY_DEATH_REWARD.SAILFISH);
+        map.put(BasicEnemy.Shark.class, constant.ENEMY_DEATH_REWARD.SHARK);
+        map.put(BasicEnemy.FishInAFishTank.class, constant.ENEMY_DEATH_REWARD.FISH_IN_A_FISH_TANK);
 
         return map;
     }

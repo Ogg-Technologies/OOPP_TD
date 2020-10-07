@@ -1,9 +1,11 @@
 package view.particles;
 
+import application.Constant;
 import utils.Vector;
 import view.particles.distribution.LinearDoubleDistribution;
 import view.particles.distribution.LinearIntegerDistribution;
 import view.particles.distribution.LinearVectorDistribution;
+import view.texture.ImageHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -29,15 +31,14 @@ public final class EmitterFactory {
 
     static {
         try {
-            rockImage = ImageIO.read(new File("resource/stone.png"));
-            boltImage = ImageIO.read(new File("resource/bombardaCharm.png"));
-            sniperSmokeImage = ImageIO.read(new File("resource/sniperSmoke.png"));
             bulletImage = ImageIO.read(new File("resource/bullet.png"));
             axeImage = ImageIO.read(new File("resource/axe.png"));
-
         } catch (IOException e) {
             throw new IOError(e);
         }
+        rockImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.ROCK);
+        boltImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BOMBARDA_CHARM);
+        sniperSmokeImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.SMOKE);
     }
 
     static Emitter createRockEmitter(Vector position) {

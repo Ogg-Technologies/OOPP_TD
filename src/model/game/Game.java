@@ -1,5 +1,6 @@
 package model.game;
 
+import application.Constant;
 import model.event.Event;
 import model.event.EventListener;
 import model.event.EventSender;
@@ -41,11 +42,11 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     public Game(EventSender eventSender) {
         this.eventSender = eventSender;
         towerHandler = new TowerHandler(this, this, eventSender);
-        baseHealth = new MutableHealth(100);
+        baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
         waveHandler = new WaveHandler(baseHealth::damage, tileMap.getPath(), eventSender);
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
-        economy = new Economy(1000);
+        economy = new Economy(Constant.getInstance().PLAYER.START_MONEY);
     }
 
     public void update() {

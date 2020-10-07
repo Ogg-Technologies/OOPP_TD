@@ -1,5 +1,6 @@
 package model.game.enemy.concreteenemies;
 
+import application.Constant;
 import model.game.enemy.AbstractEnemy;
 import model.game.enemy.BaseDamager;
 import model.game.enemy.EnemyVisitor;
@@ -20,7 +21,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Fishstick extends BasicEnemy {
 
         public Fishstick(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 1, 1);
+            super(baseDamager, pathIterator, Constant.getInstance().ENEMY_HEALTH.FISHSTICK, Constant.getInstance().ENEMY_SPEED.FISHSTICK);
         }
 
         @Override
@@ -32,7 +33,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Swordfish extends BasicEnemy {
 
         public Swordfish(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 1.5, 1.1);
+            super(baseDamager, pathIterator, Constant.getInstance().ENEMY_HEALTH.SWORDFISH, Constant.getInstance().ENEMY_SPEED.SWORDFISH);
         }
 
         @Override
@@ -44,7 +45,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class FishAndChips extends BasicEnemy {
 
         public FishAndChips(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 2, 1.2);
+            super(baseDamager, pathIterator, Constant.getInstance().ENEMY_HEALTH.FISH_AND_CHIPS, Constant.getInstance().ENEMY_SPEED.FISH_AND_CHIPS);
         }
 
         @Override
@@ -56,7 +57,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class FishInABoat extends BasicEnemy {
 
         public FishInABoat(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 3, 1.3);
+            super(baseDamager, pathIterator, Constant.getInstance().ENEMY_HEALTH.FISH_IN_A_BOAT, Constant.getInstance().ENEMY_SPEED.FISH_IN_A_BOAT);
         }
 
         @Override
@@ -68,7 +69,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Sailfish extends BasicEnemy {
 
         public Sailfish(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 1, 3.5);
+            super(baseDamager, pathIterator, Constant.getInstance().ENEMY_HEALTH.SAILFISH, Constant.getInstance().ENEMY_SPEED.SAILFISH);
         }
 
         @Override
@@ -80,7 +81,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class Shark extends BasicEnemy {
 
         public Shark(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 5, 1.7);
+            super(baseDamager, pathIterator, Constant.getInstance().ENEMY_HEALTH.SHARK, Constant.getInstance().ENEMY_SPEED.SHARK);
         }
 
         @Override
@@ -92,7 +93,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static class FishInAFishTank extends BasicEnemy {
 
         public FishInAFishTank(BaseDamager baseDamager, PathIterator pathIterator) {
-            super(baseDamager, pathIterator, 10, 0.9);
+            super(baseDamager, pathIterator, Constant.getInstance().ENEMY_HEALTH.FISH_IN_A_FISH_TANK, Constant.getInstance().ENEMY_SPEED.FISH_IN_A_FISH_TANK);
         }
 
         @Override

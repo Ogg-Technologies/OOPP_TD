@@ -1,5 +1,6 @@
 package model.game.projectile;
 
+import application.Constant;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.projectile.concreteprojectile.BombardaCharm;
@@ -24,7 +25,7 @@ public final class ProjectileFactory {
     }
 
     public Projectile createRock(Vector position, Vector target, int damage) {
-        return new Rock(service, position, target.minus(position).setMagnitude(0.3), damage, this.eventSender);
+        return new Rock(service, position, target.minus(position).setMagnitude(Constant.getInstance().PROJECTILE_SPEED.ROCK), damage, this.eventSender);
     }
 
     public Projectile createExplodingCharm(Vector position, Enemy target, int damage) {
