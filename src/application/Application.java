@@ -17,12 +17,6 @@ public class Application {
      * The constructor for Application which instantiate all the necessary objects.
      */
     public Application() {
-        try {
-            PropertyValues.populateValues();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         Model model = new Model();
         View view = new SwingView(model);
         Controller controller = new Controller(model, view);
