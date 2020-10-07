@@ -14,6 +14,11 @@ public class MutableHealth implements Health {
         current = max;
     }
 
+    public MutableHealth(int max, int current) {
+        this.max = max;
+        this.current = current;
+    }
+
     public void damage(int amount) {
         current = Math.max(0, current - amount);
     }

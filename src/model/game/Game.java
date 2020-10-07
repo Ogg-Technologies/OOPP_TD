@@ -4,7 +4,6 @@ import model.event.Event;
 import model.event.EventListener;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
-import model.game.enemy.EnemyHandler;
 import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
@@ -15,6 +14,7 @@ import model.game.tower.TowerHandler;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.ProjectileCreator;
+import model.game.wave.WaveHandler;
 import utils.Vector;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
 
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
     private final TowerHandler towerHandler;
-    private final EnemyHandler enemyHandler;
+    private final WaveHandler enemyHandler;
     private final MutableHealth baseHealth;
     private final Collection<Projectile> projectiles;
     private final ProjectileFactory projectileFactory;
@@ -42,7 +42,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         this.eventSender = eventSender;
         towerHandler = new TowerHandler(this, this, eventSender);
         baseHealth = new MutableHealth(100);
-        enemyHandler = new EnemyHandler(baseHealth::damage, tileMap.getPath(), eventSender);
+        enemyHandler = new WaveHandler(baseHealth::damage, tileMap.getPath(), eventSender);
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
         economy = new Economy(1000);
@@ -77,7 +77,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     }
 
     public Collection<? extends Enemy> getEnemies() {
-        return enemyHandler.getEnemies();
+        return enemyHandler.getSpawnedEnemies();
     }
 
     public Health getBaseHealth() {
