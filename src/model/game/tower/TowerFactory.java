@@ -27,9 +27,7 @@ public class TowerFactory {
         return new GrizzlyBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
     }
 
-
-    // TODO: Decide if this should be called something else (like Bearry Potter idk)
-    public Tower createMageBear(Vector pos) {
+    public Tower createBearryPotter(Vector pos) {
         return new BearryPotter(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
     }
 
@@ -57,7 +55,7 @@ public class TowerFactory {
             return createGrizzlyBear(pos);
         }
         if (towerClass == BearryPotter.class) {
-            return createMageBear(pos);
+            return createBearryPotter(pos);
         }
         if (towerClass == SniperBear.class) {
             return createSniperBear(pos);
