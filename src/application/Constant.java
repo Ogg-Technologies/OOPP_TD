@@ -64,6 +64,26 @@ public final class Constant {
         return prop;
     }
 
+    private static double readDoubleValue(Properties prop, String propName) {
+        String propVal = prop.getProperty(propName);
+        if(propVal == null){
+            throw new NoSuchPropertyException(propName);
+        }
+        try {
+            return Double.parseDouble(prop.getProperty(propName));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("The Property " + propName + " is not a double");
+        }
+    }
+
+    private static String readStringValue(Properties prop, String propName){
+        String propVal = prop.getProperty(propName);
+        if(propVal == null){
+            throw new NoSuchPropertyException(propName);
+        }
+        return propVal;
+    }
+
     public static class Price {
         public final int BEARRY_POTTER;
         public final int GRIZZLY_BEAR;
@@ -72,11 +92,11 @@ public final class Constant {
         public final int BARBEARIAN;
 
         private Price(Properties prop) {
-            BEARRY_POTTER = Integer.parseInt(prop.getProperty("bearry_potter_cost"));
-            GRIZZLY_BEAR = Integer.parseInt(prop.getProperty("grizzly_bear_cost"));
-            SNIPER_BEAR = Integer.parseInt(prop.getProperty("sniper_bear_cost"));
-            SOVIET_BEAR = Integer.parseInt(prop.getProperty("soviet_bear_cost"));
-            BARBEARIAN = Integer.parseInt(prop.getProperty("barbearian_cost"));
+            BEARRY_POTTER = (int) readDoubleValue(prop, "bearry_potter_cost");
+            GRIZZLY_BEAR = (int) readDoubleValue(prop, "grizzly_bear_cost");
+            SNIPER_BEAR = (int) readDoubleValue(prop, "sniper_bear_cost");
+            SOVIET_BEAR = (int) readDoubleValue(prop, "soviet_bear_cost");
+            BARBEARIAN = (int) readDoubleValue(prop, "barbearian_cost");
         }
     }
 
@@ -90,13 +110,13 @@ public final class Constant {
         public final int FISH_IN_A_FISH_TANK;
 
         private EnemyDeathReward(Properties prop) {
-            FISHSTICK = Integer.parseInt(prop.getProperty("fishstick_value"));
-            SWORDFISH = Integer.parseInt(prop.getProperty("swordfish_value"));
-            FISH_AND_CHIPS = Integer.parseInt(prop.getProperty("fish_and_chips_value"));
-            FISH_IN_A_BOAT = Integer.parseInt(prop.getProperty("fish_in_a_boat_value"));
-            SAILFISH = Integer.parseInt(prop.getProperty("sailfish_value"));
-            SHARK = Integer.parseInt(prop.getProperty("shark_value"));
-            FISH_IN_A_FISH_TANK = Integer.parseInt(prop.getProperty("fish_in_a_fish_tank_value"));
+            FISHSTICK = (int) readDoubleValue(prop, "fishstick_value");
+            SWORDFISH = (int) readDoubleValue(prop, "swordfish_value");
+            FISH_AND_CHIPS = (int) readDoubleValue(prop, "fish_and_chips_value");
+            FISH_IN_A_BOAT = (int) readDoubleValue(prop, "fish_in_a_boat_value");
+            SAILFISH = (int) readDoubleValue(prop, "sailfish_value");
+            SHARK = (int) readDoubleValue(prop, "shark_value");
+            FISH_IN_A_FISH_TANK = (int) readDoubleValue(prop, "fish_in_a_fish_tank_value");
         }
     }
 
@@ -111,13 +131,13 @@ public final class Constant {
         public final double FISH_IN_A_FISH_TANK;
 
         private EnemySpeed(Properties prop) {
-            FISHSTICK = Double.parseDouble(prop.getProperty("fishstick_speed"));
-            SWORDFISH = Double.parseDouble(prop.getProperty("swordfish_speed"));
-            FISH_AND_CHIPS = Double.parseDouble(prop.getProperty("fish_and_chips_speed"));
-            FISH_IN_A_BOAT = Double.parseDouble(prop.getProperty("fish_in_a_boat_speed"));
-            SAILFISH = Double.parseDouble(prop.getProperty("sailfish_speed"));
-            SHARK = Double.parseDouble(prop.getProperty("shark_speed"));
-            FISH_IN_A_FISH_TANK = Double.parseDouble(prop.getProperty("fish_in_a_fish_tank_speed"));
+            FISHSTICK = readDoubleValue(prop, "fishstick_speed");
+            SWORDFISH = readDoubleValue(prop, "swordfish_speed");
+            FISH_AND_CHIPS = readDoubleValue(prop, "fish_and_chips_speed");
+            FISH_IN_A_BOAT = readDoubleValue(prop, "fish_in_a_boat_speed");
+            SAILFISH = readDoubleValue(prop, "sailfish_speed");
+            SHARK = readDoubleValue(prop, "shark_speed");
+            FISH_IN_A_FISH_TANK = readDoubleValue(prop, "fish_in_a_fish_tank_speed");
         }
     }
 
@@ -131,14 +151,20 @@ public final class Constant {
         public final double SHARK;
         public final double FISH_IN_A_FISH_TANK;
 
-        private EnemyHealth(Properties prop){
-            FISHSTICK = Double.parseDouble(prop.getProperty("fishstick_health"));
-            SWORDFISH = Double.parseDouble(prop.getProperty("swordfish_health"));
-            FISH_AND_CHIPS = Double.parseDouble(prop.getProperty("fish_and_chips_health"));
-            FISH_IN_A_BOAT = Double.parseDouble(prop.getProperty("fish_in_a_boat_health"));
-            SAILFISH = Double.parseDouble(prop.getProperty("sailfish_health"));
-            SHARK = Double.parseDouble(prop.getProperty("shark_health"));
-            FISH_IN_A_FISH_TANK = Double.parseDouble(prop.getProperty("fish_in_a_fish_tank_health"));
+        private EnemyHealth(Properties prop) {
+            FISHSTICK = readDoubleValue(prop, "fishstick_health");
+            SWORDFISH = readDoubleValue(prop, "swordfish_health");
+            FISH_AND_CHIPS = readDoubleValue(prop, "fish_and_chips_health");
+            FISH_IN_A_BOAT = readDoubleValue(prop, "fish_in_a_boat_health");
+            SAILFISH = readDoubleValue(prop, "sailfish_health");
+            SHARK = readDoubleValue(prop, "shark_health");
+            FISH_IN_A_FISH_TANK = readDoubleValue(prop, "fish_in_a_fish_tank_health");
+        }
+    }
+
+    private static class NoSuchPropertyException extends RuntimeException{
+        public NoSuchPropertyException(String propName) {
+            super("The property " + propName + " was not found in config file");
         }
     }
 
