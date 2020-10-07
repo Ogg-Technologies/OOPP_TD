@@ -32,7 +32,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
 
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
     private final TowerHandler towerHandler;
-    private final WaveHandler enemyHandler;
+    private final WaveHandler waveHandler;
     private final MutableHealth baseHealth;
     private final Collection<Projectile> projectiles;
     private final ProjectileFactory projectileFactory;
@@ -42,7 +42,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         this.eventSender = eventSender;
         towerHandler = new TowerHandler(this, this, eventSender);
         baseHealth = new MutableHealth(100);
-        enemyHandler = new WaveHandler(baseHealth::damage, tileMap.getPath(), eventSender);
+        waveHandler = new WaveHandler(baseHealth::damage, tileMap.getPath(), eventSender);
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
         economy = new Economy(1000);
@@ -54,7 +54,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         }
         updateProjectiles();
         towerHandler.update();
-        enemyHandler.update();
+        waveHandler.update();
     }
 
     private void updateProjectiles() {
@@ -77,7 +77,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     }
 
     public Collection<? extends Enemy> getEnemies() {
-        return enemyHandler.getSpawnedEnemies();
+        return waveHandler.getSpawnedEnemies();
     }
 
     public Health getBaseHealth() {
@@ -127,14 +127,14 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
      * Method for collecting position to place tower at.
      * Only places towers if requirement are fulfilled, such as no other tower on this tile
      *
-     * @param v, the position to place the tower
+     * @param v,          the position to place the tower
      * @param towerClass, the tower to be placed
      * @see #isValidTile(Vector) for requirements
      */
     public void placeTower(Vector v, Class<? extends Tower> towerClass) {
         //TODO: Logic for if the tower can be placed, and what tower to place
         if (isValidTile(v)) {
-            if(economy.buyTower(towerClass)){
+            if (economy.buyTower(towerClass)) {
                 towerHandler.createTower(v, towerClass);
             }
         }
@@ -147,12 +147,15 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         }
     }
 
-    public void startNewWave(){
-        enemyHandler.startNewWave();
+    public void startNewWave() {
+        int remainingEnemyHealth = waveHandler.getEnemyAttackHealth().getCurrent();
+        economy.addMoney(remainingEnemyHealth);
+        waveHandler.startNewWave();
     }
 
     /**
      * Gets the price of desired tower.
+     *
      * @param towerClass desired tower.
      * @return returns the price.
      */
@@ -162,6 +165,7 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
 
     /**
      * Get start range of specified tower
+     *
      * @param towerClass the specified tower
      * @return the range
      */
