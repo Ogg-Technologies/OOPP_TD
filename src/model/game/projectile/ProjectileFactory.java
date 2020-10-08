@@ -9,7 +9,7 @@ import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;
 
 /**
- * @author Oskar, Behroz, Samuel, Erik
+ * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * Factory for creating Projectiles. Used by Game.
  */
 public final class ProjectileFactory {
@@ -25,7 +25,7 @@ public final class ProjectileFactory {
     }
 
     public Projectile createRock(Vector position, Vector target, int damage) {
-        return new Rock(service, position, target.minus(position).setMagnitude(Constant.getInstance().PROJECTILE_SPEED.ROCK), damage, this.eventSender);
+        return new Rock(service, position, target.minus(position).setMagnitude(Constant.getInstance().ROCK.SPEED), damage, this.eventSender);
     }
 
     public Projectile createExplodingCharm(Vector position, Enemy target, int damage) {

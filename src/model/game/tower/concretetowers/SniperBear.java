@@ -21,14 +21,14 @@ public class SniperBear extends AbstractAttackingTower {
     private EventSender eventSender;
 
     public SniperBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
-        super(pos, Constant.getInstance().TOWER_RANGE.SNIPER_BEAR,
-                new ConstantChargeStrategy(Constant.getInstance().TOWER_ATTACK_DELAY.SNIPER_BEAR), enemyTargeter);
+        super(pos, Constant.getInstance().SNIPER_BEAR.RANGE,
+                new ConstantChargeStrategy(Constant.getInstance().SNIPER_BEAR.ATTACK_DELAY), enemyTargeter);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        int damage = Constant.getInstance().TOWER_DAMAGE.SNIPER_BEAR;
+        int damage = Constant.getInstance().SNIPER_BEAR.BASE_DAMAGE;
         e.damage(damage);
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
     }

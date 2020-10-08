@@ -81,7 +81,8 @@ public class TowerHandler {
 
     /**
      * Creates a tower based on the tower class
-     * @param pos of tower
+     *
+     * @param pos        of tower
      * @param towerClass the class that represent the concrete tower
      */
     public void createTower(Vector pos, Class<? extends Tower> towerClass) {
@@ -90,24 +91,25 @@ public class TowerHandler {
 
     /**
      * Get start range of specified tower
+     *
      * @param towerClass the specified tower
      * @return the range
      */
     public double getRangeOfTower(Class<? extends Tower> towerClass) {//TODO: Remove from model, should get from Constant
         if (towerClass == GrizzlyBear.class) {
-            return Constant.getInstance().TOWER_RANGE.GRIZZLY_BEAR;
+            return Constant.getInstance().GRIZZLY_BEAR.RANGE;
         }
         if (towerClass == BearryPotter.class) {
-            return Constant.getInstance().TOWER_RANGE.BEARRY_POTTER;
+            return Constant.getInstance().BEARRY_POTTER.RANGE;
         }
         if (towerClass == SniperBear.class) {
-            return Constant.getInstance().TOWER_RANGE.SNIPER_BEAR;
+            return Constant.getInstance().SNIPER_BEAR.RANGE;
         }
         if (towerClass == SovietBear.class) {
-            return SovietBear.RANGE;
+            return Constant.getInstance().SOVIET_BEAR.RANGE;
         }
         if (towerClass == Barbearian.class) {
-            return Barbearian.RANGE;
+            return Constant.getInstance().BARBEARIAN.RANGE;
         }
         throw new IllegalArgumentException("The towerClass: " + towerClass + " is not recognized");
     }

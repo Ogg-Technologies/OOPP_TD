@@ -1,6 +1,7 @@
 package model.game.tower.concretetowers;
 
 
+import application.Constant;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -16,20 +17,18 @@ import utils.Vector;
  */
 public class Barbearian extends AbstractAttackingTower {
 
-    public static final int RANGE = 2;
-    private static final int UPDATES_BETWEEN_ATTACKS = 100;
-    private static final int ATTACKS_PER_BURST = 10;
-    private static final int BASE_DAMAGE = 1;
     private EventSender eventSender;
 
     public Barbearian(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
-        super(pos, RANGE, new BurstChargeStrategy(UPDATES_BETWEEN_ATTACKS, ATTACKS_PER_BURST), enemyTargeter);
+        super(pos, Constant.getInstance().BARBEARIAN.RANGE,
+                new BurstChargeStrategy(Constant.getInstance().BARBEARIAN.ATTACK_DELAY,
+                        Constant.getInstance().BARBEARIAN.ATTACKS_PER_BURST), enemyTargeter);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        e.damage(BASE_DAMAGE);
+        e.damage(Constant.getInstance().BARBEARIAN.BASE_DAMAGE);
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
     }
 

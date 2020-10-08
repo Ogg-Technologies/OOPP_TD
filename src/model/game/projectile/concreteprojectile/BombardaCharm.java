@@ -10,7 +10,7 @@ import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;
 
 /**
- * @author Oskar, Erik
+ * @author Oskar, Sebastian, Erik
  * BombardaCharm is a heat seeking charm/projectile cast by the BearryPotter that causes a small explosion
  * Source: https://harrypotter.fandom.com/wiki/Exploding_Charm
  * It was only recently that wizard bears learned to harness the dark arts and make the Bombarda charm seek out their target
@@ -25,7 +25,7 @@ public class BombardaCharm extends AbstractProjectile {
     private final EnemyTargeter enemyTargeter;
 
     public BombardaCharm(ProjectileService service, Vector position, Enemy target, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
-        super(service, position, target.getPos().minus(position).setMagnitude(Constant.getInstance().PROJECTILE_SPEED.BOMBARDA_CHARM));
+        super(service, position, target.getPos().minus(position).setMagnitude(Constant.getInstance().BOMBARDA_CHARM.SPEED));
         this.damage = damage;
         this.eventSender = eventSender;
         this.target = target;
@@ -43,7 +43,7 @@ public class BombardaCharm extends AbstractProjectile {
             if (target.getHealth().isDead()) {
                 target = null;
             } else {
-                velocity = target.getPos().minus(getPosition()).setMagnitude(Constant.getInstance().PROJECTILE_SPEED.BOMBARDA_CHARM);
+                velocity = target.getPos().minus(getPosition()).setMagnitude(Constant.getInstance().BOMBARDA_CHARM.SPEED);
             }
         }
         super.update();

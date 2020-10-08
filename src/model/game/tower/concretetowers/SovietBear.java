@@ -1,6 +1,7 @@
 package model.game.tower.concretetowers;
 
 
+import application.Constant;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -16,20 +17,18 @@ import utils.Vector;
  */
 public class SovietBear extends AbstractAttackingTower {
 
-    public static final int RANGE = 3;
-    private static final int UPDATES_BETWEEN_ATTACKS = 80;
-    private static final int ATTACKS_PER_BURST = 20;
-    private static final int BASE_DAMAGE = 1;
     private EventSender eventSender;
 
     public SovietBear(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
-        super(pos, RANGE, new BurstChargeStrategy(UPDATES_BETWEEN_ATTACKS, ATTACKS_PER_BURST), enemyTargeter);
+        super(pos, Constant.getInstance().SOVIET_BEAR.RANGE,
+                new BurstChargeStrategy(Constant.getInstance().SOVIET_BEAR.ATTACK_DELAY,
+                        Constant.getInstance().SOVIET_BEAR.ATTACKS_PER_BURST), enemyTargeter);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        e.damage(BASE_DAMAGE);
+        e.damage(Constant.getInstance().SOVIET_BEAR.BASE_DAMAGE);
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
     }
 

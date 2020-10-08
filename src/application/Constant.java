@@ -22,15 +22,20 @@ public final class Constant {
 
     public final int ROTATED_IMAGE_CACHE_SIZE;
     public final Player PLAYER;
-    public final TowerDamage TOWER_DAMAGE;
-    public final TowerRange TOWER_RANGE;
-    public final TowerUpdatesBetweenAttacks TOWER_ATTACK_DELAY;
-    public final TowerPrice TOWER_PRICE;
-    public final ProjectileSpeed PROJECTILE_SPEED;
-    public final ProjectileSize PROJECTILE_SIZE;
-    public final EnemyDeathReward ENEMY_DEATH_REWARD;
-    public final EnemySpeed ENEMY_SPEED;
-    public final EnemyHealth ENEMY_HEALTH;
+    public final GrizzlyBear GRIZZLY_BEAR;
+    public final BearryPotter BEARRY_POTTER;
+    public final SniperBear SNIPER_BEAR;
+    public final SovietBear SOVIET_BEAR;
+    public final Barbearian BARBEARIAN;
+    public final Rock ROCK;
+    public final BombardaCharm BOMBARDA_CHARM;
+    public final Fishstick FISHSTICK;
+    public final Swordfish SWORDFISH;
+    public final FishAndChips FISH_AND_CHIPS;
+    public final FishInABoat FISH_IN_A_BOAT;
+    public final Sailfish SAILFISH;
+    public final Shark SHARK;
+    public final FishInAFishTank FISH_IN_A_FISH_TANK;
     public final ColorCode COLOR_CODE;
     public final ImagePath IMAGE_PATH;
 
@@ -46,16 +51,21 @@ public final class Constant {
             throw new RuntimeException(e);
         }
         ROTATED_IMAGE_CACHE_SIZE = (int) readDoubleValue(prop, "rotated_image_cache_size");
-        TOWER_PRICE = new TowerPrice(prop);
-        TOWER_DAMAGE = new TowerDamage(prop);
-        TOWER_RANGE = new TowerRange(prop);
-        ENEMY_DEATH_REWARD = new EnemyDeathReward(prop);
-        ENEMY_SPEED = new EnemySpeed(prop);
-        ENEMY_HEALTH = new EnemyHealth(prop);
         PLAYER = new Player(prop);
-        PROJECTILE_SPEED = new ProjectileSpeed(prop);
-        PROJECTILE_SIZE = new ProjectileSize(prop);
-        TOWER_ATTACK_DELAY = new TowerUpdatesBetweenAttacks(prop);
+        GRIZZLY_BEAR = new GrizzlyBear(prop);
+        BEARRY_POTTER = new BearryPotter(prop);
+        SNIPER_BEAR = new SniperBear(prop);
+        SOVIET_BEAR = new SovietBear(prop);
+        BARBEARIAN = new Barbearian(prop);
+        ROCK = new Rock(prop);
+        BOMBARDA_CHARM = new BombardaCharm(prop);
+        FISHSTICK = new Fishstick(prop);
+        SWORDFISH = new Swordfish(prop);
+        FISH_AND_CHIPS = new FishAndChips(prop);
+        FISH_IN_A_BOAT = new FishInABoat(prop);
+        SAILFISH = new Sailfish(prop);
+        SHARK = new Shark(prop);
+        FISH_IN_A_FISH_TANK = new FishInAFishTank(prop);
         COLOR_CODE = new ColorCode(prop);
         IMAGE_PATH = new ImagePath(prop);
     }
@@ -140,137 +150,186 @@ public final class Constant {
         }
     }
 
-    public static class TowerDamage {
-        public final int BEARRY_POTTER;
-        public final int GRIZZLY_BEAR;
-        public final int SNIPER_BEAR;
+    public static class GrizzlyBear {
+        public final int BASE_DAMAGE;
+        public final double RANGE;
+        public final int ATTACK_DELAY;
+        public final int COST;
 
-        private TowerDamage(Properties prop) {
-            BEARRY_POTTER = (int) readDoubleValue(prop, "bearry_potter_base_damage");
-            GRIZZLY_BEAR = (int) readDoubleValue(prop, "grizzly_bear_base_damage");
-            SNIPER_BEAR = (int) readDoubleValue(prop, "sniper_bear_base_damage");
+
+        private GrizzlyBear(Properties prop) {
+            BASE_DAMAGE = (int) readDoubleValue(prop, "grizzly_bear_base_damage");
+            RANGE = readDoubleValue(prop, "grizzly_bear_range");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "grizzly_bear_updates_between_attacks");
+            COST = (int) readDoubleValue(prop, "grizzly_bear_cost");
         }
     }
 
-    public static class TowerRange {
-        public final double BEARRY_POTTER;
-        public final double GRIZZLY_BEAR;
-        public final double SNIPER_BEAR;
+    public static class BearryPotter {
+        public final int BASE_DAMAGE;
+        public final double RANGE;
+        public final int ATTACK_DELAY;
+        public final int COST;
 
-        private TowerRange(Properties prop) {
-            BEARRY_POTTER = readDoubleValue(prop, "bearry_potter_range");
-            GRIZZLY_BEAR = readDoubleValue(prop, "grizzly_bear_range");
-            SNIPER_BEAR = readDoubleValue(prop, "sniper_bear_range");
+
+        private BearryPotter(Properties prop) {
+            BASE_DAMAGE = (int) readDoubleValue(prop, "bearry_potter_base_damage");
+            RANGE = readDoubleValue(prop, "bearry_potter_range");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "bearry_potter_updates_between_attacks");
+            COST = (int) readDoubleValue(prop, "bearry_potter_cost");
         }
     }
 
-    public static class TowerUpdatesBetweenAttacks {
-        public final int BEARRY_POTTER;
-        public final int GRIZZLY_BEAR;
-        public final int SNIPER_BEAR;
+    public static class SniperBear {
+        public final int BASE_DAMAGE;
+        public final double RANGE;
+        public final int ATTACK_DELAY;
+        public final int COST;
 
-        private TowerUpdatesBetweenAttacks(Properties prop) {
-            BEARRY_POTTER = (int) readDoubleValue(prop, "bearry_potter_updates_between_attacks");
-            GRIZZLY_BEAR = (int) readDoubleValue(prop, "grizzly_bear_updates_between_attacks");
-            SNIPER_BEAR = (int) readDoubleValue(prop, "sniper_bear_updates_between_attacks");
+
+        private SniperBear(Properties prop) {
+            BASE_DAMAGE = (int) readDoubleValue(prop, "sniper_bear_base_damage");
+            RANGE = readDoubleValue(prop, "sniper_bear_range");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "sniper_bear_updates_between_attacks");
+            COST = (int) readDoubleValue(prop, "sniper_bear_cost");
         }
     }
 
-    public static class TowerPrice {
-        public final int BEARRY_POTTER;
-        public final int GRIZZLY_BEAR;
-        public final int SNIPER_BEAR;
-        public final int SOVIET_BEAR;
-        public final int BARBEARIAN;
+    public static class SovietBear {
+        public final int BASE_DAMAGE;
+        public final double RANGE;
+        public final int ATTACK_DELAY;
+        public final int ATTACKS_PER_BURST;
+        public final int COST;
 
-        private TowerPrice(Properties prop) {
-            BEARRY_POTTER = (int) readDoubleValue(prop, "bearry_potter_cost");
-            GRIZZLY_BEAR = (int) readDoubleValue(prop, "grizzly_bear_cost");
-            SNIPER_BEAR = (int) readDoubleValue(prop, "sniper_bear_cost");
-            SOVIET_BEAR = (int) readDoubleValue(prop, "soviet_bear_cost");
-            BARBEARIAN = (int) readDoubleValue(prop, "barbearian_cost");
+
+        private SovietBear(Properties prop) {
+            BASE_DAMAGE = (int) readDoubleValue(prop, "soviet_bear_base_damage");
+            RANGE = readDoubleValue(prop, "soviet_bear_range");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "soviet_bear_updates_between_attacks");
+            ATTACKS_PER_BURST = (int) readDoubleValue(prop, "soviet_bear_attacks_per_burst");
+            COST = (int) readDoubleValue(prop, "soviet_bear_cost");
         }
     }
 
-    public static class ProjectileSpeed {
-        public final double ROCK;
-        public final double BOMBARDA_CHARM;
+    public static class Barbearian {
+        public final int BASE_DAMAGE;
+        public final double RANGE;
+        public final int ATTACK_DELAY;
+        public final int ATTACKS_PER_BURST;
+        public final int COST;
 
-        private ProjectileSpeed(Properties prop) {
-            ROCK = readDoubleValue(prop, "rock_speed");
-            BOMBARDA_CHARM = readDoubleValue(prop, "bombarda_charm_speed");
+
+        private Barbearian(Properties prop) {
+            BASE_DAMAGE = (int) readDoubleValue(prop, "barbearian_base_damage");
+            RANGE = readDoubleValue(prop, "barbearian_range");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "barbearian_updates_between_attacks");
+            ATTACKS_PER_BURST = (int) readDoubleValue(prop, "barbearian_attacks_per_burst");
+            COST = (int) readDoubleValue(prop, "barbearian_cost");
         }
     }
 
-    public static class ProjectileSize {
-        public final double ROCK;
-        public final double BOMBARDA_CHARM;
+    public static class Rock {
+        public final double SPEED;
+        public final double SIZE;
 
-        private ProjectileSize(Properties prop) {
-            ROCK = readDoubleValue(prop, "rock_size");
-            BOMBARDA_CHARM = readDoubleValue(prop, "bombarda_charm_size");
+        private Rock(Properties prop) {
+            SPEED = readDoubleValue(prop, "rock_speed");
+            SIZE = readDoubleValue(prop, "rock_size");
         }
     }
 
-    public static class EnemyDeathReward {
-        public final int FISHSTICK;
-        public final int SWORDFISH;
-        public final int FISH_AND_CHIPS;
-        public final int FISH_IN_A_BOAT;
-        public final int SAILFISH;
-        public final int SHARK;
-        public final int FISH_IN_A_FISH_TANK;
+    public static class BombardaCharm {
+        public final double SPEED;
+        public final double SIZE;
 
-        private EnemyDeathReward(Properties prop) {
-            FISHSTICK = (int) readDoubleValue(prop, "fishstick_value");
-            SWORDFISH = (int) readDoubleValue(prop, "swordfish_value");
-            FISH_AND_CHIPS = (int) readDoubleValue(prop, "fish_and_chips_value");
-            FISH_IN_A_BOAT = (int) readDoubleValue(prop, "fish_in_a_boat_value");
-            SAILFISH = (int) readDoubleValue(prop, "sailfish_value");
-            SHARK = (int) readDoubleValue(prop, "shark_value");
-            FISH_IN_A_FISH_TANK = (int) readDoubleValue(prop, "fish_in_a_fish_tank_value");
+        private BombardaCharm(Properties prop) {
+            SPEED = readDoubleValue(prop, "bombarda_charm_speed");
+            SIZE = readDoubleValue(prop, "bombarda_charm_size");
         }
     }
 
-    public static class EnemySpeed {
+    public static class Fishstick {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
 
-        public final double FISHSTICK;
-        public final double SWORDFISH;
-        public final double FISH_AND_CHIPS;
-        public final double FISH_IN_A_BOAT;
-        public final double SAILFISH;
-        public final double SHARK;
-        public final double FISH_IN_A_FISH_TANK;
-
-        private EnemySpeed(Properties prop) {
-            FISHSTICK = readDoubleValue(prop, "fishstick_speed");
-            SWORDFISH = readDoubleValue(prop, "swordfish_speed");
-            FISH_AND_CHIPS = readDoubleValue(prop, "fish_and_chips_speed");
-            FISH_IN_A_BOAT = readDoubleValue(prop, "fish_in_a_boat_speed");
-            SAILFISH = readDoubleValue(prop, "sailfish_speed");
-            SHARK = readDoubleValue(prop, "shark_speed");
-            FISH_IN_A_FISH_TANK = readDoubleValue(prop, "fish_in_a_fish_tank_speed");
+        private Fishstick(Properties prop) {
+            SPEED = readDoubleValue(prop, "fishstick_speed");
+            HEALTH = readDoubleValue(prop, "fishstick_health");
+            VALUE = (int) readDoubleValue(prop, "fishstick_value");
         }
     }
 
-    public static class EnemyHealth {
+    public static class Swordfish {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
 
-        public final double FISHSTICK;
-        public final double SWORDFISH;
-        public final double FISH_AND_CHIPS;
-        public final double FISH_IN_A_BOAT;
-        public final double SAILFISH;
-        public final double SHARK;
-        public final double FISH_IN_A_FISH_TANK;
+        private Swordfish(Properties prop) {
+            SPEED = readDoubleValue(prop, "swordfish_speed");
+            HEALTH = readDoubleValue(prop, "swordfish_health");
+            VALUE = (int) readDoubleValue(prop, "swordfish_value");
+        }
+    }
 
-        private EnemyHealth(Properties prop) {
-            FISHSTICK = readDoubleValue(prop, "fishstick_health");
-            SWORDFISH = readDoubleValue(prop, "swordfish_health");
-            FISH_AND_CHIPS = readDoubleValue(prop, "fish_and_chips_health");
-            FISH_IN_A_BOAT = readDoubleValue(prop, "fish_in_a_boat_health");
-            SAILFISH = readDoubleValue(prop, "sailfish_health");
-            SHARK = readDoubleValue(prop, "shark_health");
-            FISH_IN_A_FISH_TANK = readDoubleValue(prop, "fish_in_a_fish_tank_health");
+    public static class FishAndChips {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
+
+        private FishAndChips(Properties prop) {
+            SPEED = readDoubleValue(prop, "fish_and_chips_speed");
+            HEALTH = readDoubleValue(prop, "fish_and_chips_health");
+            VALUE = (int) readDoubleValue(prop, "fish_and_chips_value");
+        }
+    }
+
+    public static class FishInABoat {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
+
+        private FishInABoat(Properties prop) {
+            SPEED = readDoubleValue(prop, "fish_in_a_boat_speed");
+            HEALTH = readDoubleValue(prop, "fish_in_a_boat_health");
+            VALUE = (int) readDoubleValue(prop, "fish_in_a_boat_value");
+        }
+    }
+
+    public static class Sailfish {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
+
+        private Sailfish(Properties prop) {
+            SPEED = readDoubleValue(prop, "sailfish_speed");
+            HEALTH = readDoubleValue(prop, "sailfish_health");
+            VALUE = (int) readDoubleValue(prop, "sailfish_value");
+        }
+    }
+
+    public static class Shark {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
+
+        private Shark(Properties prop) {
+            SPEED = readDoubleValue(prop, "shark_speed");
+            HEALTH = readDoubleValue(prop, "shark_health");
+            VALUE = (int) readDoubleValue(prop, "shark_value");
+        }
+    }
+
+    public static class FishInAFishTank {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
+
+        private FishInAFishTank(Properties prop) {
+            SPEED = readDoubleValue(prop, "fish_in_a_fish_tank_speed");
+            HEALTH = readDoubleValue(prop, "fish_in_a_fish_tank_health");
+            VALUE = (int) readDoubleValue(prop, "fish_in_a_fish_tank_value");
         }
     }
 
