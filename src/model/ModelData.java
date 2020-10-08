@@ -56,12 +56,21 @@ public interface ModelData {
      * @param towerClass desired tower.
      * @return returns the price.
      */
-    int getTowerPrice(Class<?extends Tower> towerClass);
+    int getTowerPrice(Class<? extends Tower> towerClass);
 
     /**
      * Get start range of specified tower
+     *
      * @param towerClass the specified tower
      * @return the range
      */
     double getRangeOfTower(Class<? extends Tower> towerClass);
+
+
+    /**
+     * Gets the health object for "the enemies attack".
+     *
+     * @return the health of the enemy teams attack
+     */
+    Health getEnemyAttackHealth();
 }

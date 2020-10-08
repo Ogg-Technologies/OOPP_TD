@@ -10,7 +10,7 @@ import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;
 
 /**
- * @author Erik, Oskar
+ * @author Oskar, Erik
  * BombardaCharm is a heat seeking charm/projectile cast by the BearryPotter that causes a small explosion
  * Source: https://harrypotter.fandom.com/wiki/Exploding_Charm
  * It was only recently that wizard bears learned to harness the dark arts and make the Bombarda charm seek out their target

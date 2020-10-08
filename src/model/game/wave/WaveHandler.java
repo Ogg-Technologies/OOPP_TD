@@ -44,7 +44,6 @@ public class WaveHandler {
             originalEnemyAttackHealth = 0;
         }
 
-        System.out.println("Health of enemy attack: " + getEnemyAttackHealth());
     }
 
     private void updateEnemies() {

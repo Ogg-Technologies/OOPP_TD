@@ -113,4 +113,9 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     public void onStartNewWave() {
         game.startNewWave();
     }
+
+    @Override
+    public Health getEnemyAttackHealth() {
+        return game.getEnemyAttackHealth();
+    }
 }

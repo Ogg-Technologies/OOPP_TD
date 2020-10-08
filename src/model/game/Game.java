@@ -173,4 +173,8 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     public double getRangeOfTower(Class<? extends Tower> towerClass) {
         return towerHandler.getRangeOfTower(towerClass);
     }
+
+    public Health getEnemyAttackHealth() {
+        return waveHandler.getEnemyAttackHealth();
+    }
 }

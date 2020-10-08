@@ -17,7 +17,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * @author Sebastian, Samuel, Erik
+ * @author Oskar, Sebastian, Samuel, Erik
  * Displays gui elemets.
  * Is used by SwingView.
  */
@@ -32,15 +32,10 @@ public class GUIPanel extends JPanel {
 
     private WindowState windowState;
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        drawGhostTower(g);
-        drawHealthBar(g);
-        drawMoneyDisplay(g);
-        drawNextWaveButton(g);
-        drawTowerPanel(g);
-    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //EnemyAttack health
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private static final double ENEMY_ATTACK_HEALTH_BAR_LEFT = 0.845;
 
     /**
      * Sets up every gui element, except button controller part
@@ -70,13 +65,7 @@ public class GUIPanel extends JPanel {
         towerPricesSetup();
     }
 
-    private void setupLabels() {
-        moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(moneyLabel);
-        healthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(healthBarLabel);
-        towerPriceLabelSetup();
-    }
+    private static final double ENEMY_ATTACK_HEALTH_BAR_UP = .02;
 
     private void createButtons() {
         nextWaveButton.setBorder(BorderFactory.createEmptyBorder());
@@ -173,6 +162,57 @@ public class GUIPanel extends JPanel {
         int fontSize = (int) (HEALTH_LABEL_HEIGHT * getHeight() / 2);
         healthBarLabel.setFont(new Font("serif", Font.PLAIN, fontSize));
     }
+
+    private static final double ENEMY_ATTACK_HEALTH_BAR_WIDTH = .01;
+    private static final double ENEMY_ATTACK_HEALTH_BAR_HEIGHT = .83;
+    private static final double ENEMY_ATTACK_HEALTH_LABEL_LEFT = ENEMY_ATTACK_HEALTH_BAR_LEFT - .02;
+    private static final double ENEMY_ATTACK_HEALTH_LABEL_UP = ENEMY_ATTACK_HEALTH_BAR_UP + ENEMY_ATTACK_HEALTH_BAR_HEIGHT;
+    private static final double ENEMY_ATTACK_HEALTH_LABEL_WIDTH = ENEMY_ATTACK_HEALTH_BAR_WIDTH + .04;
+    private static final double ENEMY_ATTACK_HEALTH_LABEL_HEIGHT = .04;
+    private final JLabel enemyAttackHealthBarLabel = new JLabel();
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawGhostTower(g);
+        drawHealthBar(g);
+        drawEnemyAttackHealthBar(g);
+        drawMoneyDisplay(g);
+        drawNextWaveButton(g);
+        drawTowerPanel(g);
+    }
+
+    private void setupLabels() {
+        moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(moneyLabel);
+        healthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(healthBarLabel);
+        enemyAttackHealthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(enemyAttackHealthBarLabel);
+        towerPriceLabelSetup();
+    }
+
+    private void drawEnemyAttackHealthBar(Graphics g) {
+        int x = (int) (ENEMY_ATTACK_HEALTH_BAR_LEFT * getWidth());
+        int fullY = (int) (ENEMY_ATTACK_HEALTH_BAR_UP * getHeight());
+        int width = (int) (ENEMY_ATTACK_HEALTH_BAR_WIDTH * getWidth());
+        int fullHeight = (int) (ENEMY_ATTACK_HEALTH_BAR_HEIGHT * getHeight());
+        int fractionY = (int) (fullY + fullHeight * (1 - modelData.getEnemyAttackHealth().getFraction()));
+        int fractionHeight = (int) (fullHeight * modelData.getEnemyAttackHealth().getFraction());
+        g.setColor(ColorHandler.STANDARD_GUI_BACKGROUND);
+        g.fillRect(x, fullY, width, fullHeight);
+
+        g.setColor(ColorHandler.ENEMY_HEALTH);
+        g.fillRect(x, fractionY, width, fractionHeight);
+
+        int healthBarLabelWidth = (int) (ENEMY_ATTACK_HEALTH_LABEL_WIDTH * getWidth());
+        enemyAttackHealthBarLabel.setLocation((int) (ENEMY_ATTACK_HEALTH_LABEL_LEFT * getWidth()), (int) (ENEMY_ATTACK_HEALTH_LABEL_UP * getHeight()));
+        enemyAttackHealthBarLabel.setSize(healthBarLabelWidth, (int) (ENEMY_ATTACK_HEALTH_LABEL_HEIGHT * getHeight()));
+        enemyAttackHealthBarLabel.setText("" + (int) (Math.round(modelData.getEnemyAttackHealth().getFraction() * 100)) + "%");
+        int fontSize = (int) (ENEMY_ATTACK_HEALTH_LABEL_HEIGHT * getHeight() / 2);
+        enemyAttackHealthBarLabel.setFont(new Font("serif", Font.PLAIN, fontSize));
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //MoneyLabel data
