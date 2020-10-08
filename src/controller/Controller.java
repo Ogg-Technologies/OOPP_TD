@@ -11,16 +11,17 @@ public class Controller {
     /**
      * Initiate all the controllers and sets up all listeners to view.
      * Is used by Application.
+     *
      * @param modelInputListener handler of events for model
      * @param view               a view that need input from controller
      */
     public Controller(ModelInputListener modelInputListener, View view) {
-        ControllerState controllerState = new ControllerState();
+        ControllerState controllerState = new ControllerState(modelInputListener.getFactory());
         SwingMouseController mouseController = new SwingMouseController(view, view, modelInputListener, controllerState);
         view.addMouseListener(mouseController);
         view.addMouseMotionListener(mouseController);
-        view.addButtonAndMethodHandler(mouseController, modelInputListener);
         view.addState(controllerState);
+        view.addButtonClickHandler(mouseController);
     }
 
 }

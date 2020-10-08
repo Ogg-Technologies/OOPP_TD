@@ -26,6 +26,7 @@ public interface ModelData {
 
     /**
      * Retrieves the Tile at the given position or throws an exception if they are not within getMapSize() bounds
+     *
      * @param x The x coordinate
      * @param y The y coordinate
      * @return The Tile at that position in the map
@@ -50,22 +51,6 @@ public interface ModelData {
      * @return amount of money the player has
      */
     int getMoney();
-
-    /**
-     * Gets the price of desired tower.
-     * @param towerClass desired tower.
-     * @return returns the price.
-     */
-    int getTowerPrice(Class<? extends Tower> towerClass);
-
-    /**
-     * Get start range of specified tower
-     *
-     * @param towerClass the specified tower
-     * @return the range
-     */
-    double getRangeOfTower(Class<? extends Tower> towerClass);
-
 
     /**
      * Gets the health object for "the enemies attack".

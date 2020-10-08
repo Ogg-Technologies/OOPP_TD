@@ -1,7 +1,5 @@
 package view;
 
-import model.ModelInputListener;
-
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
@@ -29,11 +27,10 @@ public interface View extends Drawable, MouseViewObserver, ShutDownAble, WindowP
     void addMouseMotionListener(MouseMotionListener mouseMotionListener);
 
     /**
-     * Adds a buttonHandler and an object that takes care of all the methods calls from these buttons
+     * Adds a buttonHandler to view
      * @param buttonClickHandler the button handler
-     * @param modelInputListener the method handler
      */
-    void addButtonAndMethodHandler(ButtonClickHandler buttonClickHandler, ModelInputListener modelInputListener);
+    void addButtonClickHandler(ButtonClickHandler buttonClickHandler);
 
     /**
      * Adds a state from controller to get some data from.

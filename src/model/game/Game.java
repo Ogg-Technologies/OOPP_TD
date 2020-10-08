@@ -10,7 +10,9 @@ import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
 import model.game.projectile.ProjectileService;
+import model.game.tower.AbstractTowerFactory;
 import model.game.tower.Tower;
+import model.game.tower.TowerFactory;
 import model.game.tower.TowerHandler;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
@@ -38,15 +40,17 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     private final Collection<Projectile> projectiles;
     private final ProjectileFactory projectileFactory;
     private final Economy economy;
+    private final TowerFactory towerFactory;
 
     public Game(EventSender eventSender) {
         this.eventSender = eventSender;
-        towerHandler = new TowerHandler(this, this, eventSender);
+        towerHandler = new TowerHandler();
         baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
         waveHandler = new WaveHandler(baseHealth::damage, tileMap.getPath(), eventSender);
         projectiles = new ArrayList<>();
         projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
         economy = new Economy(Constant.getInstance().PLAYER.START_MONEY);
+        towerFactory = new TowerFactory(this, this, eventSender);
     }
 
     public void update() {
@@ -128,15 +132,16 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
      * Method for collecting position to place tower at.
      * Only places towers if requirement are fulfilled, such as no other tower on this tile
      *
-     * @param v,          the position to place the tower
-     * @param towerClass, the tower to be placed
+     * @param towerType,   the towerType to be placed
+     * @param towerFactory the interface that creates the tower
+     * @param pos,         the position to place the tower
      * @see #isValidTile(Vector) for requirements
      */
-    public void placeTower(Vector v, Class<? extends Tower> towerClass) {
+    public void placeTower(Class<? extends Tower> towerType, AbstractTowerFactory towerFactory, Vector pos) {
         //TODO: Logic for if the tower can be placed, and what tower to place
-        if (isValidTile(v)) {
-            if (economy.buyTower(towerClass)) {
-                towerHandler.createTower(v, towerClass);
+        if (isValidTile(pos)) {
+            if (economy.buyTower(towerType)) {
+                towerHandler.createTower(towerFactory, pos);
             }
         }
     }
@@ -154,27 +159,16 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         waveHandler.startNewWave();
     }
 
-    /**
-     * Gets the price of desired tower.
-     *
-     * @param towerClass desired tower.
-     * @return returns the price.
-     */
-    public int getTowerPrice(Class<? extends Tower> towerClass) {
-        return economy.getTowerPrice(towerClass);
-    }
-
-    /**
-     * Get start range of specified tower
-     *
-     * @param towerClass the specified tower
-     * @return the range
-     */
-    public double getRangeOfTower(Class<? extends Tower> towerClass) {
-        return towerHandler.getRangeOfTower(towerClass);
-    }
-
     public Health getEnemyAttackHealth() {
         return waveHandler.getEnemyAttackHealth();
+    }
+
+    /**
+     * Getter for towerFactory to create interfaces of type AbstractTowerFactory
+     *
+     * @return the towerFactory
+     */
+    public TowerFactory getFactory() {
+        return towerFactory;
     }
 }

@@ -128,17 +128,4 @@ public class Economy {
         }
         money += value;
     }
-
-    /**
-     * Gets the price of desired tower.
-     *
-     * @param towerClass desired tower.
-     * @return returns the price.
-     */
-    public int getTowerPrice(Class<? extends Tower> towerClass) {
-        if (!towerMap.containsKey(towerClass)) {
-            throw new UnsupportedOperationException("This tower (" + towerClass.getSimpleName() + ") has not yet been added in economy class");
-        }
-        return towerMap.get(towerClass);
-    }
 }

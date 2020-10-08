@@ -347,6 +347,8 @@ public final class Constant {
         public final String TOWER_PANEL;
         public final String TOWER_BUTTON_BACKGROUND;
         public final int TOWER_BUTTON_LABEL_ALPHA;
+        public final String GHOST_RANGE;
+        public final int GHOST_RANGE_ALPHA;
 
         private ColorCode(Properties prop) {
             VALID_TILE_HOVER = readStringValue(prop, "color_valid_tile_hover");
@@ -362,6 +364,8 @@ public final class Constant {
             TOWER_PANEL = readStringValue(prop, "color_tower_panel");
             TOWER_BUTTON_BACKGROUND = readStringValue(prop, "color_tower_button_background");
             TOWER_BUTTON_LABEL_ALPHA = (int) readDoubleValue(prop, "color_tower_button_label_alpha");
+            GHOST_RANGE = readStringValue(prop, "color_ghost_range");
+            GHOST_RANGE_ALPHA = (int) readDoubleValue(prop, "color_ghost_range_alpha");
         }
     }
 
@@ -370,6 +374,8 @@ public final class Constant {
         public final String GRIZZLY_BEAR;
         public final String BEARRY_POTTER;
         public final String SNIPER_BEAR;
+        public final String SOVIET_BEAR;
+        public final String BARBEARIAN;
         public final String ROCK;
         public final String BOMBARDA_CHARM;
         public final String SMOKE;
@@ -380,6 +386,8 @@ public final class Constant {
             GRIZZLY_BEAR = readStringValue(prop, "grizzly_bear_path");
             BEARRY_POTTER = readStringValue(prop, "bearry_potter_path");
             SNIPER_BEAR = readStringValue(prop, "sniper_bear_path");
+            SOVIET_BEAR = readStringValue(prop, "soviet_bear_path");
+            BARBEARIAN = readStringValue(prop, "barbearian_path");
             ROCK = readStringValue(prop, "stone_path");
             BOMBARDA_CHARM = readStringValue(prop, "bombarda_charm_path");
             SMOKE = readStringValue(prop, "smoke_path");

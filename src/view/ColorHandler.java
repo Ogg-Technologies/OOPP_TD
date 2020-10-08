@@ -25,6 +25,7 @@ public final class ColorHandler {
     public static final Color TOWER_PANEL;
     public static final Color TOWER_BUTTON_BACKGROUND;
     public static final Color TOWER_BUTTON_LABEL;
+    public static final Color GHOST_RANGE;
 
     static {
         Constant constant = Constant.getInstance();
@@ -39,6 +40,7 @@ public final class ColorHandler {
         TOWER_PANEL = Color.decode(constant.COLOR_CODE.TOWER_PANEL);
         TOWER_BUTTON_BACKGROUND = Color.decode(constant.COLOR_CODE.TOWER_BUTTON_BACKGROUND);
         TOWER_BUTTON_LABEL = convert(constant.COLOR_CODE.STANDARD_GUI_BACKGROUND, constant.COLOR_CODE.TOWER_BUTTON_LABEL_ALPHA);
+        GHOST_RANGE = convert(constant.COLOR_CODE.GHOST_RANGE, constant.COLOR_CODE.GHOST_RANGE_ALPHA);
     }
     /**
      * Converts a hexCode and an alpha to a Color object

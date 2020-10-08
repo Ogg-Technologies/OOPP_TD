@@ -1,10 +1,5 @@
 package model.game.tower;
 
-import application.Constant;
-import model.event.EventSender;
-import model.game.tower.concretetowers.*;
-import model.game.tower.towerutils.EnemyGetter;
-import model.game.tower.towerutils.ProjectileCreator;
 import utils.Vector;
 
 import java.util.ArrayList;
@@ -18,11 +13,9 @@ import java.util.Collections;
  */
 public class TowerHandler {
 
-    private final TowerFactory factory;
     private final Collection<Tower> towers;
 
-    public TowerHandler(EnemyGetter enemyGetter, ProjectileCreator projectileCreator, EventSender eventSender) {
-        factory = new TowerFactory(enemyGetter, projectileCreator, eventSender);
+    public TowerHandler() {
         towers = new ArrayList<>();
     }
 
@@ -34,6 +27,16 @@ public class TowerHandler {
         for (Tower t : towers) {
             t.update();
         }
+    }
+
+    /**
+     * Creates tower and adds it to the tower list in this class.
+     *
+     * @param towerFactory the method that actually creates the tower
+     * @param pos          the position of the tower to be created
+     */
+    public void createTower(AbstractTowerFactory towerFactory, Vector pos) {
+        towers.add(towerFactory.createTower(pos));
     }
 
     /**
@@ -49,68 +52,5 @@ public class TowerHandler {
             }
         }
         return false;
-    }
-
-    /**
-     * Creates a grizzly tower at position v
-     *
-     * @param v, a {@code Vector} that describes position
-     */
-    public void createGrizzlyBear(Vector v) {
-        towers.add(factory.createGrizzlyBear(v));
-    }
-
-    /**
-     * Creates a mage bear tower at position v
-     *
-     * @param v, a {@code Vector} that describes position
-     */
-    public void createBearryPotter(Vector v) {
-        // TODO: Should probably not have methods for each tower, just give Game a reference to TowerFactory
-        towers.add(factory.createBearryPotter(v));
-    }
-
-    /**
-     * Creates a sniper tower at position v
-     *
-     * @param v, a {@code Vector} that describes position
-     */
-    public void createSniperBear(Vector v) {
-        towers.add(factory.createSniperBear(v));
-    }
-
-    /**
-     * Creates a tower based on the tower class
-     *
-     * @param pos        of tower
-     * @param towerClass the class that represent the concrete tower
-     */
-    public void createTower(Vector pos, Class<? extends Tower> towerClass) {
-        towers.add(factory.createTower(pos, towerClass));
-    }
-
-    /**
-     * Get start range of specified tower
-     *
-     * @param towerClass the specified tower
-     * @return the range
-     */
-    public double getRangeOfTower(Class<? extends Tower> towerClass) {//TODO: Remove from model, should get from Constant
-        if (towerClass == GrizzlyBear.class) {
-            return Constant.getInstance().GRIZZLY_BEAR.RANGE;
-        }
-        if (towerClass == BearryPotter.class) {
-            return Constant.getInstance().BEARRY_POTTER.RANGE;
-        }
-        if (towerClass == SniperBear.class) {
-            return Constant.getInstance().SNIPER_BEAR.RANGE;
-        }
-        if (towerClass == SovietBear.class) {
-            return Constant.getInstance().SOVIET_BEAR.RANGE;
-        }
-        if (towerClass == Barbearian.class) {
-            return Constant.getInstance().BARBEARIAN.RANGE;
-        }
-        throw new IllegalArgumentException("The towerClass: " + towerClass + " is not recognized");
     }
 }

@@ -8,7 +8,9 @@ import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
 import model.game.projectile.Projectile;
+import model.game.tower.AbstractTowerFactory;
 import model.game.tower.Tower;
+import model.game.tower.TowerFactory;
 import utils.Vector;
 
 import java.util.Collection;
@@ -72,14 +74,9 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
 
-    /**
-     * This method sends the vector through to the {@code Game} object
-     * @param v is a vector that correspond to a position on the tileMap
-     * @param towerClass the type of the tower to place in game
-     */
     @Override
-    public void onTileClick(Vector v, Class<? extends Tower> towerClass) {
-        game.placeTower(v, towerClass);
+    public void onTileClick(AbstractTowerFactory factory, Vector pos, Class<? extends Tower> towerType) {
+        game.placeTower(towerType, factory, pos);
     }
 
     @Override
@@ -93,16 +90,6 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
     @Override
-    public int getTowerPrice(Class<?extends Tower> towerClass) {
-        return game.getTowerPrice(towerClass);
-    }
-
-    @Override
-    public double getRangeOfTower(Class<? extends Tower> towerClass) {
-        return game.getRangeOfTower(towerClass);
-    }
-
-    @Override
     public void sendEvent(Event event) {
         for (EventListener listener : eventListeners) {
             listener.onEvent(event);
@@ -112,6 +99,11 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     @Override
     public void onStartNewWave() {
         game.startNewWave();
+    }
+
+    @Override
+    public TowerFactory getFactory() {
+        return game.getFactory();
     }
 
     @Override

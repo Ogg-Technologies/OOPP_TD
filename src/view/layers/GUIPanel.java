@@ -2,7 +2,6 @@ package view.layers;
 
 import application.Constant;
 import model.ModelData;
-import model.ModelInputListener;
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.*;
 import utils.Vector;
@@ -10,11 +9,14 @@ import view.ButtonClickHandler;
 import view.ColorHandler;
 import view.ControllerStateValue;
 import view.WindowState;
+import view.layers.GUIObjects.GhostTowerDrawer;
 import view.texture.ImageHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Oskar, Sebastian, Samuel, Erik
@@ -24,13 +26,29 @@ import java.awt.image.BufferedImage;
 
 public class GUIPanel extends JPanel {
 
+    /**
+     * A map used by a lot of GUI elements (in this class and in GUIObjects) to know which path to use for displaying
+     * an image.
+     */
+    public static Map<Class<? extends Tower>, String> towerPathMap = setupPathMap();
+
+    private static Map<Class<? extends Tower>, String> setupPathMap() {
+        HashMap<Class<? extends Tower>, String> pathMap = new HashMap<>();
+        pathMap.put(GrizzlyBear.class, Constant.getInstance().IMAGE_PATH.GRIZZLY_BEAR);
+        pathMap.put(BearryPotter.class, Constant.getInstance().IMAGE_PATH.BEARRY_POTTER);
+        pathMap.put(SniperBear.class, Constant.getInstance().IMAGE_PATH.SNIPER_BEAR);
+        pathMap.put(SovietBear.class, Constant.getInstance().IMAGE_PATH.SOVIET_BEAR);
+        pathMap.put(Barbearian.class, Constant.getInstance().IMAGE_PATH.BARBEARIAN);
+        return pathMap;
+    }
+
     private final ModelData modelData;
 
     private Vector mouseTilePos;
 
     private ControllerStateValue controllerStateValue;
 
-    private WindowState windowState;
+    private final GhostTowerDrawer ghostTowerDrawer;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //EnemyAttack health
@@ -45,11 +63,10 @@ public class GUIPanel extends JPanel {
      */
     public GUIPanel(ModelData modelData, WindowState windowState) {
         this.modelData = modelData;
-        this.windowState = windowState;
+        ghostTowerDrawer = new GhostTowerDrawer(windowState);
         setLayout(null);
         createButtons();
         setupLabels();
-        valueSetups();
     }
 
     /**
@@ -59,10 +76,6 @@ public class GUIPanel extends JPanel {
      */
     public void updateMouseTilePos(Vector mouseTilePos) {
         this.mouseTilePos = mouseTilePos;
-    }
-
-    private void valueSetups() {
-        towerPricesSetup();
     }
 
     private static final double ENEMY_ATTACK_HEALTH_BAR_UP = .02;
@@ -78,55 +91,15 @@ public class GUIPanel extends JPanel {
      * Sets up all buttons to talk with a controller
      *
      * @param buttonClickHandler the controller that handles the onClicks.
-     * @param methodGiver        methods from model that will happen when button is clicked.
      */
-    public void setupButtons(ButtonClickHandler buttonClickHandler, ModelInputListener methodGiver) {
+    public void setupButtons(ButtonClickHandler buttonClickHandler) {
         //nextWaveButton
         nextWaveButton.addActionListener(e -> buttonClickHandler.onNextWaveClicked());
-        for (int i = 0; i < towerClasses.length; i++) {
+        Class<? extends Tower>[] towerTypes = controllerStateValue.getAllTowerTypes();
+        for (int i = 0; i < towerTypes.length; i++) {
             int finalI = i;
-            towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTower(towerClasses[finalI])));
+            towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTower(towerTypes[finalI])));
         }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //GhostTower data
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static final Color GHOST_RANGE_COLOR = new Color(128, 128, 128, 80);
-
-    private void drawGhostTower(Graphics g) {
-        Class<? extends Tower> ghostTower = controllerStateValue.getSelectedTower();
-        if (ghostTower == null || mouseTilePos == null) {
-            return;
-        }
-
-        int tilePosX = mouseTilePos.getIntX() * windowState.getTileSize() + windowState.getTileMapOffset().getIntX();
-        int tilePosY = mouseTilePos.getIntY() * windowState.getTileSize() + windowState.getTileMapOffset().getIntY();
-
-        int tileCenterX = tilePosX + windowState.getTileSize() / 2;
-        int tileCenterY = tilePosY + windowState.getTileSize() / 2;
-
-        double range = modelData.getRangeOfTower(ghostTower);
-        int realRangeRadius = (int) (windowState.getTileSize() * range);
-
-        g.setColor(GHOST_RANGE_COLOR);
-        g.fillOval(tileCenterX - realRangeRadius, tileCenterY - realRangeRadius,
-                realRangeRadius * 2, realRangeRadius * 2);
-
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-
-        String path = "";
-
-        for (int i = 0; i < towerClasses.length; i++) {
-            if (ghostTower == towerClasses[i]) {
-                path = towerImagePaths[i];
-            }
-        }
-
-        BufferedImage ghostImage = ImageHandler.getImage(path, Math.toRadians(90));
-        g.drawImage(ghostImage, tilePosX, tilePosY, windowState.getTileSize(), windowState.getTileSize(), null);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,7 +147,9 @@ public class GUIPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGhostTower(g);
+        if (controllerStateValue.getSelectedTowerType() != null && mouseTilePos != null) {
+            ghostTowerDrawer.draw(g, controllerStateValue.getSelectedTowerType(), controllerStateValue.getSelectedTowerRange(), mouseTilePos);
+        }
         drawHealthBar(g);
         drawEnemyAttackHealthBar(g);
         drawMoneyDisplay(g);
@@ -274,14 +249,6 @@ public class GUIPanel extends JPanel {
     private static final int MAX_TOWERS = 8;
     private final JLabel[] towerPriceLabels = new JLabel[MAX_TOWERS];
     private final JButton[] towerButtons = new JButton[MAX_TOWERS];
-    private final int[] towerPrices = new int[MAX_TOWERS];
-    private final Class<? extends Tower>[] towerClasses = new Class[]{
-            GrizzlyBear.class, BearryPotter.class, SniperBear.class, SovietBear.class, Barbearian.class
-    };
-    private final String[] towerImagePaths = new String[]{
-            Constant.getInstance().IMAGE_PATH.GRIZZLY_BEAR, Constant.getInstance().IMAGE_PATH.BEARRY_POTTER,
-            Constant.getInstance().IMAGE_PATH.SNIPER_BEAR, "resource/sovietBear.png", "resource/barbearian.png"
-    };
 
     private void drawTowerPanel(Graphics g) {
         double percentStartY = (WindowState.MAP_HEIGHT + WindowState.MAP_UP - 0.001);
@@ -300,6 +267,7 @@ public class GUIPanel extends JPanel {
         double towerStartY = (startY + (height - towerSize) / 2);
         double gap = (WindowState.MAP_WIDTH * getWidth() - towerSize * MAX_TOWERS) / (MAX_TOWERS - 1);
         g.setColor(ColorHandler.TOWER_BUTTON_BACKGROUND);
+        Class<? extends Tower>[] towerTypes = controllerStateValue.getAllTowerTypes();
         for (int nr = 0; nr < MAX_TOWERS; nr++) {
             //Calculates the xPos for the towerButton
             int towerStartX = (int) (percentStartX * getWidth() + startX + gap * nr + nr * towerSize);
@@ -309,20 +277,23 @@ public class GUIPanel extends JPanel {
             //Adds a background
             g.fillRect(towerStartX, (int) towerStartY, (int) towerSize, (int) towerSize);
             //Paints a tower if there is a sprite for it
-            if (nr < towerImagePaths.length) {
-                BufferedImage tempImage = ImageHandler.getImage(towerImagePaths[nr], Math.toRadians(90));
+            if (nr < towerPathMap.size() && nr < towerTypes.length) {
+                BufferedImage tempImage = ImageHandler.getImage(towerPathMap.get(towerTypes[nr]), Math.toRadians(90));
                 g.drawImage(tempImage, (int) (towerStartX + towerSize * 0.05), (int) (towerStartY + towerSize * 0.05),
                         (int) (towerSize * 0.9), (int) (towerSize * 0.9), null);
+                //Populate the label if there is a tower there
+                drawPriceLabel(towerStartX, towerStartY, towerSize, nr, controllerStateValue.getTowerPrice(towerTypes[nr]));
+            } else {
+                drawPriceLabel(towerStartX, towerStartY, towerSize, nr, 0);
             }
-            //Populate the label if there is a tower there
-            drawPriceLabel(towerStartX, towerStartY, towerSize, nr);
+
         }
     }
 
     //TODO make this compatible for more than maxTowers
-    private void drawPriceLabel(int towerStartX, double towerStartY, double towerSize, int index) {
-        if (index < towerPrices.length) {
-            towerPriceLabels[index].setText("$" + towerPrices[index]);
+    private void drawPriceLabel(int towerStartX, double towerStartY, double towerSize, int index, int price) {
+        if (index < towerPathMap.size()) {
+            towerPriceLabels[index].setText("$" + price);
             towerPriceLabels[index].setBackground(ColorHandler.TOWER_BUTTON_LABEL);
         } else {
             towerPriceLabels[index].setText("");
@@ -353,12 +324,6 @@ public class GUIPanel extends JPanel {
             tempLabel.setOpaque(true);
             towerPriceLabels[i] = tempLabel;
             add(tempLabel);
-        }
-    }
-
-    private void towerPricesSetup() {
-        for (int i = 0; i < towerClasses.length; i++) {
-            towerPrices[i] = modelData.getTowerPrice(towerClasses[i]);
         }
     }
 

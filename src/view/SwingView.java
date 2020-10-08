@@ -1,7 +1,6 @@
 package view;
 
 import model.ModelData;
-import model.ModelInputListener;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import utils.Vector;
@@ -153,8 +152,8 @@ public class SwingView implements View {
     }
 
     @Override
-    public void addButtonAndMethodHandler(ButtonClickHandler buttonClickHandler, ModelInputListener methodGiver) {
-        GUIPanel.setupButtons(buttonClickHandler, methodGiver);
+    public void addButtonClickHandler(ButtonClickHandler buttonClickHandler) {
+        GUIPanel.setupButtons(buttonClickHandler);
     }
 
     @Override
