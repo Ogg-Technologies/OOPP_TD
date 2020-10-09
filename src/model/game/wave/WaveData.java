@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * @author Oskar
  * Class which defines all waves in the game.
- * <p>
  * The first levels are manually declared in this class. After those levels, there is an infinite number of
  * algorithmically created levels
  */
@@ -44,6 +43,7 @@ public class WaveData {
     }
 
     private void setupDefinedWaves() {
+        // Introduce fishStick
         definedWaves.add(seq()
                 .spawnMultipleWithDelay(fac::createFishstick, 10, 90)
                 ::toWave);
@@ -51,21 +51,126 @@ public class WaveData {
         definedWaves.add(seq()
                 .spawnMultipleWithDelay(fac::createFishstick, 10, 80)
                 .delay(50)
-                .spawn(fac::createSailfish)
+                .spawn(fac::createSwordfish)
                 ::toWave);
 
+        // Introduce swordFish
         definedWaves.add(seq()
                 .spawnMultipleWithDelay(fac::createFishstick, 5, 90)
                 .delay(30)
-                .spawnMultipleWithDelay(fac::createSailfish, 5, 90)
+                .spawnMultipleWithDelay(fac::createSwordfish, 5, 90)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createSwordfish, 15, 40)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishstick, 100, 5)
+                ::toWave);
+
+        // Introduce FishAndChips
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishAndChips, 5, 100)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishAndChips, 5, 50)
+                ::toWave);
+
+        // Introduce FishInABoat
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishInABoat, 5, 200)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishInABoat, 3, 20)
+                .delay(300)
+                .spawnMultipleWithDelay(fac::createFishInABoat, 3, 20)
+                ::toWave);
+
+        // Introduce SailFish
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishstick, 100, 2)
+                .delay(300)
+                .spawnMultipleWithDelay(fac::createFishAndChips, 50, 5)
+                .delay(300)
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 60)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishInABoat, 3, 60)
+                .delay(5)
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 30)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
+                .delay(5)
+                .spawnMultipleWithDelay(fac::createFishInABoat, 5, 40)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
+                .delay(300)
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
+                ::toWave);
+
+        // Introduce shark
+        definedWaves.add(seq()
+                .spawn(fac::createShark)
+                .delay(30)
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
+                .delay(5)
+                .spawnMultipleWithDelay(fac::createFishInABoat, 20, 40)
+                .delay(10)
+                .spawn(fac::createShark)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createShark, 3, 60)
+                .delay(400)
+                .spawnMultipleWithDelay(fac::createShark, 3, 60)
+                .delay(400)
+                .spawnMultipleWithDelay(fac::createShark, 8, 40)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createSailfish, 20, 5)
+                .delay(100)
+                .spawnMultipleWithDelay(fac::createShark, 10, 60)
+                ::toWave);
+
+        // Introduce fishInAFishTank
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishInABoat, 40, 10)
+                .delay(10)
+                .spawn(fac::createFishInFishTank)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishInFishTank, 4, 200)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createShark, 20, 30)
+                .delay(10)
+                .spawnMultipleWithDelay(fac::createFishInFishTank, 10, 200)
+                ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createSailfish, 100, 10)
+                .delay(10)
+                .spawnMultipleWithDelay(fac::createFishInFishTank, 20, 60)
                 ::toWave);
     }
 
     private Wave createWaveFromAlgorithm(int level) {
         EnemySequence s = seq();
-        int numEnemies = level;
-        int separation = Math.max(1, 1000 / level);
-        s.spawnMultipleWithDelay(fac::createFishInABoat, numEnemies, separation);
+        int baseNumEnemies = level / 5;
+        int baseSeparation = Math.max(1, 1000 / level);
+        s.spawnMultipleWithDelay(fac::createFishInFishTank, baseNumEnemies, baseSeparation * 4);
+        s.spawnMultipleWithDelay(fac::createShark, baseNumEnemies * 2, baseSeparation);
         return s.toWave();
     }
 
