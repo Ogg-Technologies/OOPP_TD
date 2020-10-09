@@ -9,7 +9,7 @@ public class BurstChargeStrategy implements ChargeStrategy {
     private final int attacksPerCharge;
     private int attacksLeft;
 
-    private int charge = 0;
+    private double charge = 0;
 
     /**
      * @param maxCharge        the number of updates between bursts
@@ -23,8 +23,13 @@ public class BurstChargeStrategy implements ChargeStrategy {
 
     @Override
     public void update() {
+        update(1);
+    }
+
+    @Override
+    public void update(double fireRateMultiplier) {
         if (charge < maxCharge) {
-            charge++;
+            charge += fireRateMultiplier;
         }
     }
 

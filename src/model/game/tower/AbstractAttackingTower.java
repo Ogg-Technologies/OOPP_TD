@@ -16,10 +16,11 @@ public abstract class AbstractAttackingTower extends AbstractTower {
 
     /**
      * Creates an attacking tower
-     * @param pos The position of the tower
-     * @param range The tower's range
+     *
+     * @param pos            The position of the tower
+     * @param range          The tower's range
      * @param chargeStrategy Strategy on how the tower charges between attacks
-     * @param enemyTargeter Helper class used to find an enemy to target
+     * @param enemyTargeter  Helper class used to find an enemy to target
      */
     public AbstractAttackingTower(Vector pos, double range, ChargeStrategy chargeStrategy, EnemyTargeter enemyTargeter) {
         super(pos, range, chargeStrategy);
@@ -28,17 +29,19 @@ public abstract class AbstractAttackingTower extends AbstractTower {
 
     /**
      * Template method pattern - all attacking towers attacks differently
+     *
      * @param e The enemy to attack
      */
     protected abstract void attack(Enemy e);
 
     /**
      * Attacks an enemy if there is one within its range
+     *
      * @return True if it attacked or false if it didn't
      */
     @Override
     protected boolean tryFire() {
-        Enemy e = enemyTargeter.getEnemyToAttack(getPos(), getRange());
+        Enemy e = enemyTargeter.getEnemyToAttack(getPos(), getRange() * getActiveMultipliers().getRangeMultiplier());
         if (e == null) {
             return false;
         }

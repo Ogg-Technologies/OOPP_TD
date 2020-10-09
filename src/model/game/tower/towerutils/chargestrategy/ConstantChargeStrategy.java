@@ -6,7 +6,7 @@ package model.game.tower.towerutils.chargestrategy;
  */
 public class ConstantChargeStrategy implements ChargeStrategy {
     private final int maxCharge;
-    private int charge = 0;
+    private double charge = 0;
 
     /**
      * @param maxCharge the number of updates between fires
@@ -17,14 +17,19 @@ public class ConstantChargeStrategy implements ChargeStrategy {
 
     @Override
     public void update() {
+        update(1);
+    }
+
+    @Override
+    public void update(double fireRateMultiplier) {
         if (charge < maxCharge) {
-            charge++;
+            charge += fireRateMultiplier;
         }
     }
 
     @Override
     public boolean isReadyToFire() {
-        return charge == maxCharge;
+        return charge >= maxCharge;
     }
 
     @Override

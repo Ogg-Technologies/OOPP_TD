@@ -28,7 +28,7 @@ public class SovietBear extends AbstractAttackingTower {
 
     @Override
     protected void attack(Enemy e) {
-        e.damage(Constant.getInstance().SOVIET_BEAR.BASE_DAMAGE);
+        e.damage((int) (Constant.getInstance().SOVIET_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier()));
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
     }
 

@@ -30,7 +30,7 @@ public class GrizzlyBear extends AbstractAttackingTower {
 
     @Override
     protected void attack(Enemy e) {
-        int damage = Constant.getInstance().GRIZZLY_BEAR.BASE_DAMAGE;
+        int damage = (int) (Constant.getInstance().GRIZZLY_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
         Projectile rock = projectileCreator.getProjectileFactory().createRock(getPos(), e.getPos(), damage);
         projectileCreator.addProjectile(rock);
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));

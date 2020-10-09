@@ -39,7 +39,8 @@ public class TowerHandler {
      */
     public void createTower(AbstractTowerFactory towerFactory, Vector pos) {
         synchronized (towers) {
-            towers.add(towerFactory.createTower(pos));
+            Tower newTower = towerFactory.createTower(pos);
+            towers.add(newTower);
         }
     }
 

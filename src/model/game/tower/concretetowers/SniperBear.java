@@ -28,7 +28,7 @@ public class SniperBear extends AbstractAttackingTower {
 
     @Override
     protected void attack(Enemy e) {
-        int damage = Constant.getInstance().SNIPER_BEAR.BASE_DAMAGE;
+        int damage = (int) (Constant.getInstance().SNIPER_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
         e.damage(damage);
         eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
     }

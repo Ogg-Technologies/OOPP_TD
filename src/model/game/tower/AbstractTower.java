@@ -1,5 +1,8 @@
 package model.game.tower;
 
+import model.game.tower.towerutils.buff.BuffManager;
+import model.game.tower.towerutils.buff.TowerModifier;
+import model.game.tower.towerutils.buff.TowerMultipliers;
 import model.game.tower.towerutils.chargestrategy.ChargeStrategy;
 import utils.Vector;
 
@@ -11,6 +14,7 @@ public abstract class AbstractTower implements Tower {
     private final Vector pos;
     private final double range;
     private final ChargeStrategy chargeStrategy;
+    private final BuffManager buffManager = new BuffManager();
 
     /**
      * @param pos The tile position of the tower
@@ -36,7 +40,8 @@ public abstract class AbstractTower implements Tower {
 
     @Override
     public void update() {
-        chargeStrategy.update();
+        buffManager.update();
+        chargeStrategy.update(getActiveMultipliers().getFireRateMultiplier());
         while (chargeStrategy.isReadyToFire()) {
             boolean success = tryFire();
             if (success) {
@@ -45,6 +50,15 @@ public abstract class AbstractTower implements Tower {
                 break;
             }
         }
+    }
+
+    @Override
+    public void applyBuff(TowerModifier towerModifier, int duration) {
+        buffManager.applyBuff(towerModifier, duration);
+    }
+
+    protected TowerMultipliers getActiveMultipliers() {
+        return buffManager.getTowerMultipliers();
     }
 
     @Override
