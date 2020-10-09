@@ -11,6 +11,9 @@ import java.awt.image.ImageProducer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Erik
+ */
 class EmitterTest {
 
     @Test

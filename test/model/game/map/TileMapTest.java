@@ -11,6 +11,9 @@ import static model.game.map.Tile.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * @author Oskar, Erik
+ */
 class TileMapTest {
 
     @Test

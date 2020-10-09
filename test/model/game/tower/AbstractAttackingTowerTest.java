@@ -9,6 +9,9 @@ import utils.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Erik
+ */
 class AbstractAttackingTowerTest {
 
     private AbstractAttackingTower mockTower;

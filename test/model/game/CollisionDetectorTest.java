@@ -10,6 +10,9 @@ import static model.game.Mock.createStationaryProjectile;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * @author Oskar, Erik
+ */
 class CollisionDetectorTest {
 
     @Test
