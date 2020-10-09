@@ -4,15 +4,12 @@ import model.event.Event;
 import model.event.EventSender;
 import model.game.Health;
 import model.game.MutableHealth;
-import model.game.enemy.BaseDamager;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyFactory;
-import utils.Vector;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -32,8 +29,8 @@ public class WaveHandler {
      */
     private int originalEnemyAttackHealth = 0; //TODO remove this by keeping finished waves to calculate enemyAttackHealth. Remove all Waves when all are finished
 
-    public WaveHandler(BaseDamager baseDamager, List<? extends Vector> path, EventSender eventSender) {
-        waveData = new WaveData(new EnemyFactory(baseDamager, path));
+    public WaveHandler(EnemyFactory enemyFactory, EventSender eventSender) {
+        waveData = new WaveData(enemyFactory);
         this.eventSender = eventSender;
     }
 

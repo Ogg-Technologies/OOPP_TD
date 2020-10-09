@@ -5,6 +5,7 @@ import model.event.Event;
 import model.event.EventListener;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
+import model.game.enemy.EnemyFactory;
 import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
@@ -28,24 +29,24 @@ import java.util.Collection;
  * It is created and used by Model
  */
 public class Game implements EnemyGetter, ProjectileService, EventListener {
-    private final EventSender eventSender;
 
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
-    private final MutableHealth baseHealth;
-    private final TowerHandler towerHandler;
+    private final MutableHealth baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
+    ;
+    private final TowerHandler towerHandler = new TowerHandler();
     private final WaveHandler waveHandler;
     private final ProjectileHandler projectileHandler;
-    private final Economy economy;
+    private final Economy economy = new Economy(Constant.getInstance().PLAYER.START_MONEY);
+    ;
     private final TowerFactory towerFactory;
 
     public Game(EventSender eventSender) {
-        this.eventSender = eventSender;
-        baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
-        towerHandler = new TowerHandler();
-        waveHandler = new WaveHandler(baseHealth::damage, tileMap.getPath(), eventSender);
+        EnemyFactory enemyFactory = new EnemyFactory(baseHealth::damage, tileMap.getPath());
+        waveHandler = new WaveHandler(enemyFactory, eventSender);
+
         ProjectileFactory projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
         projectileHandler = new ProjectileHandler(projectileFactory);
-        economy = new Economy(Constant.getInstance().PLAYER.START_MONEY);
+
         towerFactory = new TowerFactory(this, projectileHandler, eventSender);
     }
 
