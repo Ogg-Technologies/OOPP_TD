@@ -4,8 +4,9 @@ import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import utils.Vector;
-import view.layers.*;
+import view.gameLayers.*;
 import view.particles.ParticleHandler;
+import view.startLayers.ButtonPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,7 @@ public class SwingView implements View {
     private int width = 800;
     private int height = 800;
     public final static int heightOffset = 40;//same goes for y
-    private final JFrame window;
+    private JFrame window;
 
     private final Vector offset = new Vector(8, 31);
 
@@ -34,18 +35,33 @@ public class SwingView implements View {
 
     private boolean windowHasBeenActive = false;
 
-    private final ParticleHandler particleHandler;
-    private final JPanel[] layers;
+    private ParticleHandler particleHandler;
+    private JPanel[] gameLayers;
+    private JPanel[] startLayers;
 
-    private final Background background;
-    private final GUIPanel GUIPanel;
+    private JLayeredPane gameLayersPane;
+    private JLayeredPane startLayersPane;
+
+    private Background background;
+    private GUIPanel GUIPanel;
+    private ControllerStateValue controllerStateValue;
+    private ButtonClickHandler buttonClickHandler;
+
+    private ViewState previousState = ViewState.START;
 
     public SwingView(ModelData modelData) {
 
         this.modelData = modelData;
 
-        //Setup for window and every layer
         window = new JFrame();
+
+        setupStartWindow();
+    }
+
+
+    private void setupGameWindow() {
+        window.remove(startLayersPane);
+        windowState.setViewStateToGame();
 
         background = new Background(modelData, windowState);
         JPanel towerLayer = new JPanel() {
@@ -69,13 +85,38 @@ public class SwingView implements View {
             }
         };
         ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
-        this.GUIPanel = new GUIPanel(modelData, windowState);
+        this.GUIPanel = new GUIPanel(modelData, windowState, controllerStateValue);
+        this.GUIPanel.setupButtons(buttonClickHandler);
 
         particleHandler = new ParticleHandler(windowState);
         modelData.addOnModelEventListener(particleHandler);
 
         //All layers where first element is furthest back
-        layers = new JPanel[]{background, towerLayer, enemyLayer, projectileLayer, particleHandler, GUIPanel};
+        gameLayers = new JPanel[]{background, towerLayer, enemyLayer, projectileLayer, particleHandler, GUIPanel};
+
+        setOpaqueness(gameLayers);
+        gameLayersPane = createLayeredPane(gameLayers);
+
+        window.add(gameLayersPane);
+        SwingUtilities.updateComponentTreeUI(window);
+    }
+
+    private void setupStartWindow() {
+        if (gameLayersPane != null) {
+            window.remove(gameLayersPane);
+        }
+        window.getContentPane().setBackground(ColorHandler.GROUND);
+
+        windowState.setViewStateToStart();
+        ButtonPanel buttons = new ButtonPanel(windowState);
+
+        startLayers = new JPanel[]{buttons};
+
+        setOpaqueness(startLayers);
+        startLayersPane = createLayeredPane(startLayers);
+
+        window.add(startLayersPane);
+        SwingUtilities.updateComponentTreeUI(window);
     }
 
     @Override
@@ -83,15 +124,10 @@ public class SwingView implements View {
         window.setSize(width, height);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        setOpaqueness();
-        JLayeredPane layeredPane = createLayeredPane();
-
-        this.window.add(layeredPane);
         draw();
     }
 
-    private JLayeredPane createLayeredPane() {
+    private JLayeredPane createLayeredPane(JPanel[] layers) {
         JLayeredPane returnPane = new JLayeredPane();
         for (int i = 0; i < layers.length; i++) {
             returnPane.add(layers[i], i, 0);
@@ -99,21 +135,33 @@ public class SwingView implements View {
         return returnPane;
     }
 
-    private void setOpaqueness() {
-        for (int i = 1; i < layers.length; i++) {
-            layers[i].setOpaque(false);
+    private void setOpaqueness(JPanel[] layers) {
+        for (JPanel layer : layers) {
+            layer.setOpaque(false);
         }
     }
 
     @Override
     public void draw() {
-
+        ViewState currentState = windowState.getViewState();
+        if (previousState != currentState) {
+            previousState = currentState;
+            if (currentState == ViewState.START) {
+                setupStartWindow();
+            } else {
+                setupGameWindow();
+            }
+        }
         Vector totalSize = new Vector(window.getWidth() - widthOffset, window.getHeight() - heightOffset);
         Vector tileSize = modelData.getMapSize();
 
         windowState.update(totalSize, tileSize);
 
-        setSizeOfLayers(window.getSize());
+        if (currentState == ViewState.GAME) {
+            setSizeOfLayers(window.getSize(), gameLayers);
+        } else {
+            setSizeOfLayers(window.getSize(), startLayers);
+        }
 
         window.repaint();
 
@@ -122,14 +170,14 @@ public class SwingView implements View {
         }
     }
 
-    private void setSizeOfLayers(Dimension size) {
+    private void setSizeOfLayers(Dimension size, JPanel[] layers) {
         int width = size.width - widthOffset;
         int height = size.height - heightOffset;
         for (JPanel layer : layers) {
             layer.setSize(width, height);
         }
-    }
 
+    }
 
     @Override
     public void addMouseListener(MouseListener mouseListener) {
@@ -147,24 +195,27 @@ public class SwingView implements View {
     }
 
     @Override
-    public void addMouseMotionListener(MouseMotionListener mouseMotionListener){
+    public void addMouseMotionListener(MouseMotionListener mouseMotionListener) {
         window.addMouseMotionListener(mouseMotionListener);
     }
 
     @Override
     public void addButtonClickHandler(ButtonClickHandler buttonClickHandler) {
-        GUIPanel.setupButtons(buttonClickHandler);
+        this.buttonClickHandler = buttonClickHandler;
     }
 
     @Override
     public void addState(ControllerStateValue controllerStateValue) {
-        GUIPanel.addState(controllerStateValue);
+        this.controllerStateValue = controllerStateValue;
     }
 
     private Vector prevTilePos = null;
 
     @Override
     public void updateMousePosition(Vector v) {
+        if (windowState.getViewState() != ViewState.GAME) {
+            return;
+        }
         Vector tilePos = convertFromRealPosToTilePos(v);
         if (tilePos == null) {
             GUIPanel.updateMouseTilePos(null);

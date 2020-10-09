@@ -11,6 +11,7 @@ public class WindowState {
     private int tileSize = 0;
     private Vector offset;
 
+    private ViewState viewState = ViewState.START;
 
     public static final double MAP_LEFT = .17;
     public static final double MAP_UP = .02;
@@ -51,4 +52,15 @@ public class WindowState {
         return offset;
     }
 
+    public ViewState getViewState() {
+        return viewState;
+    }
+
+    public void setViewStateToStart() {
+        this.viewState = ViewState.START;
+    }
+
+    public void setViewStateToGame() {
+        this.viewState = ViewState.GAME;
+    }
 }

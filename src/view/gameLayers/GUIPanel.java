@@ -1,4 +1,4 @@
-package view.layers;
+package view.gameLayers;
 
 import application.Constant;
 import model.ModelData;
@@ -9,7 +9,7 @@ import view.ButtonClickHandler;
 import view.ColorHandler;
 import view.ControllerStateValue;
 import view.WindowState;
-import view.layers.GUIObjects.GhostTowerDrawer;
+import view.gameLayers.GUIObjects.GhostTowerDrawer;
 import view.texture.ImageHandler;
 
 import javax.swing.*;
@@ -61,8 +61,9 @@ public class GUIPanel extends JPanel {
      * @param modelData   data from model that gui needs.
      * @param windowState the state of window
      */
-    public GUIPanel(ModelData modelData, WindowState windowState) {
+    public GUIPanel(ModelData modelData, WindowState windowState, ControllerStateValue controllerStateValue) {
         this.modelData = modelData;
+        this.controllerStateValue = controllerStateValue;
         ghostTowerDrawer = new GhostTowerDrawer(windowState);
         setLayout(null);
         createButtons();
@@ -325,14 +326,5 @@ public class GUIPanel extends JPanel {
             towerPriceLabels[i] = tempLabel;
             add(tempLabel);
         }
-    }
-
-    /**
-     * Adds a state for some controller values
-     *
-     * @param controllerStateValue the state
-     */
-    public void addState(ControllerStateValue controllerStateValue) {
-        this.controllerStateValue = controllerStateValue;
     }
 }

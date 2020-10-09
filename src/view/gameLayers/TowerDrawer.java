@@ -1,4 +1,4 @@
-package view.layers;
+package view.gameLayers;
 
 import application.Constant;
 import model.game.tower.Tower;

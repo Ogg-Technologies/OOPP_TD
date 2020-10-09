@@ -1,10 +1,10 @@
-package view.layers.GUIObjects;
+package view.gameLayers.GUIObjects;
 
 import model.game.tower.Tower;
 import utils.Vector;
 import view.ColorHandler;
 import view.WindowState;
-import view.layers.GUIPanel;
+import view.gameLayers.GUIPanel;
 import view.texture.ImageHandler;
 
 import java.awt.*;
