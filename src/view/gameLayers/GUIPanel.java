@@ -52,6 +52,8 @@ public class GUIPanel extends JPanel {
 
     private JButton backToStartButton;
 
+    private JLabel waveLabel;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //EnemyAttack health
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,6 +128,23 @@ public class GUIPanel extends JPanel {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //WaveLabel data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private final double WAVE_LABEL_LEFT = WAVE_BUTTON_LEFT;
+    private final double WAVE_LABEL_UP = BACK_TO_START_UP + .1;
+    private final double WAVE_LABEL_WIDTH = WAVE_BUTTON_WIDTH;
+    private final double WAVE_LABEL_HEIGHT = .2;
+    private final double WAVE_LABEL_FONT = .025;
+
+    private void updateWaveLabel(){
+        waveLabel.setSize((int)(WAVE_LABEL_WIDTH * getWidth()), (int)(WAVE_LABEL_HEIGHT * getHeight()));
+        waveLabel.setLocation((int)(WAVE_LABEL_LEFT * getWidth()), (int)(WAVE_LABEL_UP * getHeight()));
+        String text = "Wave: " + modelData.getWaveNumber();
+        waveLabel.setText(text);
+        waveLabel.setFont(new Font("serif", Font.BOLD, (int)(WAVE_LABEL_FONT*getWidth())));
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //BaseHealth data
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static final double HEALTH_BAR_LEFT = .145;
@@ -179,6 +198,7 @@ public class GUIPanel extends JPanel {
         drawNextWaveButton(g);
         drawTowerPanel(g);
         updateBackToStartButton();
+        updateWaveLabel();
     }
 
     private void setupLabels() {
@@ -189,6 +209,9 @@ public class GUIPanel extends JPanel {
         enemyAttackHealthBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(enemyAttackHealthBarLabel);
         towerPriceLabelSetup();
+        waveLabel = new JLabel();
+        waveLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(waveLabel);
     }
 
     private void drawEnemyAttackHealthBar(Graphics g) {

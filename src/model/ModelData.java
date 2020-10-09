@@ -58,4 +58,11 @@ public interface ModelData {
      * @return the health of the enemy teams attack
      */
     Health getEnemyAttackHealth();
+
+    /**
+     * Getter for current wave number
+     *
+     * @return the wave number
+     */
+    int getWaveNumber();
 }

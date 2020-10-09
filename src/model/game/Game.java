@@ -171,4 +171,13 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
     public TowerFactory getFactory() {
         return towerFactory;
     }
+
+    /**
+     * Getter for current wave number
+     *
+     * @return the current wave number
+     */
+    public int getWaveNumber() {
+        return waveHandler.getCurrentLevel();
+    }
 }
