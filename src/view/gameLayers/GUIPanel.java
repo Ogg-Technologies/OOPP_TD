@@ -50,6 +50,8 @@ public class GUIPanel extends JPanel {
 
     private final GhostTowerDrawer ghostTowerDrawer;
 
+    private JButton backToStartButton;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //EnemyAttack health
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +88,9 @@ public class GUIPanel extends JPanel {
         nextWaveButton.setContentAreaFilled(false);
         add(nextWaveButton);
         createTowerButtons();
+        backToStartButton = new JButton();
+        backToStartButton.setText("X");
+        add(backToStartButton);
     }
 
     /**
@@ -93,7 +98,7 @@ public class GUIPanel extends JPanel {
      *
      * @param buttonClickHandler the controller that handles the onClicks.
      */
-    public void setupButtons(ButtonClickHandler buttonClickHandler) {
+    public void setupButtons(ButtonClickHandler buttonClickHandler, WindowState windowState) {
         //nextWaveButton
         nextWaveButton.addActionListener(e -> buttonClickHandler.onNextWaveClicked());
         Class<? extends Tower>[] towerTypes = controllerStateValue.getAllTowerTypes();
@@ -101,6 +106,23 @@ public class GUIPanel extends JPanel {
             int finalI = i;
             towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTower(towerTypes[finalI])));
         }
+        backToStartButton.addActionListener(e -> windowState.setViewStateToStart());
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //BackToStartButton data
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private final double BACK_TO_START_LEFT = .93;
+    private final double BACK_TO_START_UP = .02;
+    private final double BACK_TO_START_WIDTH = .05;
+    private final double BACK_TO_START_HEIGHT = .05;
+    private final double BACK_TO_START_FONT = .22;
+
+    private void updateBackToStartButton() {
+        backToStartButton.setSize((int)(BACK_TO_START_WIDTH * getWidth()), (int)(BACK_TO_START_HEIGHT * getHeight()));
+        backToStartButton.setLocation((int)(BACK_TO_START_LEFT * getWidth()), (int)(BACK_TO_START_UP * getHeight()));
+        backToStartButton.setFont(new Font("serif", Font.BOLD, (int)(BACK_TO_START_FONT * getWidth() * BACK_TO_START_WIDTH)));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -156,6 +178,7 @@ public class GUIPanel extends JPanel {
         drawMoneyDisplay(g);
         drawNextWaveButton(g);
         drawTowerPanel(g);
+        updateBackToStartButton();
     }
 
     private void setupLabels() {

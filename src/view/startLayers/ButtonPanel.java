@@ -5,9 +5,18 @@ import view.WindowState;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Sebastian, Samuel
+ * Panel for start window, where all buttons are
+ * It is used by view
+ */
 public class ButtonPanel extends JPanel {
     private final JButton startButton;
 
+    /**
+     * The constructor creates all the buttons
+     * @param windowState used to change view state
+     */
     public ButtonPanel(WindowState windowState) {
         startButton = new JButton();
         startButton.addActionListener((e -> windowState.setViewStateToGame()));

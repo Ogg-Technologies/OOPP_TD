@@ -61,7 +61,6 @@ public class SwingView implements View {
 
     private void setupGameWindow() {
         window.remove(startLayersPane);
-        windowState.setViewStateToGame();
 
         background = new Background(modelData, windowState);
         JPanel towerLayer = new JPanel() {
@@ -86,7 +85,7 @@ public class SwingView implements View {
         };
         ProjectileDrawer projectileLayer = new ProjectileDrawer(modelData, windowState);
         this.GUIPanel = new GUIPanel(modelData, windowState, controllerStateValue);
-        this.GUIPanel.setupButtons(buttonClickHandler);
+        this.GUIPanel.setupButtons(buttonClickHandler, windowState);
 
         particleHandler = new ParticleHandler(windowState);
         modelData.addOnModelEventListener(particleHandler);
@@ -99,6 +98,8 @@ public class SwingView implements View {
 
         window.add(gameLayersPane);
         SwingUtilities.updateComponentTreeUI(window);
+
+        windowState.setViewStateToGame();
     }
 
     private void setupStartWindow() {
@@ -107,7 +108,6 @@ public class SwingView implements View {
         }
         window.getContentPane().setBackground(ColorHandler.GROUND);
 
-        windowState.setViewStateToStart();
         ButtonPanel buttons = new ButtonPanel(windowState);
 
         startLayers = new JPanel[]{buttons};
@@ -117,6 +117,7 @@ public class SwingView implements View {
 
         window.add(startLayersPane);
         SwingUtilities.updateComponentTreeUI(window);
+        windowState.setViewStateToStart();
     }
 
     @Override
@@ -213,7 +214,7 @@ public class SwingView implements View {
 
     @Override
     public void updateMousePosition(Vector v) {
-        if (windowState.getViewState() != ViewState.GAME) {
+        if (windowState.getViewState() != ViewState.GAME || GUIPanel == null || background == null) {
             return;
         }
         Vector tilePos = convertFromRealPosToTilePos(v);
