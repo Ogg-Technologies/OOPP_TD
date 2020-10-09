@@ -9,6 +9,7 @@ import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
+import model.game.projectile.ProjectileHandler;
 import model.game.projectile.ProjectileService;
 import model.game.tower.AbstractTowerFactory;
 import model.game.tower.Tower;
@@ -16,60 +17,45 @@ import model.game.tower.TowerFactory;
 import model.game.tower.TowerHandler;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
-import model.game.tower.towerutils.ProjectileCreator;
 import model.game.wave.WaveHandler;
 import utils.Vector;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * The class representing the whole TowerDefenseGame with a given map.
  * It is created and used by Model
  */
-public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, EventListener {
+public class Game implements EnemyGetter, ProjectileService, EventListener {
     private final EventSender eventSender;
 
     private final TileMap tileMap = TileMap.fromDefaultTileGrid();
+    private final MutableHealth baseHealth;
     private final TowerHandler towerHandler;
     private final WaveHandler waveHandler;
-    private final MutableHealth baseHealth;
-    private final Collection<Projectile> projectiles;
-    private final ProjectileFactory projectileFactory;
+    private final ProjectileHandler projectileHandler;
     private final Economy economy;
     private final TowerFactory towerFactory;
 
     public Game(EventSender eventSender) {
         this.eventSender = eventSender;
-        towerHandler = new TowerHandler();
         baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
+        towerHandler = new TowerHandler();
         waveHandler = new WaveHandler(baseHealth::damage, tileMap.getPath(), eventSender);
-        projectiles = new ArrayList<>();
-        projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
+        ProjectileFactory projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
+        projectileHandler = new ProjectileHandler(projectileFactory);
         economy = new Economy(Constant.getInstance().PLAYER.START_MONEY);
-        towerFactory = new TowerFactory(this, this, eventSender);
+        towerFactory = new TowerFactory(this, projectileHandler, eventSender);
     }
 
     public void update() {
         if (baseHealth.isDead()) {
             return;
         }
-        updateProjectiles();
+        projectileHandler.update();
         towerHandler.update();
         waveHandler.update();
-    }
-
-    private void updateProjectiles() {
-        for (Iterator<Projectile> iterator = projectiles.iterator(); iterator.hasNext(); ) {
-            Projectile p = iterator.next();
-            p.update();
-            if (p.isConsumed()) {
-                iterator.remove();
-            }
-        }
     }
 
     public Collection<? extends Tower> getTowers() {
@@ -89,16 +75,6 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         return baseHealth;
     }
 
-    @Override
-    public void addProjectile(Projectile projectile) {
-        projectiles.add(projectile);
-    }
-
-    @Override
-    public ProjectileFactory getProjectileFactory() {
-        return projectileFactory;
-    }
-
     /**
      * Returns the Tile at the given position or throws an exception if it is not within map bounds
      */
@@ -106,9 +82,8 @@ public class Game implements EnemyGetter, ProjectileCreator, ProjectileService, 
         return tileMap.getTile(x, y);
     }
 
-    //TODO: Change this if not compliant with what is wanted in the model
     public Collection<Projectile> getProjectiles() {
-        return Collections.unmodifiableCollection(new ArrayList<>(projectiles));
+        return projectileHandler.getProjectiles();
     }
 
     /**

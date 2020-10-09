@@ -11,12 +11,13 @@ import static model.game.map.Tile.*;
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * Represents the a map in the game with the path for the enemies, the spawn and the base.
+ *
+ * The tileGrid never changes
  */
 public class TileMap {
 
     private final Tile[][] tileGrid;
     private final List<? extends Vector> deltas;
-    //private final ConnectedSequence<Vector> path;
     private final List<Vector> path;
 
     private TileMap(Tile[][] tileGrid) {
@@ -165,10 +166,12 @@ public class TileMap {
     }
 
     public Tile getTile(int x, int y) {
-        if (x < 0 || x >= getWidth())
+        if (x < 0 || x >= getWidth()) {
             throw new IllegalArgumentException("x: " + x + " is not within 0 to " + (getWidth() - 1));
-        if (y < 0 || y >= getHeight())
+        }
+        if (y < 0 || y >= getHeight()) {
             throw new IllegalArgumentException("y: " + y + " is not within 0 to " + (getHeight() - 1));
+        }
         return tileGrid[y][x];
     }
 

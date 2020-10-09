@@ -4,7 +4,6 @@ import utils.Vector;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author Oskar, Sebastian, Behroz, Erik
@@ -13,19 +12,22 @@ import java.util.Collections;
  */
 public class TowerHandler {
 
-    private final Collection<Tower> towers;
+    private final Collection<Tower> towers = new ArrayList<>();
 
     public TowerHandler() {
-        towers = new ArrayList<>();
     }
 
     public Collection<? extends Tower> getTowers() {
-        return Collections.unmodifiableCollection(new ArrayList<>(towers));
+        synchronized (towers) {
+            return new ArrayList<>(towers);
+        }
     }
 
     public void update() {
-        for (Tower t : towers) {
-            t.update();
+        synchronized (towers) {
+            for (Tower t : towers) {
+                t.update();
+            }
         }
     }
 
@@ -36,7 +38,9 @@ public class TowerHandler {
      * @param pos          the position of the tower to be created
      */
     public void createTower(AbstractTowerFactory towerFactory, Vector pos) {
-        towers.add(towerFactory.createTower(pos));
+        synchronized (towers) {
+            towers.add(towerFactory.createTower(pos));
+        }
     }
 
     /**
@@ -46,9 +50,11 @@ public class TowerHandler {
      * @return true if there is a tower on this pos, else false
      */
     public boolean isTowerAt(Vector tilePos) {
-        for (Tower t : towers) {
-            if (t.getPos().equals(tilePos)) {
-                return true;
+        synchronized (towers) {
+            for (Tower t : towers) {
+                if (t.getPos().equals(tilePos)) {
+                    return true;
+                }
             }
         }
         return false;

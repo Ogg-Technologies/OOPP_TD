@@ -47,7 +47,9 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
 
     @Override
     public void addOnModelEventListener(EventListener eventListener) {
-        eventListeners.add(eventListener);
+        synchronized (commands) {
+            commands.add(() -> eventListeners.add(eventListener));
+        }
     }
 
     @Override

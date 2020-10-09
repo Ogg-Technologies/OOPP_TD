@@ -9,19 +9,21 @@ import model.game.enemy.Enemy;
 import model.game.enemy.EnemyFactory;
 import utils.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * Handler for starting Waves and spawning the enemies from them.
- * <p>
  * It is possible to start multiple waves at the same time.
  */
 public class WaveHandler {
-    WaveData waveData;
-    Collection<Wave> activeWaves = new ArrayList<>();
+    private final WaveData waveData;
+    private final Collection<Wave> activeWaves = new ArrayList<>();
     private int currentLevel = 0;
-    private final Collection<Enemy> enemies;
+    private final Collection<Enemy> enemies = new ArrayList<>();
     private final EventSender eventSender;
 
     /**
@@ -32,7 +34,6 @@ public class WaveHandler {
 
     public WaveHandler(BaseDamager baseDamager, List<? extends Vector> path, EventSender eventSender) {
         waveData = new WaveData(new EnemyFactory(baseDamager, path));
-        enemies = new ArrayList<>();
         this.eventSender = eventSender;
     }
 
@@ -47,30 +48,36 @@ public class WaveHandler {
     }
 
     private void updateEnemies() {
-        for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
-            Enemy e = enemyIterator.next();
-            if (e.getHealth().isDead()) { //When enemy dies from tower
-                sendEnemyDeathEvent(e);
-                enemyIterator.remove();
-                continue;
-            }
+        synchronized (enemies) {
+            for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
+                Enemy e = enemyIterator.next();
+                if (e.getHealth().isDead()) { //When enemy dies from tower
+                    sendEnemyDeathEvent(e);
+                    enemyIterator.remove();
+                    continue;
+                }
 
-            e.update();
+                e.update();
 
-            if (e.getHealth().isDead()) { //When enemy dies from reaching the base
-                enemyIterator.remove();
+                if (e.getHealth().isDead()) { //When enemy dies from reaching the base
+                    enemyIterator.remove();
+                }
             }
         }
     }
 
     private void updateWaves() {
-        for (Iterator<Wave> waveIterator = activeWaves.iterator(); waveIterator.hasNext(); ) {
-            Wave w = waveIterator.next();
-            if (w.hasNext()) {
-                Collection<Enemy> newEnemies = w.next();
-                enemies.addAll(newEnemies);
-            } else {
-                waveIterator.remove();
+        synchronized (activeWaves) {
+            for (Iterator<Wave> waveIterator = activeWaves.iterator(); waveIterator.hasNext(); ) {
+                Wave w = waveIterator.next();
+                if (w.hasNext()) {
+                    Collection<Enemy> newEnemies = w.next();
+                    synchronized (enemies) {
+                        enemies.addAll(newEnemies);
+                    }
+                } else {
+                    waveIterator.remove();
+                }
             }
         }
     }
@@ -81,9 +88,10 @@ public class WaveHandler {
     public void startNewWave() {
         currentLevel++;
         Wave wave = waveData.getWave(currentLevel);
-        activeWaves.add(wave);
+        synchronized (activeWaves) {
+            activeWaves.add(wave);
+        }
         originalEnemyAttackHealth += wave.getRemainingHealth();
-        System.out.println("Starting Level " + currentLevel);
     }
 
     /**
@@ -96,7 +104,9 @@ public class WaveHandler {
     }
 
     public Collection<? extends Enemy> getSpawnedEnemies() {
-        return Collections.unmodifiableCollection(new ArrayList<>(enemies));
+        synchronized (enemies) {
+            return new ArrayList<>(enemies);
+        }
     }
 
     /**
@@ -107,15 +117,21 @@ public class WaveHandler {
      * @return the health of the enemy teams attack
      */
     public Health getEnemyAttackHealth() {
-        int healthOfSpawnedEnemies = enemies
-                .stream()
-                .map(e -> e.getHealth().getCurrent())
-                .reduce(0, Integer::sum);
+        int healthOfSpawnedEnemies;
+        synchronized (enemies) {
+            healthOfSpawnedEnemies = enemies
+                    .stream()
+                    .map(e -> e.getHealth().getCurrent())
+                    .reduce(0, Integer::sum);
+        }
 
-        int healthOfToBeSpawnedEnemies = activeWaves
-                .stream()
-                .map(Wave::getRemainingHealth)
-                .reduce(0, Integer::sum);
+        int healthOfToBeSpawnedEnemies;
+        synchronized (activeWaves) {
+            healthOfToBeSpawnedEnemies = activeWaves
+                    .stream()
+                    .map(Wave::getRemainingHealth)
+                    .reduce(0, Integer::sum);
+        }
 
         int current = healthOfSpawnedEnemies + healthOfToBeSpawnedEnemies;
         return new MutableHealth(originalEnemyAttackHealth, current);
