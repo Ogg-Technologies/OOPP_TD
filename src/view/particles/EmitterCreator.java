@@ -8,5 +8,5 @@ import utils.Vector;
  */
 @FunctionalInterface
 interface EmitterCreator {
-    Emitter createEmitter(Vector position);
+    Emitter createEmitter(Vector position, double angle);
 }

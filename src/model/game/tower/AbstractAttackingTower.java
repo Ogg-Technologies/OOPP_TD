@@ -42,8 +42,8 @@ public abstract class AbstractAttackingTower extends AbstractTower {
         if (e == null) {
             return false;
         }
-        attack(e);
         setAimTo(e.getPos());
+        attack(e);
         return true;
     }
 

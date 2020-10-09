@@ -27,7 +27,7 @@ public final class ParticleHandler extends JPanel implements EventListener {
 
     private final Collection<Emitter> emitters;
 
-    public ParticleHandler(WindowState windowState) {   // TODO: Decide if ParticleHandler should add itself as listener or if its creator should
+    public ParticleHandler(WindowState windowState) {
         this.windowState = windowState;
         particleMap = new HashMap<>();
         emitters = new ArrayList<>();
@@ -54,7 +54,7 @@ public final class ParticleHandler extends JPanel implements EventListener {
             update();
         } else if (particleMap.containsKey(event.getSender())) {
             EmitterCreator emitterCreator = particleMap.get(event.getSender());
-            emitters.add(emitterCreator.createEmitter(event.getPosition()));
+            emitters.add(emitterCreator.createEmitter(event.getPosition(), event.getAngle()));
         }
     }
 
