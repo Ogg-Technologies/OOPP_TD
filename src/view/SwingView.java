@@ -7,6 +7,7 @@ import utils.Vector;
 import view.gameLayers.*;
 import view.particles.ParticleHandler;
 import view.startLayers.ButtonPanel;
+import view.startLayers.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +25,8 @@ public class SwingView implements View {
 
     private final ModelData modelData;
 
-    private int width = 800;
-    private int height = 800;
+    private int width = 1920;
+    private int height = 1080;
     public final static int heightOffset = 40;//same goes for y
     private JFrame window;
 
@@ -108,9 +109,10 @@ public class SwingView implements View {
         }
         window.getContentPane().setBackground(ColorHandler.GROUND);
 
+        ImagePanel backgroundImage = new ImagePanel(getWindowSize());
         ButtonPanel buttons = new ButtonPanel(windowState);
 
-        startLayers = new JPanel[]{buttons};
+        startLayers = new JPanel[]{backgroundImage,buttons};
 
         setOpaqueness(startLayers);
         startLayersPane = createLayeredPane(startLayers);
