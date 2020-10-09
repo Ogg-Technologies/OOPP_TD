@@ -18,6 +18,7 @@ public class BuffManager {
             Buff buff = iterator.next();
             if (buff.updatesLeft <= 0) {
                 iterator.remove();
+                continue;
             }
             buff.updatesLeft--;
             buff.towerModifier.modifyTowerMultipliers(towerMultipliers);
