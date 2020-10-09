@@ -13,9 +13,7 @@ import model.game.tower.Tower;
 import model.game.tower.TowerFactory;
 import utils.Vector;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -23,19 +21,28 @@ import java.util.Set;
  */
 public final class Model implements ModelInputListener, ModelData, Updatable, EventSender {
     private Game game;
-    private final Set<EventListener> eventListeners;
+    private final Set<EventListener> eventListeners = new HashSet<>();
+    private final List<Command> commands = new ArrayList<>();
 
     public Model() {
         game = new Game(this);
-        eventListeners = new HashSet<>();
         addOnModelEventListener(game);
     }
 
     @Override
     public void update() {
+        executeCommands();
+
         game.update();
 
         sendEvent(new Event(Event.Type.UPDATE, this.getClass()));
+    }
+
+    private void executeCommands() {
+        synchronized (commands) {
+            commands.forEach(Command::execute);
+            commands.clear();
+        }
     }
 
     @Override
@@ -76,7 +83,9 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
 
     @Override
     public void onTileClick(AbstractTowerFactory factory, Vector pos, Class<? extends Tower> towerType) {
-        game.placeTower(towerType, factory, pos);
+        synchronized (commands) {
+            commands.add(() -> game.placeTower(towerType, factory, pos));
+        }
     }
 
     @Override
@@ -98,7 +107,9 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
 
     @Override
     public void onStartNewWave() {
-        game.startNewWave();
+        synchronized (commands) {
+            commands.add(() -> game.startNewWave());
+        }
     }
 
     @Override
@@ -114,5 +125,15 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     @Override
     public int getWaveNumber() {
         return game.getWaveNumber();
+    }
+
+    /**
+     * @author Oskar, Erik
+     * <p>
+     * Command design pattern for delaying the execution of changes to the model from the Controller
+     */
+    @FunctionalInterface
+    private interface Command {
+        void execute();
     }
 }
