@@ -13,7 +13,7 @@ import utils.Vector;
 
 /**
  * @author Behroz
- * A tower with melee attacks ehich go out in bursts. Does not create projectile
+ * A tower with melee attacks which go out in bursts. Does not create projectiles
  */
 public class Barbearian extends AbstractAttackingTower {
 
