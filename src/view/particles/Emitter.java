@@ -67,32 +67,38 @@ public class Emitter {
             }
             emitterLifetime--;
         }
-        for (Iterator<Particle> iterator = particles.iterator(); iterator.hasNext(); ) {
-            Particle p = iterator.next();
-            p.update();
-            if (p.isDead()) {
-                iterator.remove();
+
+        synchronized (particles) {
+            for (Iterator<Particle> iterator = particles.iterator(); iterator.hasNext(); ) {
+                Particle p = iterator.next();
+                p.update();
+                if (p.isDead()) {
+                    iterator.remove();
+                }
             }
         }
     }
 
     private void createNewParticle() {
-        particles.add(new Particle(
-                lifetime.getRandom(),
-                emitterPosition.plus(startPosition.getRandom()),
-                startVelocity.getRandom(),
-                angleVelocity.getRandom(),
-                tileSize.getRandom(),
-                friction.getRandom(),
-                image
-        ));
+        synchronized (particles) {
+            particles.add(new Particle(
+                    lifetime.getRandom(),
+                    emitterPosition.plus(startPosition.getRandom()),
+                    startVelocity.getRandom(),
+                    angleVelocity.getRandom(),
+                    tileSize.getRandom(),
+                    friction.getRandom(),
+                    image
+            ));
+        }
     }
 
     /** Draws each particle on the screen */
     public void draw(Graphics graphics, WindowState windowState) {
-        ArrayList<Particle> copyParticles = new ArrayList<>(particles);
-        for (Particle particle : copyParticles) {
-            particle.draw(graphics, windowState);
+        synchronized (particles) {
+            for (Particle particle : particles) {
+                particle.draw(graphics, windowState);
+            }
         }
     }
 
