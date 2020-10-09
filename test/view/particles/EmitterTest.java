@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 import utils.Vector;
 import view.particles.distribution.LinearIntegerDistribution;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -20,7 +16,7 @@ class EmitterTest {
     void defaultEmitterWorks() {
         Emitter e = new Emitter.Builder()
                 .setEmitterPosition(new Vector(0, 0))
-                .setImage(createMockImage())
+                .setImagePath("")
                 .build();
 
         while (e.isAlive()) {
@@ -32,7 +28,7 @@ class EmitterTest {
     void changedLifetimeWorks() {
         Emitter e = new Emitter.Builder()
                 .setEmitterPosition(new Vector(0, 0))
-                .setImage(createMockImage())
+                .setImagePath("")
                 .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(100, 100))
                 .setEmitterLifetime(1)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(0, 1))
@@ -49,7 +45,7 @@ class EmitterTest {
         @Test
         void builderThrowsExceptionWithoutEmitterPosition() {
             Emitter.Builder builder = new Emitter.Builder();
-            builder.setImage(createMockImage());
+            builder.setImagePath("");
             assertThrows(RuntimeException.class, builder::build);
         }
 
@@ -64,37 +60,8 @@ class EmitterTest {
         void builderCreatesEmitter() {
             assertDoesNotThrow(() -> new Emitter.Builder()
                     .setEmitterPosition(new Vector(0, 0))
-                    .setImage(createMockImage())
+                    .setImagePath("")
                     .build());
         }
-    }
-
-    private Image createMockImage() {
-        return new Image() {
-            @Override
-            public int getWidth(ImageObserver imageObserver) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver imageObserver) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String s, ImageObserver imageObserver) {
-                return null;
-            }
-        };
     }
 }

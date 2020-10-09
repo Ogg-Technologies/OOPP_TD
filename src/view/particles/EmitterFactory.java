@@ -44,7 +44,7 @@ public final class EmitterFactory {
     static Emitter createRockEmitter(Vector position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImage(rockImage)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.ROCK)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(10, 20))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.1))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.02)))
@@ -56,7 +56,7 @@ public final class EmitterFactory {
     static Emitter createBombardaEmitter(Vector position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImage(boltImage)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.BOMBARDA_CHARM)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(10, 20))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.08, 0.1)))
@@ -69,7 +69,7 @@ public final class EmitterFactory {
     static Emitter createSniperSmokeEmitter(Vector position) { //TODO make actuall effect that had the correct angle etc...
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImage(sniperSmokeImage)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.SMOKE)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.01)))
@@ -82,7 +82,7 @@ public final class EmitterFactory {
     static Emitter createBulletEmitter(Vector position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImage(bulletImage)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.BULLET)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(15, 15))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.01)))
@@ -95,10 +95,12 @@ public final class EmitterFactory {
     static Emitter createSwingEmitter(Vector position) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImage(axeImage)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.AXE)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(20, 20))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.5))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.01)))
+                .setStartAngle(LinearDoubleDistribution.fromRange(0, Math.PI * 2))
+                .setAngleVelocity(LinearDoubleDistribution.fromRange(0, Math.PI * 0.01))
                 .setEmitterLifetime(1)
                 .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(1, 1))
                 .setTileSize(LinearDoubleDistribution.fromRange(0.3, 0.3))

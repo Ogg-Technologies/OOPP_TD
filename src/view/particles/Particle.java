@@ -2,6 +2,7 @@ package view.particles;
 
 import utils.Vector;
 import view.WindowState;
+import view.texture.ImageHandler;
 
 import java.awt.*;
 
@@ -16,23 +17,23 @@ class Particle {
     private int lifetime;
     private Vector tilePosition;
     private Vector velocity;
-    private double angle; // TODO: Support angles
+    private final String imagePath;
     private double angleVelocity;
 
     private final double tileSize;
     private final double friction;
-    private final Image image;
+    private double angle;
 
-    public Particle(int lifetime, Vector tilePosition, Vector velocity, double angleVelocity,
-                    double tileSize, double friction, Image image) {
+    public Particle(int lifetime, Vector tilePosition, Vector velocity, double angle, double angleVelocity,
+                    double tileSize, double friction, String imagePath) {
         this.lifetime = lifetime;
         this.tilePosition = tilePosition;
         this.velocity = velocity;
+        this.angle = angle;
         this.angleVelocity = angleVelocity;
         this.tileSize = tileSize;
         this.friction = friction;
-        this.image = image;
-        angle = randomAngle();
+        this.imagePath = imagePath;
     }
 
     public void update() {
@@ -50,7 +51,7 @@ class Particle {
         int x = (int) ((tilePosition.x + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().x);
         int y = (int) ((tilePosition.y + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().y);
         int size = (int) (this.tileSize * windowState.getTileSize());
-        graphics.drawImage(image, x, y, size, size, null);
+        graphics.drawImage(ImageHandler.getImage(imagePath, angle), x, y, size, size, null);
     }
 
     /** @return True if the particle is dead, meaning it should be removed */

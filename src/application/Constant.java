@@ -373,6 +373,7 @@ public final class Constant {
 
     public static class ImagePath {
 
+        public final String AXE;
         public final String GRIZZLY_BEAR;
         public final String BEARRY_POTTER;
         public final String SNIPER_BEAR;
@@ -381,10 +382,12 @@ public final class Constant {
         public final String ROCK;
         public final String BOMBARDA_CHARM;
         public final String SMOKE;
+        public final String BULLET;
         public final String FISHSTICK;
         public final String BASE;
 
         private ImagePath(Properties prop) {
+            AXE = readStringValue(prop, "axe_path");
             GRIZZLY_BEAR = readStringValue(prop, "grizzly_bear_path");
             BEARRY_POTTER = readStringValue(prop, "bearry_potter_path");
             SNIPER_BEAR = readStringValue(prop, "sniper_bear_path");
@@ -393,6 +396,7 @@ public final class Constant {
             ROCK = readStringValue(prop, "stone_path");
             BOMBARDA_CHARM = readStringValue(prop, "bombarda_charm_path");
             SMOKE = readStringValue(prop, "smoke_path");
+            BULLET = readStringValue(prop, "bullet_path");
             FISHSTICK = readStringValue(prop, "fishstick_path");
             BASE = readStringValue(prop, "base_path");
         }

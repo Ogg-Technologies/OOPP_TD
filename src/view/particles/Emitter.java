@@ -32,14 +32,17 @@ public class Emitter {
     private final Distribution<Vector> startPosition;
     private final Distribution<Vector> startVelocity;
     private final Distribution<Integer> newParticlesPerUpdate;
+    private final Distribution<Double> startAngle;
     private final Distribution<Double> angleVelocity;
     private final Distribution<Double> tileSize;
     private final Distribution<Double> friction;
-    private final Image image;
+    private final String imagePath;
 
     private final Collection<Particle> particles;
 
-    /** Creates an Emitter from a Builder. Private constructor to force use of Builder */
+    /**
+     * Creates an Emitter from a Builder. Private constructor to force use of Builder
+     */
     private Emitter(Builder builder) {
         this.emitterPosition = builder.emitterPosition;
         this.emitterLifetime = builder.emitterLifetime;
@@ -48,10 +51,11 @@ public class Emitter {
         this.startPosition = builder.startPosition;
         this.startVelocity = builder.startVelocity;
         this.newParticlesPerUpdate = builder.newParticlesPerUpdate;
+        this.startAngle = builder.startAngle;
         this.angleVelocity = builder.angleVelocity;
         this.tileSize = builder.tileSize;
         this.friction = builder.friction;
-        this.image = builder.image;
+        this.imagePath = builder.imagePath;
 
         this.particles = new ArrayList<>();
     }
@@ -85,15 +89,18 @@ public class Emitter {
                     lifetime.getRandom(),
                     emitterPosition.plus(startPosition.getRandom()),
                     startVelocity.getRandom(),
+                    startAngle.getRandom(),
                     angleVelocity.getRandom(),
                     tileSize.getRandom(),
                     friction.getRandom(),
-                    image
+                    imagePath
             ));
         }
     }
 
-    /** Draws each particle on the screen */
+    /**
+     * Draws each particle on the screen
+     */
     public void draw(Graphics graphics, WindowState windowState) {
         synchronized (particles) {
             for (Particle particle : particles) {
@@ -123,14 +130,16 @@ public class Emitter {
         private Distribution<Vector> startVelocity =
                 LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromMidPoint(0, 0.075));
         private Distribution<Integer> newParticlesPerUpdate = LinearIntegerDistribution.fromRange(3, 5);
-        private Distribution<Double> angleVelocity = LinearDoubleDistribution.fromRange(-0.1, 0.1);
+        private Distribution<Double> startAngle = () -> 0d;
+        private Distribution<Double> angleVelocity = () -> 0d;
         private Distribution<Double> tileSize = LinearDoubleDistribution.fromRange(0.02, 0.1);
         private Distribution<Double> friction = LinearDoubleDistribution.fromRange(0.98, 0.99);
-        private Image image;
+        private String imagePath;
 
         /**
          * Builds an emitter from the attributes given set in the builder. If position or image has not been set it will
          * throw exceptions
+         *
          * @return An Emitter
          */
         public Emitter build() {
@@ -138,7 +147,7 @@ public class Emitter {
                 throw new RuntimeException(this.getClass().getSimpleName()
                         + " must have emitter position set before building " + Emitter.class.getSimpleName());
             }
-            if (image == null) {
+            if (imagePath == null) {
                 throw new RuntimeException(this.getClass().getSimpleName()
                         + " must have image set before building " + Emitter.class.getSimpleName());
             }
@@ -175,6 +184,11 @@ public class Emitter {
             return this;
         }
 
+        public Builder setStartAngle(Distribution<Double> startAngle) {
+            this.startAngle = startAngle;
+            return this;
+        }
+
         public Builder setAngleVelocity(Distribution<Double> angleVelocity) {
             this.angleVelocity = angleVelocity;
             return this;
@@ -190,8 +204,8 @@ public class Emitter {
             return this;
         }
 
-        public Builder setImage(Image image) {
-            this.image = image;
+        public Builder setImagePath(String imagePath) {
+            this.imagePath = imagePath;
             return this;
         }
     }

@@ -13,7 +13,7 @@ class ParticleTest {
 
     @Test
     void isDeadWithEnoughUpdates() {
-        Particle particle = new Particle(100, new Vector(0, 0), new Vector(0, 0), 0, 0, 0, null);
+        Particle particle = new Particle(100, new Vector(0, 0), new Vector(0, 0), 0, 0, 0, 0, null);
 
         for (int i = 0; i < 100 - 1; i++) {
             particle.update();
