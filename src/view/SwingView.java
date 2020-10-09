@@ -62,6 +62,7 @@ public class SwingView implements View {
 
     private void setupGameWindow() {
         window.remove(startLayersPane);
+        window.getContentPane().setBackground(ColorHandler.GAME_BACKGROUND);
 
         background = new Background(modelData, windowState);
         JPanel towerLayer = new JPanel() {

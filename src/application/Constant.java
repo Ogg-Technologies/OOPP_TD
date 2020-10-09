@@ -349,6 +349,7 @@ public final class Constant {
         public final int TOWER_BUTTON_LABEL_ALPHA;
         public final String GHOST_RANGE;
         public final int GHOST_RANGE_ALPHA;
+        public final String GAME_BACKGROUND;
 
         private ColorCode(Properties prop) {
             VALID_TILE_HOVER = readStringValue(prop, "color_valid_tile_hover");
@@ -366,6 +367,7 @@ public final class Constant {
             TOWER_BUTTON_LABEL_ALPHA = (int) readDoubleValue(prop, "color_tower_button_label_alpha");
             GHOST_RANGE = readStringValue(prop, "color_ghost_range");
             GHOST_RANGE_ALPHA = (int) readDoubleValue(prop, "color_ghost_range_alpha");
+            GAME_BACKGROUND = readStringValue(prop, "color_game_background");
         }
     }
 
