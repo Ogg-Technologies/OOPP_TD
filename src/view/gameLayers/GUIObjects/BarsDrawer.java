@@ -28,18 +28,24 @@ public class BarsDrawer {
     private static final double ENEMY_ATTACK_HEALTH_BAR_LEFT = 0.845;
     private static final double ENEMY_ATTACK_HEALTH_LABEL_LEFT = ENEMY_ATTACK_HEALTH_BAR_LEFT - .02;
 
+    private final JLabel playerHealthBar;
+    private final JLabel enemyHealthBar;
+
+    public BarsDrawer(JLabel playerHealthBar, JLabel enemyHealthBar) {
+        this.playerHealthBar = playerHealthBar;
+        this.enemyHealthBar = enemyHealthBar;
+    }
+
     /**
      * The actual method that draws the bars
      *
-     * @param g               graphics component where everything is drawn
-     * @param panelWidth      the whole width of the panel the bars are occupying
-     * @param panelHeight     the whole height of the panel the bars are occupying
-     * @param playerHealthBar the label for the playerHealth
-     * @param enemyHealthBar  the label for the enemyHealth
-     * @param playerFraction  the fraction of health the player has
-     * @param enemyFraction   the fraction of health the enemies has
+     * @param g              graphics component where everything is drawn
+     * @param panelWidth     the whole width of the panel the bars are occupying
+     * @param panelHeight    the whole height of the panel the bars are occupying
+     * @param playerFraction the fraction of health the player has
+     * @param enemyFraction  the fraction of health the enemies has
      */
-    public void draw(Graphics g, int panelWidth, int panelHeight, JLabel playerHealthBar, JLabel enemyHealthBar, double playerFraction, double enemyFraction) {
+    public void draw(Graphics g, int panelWidth, int panelHeight, double playerFraction, double enemyFraction) {
         int barY = (int) Math.round(BAR_UP * panelHeight);
         int barWidth = (int) Math.round(BAR_WIDTH * panelWidth);
         int barHeight = (int) Math.round(BAR_HEIGHT * panelHeight);
