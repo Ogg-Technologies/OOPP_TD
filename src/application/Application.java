@@ -16,6 +16,10 @@ public class Application {
      */
     public Application() {
         Model model = new Model();
+
+        MapController mapController = new MapController(model);
+        mapController.startGame(0);
+
         View view = new SwingView(model);
         Controller controller = new Controller(model, view);
         view.start();
