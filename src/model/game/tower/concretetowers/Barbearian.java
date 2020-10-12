@@ -22,7 +22,7 @@ public class Barbearian extends AbstractAttackingTower {
     public Barbearian(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
         super(pos, Constant.getInstance().BARBEARIAN.RANGE,
                 new BurstChargeStrategy(Constant.getInstance().BARBEARIAN.ATTACK_DELAY,
-                        Constant.getInstance().BARBEARIAN.ATTACKS_PER_BURST), enemyTargeter);
+                        Constant.getInstance().BARBEARIAN.ATTACKS_PER_BURST, Constant.getInstance().BARBEARIAN.TICKS_BETWEEN_ATTACKS), enemyTargeter);
         this.eventSender = eventSender;
     }
 

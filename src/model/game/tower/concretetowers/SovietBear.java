@@ -22,7 +22,7 @@ public class SovietBear extends AbstractAttackingTower {
     public SovietBear(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
         super(pos, Constant.getInstance().SOVIET_BEAR.RANGE,
                 new BurstChargeStrategy(Constant.getInstance().SOVIET_BEAR.ATTACK_DELAY,
-                        Constant.getInstance().SOVIET_BEAR.ATTACKS_PER_BURST), enemyTargeter);
+                        Constant.getInstance().SOVIET_BEAR.ATTACKS_PER_BURST, Constant.getInstance().SOVIET_BEAR.TICKS_BETWEEN_ATTACKS), enemyTargeter);
         this.eventSender = eventSender;
     }
 

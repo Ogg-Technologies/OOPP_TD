@@ -200,6 +200,7 @@ public final class Constant {
         public final double RANGE;
         public final int ATTACK_DELAY;
         public final int ATTACKS_PER_BURST;
+        public final int TICKS_BETWEEN_ATTACKS;
         public final int COST;
 
 
@@ -209,6 +210,7 @@ public final class Constant {
             ATTACK_DELAY = (int) readDoubleValue(prop, "soviet_bear_updates_between_attacks");
             ATTACKS_PER_BURST = (int) readDoubleValue(prop, "soviet_bear_attacks_per_burst");
             COST = (int) readDoubleValue(prop, "soviet_bear_cost");
+            TICKS_BETWEEN_ATTACKS = (int) readDoubleValue(prop, "soviet_bear_ticks_between_attack");
         }
     }
 
@@ -217,6 +219,7 @@ public final class Constant {
         public final double RANGE;
         public final int ATTACK_DELAY;
         public final int ATTACKS_PER_BURST;
+        public final int TICKS_BETWEEN_ATTACKS;
         public final int COST;
 
 
@@ -226,6 +229,8 @@ public final class Constant {
             ATTACK_DELAY = (int) readDoubleValue(prop, "barbearian_updates_between_attacks");
             ATTACKS_PER_BURST = (int) readDoubleValue(prop, "barbearian_attacks_per_burst");
             COST = (int) readDoubleValue(prop, "barbearian_cost");
+            TICKS_BETWEEN_ATTACKS = (int) readDoubleValue(prop, "barbearian_ticks_between_attack");
+
         }
     }
 

@@ -7,18 +7,22 @@ package model.game.tower.towerutils.chargestrategy;
 public class BurstChargeStrategy implements ChargeStrategy {
     private final int maxCharge;
     private final int attacksPerCharge;
+    private final int ticksBetweenAttack;
+
     private int attacksLeft;
 
     private double charge = 0;
 
     /**
-     * @param maxCharge        the number of updates between bursts
-     * @param attacksPerCharge the number of attacks in one burst
+     * @param maxCharge          the number of updates between bursts
+     * @param attacksPerCharge   the number of attacks in one burst
+     * @param ticksBetweenAttack the number of updates that are called between attacks
      */
-    public BurstChargeStrategy(int maxCharge, int attacksPerCharge) {
+    public BurstChargeStrategy(int maxCharge, int attacksPerCharge, int ticksBetweenAttack) {
         this.maxCharge = maxCharge;
         this.attacksPerCharge = attacksPerCharge;
         this.attacksLeft = attacksPerCharge;
+        this.ticksBetweenAttack = ticksBetweenAttack;
     }
 
     @Override
@@ -44,7 +48,10 @@ public class BurstChargeStrategy implements ChargeStrategy {
         if (attacksLeft == 0) {
             attacksLeft = attacksPerCharge;
             charge = 0;
+        } else {
+            charge = maxCharge - ticksBetweenAttack;
         }
+
     }
 }
 
