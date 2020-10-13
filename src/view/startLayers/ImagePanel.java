@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * @author Samuel
+ * Panel for the background image in the start window
+ */
 public class ImagePanel extends JPanel {
     private final BufferedImage image;
     private int width;
@@ -14,11 +18,14 @@ public class ImagePanel extends JPanel {
     private int x;
     private int y;
 
+    /**
+     * The constructor fetches the image from the ImageHandler and sets size to parameter.
+     * @param size size to set the image to.
+     */
     public ImagePanel(Vector size) {
         this.image = ImageHandler.getImage("resource/startScreen.png");
         this.width = size.getIntX();
         this.height = size.getIntY();
-        updateImage();
     }
 
     private void updateImage() {
