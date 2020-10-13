@@ -53,12 +53,20 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     }
 
 
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            onLeftClick(e);
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
+            onRightClick();
+        }
+    }
+
     /**
      * Compares if the mouse release was over the same object as when mouse was pressed.
      * If yes, send a method call to model.
      */
-    @Override
-    public void mouseReleased(MouseEvent e) {
+    private void onLeftClick(MouseEvent e) {
         Vector clickedTile = getClickedTile(e);
         if (clickedTile != null && clickedTile.equals(tilePressed)) {
             if (controllerState.selectedTower != null) {
@@ -66,6 +74,15 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
             }
         }
         controllerState.selectedTower = null;
+    }
+
+    /**
+     * deselects tower in controllerState if one is selected.
+     */
+    private void onRightClick() {
+        if (controllerState.selectedTower != null) {
+            controllerState.selectedTower = null;
+        }
     }
 
     /**
