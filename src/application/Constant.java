@@ -389,6 +389,12 @@ public final class Constant {
         public final String SMOKE;
         public final String BULLET;
         public final String FISHSTICK;
+        public final String SWORDFISH;
+        public final String FISH_AND_CHIPS;
+        public final String FISH_IN_A_BOAT;
+        public final String SAILFISH;
+        public final String SHARK;
+        public final String FISH_IN_A_FISH_TANK;
         public final String BASE;
 
         private ImagePath(Properties prop) {
@@ -403,6 +409,12 @@ public final class Constant {
             SMOKE = readStringValue(prop, "smoke_path");
             BULLET = readStringValue(prop, "bullet_path");
             FISHSTICK = readStringValue(prop, "fishstick_path");
+            SWORDFISH = readStringValue(prop, "swordfish_path");
+            FISH_AND_CHIPS = readStringValue(prop, "fish_and_chips_path");
+            FISH_IN_A_BOAT = readStringValue(prop, "fish_in_a_boat_path");
+            SAILFISH = readStringValue(prop, "sailfish_path");
+            SHARK = readStringValue(prop, "shark_path");
+            FISH_IN_A_FISH_TANK = readStringValue(prop, "fish_in_a_fish_tank_path");
             BASE = readStringValue(prop, "base_path");
         }
     }

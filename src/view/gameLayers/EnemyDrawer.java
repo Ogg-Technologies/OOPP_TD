@@ -1,6 +1,7 @@
 package view.gameLayers;
 
 import application.Constant;
+import model.game.enemy.AbstractEnemy;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.concreteenemies.BasicEnemy;
@@ -18,113 +19,68 @@ import java.awt.image.BufferedImage;
  */
 
 public class EnemyDrawer implements EnemyVisitor {
-    private static final BufferedImage image = getEnemyImage();
     private static final double healthHeightPercent = 0.05; //Of tileSize
     private static final double healthWidthPercent = 0.5; //Of tileSize
 
     private final Graphics graphics;
     private final WindowState windowState;
 
+    /**
+     * @param g           graphics component where the image will be drawn upon
+     * @param windowState gives the "real" tile size for deciding what size the enemy should be.
+     */
     public EnemyDrawer(Graphics g, WindowState windowState) {
         graphics = g;
         this.windowState = windowState;
     }
 
-    private static BufferedImage getEnemyImage() {
-        return ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.FISHSTICK);
-    }
 
     @Override
     public void visit(Enemy enemy) {
+        throw new IllegalArgumentException("This enemy " + enemy.getClass().getSimpleName() + " is not implemented in EnemyDrawer");
+    }
 
-        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
-        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
-
-        //Draws the enemy
-        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
-
-        drawHealthBar(enemy, x, y);
+    @Override
+    public void visit(BasicEnemy.Fishstick enemy) {
+        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISHSTICK);
     }
 
     @Override
     public void visit(BasicEnemy.Swordfish enemy) {
-
-        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
-        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
-
-        BufferedImage image = ImageHandler.getImage("resource/swordfish.png");
-
-        //Draws the Swordfish
-        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
-
-        drawHealthBar(enemy, x, y);
+        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.SWORDFISH);
     }
 
     @Override
     public void visit(BasicEnemy.FishAndChips enemy) {
-
-        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
-        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
-
-        BufferedImage image = ImageHandler.getImage("resource/fishAndChips.png");
-
-        //Draws the FishAndChips
-        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
-
-        drawHealthBar(enemy, x, y);
+        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISH_AND_CHIPS);
     }
 
     @Override
     public void visit(BasicEnemy.FishInABoat enemy) {
-
-        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
-        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
-
-        BufferedImage image = ImageHandler.getImage("resource/fishInABoat.png");
-
-        //Draws the FishInABoat
-        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
-
-        drawHealthBar(enemy, x, y);
+        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISH_IN_A_BOAT);
     }
 
     @Override
     public void visit(BasicEnemy.Sailfish enemy) {
-
-        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
-        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
-
-        BufferedImage image = ImageHandler.getImage("resource/sailfish.png");
-
-        //Draws the Sailfish
-        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
-
-        drawHealthBar(enemy, x, y);
+        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.SAILFISH);
     }
 
     @Override
     public void visit(BasicEnemy.Shark enemy) {
-
-        int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
-        int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
-
-        BufferedImage image = ImageHandler.getImage("resource/shark.png");
-
-        //Draws the Shark
-        graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
-
-        drawHealthBar(enemy, x, y);
+        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.SHARK);
     }
 
     @Override
     public void visit(BasicEnemy.FishInAFishTank enemy) {
+        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISH_IN_A_FISH_TANK);
+    }
 
+    private void drawEnemy(AbstractEnemy enemy, String path) {
         int x = (int) (windowState.getTileSize() * enemy.getPos().x + windowState.getTileMapOffset().x);
         int y = (int) (windowState.getTileSize() * enemy.getPos().y + windowState.getTileMapOffset().y);
 
-        BufferedImage image = ImageHandler.getImage("resource/fishInAFishTank.png");
+        BufferedImage image = ImageHandler.getImage(path);
 
-        //Draws the FishInAFishTank
         graphics.drawImage(image, x, y, windowState.getTileSize(), windowState.getTileSize(), null);
 
         drawHealthBar(enemy, x, y);

@@ -18,6 +18,7 @@ public interface EnemyVisitor {
      * The visit methods for each BasicEnemy type
      * @param enemy A reference to the enemy that will be visited
      */
+    void visit(BasicEnemy.Fishstick enemy);
     void visit(BasicEnemy.Swordfish enemy);
     void visit(BasicEnemy.FishAndChips enemy);
     void visit(BasicEnemy.FishInABoat enemy);
