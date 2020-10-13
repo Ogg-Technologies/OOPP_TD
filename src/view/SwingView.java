@@ -25,8 +25,6 @@ public class SwingView implements View {
 
     private final ModelData modelData;
 
-    private int width = 1920;
-    private int height = 1080;
     public final static int heightOffset = 40;//same goes for y
     private JFrame window;
 
@@ -126,8 +124,10 @@ public class SwingView implements View {
 
     @Override
     public void start() {
-        window.setSize(width, height);
+        //This line of code is for setting a size when window is not set to maximized.
+        window.setSize(800, 600);
         window.setVisible(true);
+        window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         draw();
     }
