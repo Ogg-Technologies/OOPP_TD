@@ -7,6 +7,7 @@ import model.game.Game;
 import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
+import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.tower.AbstractTowerFactory;
 import model.game.tower.Tower;
@@ -127,6 +128,16 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     @Override
     public int getWaveNumber() {
         return game.getWaveNumber();
+    }
+
+    //TODO: Make this correct
+    @Override
+    public TileMap[] getTileMaps() {
+        TileMap[] returnValue = new TileMap[3];
+        returnValue[0] = TileMap.fromDefaultTileGrid();
+        returnValue[1] = TileMap.fromDefaultTileGrid();
+        returnValue[2] = TileMap.fromDefaultTileGrid();
+        return returnValue;
     }
 
     /**

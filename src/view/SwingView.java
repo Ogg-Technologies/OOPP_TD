@@ -110,7 +110,7 @@ public class SwingView implements View {
         window.getContentPane().setBackground(ColorHandler.GROUND);
 
         ImagePanel backgroundImage = new ImagePanel(getWindowSize());
-        ButtonPanel buttons = new ButtonPanel(windowState);
+        ButtonPanel buttons = new ButtonPanel(windowState, modelData.getTileMaps());
 
         startLayers = new JPanel[]{backgroundImage,buttons};
 

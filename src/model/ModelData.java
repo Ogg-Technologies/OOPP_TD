@@ -4,6 +4,7 @@ import model.event.EventListener;
 import model.game.Health;
 import model.game.enemy.Enemy;
 import model.game.map.Tile;
+import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.tower.Tower;
 import utils.Vector;
@@ -65,4 +66,6 @@ public interface ModelData {
      * @return the wave number
      */
     int getWaveNumber();
+
+    TileMap[] getTileMaps();
 }
