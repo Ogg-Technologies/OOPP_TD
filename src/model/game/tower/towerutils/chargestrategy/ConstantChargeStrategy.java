@@ -33,7 +33,7 @@ public class ConstantChargeStrategy implements ChargeStrategy {
     }
 
     @Override
-    public void didFire() {
+    public void notifyFirePerformed() {
         charge = 0;
     }
 }

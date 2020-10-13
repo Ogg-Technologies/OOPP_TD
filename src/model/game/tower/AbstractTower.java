@@ -45,7 +45,7 @@ public abstract class AbstractTower implements Tower {
         while (chargeStrategy.isReadyToFire()) {
             boolean success = tryFire();
             if (success) {
-                chargeStrategy.didFire();
+                chargeStrategy.notifyFirePerformed();
             } else {
                 break;
             }

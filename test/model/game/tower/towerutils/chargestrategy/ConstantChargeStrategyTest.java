@@ -38,7 +38,7 @@ class ConstantChargeStrategyTest {
         for (int i = 0; i < 5; i++) {
             constantChargeStrategy.update();
         }
-        constantChargeStrategy.didFire();
+        constantChargeStrategy.notifyFirePerformed();
         for (int i = 0; i < 5; i++) {
             assertFalse(constantChargeStrategy.isReadyToFire());
             constantChargeStrategy.update();

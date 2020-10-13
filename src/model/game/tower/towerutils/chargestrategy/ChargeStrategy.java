@@ -26,5 +26,5 @@ public interface ChargeStrategy {
     /**
      * Called when the tower has fired for the charge strategy to adjust accordingly (e.g reset charge)
      */
-    void didFire();
+    void notifyFirePerformed();
 }
