@@ -39,7 +39,8 @@ public final class MapLoader {
             throw new IOError(new Throwable("Could not load any maps"));
         }
 
-        System.out.println("Succeeded in loading " + maps.size() + " maps");
+        String mapOrMaps = maps.size() == 1 ? "map" : "maps";
+        System.out.println("Succeeded in loading " + maps.size() + " " + mapOrMaps);
         return maps;
     }
 
@@ -73,11 +74,9 @@ public final class MapLoader {
             try {
                 maps.add(tryReadMap(mapReader, f.getName()));
             } catch (IOException e) {
-                System.out.println("Could not read map " + f.getName());
-                e.printStackTrace();
+                System.out.println("Could not read map \"" + f.getName() + "\" with reason: " + e.getMessage());
             } catch (IllegalTileMapException e) {
-                System.out.println("Illegal tile map layout " + f.getName());
-                e.printStackTrace();
+                System.out.println("Illegal tile map layout in \"" + f.getName() + "\" with reason: " + e.getMessage());
             }
         }
         return maps;

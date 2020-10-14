@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Erik
@@ -18,16 +19,45 @@ class MapFileReader implements MapReader {
 
     @Override
     public Tile[][] readMap(String path) throws IOException {
-        List<String> content = readFileAsString(path);
+        List<String> contentWithComments = readFileAsString(path);
 
-        Tile[][] tileGrid = new Tile[content.size()][content.get(0).length()];
+        // Remove commented lines
+        List<String> content = contentWithComments.stream()
+                .filter(e -> !e.startsWith(MapDecoder.COMMENT_PREFIX))
+                .collect(Collectors.toList());
 
-        for (int row = 0; row < content.size(); row++) {
-            for (int i = 0; i < content.get(row).length(); i++) {
-                tileGrid[row][i] = MapDecoder.convertToTile(content.get(row).charAt(i));
-            }
+        if (content.isEmpty()) {
+            throw new IOException("Map could not be loaded because it is empty");
         }
 
+        return convertContentToTiles(content, content.get(0).length());
+    }
+
+    /**
+     * Converts the list of Strings to a Tile matrix
+     *
+     * @param content   The list of Strings read from the file where every element is one row
+     * @param rowLength The expected row length of all uncommented rows
+     * @return A Tile matrix decoded from @param content
+     * @throws IOException Thrown if the content could not be converted to a tile matrix
+     */
+    private Tile[][] convertContentToTiles(List<String> content, int rowLength) throws IOException {
+        Tile[][] tileGrid = new Tile[content.size()][rowLength];
+
+        for (int row = 0; row < content.size(); row++) {
+            String currentRow = content.get(row);
+
+            // Invalid file if uneven row size
+            if (currentRow.length() != rowLength) {
+                throw new IOException("Map could not be loaded because row "
+                        + (row + 1) + " (not included commented lines) is not of correct length (" + rowLength + ")");
+            }
+
+            // Convert row to tiles
+            for (int i = 0; i < currentRow.length(); i++) {
+                tileGrid[row][i] = MapDecoder.convertToTile(currentRow.charAt(i));
+            }
+        }
         return tileGrid;
     }
 
@@ -43,6 +73,7 @@ class MapFileReader implements MapReader {
      */
     private final static class MapDecoder {
 
+        private static final String COMMENT_PREFIX = "//";
         private static final char GROUND = '.';
         private static final char PATH = 'o';
         private static final char START = 'S';
