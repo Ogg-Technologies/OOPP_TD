@@ -3,6 +3,7 @@ package model.game.map;
 import utils.Vector;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import static model.game.map.Tile.*;
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
  * Represents the a map in the game with the path for the enemies, the spawn and the base.
- *
+ * <p>
  * The tileGrid never changes
  */
 public class TileMap {
@@ -73,21 +74,13 @@ public class TileMap {
         Vector base = findSingleTilePosition(BASE);
 
         path.add(calculateSpawnTile(start));
-        path.add(start);
 
         Vector current = start;
-        Vector previous = start;
-        while (true) {
-            current = findNext(current, previous);
-            if (current == null) {
-                // Path is finished
-                break;
-            }
+        do {
             path.add(current);
-            if (path.size() > 2) {
-                previous = path.get(path.size() - 2);
-            }
-        }
+            current = findNext(path, current);
+
+        } while (current != null);
 
         // Check if the base tile is within one tile of the current last path tile
         if (path.get(path.size() - 1).minus(base).getDist() == 1) {
@@ -106,7 +99,7 @@ public class TileMap {
      * @return The position one tile backwards from where the next tile after the start tile is
      */
     private Vector calculateSpawnTile(Vector startPosition) throws IllegalTileMapException {
-        Vector next = findNext(startPosition, null);
+        Vector next = findNext(new ArrayList<>(), startPosition);
         if (next == null) {
             throw new IllegalTileMapException("The marked path is not connected to the START tile");
         }
@@ -116,15 +109,20 @@ public class TileMap {
 
     /**
      * Goes through all deltas (unit vectors in each direction) and finds out which one is the next in the path
+     *
+     * @param path    The so-far-calculated path, used to make sure only one position is added at most once to avoid loops or backtracking
      * @param current The current grid position as starting point
-     * @param previous The previous grid position to stop backtracking, can be null if there was no previous
      * @return The next grid position in the path as a vector or null if its the end of the path
      */
-    private Vector findNext(Vector current, Vector previous) {
+    private Vector findNext(Collection<? extends Vector> path, Vector current) {
         for (Vector direction : this.deltas) {
             Vector potentialNextPath = current.plus(direction);
 
-            if (!potentialNextPath.equals(previous) && isPath(potentialNextPath)) {
+            if (path.contains(potentialNextPath)) {
+                continue;
+            }
+
+            if (isPath(potentialNextPath)) {
                 return potentialNextPath;
             }
         }
@@ -175,6 +173,13 @@ public class TileMap {
         return tileGrid.length;
     }
 
+    /**
+     * Returns the Tile at the given position, or throws an exception if the given position is not within map bounds
+     *
+     * @param x The x-coordinate, must be within (0..width-1)
+     * @param y The x-coordinate, must be within (0..height-1)
+     * @return The Tile at that position
+     */
     public Tile getTile(int x, int y) {
         if (x < 0 || x >= getWidth()) {
             throw new IllegalArgumentException("x: " + x + " is not within 0 to " + (getWidth() - 1));
@@ -185,10 +190,18 @@ public class TileMap {
         return tileGrid[y][x];
     }
 
+    /**
+     * @return Returns the size of the map in tiles as a Vector
+     */
     public Vector getSize() {
         return new Vector(getWidth(), getHeight());
     }
 
+    /**
+     * Getter for the calculated path, wrapped to make it unmodifiable
+     *
+     * @return The list of calculated path tiles from the start to the base
+     */
     public List<? extends Vector> getPath() {
         return Collections.unmodifiableList(path);
     }
