@@ -17,6 +17,7 @@ import static model.game.map.Tile.*;
  */
 public class TileMap {
 
+    private final String name;
     private final Tile[][] tileGrid;
     private final List<? extends Vector> deltas;
     private final List<Vector> path;
@@ -24,15 +25,21 @@ public class TileMap {
     /**
      * Tries to create a TileMap with the given tile grid information
      *
+     * @param name     The name of the map
      * @param tileGrid The layout of the map as a Tile matrix
      * @throws IllegalTileMapException Thrown during the creation process if:
      *                                 There is not exactly one START and BASE tile in the matrix
      *                                 There is not a continuous connection of PATH tiles from the START tile to the BASE tile
      */
-    private TileMap(Tile[][] tileGrid) throws IllegalTileMapException {
+    private TileMap(String name, Tile[][] tileGrid) throws IllegalTileMapException {
+        this.name = name;
         this.tileGrid = tileGrid;
         this.deltas = initDirectionDeltas();
         this.path = calculatePath();
+    }
+
+    private TileMap(Tile[][] tileGrid) throws IllegalTileMapException {
+        this("Map has no name", tileGrid);
     }
 
     private List<Vector> initDirectionDeltas() {
@@ -46,6 +53,10 @@ public class TileMap {
 
     public static TileMap fromDefaultTileGrid() throws IllegalTileMapException {
         return new TileMap(createBasicTileGrid());
+    }
+
+    public static TileMap fromTileGrid(String name, Tile[][] tileGrid) throws IllegalTileMapException {
+        return new TileMap(name, tileGrid);
     }
 
     public static TileMap fromTileGrid(Tile[][] tileGrid) throws IllegalTileMapException {
@@ -204,5 +215,14 @@ public class TileMap {
      */
     public List<? extends Vector> getPath() {
         return Collections.unmodifiableList(path);
+    }
+
+    /**
+     * Returns the name of the map
+     *
+     * @return the name of the map
+     */
+    public String getName() {
+        return this.name;
     }
 }

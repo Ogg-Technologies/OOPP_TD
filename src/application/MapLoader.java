@@ -85,6 +85,6 @@ public final class MapLoader {
     private TileMap tryReadMap(MapReader mapReader, String mapName) throws IOException, IllegalTileMapException {
         Tile[][] tileGrid = mapReader.readMap(ROOT_PATH + mapName);
 
-        return TileMap.fromTileGrid(tileGrid);
+        return TileMap.fromTileGrid(mapName.substring(0, mapName.lastIndexOf('.')), tileGrid);
     }
 }
