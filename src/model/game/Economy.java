@@ -37,6 +37,7 @@ public class Economy {
         map.put(SniperBear.class, constant.SNIPER_BEAR.COST);
         map.put(SovietBear.class, constant.SOVIET_BEAR.COST);
         map.put(Barbearian.class, constant.BARBEARIAN.COST);
+        map.put(BearGrylls.class, constant.BEAR_GRYLLS.COST);
 
         return map;
     }

@@ -23,24 +23,6 @@ public final class EmitterFactory {
     private EmitterFactory() {
     }
 
-    private static Image rockImage;
-    private static Image boltImage;
-    private static Image sniperSmokeImage;
-    private static Image bulletImage;
-    private static Image axeImage;
-
-    static {
-        try {
-            bulletImage = ImageIO.read(new File("resource/bullet.png"));
-            axeImage = ImageIO.read(new File("resource/axe.png"));
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-        rockImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.ROCK);
-        boltImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BOMBARDA_CHARM);
-        sniperSmokeImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.SMOKE);
-    }
-
     static Emitter createRockEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
@@ -108,6 +90,20 @@ public final class EmitterFactory {
                 .setEmitterLifetime(1)
                 .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(1, 1))
                 .setTileSize(LinearDoubleDistribution.fromRange(0.3, 0.3))
+                .build();
+    }
+
+    static Emitter createCompassEmitter(Vector position, double angle) {
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.COMPASS)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.0, 0.0)))
+                .setAngleVelocity(LinearDoubleDistribution.fromRange(0, 0))
+                .setEmitterLifetime(1)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(1, 1))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.5, 0.5))
                 .build();
     }
 }

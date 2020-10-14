@@ -58,6 +58,19 @@ public class TowerDrawer implements TowerVisitor {
         drawTower(tower.getPos(), tower.getAngle(), Constant.getInstance().IMAGE_PATH.BARBEARIAN);
     }
 
+    @Override
+    public void visit(BearGrylls tower) {
+        drawTowerWithoutAngle(tower.getPos(), Constant.getInstance().IMAGE_PATH.BEAR_GRYLLS);
+    }
+
+    private void drawTowerWithoutAngle(Vector pos, String path) {
+        BufferedImage image = ImageHandler.getImage(path);
+        Vector realPos = getRealPos(pos);
+        int size = windowState.getTileSize();
+        int offset =(size - windowState.getTileSize()) / 2;
+        graphics.drawImage(image, realPos.getIntX() - offset, realPos.getIntY() - offset, size, size, null);
+    }
+
     private void drawTower(Vector notRotatedPos, double angle, String path) {
 
         final double sin = Math.abs(Math.sin(angle));

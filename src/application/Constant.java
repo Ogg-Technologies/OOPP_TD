@@ -397,8 +397,11 @@ public final class Constant {
 
     public static class ImagePath {
 
+
+        public final String COMPASS;
         public final String AXE;
         public final String GRIZZLY_BEAR;
+        public final String BEAR_GRYLLS;
         public final String BEARRY_POTTER;
         public final String SNIPER_BEAR;
         public final String SOVIET_BEAR;
@@ -423,6 +426,7 @@ public final class Constant {
             SNIPER_BEAR = readStringValue(prop, "sniper_bear_path");
             SOVIET_BEAR = readStringValue(prop, "soviet_bear_path");
             BARBEARIAN = readStringValue(prop, "barbearian_path");
+            BEAR_GRYLLS = readStringValue(prop, "beargrylls_path");
             ROCK = readStringValue(prop, "stone_path");
             BOMBARDA_CHARM = readStringValue(prop, "bombarda_charm_path");
             SMOKE = readStringValue(prop, "smoke_path");
@@ -435,6 +439,7 @@ public final class Constant {
             SHARK = readStringValue(prop, "shark_path");
             FISH_IN_A_FISH_TANK = readStringValue(prop, "fish_in_a_fish_tank_path");
             BASE = readStringValue(prop, "base_path");
+            COMPASS = readStringValue(prop, "compass_path");
         }
     }
 

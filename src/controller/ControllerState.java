@@ -29,22 +29,7 @@ public class ControllerState implements ControllerStateValue {
                 new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
                 new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
                 new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
-
-                new TowerProxy(factory::createGrizzlyBear, Constant.getInstance().GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Constant.getInstance().GRIZZLY_BEAR.COST),
-                new TowerProxy(factory::createBearryPotter, Constant.getInstance().BEARRY_POTTER.RANGE, BearryPotter.class, Constant.getInstance().BEARRY_POTTER.COST),
-                new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
-                new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
-                new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
-                new TowerProxy(factory::createGrizzlyBear, Constant.getInstance().GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Constant.getInstance().GRIZZLY_BEAR.COST),
-                new TowerProxy(factory::createBearryPotter, Constant.getInstance().BEARRY_POTTER.RANGE, BearryPotter.class, Constant.getInstance().BEARRY_POTTER.COST),
-                new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
-                new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
-                new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
-                new TowerProxy(factory::createGrizzlyBear, Constant.getInstance().GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Constant.getInstance().GRIZZLY_BEAR.COST),
-                new TowerProxy(factory::createBearryPotter, Constant.getInstance().BEARRY_POTTER.RANGE, BearryPotter.class, Constant.getInstance().BEARRY_POTTER.COST),
-                new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
-                new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
-                new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
+                new TowerProxy(factory::createBearGrylls, Constant.getInstance().BEAR_GRYLLS.RANGE, BearGrylls.class, Constant.getInstance().BEAR_GRYLLS.COST),
         };
     }
 

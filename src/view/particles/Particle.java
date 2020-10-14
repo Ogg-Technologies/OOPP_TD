@@ -48,9 +48,9 @@ class Particle {
     }
 
     public void draw(Graphics graphics, WindowState windowState) {
-        int x = (int) ((tilePosition.x + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().x);
-        int y = (int) ((tilePosition.y + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().y);
         int size = (int) (this.tileSize * windowState.getTileSize());
+        int x = (int) ((tilePosition.x + 0.5) * windowState.getTileSize() - size/2 + windowState.getTileMapOffset().x);
+        int y = (int) ((tilePosition.y + 0.5) * windowState.getTileSize() - size/2 + windowState.getTileMapOffset().y);
         graphics.drawImage(ImageHandler.getImage(imagePath, angle), x, y, size, size, null);
     }
 
