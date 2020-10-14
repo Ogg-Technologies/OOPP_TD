@@ -41,7 +41,7 @@ public abstract class AbstractAttackingTower extends AbstractTower {
      */
     @Override
     protected boolean tryFire() {
-        Enemy e = enemyTargeter.getEnemyToAttack(getPos(), getRange() * getActiveMultipliers().getRangeMultiplier());
+        Enemy e = enemyTargeter.getEnemyToAttack(getPos(), getRange());
         if (e == null) {
             return false;
         }

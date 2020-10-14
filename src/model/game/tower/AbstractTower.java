@@ -12,23 +12,24 @@ import utils.Vector;
  */
 public abstract class AbstractTower implements Tower {
     private final Vector pos;
-    private final double range;
+    private final double base_range;
     private final ChargeStrategy chargeStrategy;
     private final BuffManager buffManager = new BuffManager();
 
     /**
-     * @param pos The tile position of the tower
-     * @param range The range of the tower in tiles
+     * @param pos            The tile position of the tower
+     * @param range          The range of the tower in tiles
      * @param chargeStrategy Strategy of how the tower charges between fires
      */
     public AbstractTower(Vector pos, double range, ChargeStrategy chargeStrategy) {
         this.pos = pos;
-        this.range = range;
+        this.base_range = range;
         this.chargeStrategy = chargeStrategy;
     }
 
     /**
      * Template method pattern - all towers fires differently
+     *
      * @return True if it succeeded or false if it didn't
      */
     protected abstract boolean tryFire();
@@ -61,8 +62,13 @@ public abstract class AbstractTower implements Tower {
         return buffManager.getTowerMultipliers();
     }
 
+    /**
+     * Gives the current range of the tower with active buffs applied
+     *
+     * @return The current range with buffs
+     */
     @Override
     public double getRange() {
-        return range;
+        return base_range * buffManager.getTowerMultipliers().getRangeMultiplier();
     }
 }
