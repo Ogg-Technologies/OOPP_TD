@@ -16,6 +16,8 @@ public class ControllerState implements ControllerStateValue {
 
     TowerProxy[] towerProxies;
 
+    private int startIndex = 0;
+
     ControllerState(TowerFactory factory) {
         setupTowerProxies(factory);
     }
@@ -27,17 +29,36 @@ public class ControllerState implements ControllerStateValue {
                 new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
                 new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
                 new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
+
+                new TowerProxy(factory::createGrizzlyBear, Constant.getInstance().GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Constant.getInstance().GRIZZLY_BEAR.COST),
+                new TowerProxy(factory::createBearryPotter, Constant.getInstance().BEARRY_POTTER.RANGE, BearryPotter.class, Constant.getInstance().BEARRY_POTTER.COST),
+                new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
+                new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
+                new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
+                new TowerProxy(factory::createGrizzlyBear, Constant.getInstance().GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Constant.getInstance().GRIZZLY_BEAR.COST),
+                new TowerProxy(factory::createBearryPotter, Constant.getInstance().BEARRY_POTTER.RANGE, BearryPotter.class, Constant.getInstance().BEARRY_POTTER.COST),
+                new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
+                new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
+                new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
+                new TowerProxy(factory::createGrizzlyBear, Constant.getInstance().GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Constant.getInstance().GRIZZLY_BEAR.COST),
+                new TowerProxy(factory::createBearryPotter, Constant.getInstance().BEARRY_POTTER.RANGE, BearryPotter.class, Constant.getInstance().BEARRY_POTTER.COST),
+                new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
+                new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
+                new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
         };
     }
 
-    public void setSelectedTower(Class<? extends Tower> towerType) {
-        for (TowerProxy towerProxy : towerProxies) {
-            if (towerProxy.correctTowerType(towerType)) {
-                selectedTower = towerProxy;
-                return;
-            }
+    /**
+     * Sets selected tower with an index of the corresponding button
+     *
+     * @param index the index of the button
+     */
+    public void setSelectedTowerWithIndex(int index) {
+        if (startIndex + index < towerProxies.length) {
+            selectedTower = towerProxies[startIndex + index];
+        } else {
+            selectedTower = null;
         }
-        throw new IllegalArgumentException("The tower type " + towerType.getSimpleName() + " does not exist as a proxy");
     }
 
     @Override
@@ -70,5 +91,23 @@ public class ControllerState implements ControllerStateValue {
             }
         }
         return -1;
+    }
+
+    @Override
+    public void changeStartIndex(int term) {
+        if (term + startIndex < 0 || term + startIndex >= towerProxies.length) {
+            return;
+        }
+        startIndex += term;
+    }
+
+    @Override
+    public int getTowerPanelStartIndex() {
+        return startIndex;
+    }
+
+    @Override
+    public int getTotalAmountOfTowers() {
+        return towerProxies.length;
     }
 }

@@ -1,7 +1,6 @@
 package controller;
 
 import model.ModelInputListener;
-import model.game.tower.Tower;
 import utils.Vector;
 import view.ButtonClickHandler;
 import view.MouseViewObserver;
@@ -131,8 +130,8 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     }
 
     @Override
-    public void setSelectedTower(Class<? extends Tower> towerClass) {
-        controllerState.setSelectedTower(towerClass);
+    public void setSelectedTowerIndexButton(int index) {
+        controllerState.setSelectedTowerWithIndex(index);
     }
 
     @Override

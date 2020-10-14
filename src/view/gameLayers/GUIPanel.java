@@ -51,7 +51,8 @@ public class GUIPanel extends JPanel {
     //Buttons
     private final JButton[] towerButtons;
     private final JButton nextWaveButton;
-    private JButton backToStartButton;
+    private final JButton backToStartButton;
+    private final JButton[] arrowButtons;
 
 
     //GUI objects
@@ -95,7 +96,8 @@ public class GUIPanel extends JPanel {
         waveButtonDrawer = new NextWaveButtonDrawer(nextWaveButton);
 
         towerButtons = towerButtonsSetup();
-        towerPanelDrawer = new TowerPanelDrawer(towerButtons, towerPriceLabelSetup());
+        arrowButtons = arrowButtonsSetup();
+        towerPanelDrawer = new TowerPanelDrawer(towerButtons, towerPriceLabelSetup(), arrowButtons);
 
         JLabel waveLabel = new JLabel();
         waveLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -108,6 +110,18 @@ public class GUIPanel extends JPanel {
         backToStartButtonDrawer = new BackToStartButtonDrawer(backToStartButton);
 
         setLayout(null);
+    }
+
+    private JButton[] arrowButtonsSetup() {
+        JButton[] arrowButtons = new JButton[2];
+        for (int i = 0; i < arrowButtons.length; i++) {
+            JButton tempButton = new JButton();
+            tempButton.setBorder(BorderFactory.createEmptyBorder());
+            tempButton.setContentAreaFilled(false);
+            add(tempButton);
+            arrowButtons[i] = tempButton;
+        }
+        return arrowButtons;
     }
 
 
@@ -128,12 +142,13 @@ public class GUIPanel extends JPanel {
     public void setupButtons(ButtonClickHandler buttonClickHandler, WindowState windowState) {
         //nextWaveButton
         nextWaveButton.addActionListener(e -> buttonClickHandler.onNextWaveClicked());
-        Class<? extends Tower>[] towerTypes = controllerStateValue.getAllTowerTypes();
-        for (int i = 0; i < towerTypes.length; i++) {
+        for (int i = 0; i < MAX_TOWERS; i++) {
             int finalI = i;
-            towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTower(towerTypes[finalI])));
+            towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTowerIndexButton(finalI)));
         }
         backToStartButton.addActionListener(e -> windowState.setViewStateToStart());
+        arrowButtons[0].addActionListener(e -> controllerStateValue.changeStartIndex(-MAX_TOWERS));
+        arrowButtons[1].addActionListener(e -> controllerStateValue.changeStartIndex(MAX_TOWERS));
     }
 
     private JButton[] towerButtonsSetup() {

@@ -1,17 +1,19 @@
 package view;
 
-import model.game.tower.Tower;
-
 /**
- * @author Sebastian
+ * @author Sebastian, Samuel
  * An interface for a controller used by the view to add new buttons.
  */
 public interface ButtonClickHandler {
-    /**
-     * Sets the selected tower as the tower class from the corresponding button.
-     * @param towerClass the tower to be selected.
-     */
-    void setSelectedTower(Class<? extends Tower> towerClass);
 
+    /**
+     * Sets the selected tower based on the index of the button which is clicked upon
+     * @param index of the clicked button
+     */
+    void setSelectedTowerIndexButton(int index);
+
+    /**
+     * Calls nextWaveClicked in controller when the corresponding button is pressed
+     */
     void onNextWaveClicked();
 }

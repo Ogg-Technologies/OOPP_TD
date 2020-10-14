@@ -1,6 +1,5 @@
 package view;
 
-import controller.ControllerState;
 import model.game.tower.Tower;
 
 /**
@@ -33,4 +32,21 @@ public interface ControllerStateValue {
      * @return the price of specified towerType
      */
     int getTowerPrice(Class<? extends Tower> towerType);
+
+    /**
+     * Changes startIndex that is used to know which tower types are currently displayed in towerPanel
+     * @param term how much the startIndex will increase/decrease
+     */
+    void changeStartIndex(int term);
+
+    /**
+     * StartIndex is used to know which tower types are currently displayed in towerPanel
+     * @return the startIndex
+     */
+    int getTowerPanelStartIndex();
+
+    /**
+     * @return Amount of towers there is implemented
+     */
+    int getTotalAmountOfTowers();
 }
