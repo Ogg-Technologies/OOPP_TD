@@ -15,7 +15,7 @@ public class Event {
      */
     public enum Type {
         UPDATE,
-        TOWER_ATTACK,
+        TOWER_FIRE,
         ENEMY_DEATH,
         PROJECTILE_HIT,
     }

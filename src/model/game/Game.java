@@ -18,6 +18,7 @@ import model.game.tower.TowerFactory;
 import model.game.tower.TowerHandler;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
+import model.game.tower.towerutils.TowerFinder;
 import model.game.wave.WaveHandler;
 import utils.Vector;
 
@@ -47,7 +48,7 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
         ProjectileFactory projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
         projectileHandler = new ProjectileHandler(projectileFactory);
 
-        towerFactory = new TowerFactory(this, projectileHandler, eventSender);
+        towerFactory = new TowerFactory(this, new TowerFinder(towerHandler::getTowers), projectileHandler, eventSender);
     }
 
     public void update() {

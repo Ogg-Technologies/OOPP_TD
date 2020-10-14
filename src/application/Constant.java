@@ -22,6 +22,7 @@ public final class Constant {
 
     public final int ROTATED_IMAGE_CACHE_SIZE;
     public final Player PLAYER;
+    public final BearGrylls BEAR_GRYLLS;
     public final GrizzlyBear GRIZZLY_BEAR;
     public final BearryPotter BEARRY_POTTER;
     public final SniperBear SNIPER_BEAR;
@@ -52,6 +53,7 @@ public final class Constant {
         }
         ROTATED_IMAGE_CACHE_SIZE = (int) readDoubleValue(prop, "rotated_image_cache_size");
         PLAYER = new Player(prop);
+        BEAR_GRYLLS = new BearGrylls(prop);
         GRIZZLY_BEAR = new GrizzlyBear(prop);
         BEARRY_POTTER = new BearryPotter(prop);
         SNIPER_BEAR = new SniperBear(prop);
@@ -147,6 +149,23 @@ public final class Constant {
         private Player(Properties prop) {
             START_MONEY = (int) readDoubleValue(prop, "player_start_money");
             START_HEALTH = (int) readDoubleValue(prop, "player_start_health");
+        }
+    }
+
+    public static class BearGrylls {
+        public final int BUFF_PERCENTAGE;
+        public final int BUFF_DURATION;
+        public final double RANGE;
+        public final int ATTACK_DELAY;
+        public final int COST;
+
+
+        private BearGrylls(Properties prop) {
+            BUFF_PERCENTAGE = (int) readDoubleValue(prop, "bear_grylls_buff_percentage");
+            BUFF_DURATION = (int) readDoubleValue(prop, "bear_grylls_buff_duration");
+            RANGE = readDoubleValue(prop, "bear_grylls_range");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "bear_grylls_updates_between_attacks");
+            COST = (int) readDoubleValue(prop, "bear_grylls_cost");
         }
     }
 

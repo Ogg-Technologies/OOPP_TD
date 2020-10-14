@@ -29,7 +29,7 @@ public class Barbearian extends AbstractAttackingTower {
     @Override
     protected void attack(Enemy e) {
         e.damage((int) (Constant.getInstance().BARBEARIAN.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier()));
-        eventSender.sendEvent(new Event(Event.Type.TOWER_ATTACK, this.getClass(), getPos(), getAngle()));
+        eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), getAngle()));
     }
 
     @Override

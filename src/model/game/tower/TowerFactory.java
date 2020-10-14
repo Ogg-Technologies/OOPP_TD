@@ -5,6 +5,7 @@ import model.game.tower.concretetowers.*;
 import model.game.tower.towerutils.EnemyGetter;
 import model.game.tower.towerutils.EnemyTargeter;
 import model.game.tower.towerutils.ProjectileCreator;
+import model.game.tower.towerutils.TowerFinder;
 import utils.Vector;
 
 /**
@@ -14,13 +15,19 @@ import utils.Vector;
 public class TowerFactory {
 
     private final EnemyGetter enemyGetter;
+    private final TowerFinder towerFinder;
     private final ProjectileCreator projectileCreator;
     private final EventSender eventSender;
 
-    public TowerFactory(EnemyGetter enemyGetter, ProjectileCreator projectileCreator, EventSender eventSender) {
+    public TowerFactory(EnemyGetter enemyGetter, TowerFinder towerFinder, ProjectileCreator projectileCreator, EventSender eventSender) {
         this.enemyGetter = enemyGetter;
+        this.towerFinder = towerFinder;
         this.projectileCreator = projectileCreator;
         this.eventSender = eventSender;
+    }
+
+    public Tower createBearGrylls(Vector pos) {
+        return new BearGrylls(pos, towerFinder, eventSender);
     }
 
     public Tower createGrizzlyBear(Vector pos) {
@@ -41,31 +48,5 @@ public class TowerFactory {
 
     public Tower createBarbearian(Vector pos) {
         return new Barbearian(pos, new EnemyTargeter(enemyGetter), eventSender);
-    }
-
-    /**
-     * Returns a concrete tower based on the class of that tower.
-     *
-     * @param pos        the pos where the tower should be
-     * @param towerClass the class that represent the concrete tower
-     * @return the concrete tower
-     */
-    public Tower createTower(Vector pos, Class<? extends Tower> towerClass) {
-        if (towerClass == GrizzlyBear.class) {
-            return createGrizzlyBear(pos);
-        }
-        if (towerClass == BearryPotter.class) {
-            return createBearryPotter(pos);
-        }
-        if (towerClass == SniperBear.class) {
-            return createSniperBear(pos);
-        }
-        if (towerClass == SovietBear.class) {
-            return createSovietBear(pos);
-        }
-        if (towerClass == Barbearian.class) {
-            return createBarbearian(pos);
-        }
-        throw new IllegalArgumentException("Tower class: " + towerClass + " is not recognized");
     }
 }
