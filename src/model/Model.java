@@ -21,12 +21,15 @@ import java.util.*;
  * This represents the inner logic of the program. It keeps track of the state of the application.
  */
 public final class Model implements ModelInputListener, ModelData, Updatable, EventSender {
-    private Game game;
+
     private final Set<EventListener> eventListeners = new HashSet<>();
     private final List<Command> commands = new ArrayList<>();
+    private final List<? extends TileMap> maps;
+    private Game game;
 
-    public Model() {
-        game = new Game(this);
+    public Model(List<? extends TileMap> maps) {
+        this.maps = maps;
+        game = new Game(maps.get(0), this);
         addOnModelEventListener(game);
     }
 
@@ -130,14 +133,9 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
         return game.getWaveNumber();
     }
 
-    //TODO: Make this correct
     @Override
     public TileMap[] getTileMaps() {
-        TileMap[] returnValue = new TileMap[3];
-        returnValue[0] = TileMap.fromDefaultTileGrid();
-        returnValue[1] = TileMap.fromDefaultTileGrid();
-        returnValue[2] = TileMap.fromDefaultTileGrid();
-        return returnValue;
+        return maps.toArray(new TileMap[0]);
     }
 
     /**

@@ -31,7 +31,7 @@ import java.util.Collection;
  */
 public class Game implements EnemyGetter, ProjectileService, EventListener {
 
-    private final TileMap tileMap = TileMap.fromDefaultTileGrid();
+    private final TileMap tileMap;
     private final MutableHealth baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
     ;
     private final TowerHandler towerHandler = new TowerHandler();
@@ -41,7 +41,8 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
     ;
     private final TowerFactory towerFactory;
 
-    public Game(EventSender eventSender) {
+    public Game(TileMap tileMap, EventSender eventSender) {
+        this.tileMap = tileMap;
         EnemyFactory enemyFactory = new EnemyFactory(baseHealth::damage, tileMap.getPath());
         waveHandler = new WaveHandler(enemyFactory, eventSender);
 

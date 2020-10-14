@@ -57,13 +57,13 @@ class TileMapTest {
     }
 
     @Test
-    void spawnPositionIsCorrect() {
-        assertEquals(new Vector(1, 0), TileMap.fromTileGrid(new Tile[][] {
+    void spawnPositionIsCorrect() throws IllegalTileMapException {
+        assertEquals(new Vector(1, 0), TileMap.fromTileGrid(new Tile[][]{
                 {GROUND, GROUND, GROUND},
                 {GROUND, START, GROUND},
                 {BASE, PATH, GROUND}
         }).getPath().get(0));
-        assertEquals(new Vector(3, 3), TileMap.fromTileGrid(new Tile[][] {
+        assertEquals(new Vector(3, 3), TileMap.fromTileGrid(new Tile[][]{
                 {PATH, PATH, BASE},
                 {PATH, GROUND, GROUND},
                 {PATH, PATH, GROUND},
@@ -72,13 +72,13 @@ class TileMapTest {
     }
 
     @Test
-    void startPositionIsCorrect() {
-        assertEquals(new Vector(1, 1), TileMap.fromTileGrid(new Tile[][] {
+    void startPositionIsCorrect() throws IllegalTileMapException {
+        assertEquals(new Vector(1, 1), TileMap.fromTileGrid(new Tile[][]{
                 {GROUND, GROUND, GROUND},
                 {GROUND, START, GROUND},
                 {BASE, PATH, GROUND}
         }).getPath().get(1));
-        assertEquals(new Vector(2, 3), TileMap.fromTileGrid(new Tile[][] {
+        assertEquals(new Vector(2, 3), TileMap.fromTileGrid(new Tile[][]{
                 {PATH, PATH, BASE},
                 {PATH, GROUND, GROUND},
                 {PATH, PATH, GROUND},
@@ -101,8 +101,8 @@ class TileMapTest {
         private TileMap tileMap;
 
         @BeforeEach
-        void setUp() {
-            tileMap = TileMap.fromTileGrid(new Tile[][] {
+        void setUp() throws IllegalTileMapException {
+            tileMap = TileMap.fromTileGrid(new Tile[][]{
                     {PATH, PATH, PATH, GROUND},
                     {PATH, GROUND, PATH, PATH},
                     {PATH, PATH, BASE, START}

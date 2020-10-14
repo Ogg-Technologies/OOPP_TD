@@ -20,7 +20,15 @@ public class TileMap {
     private final List<? extends Vector> deltas;
     private final List<Vector> path;
 
-    private TileMap(Tile[][] tileGrid) {
+    /**
+     * Tries to create a TileMap with the given tile grid information
+     *
+     * @param tileGrid The layout of the map as a Tile matrix
+     * @throws IllegalTileMapException Thrown during the creation process if:
+     *                                 There is not exactly one START and BASE tile in the matrix
+     *                                 There is not a continuous connection of PATH tiles from the START tile to the BASE tile
+     */
+    private TileMap(Tile[][] tileGrid) throws IllegalTileMapException {
         this.tileGrid = tileGrid;
         this.deltas = initDirectionDeltas();
         this.path = calculatePath();
@@ -35,11 +43,11 @@ public class TileMap {
         return deltas;
     }
 
-    public static TileMap fromDefaultTileGrid() {
+    public static TileMap fromDefaultTileGrid() throws IllegalTileMapException {
         return new TileMap(createBasicTileGrid());
     }
 
-    public static TileMap fromTileGrid(Tile[][] tileGrid) {
+    public static TileMap fromTileGrid(Tile[][] tileGrid) throws IllegalTileMapException {
         return new TileMap(tileGrid);
     }
 
@@ -58,7 +66,7 @@ public class TileMap {
         };
     }
 
-    private List<Vector> calculatePath() {
+    private List<Vector> calculatePath() throws IllegalTileMapException {
         List<Vector> path = new ArrayList<>();
 
         Vector start = findSingleTilePosition(START);
@@ -93,10 +101,11 @@ public class TileMap {
     /**
      * Calculates the tile at which enemies appear. This position is off-screen (provided that START tile is on the border).
      * The reason this exists is to not have enemies just appear on the start tile - instead having them enter the map.
+     *
      * @param startPosition The marked start position of the map
      * @return The position one tile backwards from where the next tile after the start tile is
      */
-    private Vector calculateSpawnTile(Vector startPosition) {
+    private Vector calculateSpawnTile(Vector startPosition) throws IllegalTileMapException {
         Vector next = findNext(startPosition, null);
         if (next == null) {
             throw new IllegalTileMapException("The marked path is not connected to the START tile");
@@ -135,10 +144,11 @@ public class TileMap {
     /**
      * Goes through every tile in the map to find the position with the tile given as argument
      * If none or multiple were found it throws an IllegalTileMapException
+     *
      * @param tile The tile to search for
      * @return A vector defining the position of the tile
      */
-    private Vector findSingleTilePosition(Tile tile) {
+    private Vector findSingleTilePosition(Tile tile) throws IllegalTileMapException {
         Vector position = null;
         for (int y = 0; y < tileGrid.length; y++) {
             for (int x = 0; x < tileGrid[0].length; x++) {
