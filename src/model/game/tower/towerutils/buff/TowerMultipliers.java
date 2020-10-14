@@ -23,14 +23,14 @@ public class TowerMultipliers {
     }
 
     public double getDamageMultiplier() {
-        return damageMultiplier;
+        return Math.min(damageMultiplier, 3);
     }
 
     public double getRangeMultiplier() {
-        return rangeMultiplier;
+        return Math.min(rangeMultiplier, 3);
     }
 
     public double getFireRateMultiplier() {
-        return fireRateMultiplier;
+        return Math.min(fireRateMultiplier, 3);
     }
 }
