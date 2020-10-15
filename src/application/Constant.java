@@ -23,7 +23,7 @@ public final class Constant {
     public final int ROTATED_IMAGE_CACHE_SIZE;
     public final Player PLAYER;
     public final BearGrylls BEAR_GRYLLS;
-    public final RubrixCubeBear RUBRIX_CUBE_BEAR;
+    public final RubixCubeBear RUBIX_CUBE_BEAR;
     public final Beer BEER;
     public final GrizzlyBear GRIZZLY_BEAR;
     public final BearryPotter BEARRY_POTTER;
@@ -56,7 +56,7 @@ public final class Constant {
         ROTATED_IMAGE_CACHE_SIZE = (int) readDoubleValue(prop, "rotated_image_cache_size");
         PLAYER = new Player(prop);
         BEAR_GRYLLS = new BearGrylls(prop);
-        RUBRIX_CUBE_BEAR = new RubrixCubeBear(prop);
+        RUBIX_CUBE_BEAR = new RubixCubeBear(prop);
         BEER = new Beer(prop);
         GRIZZLY_BEAR = new GrizzlyBear(prop);
         BEARRY_POTTER = new BearryPotter(prop);
@@ -173,7 +173,7 @@ public final class Constant {
         }
     }
 
-    public static class RubrixCubeBear {
+    public static class RubixCubeBear {
         public final int BUFF_PERCENTAGE;
         public final int BUFF_DURATION;
         public final double RANGE;
@@ -181,12 +181,12 @@ public final class Constant {
         public final int COST;
 
 
-        private RubrixCubeBear(Properties prop) {
-            BUFF_PERCENTAGE = (int) readDoubleValue(prop, "rubrix_cube_bear_buff_percentage");
-            BUFF_DURATION = (int) readDoubleValue(prop, "rubrix_cube_bear_buff_duration");
-            RANGE = readDoubleValue(prop, "rubrix_cube_bear_range");
-            ATTACK_DELAY = (int) readDoubleValue(prop, "rubrix_cube_bear_updates_between_attacks");
-            COST = (int) readDoubleValue(prop, "rubrix_cube_bear_cost");
+        private RubixCubeBear(Properties prop) {
+            BUFF_PERCENTAGE = (int) readDoubleValue(prop, "rubix_cube_bear_buff_percentage");
+            BUFF_DURATION = (int) readDoubleValue(prop, "rubix_cube_bear_buff_duration");
+            RANGE = readDoubleValue(prop, "rubix_cube_bear_range");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "rubix_cube_bear_updates_between_attacks");
+            COST = (int) readDoubleValue(prop, "rubix_cube_bear_cost");
         }
     }
 

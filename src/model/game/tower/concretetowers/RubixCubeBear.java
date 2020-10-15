@@ -17,20 +17,20 @@ import java.util.Collection;
  * @author Oskar
  * A tower that periodically buffs the fire rate of nearby towers.
  */
-public class RubrixCubeBear extends AbstractBuffTower {
+public class RubixCubeBear extends AbstractBuffTower {
 
     private EventSender eventSender;
 
-    public RubrixCubeBear(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
-        super(pos, Constant.getInstance().RUBRIX_CUBE_BEAR.RANGE,
-                new ConstantChargeStrategy(Constant.getInstance().RUBRIX_CUBE_BEAR.ATTACK_DELAY), towerFinder);
+    public RubixCubeBear(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
+        super(pos, Constant.getInstance().RUBIX_CUBE_BEAR.RANGE,
+                new ConstantChargeStrategy(Constant.getInstance().RUBIX_CUBE_BEAR.ATTACK_DELAY), towerFinder);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void buffTowers(Collection<? extends Tower> towers) {
         towers.forEach(tower -> {
-            tower.applyBuff(m -> m.addFireRate(Constant.getInstance().RUBRIX_CUBE_BEAR.BUFF_PERCENTAGE), Constant.getInstance().RUBRIX_CUBE_BEAR.BUFF_DURATION);
+            tower.applyBuff(m -> m.addFireRate(Constant.getInstance().RUBIX_CUBE_BEAR.BUFF_PERCENTAGE), Constant.getInstance().RUBIX_CUBE_BEAR.BUFF_DURATION);
         });
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), 0));
     }

@@ -30,8 +30,8 @@ public class TowerFactory {
         return new BearGrylls(pos, towerFinder, eventSender);
     }
 
-    public Tower createRubrixCubeBear(Vector pos) {
-        return new RubrixCubeBear(pos, towerFinder, eventSender);
+    public Tower createRubixCubeBear(Vector pos) {
+        return new RubixCubeBear(pos, towerFinder, eventSender);
     }
 
     public Tower createBeer(Vector pos) {
