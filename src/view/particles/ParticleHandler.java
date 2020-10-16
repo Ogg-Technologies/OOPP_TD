@@ -15,7 +15,7 @@ import java.awt.*;
 import java.util.*;
 
 /**
- * @author Samuel, Erik
+ * @author Samuel, Erik, Oskar
  * Class used for handling everything that has to do with emitters and particles
  * Listens for specific events and creates particle emitters from that
  * Is used by swingView
@@ -23,15 +23,13 @@ import java.util.*;
 public final class ParticleHandler extends JPanel implements EventListener {
 
     // Break up into multiple maps to have different particle emitters for the same sender class
-    private final Map<Class<?>, EmitterCreator> particleMap;
+    private final Map<Class<?>, EmitterCreator> particleMap = new HashMap<>();
     private final WindowState windowState;
 
-    private final Collection<Emitter> emitters;
+    private final Collection<Emitter> emitters = new ArrayList<>();
 
     public ParticleHandler(WindowState windowState) {
         this.windowState = windowState;
-        particleMap = new HashMap<>();
-        emitters = new ArrayList<>();
 
         linkEventToFactoryMethod();
     }
@@ -56,17 +54,21 @@ public final class ParticleHandler extends JPanel implements EventListener {
             update();
         } else if (particleMap.containsKey(event.getSender())) {
             EmitterCreator emitterCreator = particleMap.get(event.getSender());
-            emitters.add(emitterCreator.createEmitter(event.getPosition(), event.getAngle()));
+            synchronized (emitters) {
+                emitters.add(emitterCreator.createEmitter(event.getPosition(), event.getAngle()));
+            }
         }
     }
 
     private void update() {
-        for (Iterator<Emitter> iterator = emitters.iterator(); iterator.hasNext(); ) {
-            Emitter e = iterator.next();
-            e.update();
+        synchronized (emitters) {
+            for (Iterator<Emitter> iterator = emitters.iterator(); iterator.hasNext(); ) {
+                Emitter e = iterator.next();
+                e.update();
 
-            if (!e.isAlive()) {
-                iterator.remove();
+                if (!e.isAlive()) {
+                    iterator.remove();
+                }
             }
         }
     }
@@ -75,7 +77,10 @@ public final class ParticleHandler extends JPanel implements EventListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Collection<Emitter> copyEmitters = new ArrayList<>(emitters);
+        Collection<Emitter> copyEmitters;
+        synchronized (emitters) {
+            copyEmitters = new ArrayList<>(emitters);
+        }
 
         for (Emitter e : copyEmitters) {
             e.draw(g, windowState);
