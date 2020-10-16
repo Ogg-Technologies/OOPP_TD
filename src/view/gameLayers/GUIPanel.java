@@ -9,7 +9,6 @@ import view.ButtonClickHandler;
 import view.ControllerStateValue;
 import view.WindowState;
 import view.gameLayers.GUIObjects.*;
-import view.texture.ImageHandler;
 
 import javax.swing.*;
 import java.awt.*;

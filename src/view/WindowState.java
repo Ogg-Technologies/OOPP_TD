@@ -10,6 +10,7 @@ import utils.Vector;
 public class WindowState {
     private int tileSize = 0;
     private Vector offset;
+    private Vector totalMapSize;
 
     private ViewState viewState = ViewState.START;
 
@@ -35,6 +36,7 @@ public class WindowState {
         int startY = (int) ((MAP_UP * totalSize.y) + (height - tileSize * tileMapSize.y) / 2);
 
         offset = new Vector(startX, startY);
+        totalMapSize = new Vector(width, height);
     }
 
     /**
@@ -52,14 +54,34 @@ public class WindowState {
         return offset;
     }
 
+    /**
+     * Getter for total size of the map, including background
+     *
+     * @return total size as a Vector
+     */
+    public Vector getTotalMapSize() {
+        return totalMapSize;
+    }
+
+    /**
+     * Getter for which view state is active
+     *
+     * @return the view state
+     */
     public ViewState getViewState() {
         return viewState;
     }
 
+    /**
+     * Used for when changing to startViewState
+     */
     public void setViewStateToStart() {
         this.viewState = ViewState.START;
     }
 
+    /**
+     * Used for when changing to gameViewState
+     */
     public void setViewStateToGame() {
         this.viewState = ViewState.GAME;
     }

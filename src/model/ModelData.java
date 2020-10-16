@@ -3,7 +3,6 @@ package model;
 import model.event.EventListener;
 import model.game.Health;
 import model.game.enemy.Enemy;
-import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.tower.Tower;
@@ -26,13 +25,11 @@ public interface ModelData {
     Vector getMapSize();
 
     /**
-     * Retrieves the Tile at the given position or throws an exception if they are not within getMapSize() bounds
+     * Getter for the tileMap game contains, for knowing how to paint that map
      *
-     * @param x The x coordinate
-     * @param y The y coordinate
-     * @return The Tile at that position in the map
+     * @return the tileMap
      */
-    Tile getTile(int x, int y);
+    TileMap getActiveMap();
 
     Collection<? extends Tower> getTowers();
 
@@ -67,5 +64,11 @@ public interface ModelData {
      */
     int getWaveNumber();
 
+    /**
+     * Getter for all tileMaps that has been loaded in.
+     * This is used to see a preview for every map on start screen.
+     *
+     * @return an array of all tileMaps loaded in
+     */
     TileMap[] getTileMaps();
 }

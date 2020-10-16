@@ -33,12 +33,10 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
 
     private final TileMap tileMap;
     private final MutableHealth baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
-    ;
     private final TowerHandler towerHandler = new TowerHandler();
     private final WaveHandler waveHandler;
     private final ProjectileHandler projectileHandler;
     private final Economy economy = new Economy(Constant.getInstance().PLAYER.START_MONEY);
-    ;
     private final TowerFactory towerFactory;
 
     public Game(TileMap tileMap, EventSender eventSender) {
@@ -78,13 +76,6 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
         return baseHealth;
     }
 
-    /**
-     * Returns the Tile at the given position or throws an exception if it is not within map bounds
-     */
-    public Tile getTile(int x, int y) {
-        return tileMap.getTile(x, y);
-    }
-
     public Collection<Projectile> getProjectiles() {
         return projectileHandler.getProjectiles();
     }
@@ -95,7 +86,6 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
      * @param tilePos the tileMap pos to look att
      * @return a boolean whether or not the tile is valid
      */
-//    public boolean isValidTile(@NotNull Vector tilePos) {
     public boolean isValidTile(Vector tilePos) {
         return !towerHandler.isTowerAt(tilePos) &&
                 tileMap.getTile(tilePos.getIntX(), tilePos.getIntY()) == Tile.GROUND; //TODO: if we decide to have more obstacle, add it here
@@ -157,5 +147,14 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
      */
     public int getWaveNumber() {
         return waveHandler.getCurrentLevel();
+    }
+
+    /**
+     * Getter for games tileMap
+     *
+     * @return a tileMap
+     */
+    public TileMap getMap() {
+        return tileMap;
     }
 }

@@ -6,7 +6,6 @@ import model.event.EventSender;
 import model.game.Game;
 import model.game.Health;
 import model.game.enemy.Enemy;
-import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.tower.AbstractTowerFactory;
@@ -62,8 +61,8 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
     @Override
-    public Tile getTile(int x, int y) {
-        return game.getTile(x, y);
+    public TileMap getActiveMap() {
+        return game.getMap();
     }
 
     @Override

@@ -1,100 +1,75 @@
 package view.gameLayers;
 
-import application.Constant;
 import model.ModelData;
-import model.game.map.Tile;
 import utils.Vector;
 import view.ColorHandler;
+import view.MapDrawer;
 import view.WindowState;
-import view.texture.ImageHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * @author Sebastian, Samuel, Erik
  * Displays the map.
  * Is used by Swingview.
  */
-public class Background extends JPanel { // TODO: Could use some functional decomposition later
+public class Background extends JPanel {
 
     private final ModelData modelData;
     private final WindowState windowState;
     private Vector pos = null;
     private boolean validTile = true;
 
-    private static final BufferedImage baseImage = getBaseImage();
 
+    /**
+     * Gets some constants needed to paint the maps
+     *
+     * @param modelData   gives information about active map
+     * @param windowState gives information about windowSize
+     */
     public Background(ModelData modelData, WindowState windowState) {
         this.modelData = modelData;
         this.windowState = windowState;
     }
 
-    public void setMousePos(Vector pos, boolean validTile){
+    /**
+     * Is called by swingView whenever swingView gets a different mousePos
+     *
+     * @param pos       the pos of the mouse
+     * @param validTile if tile is valid or not, this is asked by model from swingView
+     */
+    public void setMousePos(Vector pos, boolean validTile) {
         this.pos = pos;
         this.validTile = validTile;
     }
 
-    public void setMousePosToNull(){
+    /**
+     * This is called by swingView whenever the mouse isn't over a tile
+     */
+    public void setMousePosToNull() {
         this.pos = null;
-    }
-
-    private static BufferedImage getBaseImage() {
-        return ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BASE);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(ColorHandler.BACKGROUND);
-        g.fillRect((int) (WindowState.MAP_LEFT * getWidth()), (int) (WindowState.MAP_UP * getHeight()),
-                (int) (WindowState.MAP_WIDTH * getWidth()), (int) (WindowState.MAP_HEIGHT * getHeight()));
+        int x = (int) (WindowState.MAP_LEFT * getWidth());
+        int y = (int) (WindowState.MAP_UP * getHeight());
 
-        int baseX = -1;
-        int baseY = -1;
-        Vector mapSize = modelData.getMapSize();
-        for (int tileY = 0; tileY < mapSize.getIntY(); tileY++) {
-            for (int tileX = 0; tileX < mapSize.getIntX(); tileX++) {
-
-                switch (modelData.getTile(tileX, tileY)) {
-                    case START:
-                    case PATH:
-                        g.setColor(ColorHandler.PATH);
-                        break;
-                    case GROUND:
-                    case BASE:
-                        g.setColor(ColorHandler.GROUND);
-                        break;
-                    default:
-                        throw new UnsupportedOperationException("The tile " + modelData.getTile(tileX, tileY)
-                                + " has no supported look in View");
-                }
-
-                if (modelData.getTile(tileX, tileY) == Tile.BASE) {
-                    baseX = tileX;
-                    baseY = tileY;
-                }
-
-                g.fillRect(tileX * windowState.getTileSize() + windowState.getTileMapOffset().getIntX(),
-                        tileY * windowState.getTileSize() + windowState.getTileMapOffset().getIntY(),
-                        windowState.getTileSize(), windowState.getTileSize());
-            }
-        }
+        MapDrawer.drawMap(g, modelData.getActiveMap(), x, y,
+                windowState.getTotalMapSize().getIntX(), windowState.getTotalMapSize().getIntY(),
+                ColorHandler.GAME_BACKGROUND);
 
         if (pos != null) {
             paintOverlay(pos, g);
         }
-
-        g.drawImage(baseImage, baseX * windowState.getTileSize() + windowState.getTileMapOffset().getIntX(),
-                baseY * windowState.getTileSize() + windowState.getTileMapOffset().getIntY(),
-                windowState.getTileSize(), windowState.getTileSize(), null);
     }
 
-    private void paintOverlay(Vector tilePos, Graphics g){
+    private void paintOverlay(Vector tilePos, Graphics g) {
 
-        if(tilePos.x >= 0 && tilePos.y >= 0 && tilePos.x < modelData.getMapSize().x && tilePos.y < modelData.getMapSize().y) {
+        if (tilePos.x >= 0 && tilePos.y >= 0 && tilePos.x < modelData.getMapSize().x && tilePos.y < modelData.getMapSize().y) {
             if (validTile) {
                 g.setColor(ColorHandler.VALID_TILE_HOVER);
             } else {
