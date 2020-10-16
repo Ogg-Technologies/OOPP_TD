@@ -34,7 +34,7 @@ public class TowerDrawer implements TowerVisitor {
     }
 
     @Override
-    public void visit(GrizzlyBear tower) { //TODO Possible more refactoring by adding a getAngle to tower interface
+    public void visit(GrizzlyBear tower) {
         drawTower(tower.getPos(), tower.getAngle(), Constant.getInstance().IMAGE_PATH.GRIZZLY_BEAR);
     }
 

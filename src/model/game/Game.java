@@ -80,16 +80,19 @@ public class Game implements EnemyGetter, EventListener {
 
     /**
      * Checks whether there are other towers or objects where other towers cannot be placed
+     * If obstacles are added, add logic for them in this method
      *
      * @param tilePos the tileMap pos to look att
      * @return a boolean whether or not the tile is valid
      */
     public boolean isValidTile(Vector tilePos) {
         return !towerHandler.isTowerAt(tilePos) &&
-                tileMap.getTile(tilePos.getIntX(), tilePos.getIntY()) == Tile.GROUND; //TODO: if we decide to have more obstacle, add it here
+                tileMap.getTile(tilePos.getIntX(), tilePos.getIntY()) == Tile.GROUND;
     }
 
-    //TODO: this method is what gives view the money information
+    /**
+     * @return the current amount of money units the player has
+     */
     public int getMoney() {
         return economy.getMoney();
     }
@@ -104,7 +107,6 @@ public class Game implements EnemyGetter, EventListener {
      * @see #isValidTile(Vector) for requirements
      */
     public void placeTower(Class<? extends Tower> towerType, AbstractTowerFactory towerFactory, Vector pos) {
-        //TODO: Logic for if the tower can be placed, and what tower to place
         if (isValidTile(pos)) {
             if (economy.buyTower(towerType)) {
                 towerHandler.createTower(towerFactory, pos);

@@ -19,7 +19,6 @@ import java.util.List;
  */
 public final class MapLoader {
 
-    // TODO: Constructor arguments, add in config file or leave as it is?
     private static final String ROOT_PATH = "resource/maps/";
     private static final String FILE_FORMAT = ".map";
 

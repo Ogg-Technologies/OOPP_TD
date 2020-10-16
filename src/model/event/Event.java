@@ -28,10 +28,11 @@ public class Event {
     /**
      * Creates an Event, which is something that has happened in the model that either something
      * in the model wants to find out has happened or potential event listeners
-     * @param type The type of Event
-     * @param sender The class of the object that caused the Event (send in this.getClass() as argument)
+     *
+     * @param type     The type of Event
+     * @param sender   The class of the object that caused the Event (send in this.getClass() as argument)
      * @param position [Optional] Some Events has a specific position
-     * @param angle [Optional] Some Events has an angle TODO: Figure out if this should exist
+     * @param angle    [Optional] Some Events has an angle
      */
     public Event(Type type, Class<?> sender, Vector position, double angle) {
         this.type = type;
