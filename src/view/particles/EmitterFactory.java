@@ -106,4 +106,32 @@ public final class EmitterFactory {
                 .setTileSize(LinearDoubleDistribution.fromRange(0.5, 0.5))
                 .build();
     }
+
+    static Emitter createBeerEmitter(Vector position, double angle) {
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.BEER)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.0, 0.0)))
+                .setAngleVelocity(LinearDoubleDistribution.fromRange(0, 0))
+                .setEmitterLifetime(1)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(1, 1))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.5, 0.5))
+                .build();
+    }
+
+    static Emitter createRubixCubeEmitter(Vector position, double angle) {
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImagePath(Constant.getInstance().IMAGE_PATH.RUBIX_CUBE)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.0, 0.0)))
+                .setAngleVelocity(LinearDoubleDistribution.fromRange(0, 0))
+                .setEmitterLifetime(1)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(1, 1))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.5, 0.5))
+                .build();
+    }
 }

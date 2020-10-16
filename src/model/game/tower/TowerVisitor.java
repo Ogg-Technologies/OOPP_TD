@@ -25,4 +25,6 @@ public interface TowerVisitor {
     void visit(SovietBear tower);
     void visit(Barbearian tower);
     void visit(BearGrylls tower);
+    void visit(Beer tower);
+    void visit(RubixCubeBear tower);
 }

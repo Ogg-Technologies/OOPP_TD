@@ -4,10 +4,7 @@ import model.event.Event;
 import model.event.EventListener;
 import model.game.projectile.concreteprojectile.BombardaCharm;
 import model.game.projectile.concreteprojectile.Rock;
-import model.game.tower.concretetowers.Barbearian;
-import model.game.tower.concretetowers.BearGrylls;
-import model.game.tower.concretetowers.SniperBear;
-import model.game.tower.concretetowers.SovietBear;
+import model.game.tower.concretetowers.*;
 import view.WindowState;
 
 import javax.swing.*;
@@ -41,6 +38,9 @@ public final class ParticleHandler extends JPanel implements EventListener {
         particleMap.put(SovietBear.class, EmitterFactory::createBulletEmitter);
         particleMap.put(Barbearian.class, EmitterFactory::createSwingEmitter);
         particleMap.put(BearGrylls.class, EmitterFactory::createCompassEmitter);
+        particleMap.put(Beer.class, EmitterFactory::createBeerEmitter);
+        particleMap.put(RubixCubeBear.class, EmitterFactory::createRubixCubeEmitter);
+
     }
 
     /**

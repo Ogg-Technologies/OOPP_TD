@@ -37,6 +37,8 @@ public class GUIPanel extends JPanel {
         pathMap.put(SovietBear.class, Constant.getInstance().IMAGE_PATH.SOVIET_BEAR);
         pathMap.put(Barbearian.class, Constant.getInstance().IMAGE_PATH.BARBEARIAN);
         pathMap.put(BearGrylls.class, Constant.getInstance().IMAGE_PATH.BEAR_GRYLLS);
+        pathMap.put(Beer.class, Constant.getInstance().IMAGE_PATH.BEER_BEAR);
+        pathMap.put(RubixCubeBear.class, Constant.getInstance().IMAGE_PATH.RUBIX_CUBE_BEAR);
         return pathMap;
     }
 

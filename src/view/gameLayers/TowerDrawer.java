@@ -60,15 +60,22 @@ public class TowerDrawer implements TowerVisitor {
 
     @Override
     public void visit(BearGrylls tower) {
-        drawTowerWithoutAngle(tower.getPos(), Constant.getInstance().IMAGE_PATH.BEAR_GRYLLS);
+        drawTower(tower.getPos(), Constant.getInstance().IMAGE_PATH.BEAR_GRYLLS);
     }
 
-    private void drawTowerWithoutAngle(Vector pos, String path) {
-        BufferedImage image = ImageHandler.getImage(path);
-        Vector realPos = getRealPos(pos);
-        int size = windowState.getTileSize();
-        int offset =(size - windowState.getTileSize()) / 2;
-        graphics.drawImage(image, realPos.getIntX() - offset, realPos.getIntY() - offset, size, size, null);
+    @Override
+    public void visit(Beer tower) {
+        drawTower(tower.getPos(), Constant.getInstance().IMAGE_PATH.BEER_BEAR);
+    }
+
+    @Override
+    public void visit(RubixCubeBear tower) {
+        drawTower(tower.getPos(), Constant.getInstance().IMAGE_PATH.RUBIX_CUBE_BEAR);
+    }
+
+    private void drawTower(Vector pos, String path) {
+        Vector defaultVector = new Vector(0, 1);
+        drawTower(pos, defaultVector.getAngle(), path);
     }
 
     private void drawTower(Vector notRotatedPos, double angle, String path) {
