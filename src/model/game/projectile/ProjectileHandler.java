@@ -83,12 +83,9 @@ public class ProjectileHandler implements ProjectileCreator {
      * @return true if the center of the projectile is further than EDGE_DELTA outside the edge of the map, false otherwise
      */
     private boolean projectileIsOutsideMap(Projectile p) {
-        Vector position = p.getPosition();
-        if (position.x < -EDGE_DELTA || position.y < -EDGE_DELTA
-                || position.x > mapSize.x + EDGE_DELTA || position.y > mapSize.y + EDGE_DELTA) {
-            return true;
-        }
-        return false;
+        Vector mapBoundsStart = new Vector(-EDGE_DELTA, -EDGE_DELTA);
+        Vector mapBoundsEnd = mapSize.plus(new Vector(EDGE_DELTA, EDGE_DELTA));
+        return !CollisionDetector.pointIsInsideRectangle(mapBoundsStart, mapBoundsEnd.minus(mapBoundsStart), p.getPosition());
     }
 
 

@@ -19,4 +19,14 @@ public final class CollisionDetector {
         Vector delta = circlePos.minus(pointPos);
         return delta.getDist() < radius;
     }
+
+    public static boolean pointIsInsideRectangle(Vector rectPos, Vector rectSize, Vector pointPos) {
+        Vector oppositeCorner = rectPos.plus(rectSize);
+        if (pointPos.x > rectPos.x && pointPos.x < oppositeCorner.x) {
+            if (pointPos.y > rectPos.y && pointPos.y < oppositeCorner.y) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
