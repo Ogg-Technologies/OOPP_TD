@@ -121,9 +121,13 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
         }
     }
 
+    /**
+     * Starts the next waves and gives extra money based on the remaining health of all activated waves and enemies on the map.
+     * The extra money is equal to sqrt(remainingHealth).
+     */
     public void startNewWave() {
         int remainingEnemyHealth = waveHandler.getEnemyAttackHealth().getCurrent();
-        economy.addMoney(remainingEnemyHealth);
+        economy.addMoney((int) Math.sqrt(remainingEnemyHealth));
         waveHandler.startNewWave();
     }
 
