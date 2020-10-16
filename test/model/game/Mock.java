@@ -68,6 +68,10 @@ public class Mock {
             public boolean isConsumed() {
                 return false;
             }
+
+            @Override
+            public void onEnemyHit(Enemy enemy) {
+            }
         };
     }
 

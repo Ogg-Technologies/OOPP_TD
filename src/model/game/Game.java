@@ -44,8 +44,8 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
         EnemyFactory enemyFactory = new EnemyFactory(baseHealth::damage, tileMap.getPath());
         waveHandler = new WaveHandler(enemyFactory, eventSender);
 
-        ProjectileFactory projectileFactory = new ProjectileFactory(this, eventSender, new EnemyTargeter(this));
-        projectileHandler = new ProjectileHandler(projectileFactory);
+        ProjectileFactory projectileFactory = new ProjectileFactory(eventSender, new EnemyTargeter(this));
+        projectileHandler = new ProjectileHandler(projectileFactory, tileMap.getSize(), this);
 
         towerFactory = new TowerFactory(this, new TowerFinder(towerHandler::getTowers), projectileHandler, eventSender);
     }

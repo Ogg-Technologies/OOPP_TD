@@ -1,5 +1,6 @@
 package model.game.projectile;
 
+import model.game.enemy.Enemy;
 import utils.Vector;
 
 /**
@@ -12,4 +13,6 @@ public interface Projectile {
     void update();
 
     boolean isConsumed();
+
+    void onEnemyHit(Enemy enemy);
 }

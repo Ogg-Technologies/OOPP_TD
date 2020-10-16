@@ -5,7 +5,6 @@ import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.projectile.AbstractProjectile;
-import model.game.projectile.ProjectileService;
 import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;
 
@@ -24,8 +23,8 @@ public class BombardaCharm extends AbstractProjectile {
     private Enemy target;
     private final EnemyTargeter enemyTargeter;
 
-    public BombardaCharm(ProjectileService service, Vector position, Enemy target, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
-        super(service, position, target.getPos().minus(position).setMagnitude(Constant.getInstance().BOMBARDA_CHARM.SPEED));
+    public BombardaCharm(Vector position, Enemy target, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
+        super(position, target.getPos().minus(position).setMagnitude(Constant.getInstance().BOMBARDA_CHARM.SPEED));
         this.damage = damage;
         this.eventSender = eventSender;
         this.target = target;
@@ -50,7 +49,7 @@ public class BombardaCharm extends AbstractProjectile {
     }
 
     @Override
-    protected void onEnemyHit(Enemy enemy) {
+    public void onEnemyHit(Enemy enemy) {
         damageEnemiesInRadius();
         eventSender.sendEvent(new Event(Event.Type.PROJECTILE_HIT, this.getClass(), getPosition()));
         consumed = true;

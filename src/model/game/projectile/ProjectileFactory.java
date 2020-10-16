@@ -14,21 +14,19 @@ import utils.Vector;
  */
 public final class ProjectileFactory {
 
-    private final ProjectileService service;
     private final EventSender eventSender;
     private final EnemyTargeter enemyTargeter;
 
-    public ProjectileFactory(ProjectileService service, EventSender eventSender, EnemyTargeter enemyTargeter) {
-        this.service = service;
+    public ProjectileFactory(EventSender eventSender, EnemyTargeter enemyTargeter) {
         this.eventSender = eventSender;
         this.enemyTargeter = enemyTargeter;
     }
 
     public Projectile createRock(Vector position, Vector target, int damage) {
-        return new Rock(service, position, target.minus(position).setMagnitude(Constant.getInstance().ROCK.SPEED), damage, this.eventSender);
+        return new Rock(position, target.minus(position).setMagnitude(Constant.getInstance().ROCK.SPEED), damage, this.eventSender);
     }
 
     public Projectile createExplodingCharm(Vector position, Enemy target, int damage) {
-        return new BombardaCharm(service, position, target, damage, eventSender, enemyTargeter);
+        return new BombardaCharm(position, target, damage, eventSender, enemyTargeter);
     }
 }
