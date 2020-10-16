@@ -92,6 +92,16 @@ public class WaveHandler {
     }
 
     /**
+     * Calculates the money reward for starting a wave early
+     *
+     * @return The amount of money that should be rewarded
+     */
+    public int getRewardForStartingWaveEarly() {
+        int remainingHealth = getEnemyAttackHealth().getCurrent();
+        return (int) Math.sqrt(remainingHealth);
+    }
+
+    /**
      * Gets the level (wave) that the game is currently on
      *
      * @return the current level
