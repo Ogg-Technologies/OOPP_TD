@@ -442,6 +442,10 @@ public final class Constant {
     public static class ImagePath {
 
 
+        public final String BEER_BEAR;
+        public final String BEER;
+        public final String RUBIX_CUBE;
+        public final String RUBIX_CUBE_BEAR;
         public final String COMPASS;
         public final String AXE;
         public final String GRIZZLY_BEAR;
@@ -484,6 +488,10 @@ public final class Constant {
             FISH_IN_A_FISH_TANK = readStringValue(prop, "fish_in_a_fish_tank_path");
             BASE = readStringValue(prop, "base_path");
             COMPASS = readStringValue(prop, "compass_path");
+            BEER_BEAR = readStringValue(prop, "beerBear_path");
+            BEER = readStringValue(prop, "beer_path");
+            RUBIX_CUBE = readStringValue(prop, "rubixCube_path");
+            RUBIX_CUBE_BEAR = readStringValue(prop, "rubixCubeBear_path");
         }
     }
 
