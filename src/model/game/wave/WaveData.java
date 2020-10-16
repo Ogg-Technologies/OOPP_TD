@@ -95,24 +95,24 @@ public class WaveData {
                 .delay(300)
                 .spawnMultipleWithDelay(fac::createFishAndChips, 50, 5)
                 .delay(300)
-                .spawnMultipleWithDelay(fac::createSailfish, 10, 60)
+                .spawnMultipleWithDelay(fac::createSailfish, 5, 200)
                 ::toWave);
 
         definedWaves.add(seq()
                 .spawnMultipleWithDelay(fac::createFishInABoat, 3, 60)
                 .delay(5)
-                .spawnMultipleWithDelay(fac::createSailfish, 10, 30)
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 60)
                 ::toWave);
 
         definedWaves.add(seq()
-                .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 50)
                 .delay(5)
                 .spawnMultipleWithDelay(fac::createFishInABoat, 5, 40)
                 ::toWave);
 
         definedWaves.add(seq()
                 .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
-                .delay(300)
+                .delay(500)
                 .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
                 ::toWave);
 
@@ -123,7 +123,7 @@ public class WaveData {
                 .spawnMultipleWithDelay(fac::createSailfish, 10, 20)
                 .delay(5)
                 .spawnMultipleWithDelay(fac::createFishInABoat, 20, 40)
-                .delay(10)
+                .delay(30)
                 .spawn(fac::createShark)
                 ::toWave);
 
@@ -138,7 +138,7 @@ public class WaveData {
         definedWaves.add(seq()
                 .spawnMultipleWithDelay(fac::createSailfish, 20, 5)
                 .delay(100)
-                .spawnMultipleWithDelay(fac::createShark, 10, 60)
+                .spawnMultipleWithDelay(fac::createShark, 8, 60)
                 ::toWave);
 
         // Introduce fishInAFishTank
@@ -153,7 +153,7 @@ public class WaveData {
                 ::toWave);
 
         definedWaves.add(seq()
-                .spawnMultipleWithDelay(fac::createShark, 20, 30)
+                .spawnMultipleWithDelay(fac::createShark, 20, 60)
                 .delay(10)
                 .spawnMultipleWithDelay(fac::createFishInFishTank, 10, 200)
                 ::toWave);

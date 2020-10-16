@@ -16,7 +16,7 @@ import utils.Vector;
  */
 public class BombardaCharm extends AbstractProjectile {
 
-    public static final double EXPLOSION_RADIUS = 1.3;
+    public static final double EXPLOSION_RADIUS = 1.7;
 
     private final int damage;
     private final EventSender eventSender;
