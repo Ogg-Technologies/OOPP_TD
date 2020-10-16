@@ -11,7 +11,6 @@ import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.projectile.ProjectileFactory;
 import model.game.projectile.ProjectileHandler;
-import model.game.projectile.ProjectileService;
 import model.game.tower.AbstractTowerFactory;
 import model.game.tower.Tower;
 import model.game.tower.TowerFactory;
@@ -29,7 +28,7 @@ import java.util.Collection;
  * The class representing the whole TowerDefenseGame with a given map.
  * It is created and used by Model
  */
-public class Game implements EnemyGetter, ProjectileService, EventListener {
+public class Game implements EnemyGetter, EventListener {
 
     private final TileMap tileMap;
     private final MutableHealth baseHealth = new MutableHealth(Constant.getInstance().PLAYER.START_HEALTH);
@@ -63,7 +62,6 @@ public class Game implements EnemyGetter, ProjectileService, EventListener {
         return towerHandler.getTowers();
     }
 
-    @Override
     public Vector getMapSize() {
         return tileMap.getSize();
     }
