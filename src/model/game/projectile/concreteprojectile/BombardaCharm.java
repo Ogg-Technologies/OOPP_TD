@@ -16,12 +16,12 @@ import utils.Vector;
  */
 public class BombardaCharm extends AbstractProjectile {
 
-    public static final double EXPLOSION_RADIUS = 1.7;
+    private static final double EXPLOSION_RADIUS = Constant.getInstance().BOMBARDA_CHARM.EXPLOSION_RADIUS;
 
     private final int damage;
     private final EventSender eventSender;
-    private Enemy target;
     private final EnemyTargeter enemyTargeter;
+    private Enemy target;
 
     public BombardaCharm(Vector position, Enemy target, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
         super(position, target.getPos().minus(position).setMagnitude(Constant.getInstance().BOMBARDA_CHARM.SPEED));

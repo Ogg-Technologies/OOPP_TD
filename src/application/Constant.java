@@ -308,10 +308,12 @@ public final class Constant {
     public static class BombardaCharm {
         public final double SPEED;
         public final double SIZE;
+        public final double EXPLOSION_RADIUS;
 
         private BombardaCharm(Properties prop) {
             SPEED = readDoubleValue(prop, "bombarda_charm_speed");
             SIZE = readDoubleValue(prop, "bombarda_charm_size");
+            EXPLOSION_RADIUS = readDoubleValue(prop, "bombarda_explosion_radius");
         }
     }
 
