@@ -1,6 +1,6 @@
 package view.texture;
 
-import application.Constant;
+import config.Config;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,7 +17,7 @@ import java.util.Map;
  * Is used by towerHandler
  */
 public final class ImageHandler {
-    private static final int ROTATED_IMAGES_CACHE_SIZE = Constant.getInstance().ROTATED_IMAGE_CACHE_SIZE;
+    private static final int ROTATED_IMAGES_CACHE_SIZE = Config.INSTANCE.ROTATED_IMAGE_CACHE_SIZE;
 
     private static final Map<String, BufferedImage> images = new LinkedHashMap<>();
     private static final Map<ImageInfo, BufferedImage> rotatedImages = new LinkedHashMap<>();

@@ -1,6 +1,6 @@
 package controller;
 
-import application.Constant;
+import config.Config;
 import model.game.tower.Tower;
 import model.game.tower.TowerFactory;
 import model.game.tower.concretetowers.*;
@@ -24,14 +24,14 @@ public class ControllerState implements ControllerStateValue {
 
     private void setupTowerProxies(TowerFactory factory) {
         towerProxies = new TowerProxy[]{
-                new TowerProxy(factory::createGrizzlyBear, Constant.getInstance().GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Constant.getInstance().GRIZZLY_BEAR.COST),
-                new TowerProxy(factory::createBearryPotter, Constant.getInstance().BEARRY_POTTER.RANGE, BearryPotter.class, Constant.getInstance().BEARRY_POTTER.COST),
-                new TowerProxy(factory::createSniperBear, Constant.getInstance().SNIPER_BEAR.RANGE, SniperBear.class, Constant.getInstance().SNIPER_BEAR.COST),
-                new TowerProxy(factory::createSovietBear, Constant.getInstance().SOVIET_BEAR.RANGE, SovietBear.class, Constant.getInstance().SOVIET_BEAR.COST),
-                new TowerProxy(factory::createBarbearian, Constant.getInstance().BARBEARIAN.RANGE, Barbearian.class, Constant.getInstance().BARBEARIAN.COST),
-                new TowerProxy(factory::createBearGrylls, Constant.getInstance().BEAR_GRYLLS.RANGE, BearGrylls.class, Constant.getInstance().BEAR_GRYLLS.COST),
-                new TowerProxy(factory::createBeer, Constant.getInstance().BEER.RANGE, Beer.class, Constant.getInstance().BEER.COST),
-                new TowerProxy(factory::createRubixCubeBear, Constant.getInstance().RUBIX_CUBE_BEAR.RANGE, RubixCubeBear.class, Constant.getInstance().RUBIX_CUBE_BEAR.COST),
+                new TowerProxy(factory::createGrizzlyBear, Config.INSTANCE.GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Config.INSTANCE.GRIZZLY_BEAR.COST),
+                new TowerProxy(factory::createBearryPotter, Config.INSTANCE.BEARRY_POTTER.RANGE, BearryPotter.class, Config.INSTANCE.BEARRY_POTTER.COST),
+                new TowerProxy(factory::createSniperBear, Config.INSTANCE.SNIPER_BEAR.RANGE, SniperBear.class, Config.INSTANCE.SNIPER_BEAR.COST),
+                new TowerProxy(factory::createSovietBear, Config.INSTANCE.SOVIET_BEAR.RANGE, SovietBear.class, Config.INSTANCE.SOVIET_BEAR.COST),
+                new TowerProxy(factory::createBarbearian, Config.INSTANCE.BARBEARIAN.RANGE, Barbearian.class, Config.INSTANCE.BARBEARIAN.COST),
+                new TowerProxy(factory::createBearGrylls, Config.INSTANCE.BEAR_GRYLLS.RANGE, BearGrylls.class, Config.INSTANCE.BEAR_GRYLLS.COST),
+                new TowerProxy(factory::createBeer, Config.INSTANCE.BEER.RANGE, Beer.class, Config.INSTANCE.BEER.COST),
+                new TowerProxy(factory::createRubixCubeBear, Config.INSTANCE.RUBIX_CUBE_BEAR.RANGE, RubixCubeBear.class, Config.INSTANCE.RUBIX_CUBE_BEAR.COST),
         };
     }
 

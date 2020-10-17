@@ -1,7 +1,7 @@
 package model.game.tower.concretetowers;
 
 
-import application.Constant;
+import config.Config;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.tower.AbstractBuffTower;
@@ -22,15 +22,15 @@ public class RubixCubeBear extends AbstractBuffTower {
     private EventSender eventSender;
 
     public RubixCubeBear(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
-        super(pos, Constant.getInstance().RUBIX_CUBE_BEAR.RANGE,
-                new ConstantChargeStrategy(Constant.getInstance().RUBIX_CUBE_BEAR.ATTACK_DELAY), towerFinder);
+        super(pos, Config.INSTANCE.RUBIX_CUBE_BEAR.RANGE,
+                new ConstantChargeStrategy(Config.INSTANCE.RUBIX_CUBE_BEAR.ATTACK_DELAY), towerFinder);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void buffTowers(Collection<? extends Tower> towers) {
         towers.forEach(tower -> {
-            tower.applyBuff(m -> m.addFireRate(Constant.getInstance().RUBIX_CUBE_BEAR.BUFF_PERCENTAGE), Constant.getInstance().RUBIX_CUBE_BEAR.BUFF_DURATION);
+            tower.applyBuff(m -> m.addFireRate(Config.INSTANCE.RUBIX_CUBE_BEAR.BUFF_PERCENTAGE), Config.INSTANCE.RUBIX_CUBE_BEAR.BUFF_DURATION);
         });
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), 0));
     }

@@ -1,6 +1,6 @@
 package view.gameLayers;
 
-import application.Constant;
+import config.Config;
 import model.ModelData;
 import model.game.projectile.Projectile;
 import model.game.projectile.concreteprojectile.BombardaCharm;
@@ -37,13 +37,13 @@ public class ProjectileDrawer extends JPanel {
         imageMap.put(Rock.class, rockImage);
         imageMap.put(BombardaCharm.class, bombardaImage);
         //Size parameter is percent of tileSize
-        sizeMap.put(Rock.class, Constant.getInstance().ROCK.SIZE);
-        sizeMap.put(BombardaCharm.class, Constant.getInstance().BOMBARDA_CHARM.SIZE);
+        sizeMap.put(Rock.class, Config.INSTANCE.ROCK.SIZE);
+        sizeMap.put(BombardaCharm.class, Config.INSTANCE.BOMBARDA_CHARM.SIZE);
     }
 
     private void setupImages() {
-        rockImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.ROCK);
-        bombardaImage = ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BOMBARDA_CHARM);
+        rockImage = ImageHandler.getImage(Config.INSTANCE.IMAGE_PATH.ROCK);
+        bombardaImage = ImageHandler.getImage(Config.INSTANCE.IMAGE_PATH.BOMBARDA_CHARM);
     }
 
     @Override

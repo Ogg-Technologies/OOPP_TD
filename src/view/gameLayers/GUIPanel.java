@@ -1,6 +1,6 @@
 package view.gameLayers;
 
-import application.Constant;
+import config.Config;
 import model.ModelData;
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.*;
@@ -31,14 +31,14 @@ public class GUIPanel extends JPanel {
 
     private static Map<Class<? extends Tower>, String> setupPathMap() {
         HashMap<Class<? extends Tower>, String> pathMap = new HashMap<>();
-        pathMap.put(GrizzlyBear.class, Constant.getInstance().IMAGE_PATH.GRIZZLY_BEAR);
-        pathMap.put(BearryPotter.class, Constant.getInstance().IMAGE_PATH.BEARRY_POTTER);
-        pathMap.put(SniperBear.class, Constant.getInstance().IMAGE_PATH.SNIPER_BEAR);
-        pathMap.put(SovietBear.class, Constant.getInstance().IMAGE_PATH.SOVIET_BEAR);
-        pathMap.put(Barbearian.class, Constant.getInstance().IMAGE_PATH.BARBEARIAN);
-        pathMap.put(BearGrylls.class, Constant.getInstance().IMAGE_PATH.BEAR_GRYLLS);
-        pathMap.put(Beer.class, Constant.getInstance().IMAGE_PATH.BEER_BEAR);
-        pathMap.put(RubixCubeBear.class, Constant.getInstance().IMAGE_PATH.RUBIX_CUBE_BEAR);
+        pathMap.put(GrizzlyBear.class, Config.INSTANCE.IMAGE_PATH.GRIZZLY_BEAR);
+        pathMap.put(BearryPotter.class, Config.INSTANCE.IMAGE_PATH.BEARRY_POTTER);
+        pathMap.put(SniperBear.class, Config.INSTANCE.IMAGE_PATH.SNIPER_BEAR);
+        pathMap.put(SovietBear.class, Config.INSTANCE.IMAGE_PATH.SOVIET_BEAR);
+        pathMap.put(Barbearian.class, Config.INSTANCE.IMAGE_PATH.BARBEARIAN);
+        pathMap.put(BearGrylls.class, Config.INSTANCE.IMAGE_PATH.BEAR_GRYLLS);
+        pathMap.put(Beer.class, Config.INSTANCE.IMAGE_PATH.BEER_BEAR);
+        pathMap.put(RubixCubeBear.class, Config.INSTANCE.IMAGE_PATH.RUBIX_CUBE_BEAR);
         return pathMap;
     }
 

@@ -1,7 +1,7 @@
 package model.game.tower.concretetowers;
 
 
-import application.Constant;
+import config.Config;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -21,14 +21,14 @@ public class SniperBear extends AbstractAttackingTower {
     private EventSender eventSender;
 
     public SniperBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
-        super(pos, Constant.getInstance().SNIPER_BEAR.RANGE,
-                new ConstantChargeStrategy(Constant.getInstance().SNIPER_BEAR.ATTACK_DELAY), enemyTargeter);
+        super(pos, Config.INSTANCE.SNIPER_BEAR.RANGE,
+                new ConstantChargeStrategy(Config.INSTANCE.SNIPER_BEAR.ATTACK_DELAY), enemyTargeter);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        int damage = (int) (Constant.getInstance().SNIPER_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
+        int damage = (int) (Config.INSTANCE.SNIPER_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
         e.damage(damage);
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), getAngle()));
     }

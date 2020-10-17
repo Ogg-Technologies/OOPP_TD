@@ -1,6 +1,6 @@
 package view.gameLayers;
 
-import application.Constant;
+import config.Config;
 import model.game.enemy.AbstractEnemy;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
@@ -42,37 +42,37 @@ public class EnemyDrawer implements EnemyVisitor {
 
     @Override
     public void visit(BasicEnemy.Fishstick enemy) {
-        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISHSTICK);
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FISHSTICK);
     }
 
     @Override
     public void visit(BasicEnemy.Swordfish enemy) {
-        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.SWORDFISH);
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.SWORDFISH);
     }
 
     @Override
     public void visit(BasicEnemy.FishAndChips enemy) {
-        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISH_AND_CHIPS);
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FISH_AND_CHIPS);
     }
 
     @Override
     public void visit(BasicEnemy.FishInABoat enemy) {
-        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISH_IN_A_BOAT);
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FISH_IN_A_BOAT);
     }
 
     @Override
     public void visit(BasicEnemy.Sailfish enemy) {
-        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.SAILFISH);
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.SAILFISH);
     }
 
     @Override
     public void visit(BasicEnemy.Shark enemy) {
-        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.SHARK);
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.SHARK);
     }
 
     @Override
     public void visit(BasicEnemy.FishInAFishTank enemy) {
-        drawEnemy(enemy, Constant.getInstance().IMAGE_PATH.FISH_IN_A_FISH_TANK);
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FISH_IN_A_FISH_TANK);
     }
 
     private void drawEnemy(AbstractEnemy enemy, String path) {

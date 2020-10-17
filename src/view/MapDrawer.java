@@ -1,6 +1,6 @@
 package view;
 
-import application.Constant;
+import config.Config;
 import model.game.map.Tile;
 import model.game.map.TileMap;
 import utils.Vector;
@@ -53,7 +53,7 @@ public class MapDrawer {
             }
         }
 
-        g.drawImage(ImageHandler.getImage(Constant.getInstance().IMAGE_PATH.BASE), baseX * tileSize + x,
+        g.drawImage(ImageHandler.getImage(Config.INSTANCE.IMAGE_PATH.BASE), baseX * tileSize + x,
                 baseY * tileSize + y, tileSize, tileSize, null);
     }
 

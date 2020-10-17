@@ -1,6 +1,6 @@
 package view;
 
-import application.Constant;
+import config.Config;
 
 import java.awt.*;
 
@@ -29,20 +29,20 @@ public final class ColorHandler {
     public static final Color GAME_BACKGROUND;
 
     static {
-        Constant constant = Constant.getInstance();
-        VALID_TILE_HOVER = convert(constant.COLOR_CODE.VALID_TILE_HOVER, constant.COLOR_CODE.VALID_TILE_HOVER_ALPHA);
-        INVALID_TILE_HOVER = convert(constant.COLOR_CODE.INVALID_TILE_HOVER, constant.COLOR_CODE.INVALID_TILE_HOVER_ALPHA);
-        PATH = Color.decode(constant.COLOR_CODE.PATH);
-        GROUND = Color.decode(constant.COLOR_CODE.GROUND);
-        BACKGROUND = Color.decode(constant.COLOR_CODE.BACKGROUND);
-        STANDARD_GUI_BACKGROUND = Color.decode(constant.COLOR_CODE.STANDARD_GUI_BACKGROUND);
-        PLAYER_HEALTH = Color.decode(constant.COLOR_CODE.PLAYER_HEALTH);
-        ENEMY_HEALTH = Color.decode(constant.COLOR_CODE.ENEMY_HEALTH);
-        TOWER_PANEL = Color.decode(constant.COLOR_CODE.TOWER_PANEL);
-        TOWER_BUTTON_BACKGROUND = Color.decode(constant.COLOR_CODE.TOWER_BUTTON_BACKGROUND);
-        TOWER_BUTTON_LABEL = convert(constant.COLOR_CODE.STANDARD_GUI_BACKGROUND, constant.COLOR_CODE.TOWER_BUTTON_LABEL_ALPHA);
-        GHOST_RANGE = convert(constant.COLOR_CODE.GHOST_RANGE, constant.COLOR_CODE.GHOST_RANGE_ALPHA);
-        GAME_BACKGROUND = Color.decode(constant.COLOR_CODE.GAME_BACKGROUND);
+        Config config = Config.INSTANCE;
+        VALID_TILE_HOVER = convert(config.COLOR_CODE.VALID_TILE_HOVER, config.COLOR_CODE.VALID_TILE_HOVER_ALPHA);
+        INVALID_TILE_HOVER = convert(config.COLOR_CODE.INVALID_TILE_HOVER, config.COLOR_CODE.INVALID_TILE_HOVER_ALPHA);
+        PATH = Color.decode(config.COLOR_CODE.PATH);
+        GROUND = Color.decode(config.COLOR_CODE.GROUND);
+        BACKGROUND = Color.decode(config.COLOR_CODE.BACKGROUND);
+        STANDARD_GUI_BACKGROUND = Color.decode(config.COLOR_CODE.STANDARD_GUI_BACKGROUND);
+        PLAYER_HEALTH = Color.decode(config.COLOR_CODE.PLAYER_HEALTH);
+        ENEMY_HEALTH = Color.decode(config.COLOR_CODE.ENEMY_HEALTH);
+        TOWER_PANEL = Color.decode(config.COLOR_CODE.TOWER_PANEL);
+        TOWER_BUTTON_BACKGROUND = Color.decode(config.COLOR_CODE.TOWER_BUTTON_BACKGROUND);
+        TOWER_BUTTON_LABEL = convert(config.COLOR_CODE.STANDARD_GUI_BACKGROUND, config.COLOR_CODE.TOWER_BUTTON_LABEL_ALPHA);
+        GHOST_RANGE = convert(config.COLOR_CODE.GHOST_RANGE, config.COLOR_CODE.GHOST_RANGE_ALPHA);
+        GAME_BACKGROUND = Color.decode(config.COLOR_CODE.GAME_BACKGROUND);
     }
     /**
      * Converts a hexCode and an alpha to a Color object

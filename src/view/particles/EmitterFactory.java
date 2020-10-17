@@ -1,17 +1,10 @@
 package view.particles;
 
-import application.Constant;
+import config.Config;
 import utils.Vector;
 import view.particles.distribution.LinearDoubleDistribution;
 import view.particles.distribution.LinearIntegerDistribution;
 import view.particles.distribution.LinearVectorDistribution;
-import view.texture.ImageHandler;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 /**
  * @author Oskar, Samuel, Erik
@@ -26,7 +19,7 @@ public final class EmitterFactory {
     static Emitter createRockEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImagePath(Constant.getInstance().IMAGE_PATH.ROCK)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.ROCK)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(10, 20))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.1))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.02)))
@@ -38,7 +31,7 @@ public final class EmitterFactory {
     static Emitter createBombardaEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImagePath(Constant.getInstance().IMAGE_PATH.BOMBARDA_CHARM)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.BOMBARDA_CHARM)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(10, 20))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.08, 0.1)))
@@ -52,7 +45,7 @@ public final class EmitterFactory {
         return new Emitter.Builder()
                 // Slightly offsets emitter position to make the smoke come from the gun instead of the center
                 .setEmitterPosition(position.plus(Vector.fromPolar(angle, 0.5)))
-                .setImagePath(Constant.getInstance().IMAGE_PATH.SMOKE)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.SMOKE)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(20, 30))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.1))
                 .setStartVelocity(LinearVectorDistribution.fromAngleAndMagnitude(
@@ -68,7 +61,7 @@ public final class EmitterFactory {
     static Emitter createBulletEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImagePath(Constant.getInstance().IMAGE_PATH.BULLET)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.BULLET)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(15, 15))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.3))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.01)))
@@ -81,7 +74,7 @@ public final class EmitterFactory {
     static Emitter createSwingEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImagePath(Constant.getInstance().IMAGE_PATH.AXE)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.AXE)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(20, 20))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.5))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.001, 0.01)))
@@ -96,7 +89,7 @@ public final class EmitterFactory {
     static Emitter createCompassEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImagePath(Constant.getInstance().IMAGE_PATH.COMPASS)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.COMPASS)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.0, 0.0)))
@@ -110,7 +103,7 @@ public final class EmitterFactory {
     static Emitter createBeerEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImagePath(Constant.getInstance().IMAGE_PATH.BEER)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.BEER)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.0, 0.0)))
@@ -124,7 +117,7 @@ public final class EmitterFactory {
     static Emitter createRubixCubeEmitter(Vector position, double angle) {
         return new Emitter.Builder()
                 .setEmitterPosition(position)
-                .setImagePath(Constant.getInstance().IMAGE_PATH.RUBIX_CUBE)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.RUBIX_CUBE)
                 .setLifetimeDistribution(LinearIntegerDistribution.fromRange(30, 30))
                 .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
                 .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.0, 0.0)))

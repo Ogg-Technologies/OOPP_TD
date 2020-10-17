@@ -1,4 +1,4 @@
-package application;
+package config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,11 +14,10 @@ import java.util.Properties;
  * This class also has a lot of nested classes, to categorize the stored values.
  * This class is also a Singleton, because no more copies than one will ever be needed.
  */
-public final class Constant {
+public enum  Config {
+    INSTANCE;
 
     private static final String propertyPath = "resource/config.properties";
-
-    private static Constant instance;
 
     public final int ROTATED_IMAGE_CACHE_SIZE;
     public final Player PLAYER;
@@ -46,7 +45,7 @@ public final class Constant {
      * Sets up a Properties object for handling the properties file, and also assign all the data to the proper
      * nested class.
      */
-    private Constant() {
+    Config() {
         Properties prop;
         try {
             prop = readPropertyFile();
@@ -75,19 +74,6 @@ public final class Constant {
         COLOR_CODE = new ColorCode(prop);
         IMAGE_PATH = new ImagePath(prop);
     }
-
-    /**
-     * Gets the only instance of this class
-     *
-     * @return a singleton of this class
-     */
-    public static Constant getInstance() {
-        if (instance == null) {
-            instance = new Constant();
-        }
-        return instance;
-    }
-
 
     /**
      * This method creates the Properties object that takes care of the properties file.

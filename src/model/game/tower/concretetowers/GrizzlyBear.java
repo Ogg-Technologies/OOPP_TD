@@ -1,6 +1,6 @@
 package model.game.tower.concretetowers;
 
-import application.Constant;
+import config.Config;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -22,15 +22,15 @@ public class GrizzlyBear extends AbstractAttackingTower {
     private EventSender eventSender;
 
     public GrizzlyBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
-        super(pos, Constant.getInstance().GRIZZLY_BEAR.RANGE,
-                new ConstantChargeStrategy(Constant.getInstance().GRIZZLY_BEAR.ATTACK_DELAY), enemyTargeter);
+        super(pos, Config.INSTANCE.GRIZZLY_BEAR.RANGE,
+                new ConstantChargeStrategy(Config.INSTANCE.GRIZZLY_BEAR.ATTACK_DELAY), enemyTargeter);
         this.projectileCreator = projectileCreator;
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        int damage = (int) (Constant.getInstance().GRIZZLY_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
+        int damage = (int) (Config.INSTANCE.GRIZZLY_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
         Projectile rock = projectileCreator.getProjectileFactory().createRock(getPos(), e.getPos(), damage);
         projectileCreator.addProjectile(rock);
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), getAngle()));

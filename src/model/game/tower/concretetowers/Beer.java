@@ -1,7 +1,7 @@
 package model.game.tower.concretetowers;
 
 
-import application.Constant;
+import config.Config;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.tower.AbstractBuffTower;
@@ -22,18 +22,18 @@ public class Beer extends AbstractBuffTower {
     private EventSender eventSender;
 
     public Beer(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
-        super(pos, Constant.getInstance().BEER.RANGE,
-                new ConstantChargeStrategy(Constant.getInstance().BEER.ATTACK_DELAY), towerFinder);
+        super(pos, Config.INSTANCE.BEER.RANGE,
+                new ConstantChargeStrategy(Config.INSTANCE.BEER.ATTACK_DELAY), towerFinder);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void buffTowers(Collection<? extends Tower> towers) {
-        final int duration = Constant.getInstance().BEER.BUFF_DURATION;
+        final int duration = Config.INSTANCE.BEER.BUFF_DURATION;
         towers.forEach(tower -> {
-            tower.applyBuff(m -> m.addDamage(Constant.getInstance().BEER.DAMAGE_BUFF_PERCENTAGE), duration);
-            tower.applyBuff(m -> m.addRange(Constant.getInstance().BEER.RANGE), duration);
-            tower.applyBuff(m -> m.addFireRate(Constant.getInstance().BEER.FIRE_RATE_BUFF_PERCENTAGE), duration);
+            tower.applyBuff(m -> m.addDamage(Config.INSTANCE.BEER.DAMAGE_BUFF_PERCENTAGE), duration);
+            tower.applyBuff(m -> m.addRange(Config.INSTANCE.BEER.RANGE), duration);
+            tower.applyBuff(m -> m.addFireRate(Config.INSTANCE.BEER.FIRE_RATE_BUFF_PERCENTAGE), duration);
         });
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), 0));
     }
