@@ -11,6 +11,7 @@ import view.startLayers.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
@@ -53,6 +54,7 @@ public class SwingView implements View {
         this.modelData = modelData;
 
         window = new JFrame();
+        window.setFocusable(true);
 
         setupStartWindow();
     }
@@ -112,7 +114,7 @@ public class SwingView implements View {
         ImagePanel backgroundImage = new ImagePanel(getWindowSize());
         ButtonPanel buttons = new ButtonPanel(windowState, modelData.getTileMaps());
 
-        startLayers = new JPanel[]{backgroundImage,buttons};
+        startLayers = new JPanel[]{backgroundImage, buttons};
 
         setOpaqueness(startLayers);
         startLayersPane = createLayeredPane(startLayers);
@@ -149,6 +151,13 @@ public class SwingView implements View {
     @Override
     public void draw() {
         ViewState currentState = windowState.getViewState();
+
+        //Swing method for setting the window in focused mode
+        //It is used for reading keyboard inputs
+        if (window.isActive()) {
+            window.requestFocusInWindow();
+        }
+
         if (previousState != currentState) {
             previousState = currentState;
             if (currentState == ViewState.START) {
@@ -214,6 +223,16 @@ public class SwingView implements View {
         this.controllerStateValue = controllerStateValue;
     }
 
+    @Override
+    public void addKeyListener(KeyListener keyListener) {
+        window.addKeyListener(keyListener);
+    }
+
+    @Override
+    public int maxTowersInTowerPanel() {
+        return view.gameLayers.GUIPanel.MAX_TOWERS;
+    }
+
     private Vector prevTilePos = null;
 
     @Override
@@ -255,4 +274,6 @@ public class SwingView implements View {
     public boolean isShutDown() {
         return windowHasBeenActive && !window.isEnabled();
     }
+
+
 }

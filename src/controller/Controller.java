@@ -18,10 +18,12 @@ public class Controller {
     public Controller(ModelInputListener modelInputListener, View view) {
         ControllerState controllerState = new ControllerState(modelInputListener.getFactory());
         SwingMouseController mouseController = new SwingMouseController(view, view, modelInputListener, controllerState);
+        SwingKeyboardController keyboardController = new SwingKeyboardController(controllerState, view.maxTowersInTowerPanel());
         view.addMouseListener(mouseController);
         view.addMouseMotionListener(mouseController);
         view.addState(controllerState);
         view.addButtonClickHandler(mouseController);
+        view.addKeyListener(keyboardController);
     }
 
 }

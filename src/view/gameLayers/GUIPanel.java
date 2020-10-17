@@ -48,7 +48,7 @@ public class GUIPanel extends JPanel {
 
     private ControllerStateValue controllerStateValue;
 
-    private final int MAX_TOWERS = 8;
+    public static final int MAX_TOWERS = 8;
 
     //Buttons
     private final JButton[] towerButtons;

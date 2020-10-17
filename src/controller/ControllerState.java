@@ -36,11 +36,12 @@ public class ControllerState implements ControllerStateValue {
     }
 
     /**
-     * Sets selected tower with an index of the corresponding button
+     * Sets selected tower with an index of the corresponding button + startIndex
+     * Cannot reliably handle negative numbers
      *
      * @param index the index of the button
      */
-    public void setSelectedTowerWithIndex(int index) {
+    public void setSelectedTowerWithStartIndex(int index) {
         if (startIndex + index < towerProxies.length) {
             selectedTower = towerProxies[startIndex + index];
         } else {

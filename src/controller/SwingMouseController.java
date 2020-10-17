@@ -131,7 +131,7 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
 
     @Override
     public void setSelectedTowerIndexButton(int index) {
-        controllerState.setSelectedTowerWithIndex(index);
+        controllerState.setSelectedTowerWithStartIndex(index);
     }
 
     @Override
