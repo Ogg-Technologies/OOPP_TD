@@ -7,23 +7,23 @@ import model.game.tower.concretetowers.*;
 import view.ControllerStateValue;
 
 /**
- * @author Sebastian, Samuel
+ * @author Sebastian, Samuel, Erik
  * The state of the controller.
  * Is used by controller.
  */
 public class ControllerState implements ControllerStateValue {
-    TowerProxy selectedTower;
 
-    TowerProxy[] towerProxies;
+    private final TowerProxy[] towerProxies;
 
+    private TowerProxy selectedTower;
     private int startIndex = 0;
 
     ControllerState(TowerFactory factory) {
-        setupTowerProxies(factory);
+        this.towerProxies = setupTowerProxies(factory);
     }
 
-    private void setupTowerProxies(TowerFactory factory) {
-        towerProxies = new TowerProxy[]{
+    private TowerProxy[] setupTowerProxies(TowerFactory factory) {
+        return new TowerProxy[]{
                 new TowerProxy(factory::createGrizzlyBear, Config.INSTANCE.GRIZZLY_BEAR.RANGE, GrizzlyBear.class, Config.INSTANCE.GRIZZLY_BEAR.COST),
                 new TowerProxy(factory::createBearryPotter, Config.INSTANCE.BEARRY_POTTER.RANGE, BearryPotter.class, Config.INSTANCE.BEARRY_POTTER.COST),
                 new TowerProxy(factory::createSniperBear, Config.INSTANCE.SNIPER_BEAR.RANGE, SniperBear.class, Config.INSTANCE.SNIPER_BEAR.COST),
@@ -33,6 +33,14 @@ public class ControllerState implements ControllerStateValue {
                 new TowerProxy(factory::createBeer, Config.INSTANCE.BEER.RANGE, Beer.class, Config.INSTANCE.BEER.COST),
                 new TowerProxy(factory::createRubixCubeBear, Config.INSTANCE.RUBIX_CUBE_BEAR.RANGE, RubixCubeBear.class, Config.INSTANCE.RUBIX_CUBE_BEAR.COST),
         };
+    }
+
+    public TowerProxy getSelectedTower() {
+        return selectedTower;
+    }
+
+    public void deselectTower() {
+        this.selectedTower = null;
     }
 
     /**
@@ -78,7 +86,8 @@ public class ControllerState implements ControllerStateValue {
                 return towerProxy.getPrice();
             }
         }
-        return -1;
+        throw new IllegalArgumentException("The tower " + towerType.getSimpleName()
+                + " does not have a corresponding tower proxy added");
     }
 
     @Override

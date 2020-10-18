@@ -68,20 +68,19 @@ public class SwingMouseController implements MouseListener, MouseMotionListener,
     private void onLeftClick(MouseEvent e) {
         Vector clickedTile = getClickedTile(e);
         if (clickedTile != null && clickedTile.equals(tilePressed)) {
-            if (controllerState.selectedTower != null) {
-                modelInputListener.onTileClick(controllerState.selectedTower.getTowerFactory(), clickedTile, controllerState.selectedTower.getTowerType());
+            if (controllerState.getSelectedTower() != null) {
+                modelInputListener.onTileClick(controllerState.getSelectedTower().getTowerFactory(), clickedTile,
+                        controllerState.getSelectedTower().getTowerType());
             }
         }
-        controllerState.selectedTower = null;
+        controllerState.deselectTower();
     }
 
     /**
      * deselects tower in controllerState if one is selected.
      */
     private void onRightClick() {
-        if (controllerState.selectedTower != null) {
-            controllerState.selectedTower = null;
-        }
+        controllerState.deselectTower();
     }
 
     /**
