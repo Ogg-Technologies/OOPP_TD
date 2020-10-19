@@ -7,14 +7,15 @@ import view.Drawable;
  * @author Oskar, Sebastian, Erik
  * This class is for creating a loop that call update on an updatable and drawable
  */
-public class ApplicationLoop implements Runnable {
+public class ApplicationLoop implements Runnable, Stoppable {
 
     private Updatable updatable;
     private Drawable drawable;
+    private boolean shouldRun = true;
 
     /**
-     * @param updatable    logical class that tries to update 60 times a second
-     * @param drawable     visual class that updates as often as possible
+     * @param updatable logical class that tries to update 60 times a second
+     * @param drawable  visual class that updates as often as possible
      */
     public ApplicationLoop(Updatable updatable, Drawable drawable) {
         this.updatable = updatable;
@@ -38,7 +39,7 @@ public class ApplicationLoop implements Runnable {
         int frames = 0;
         int updates = 0;
 
-        while (true) {
+        while (shouldRun) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -61,5 +62,10 @@ public class ApplicationLoop implements Runnable {
                 frames = 0;
             }
         }
+    }
+
+    @Override
+    public void stop() {
+        shouldRun = false;
     }
 }

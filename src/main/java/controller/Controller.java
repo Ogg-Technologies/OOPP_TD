@@ -13,7 +13,7 @@ public class Controller {
      * Is used by Application.
      *
      * @param modelInputListener handler of events for model
-     * @param IGameView               a view that need input from controller
+     * @param IGameView          a view that need input from controller
      */
     public Controller(ModelInputListener modelInputListener, IGameView IGameView) {
         ControllerState controllerState = new ControllerState(modelInputListener.getFactory());

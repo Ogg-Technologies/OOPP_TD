@@ -4,10 +4,7 @@ import model.ModelData;
 import model.game.enemy.Enemy;
 import model.game.tower.Tower;
 import utils.Vector;
-import view.ButtonClickHandler;
-import view.ColorHandler;
-import view.ControllerStateValue;
-import view.WindowState;
+import view.*;
 import view.gameView.layers.*;
 import view.particles.ParticleHandler;
 
@@ -17,6 +14,12 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+
+/**
+ * @author Sebastian, Samuel, Erik
+ * Game view component, where it displays everything that should be displayable for everything in game
+ * Is created in Applicaton, and updated by applicationLoop
+ */
 public class GameView implements IGameView {
 
     public final static int WIDTH_OFFSET = 17;//WidthOffset = Actual subtraction on width needed to get usable width
@@ -28,6 +31,8 @@ public class GameView implements IGameView {
     private final Background background;
     private final GUIPanel guiPanel;
 
+    private final OnClose onClose;
+
     private final JFrame window;
     private final ModelData modelData;
     private final WindowState windowState;
@@ -35,9 +40,10 @@ public class GameView implements IGameView {
     private final JLayeredPane layersPane;
 
 
-    public GameView(JFrame window, ModelData modelData){
+    public GameView(JFrame window, ModelData modelData, OnClose onClose) {
         this.window = window;
         this.modelData = modelData;
+        this.onClose = onClose;
         windowState = WindowState.INSTANCE;
 
         window.getContentPane().setBackground(ColorHandler.GAME_BACKGROUND);
@@ -112,7 +118,7 @@ public class GameView implements IGameView {
 
     @Override
     public void addButtonClickHandler(ButtonClickHandler buttonClickHandler) {
-        guiPanel.setupButtons(buttonClickHandler);
+        guiPanel.setupButtons(buttonClickHandler, this::closeThis);
     }
 
 
@@ -164,6 +170,11 @@ public class GameView implements IGameView {
             return new Vector(tileX, tileY);
         }
         return null;
+    }
+
+    private void closeThis() {
+        window.remove(layersPane);
+        onClose.close();
     }
 
     private JLayeredPane createLayeredPane(JPanel[] layers) {

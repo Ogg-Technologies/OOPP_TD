@@ -4,13 +4,18 @@ import model.game.map.TileMap;
 import utils.Vector;
 import view.ColorHandler;
 import view.Drawable;
-import view.WindowState;
+import view.OnClose;
 import view.mainMenuView.layers.ButtonPanel;
 import view.mainMenuView.layers.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Sebastian, Samuel
+ * This is the view component for displaying everything on the main menu screen.
+ * It is created by Application
+ */
 public class MainMenuView implements Drawable {
     public final static int WIDTH_OFFSET = 17;//WidthOffset = Actual subtraction on width needed to get usable width
     public final static int HEIGHT_OFFSET = 40;//same goes for y
@@ -18,13 +23,15 @@ public class MainMenuView implements Drawable {
     private final JPanel[] layers;
     private final JLayeredPane layersPane;
     private final JFrame window;
+    private final OnClose onClose;
 
-    public MainMenuView(JFrame window, TileMap[] tileMaps){
+    public MainMenuView(JFrame window, TileMap[] tileMaps, OnClose onClose) {
         this.window = window;
+        this.onClose = onClose;
         window.getContentPane().setBackground(ColorHandler.GROUND);
 
         ImagePanel backgroundImage = new ImagePanel(new Vector(window.getWidth() - WIDTH_OFFSET, window.getHeight() - HEIGHT_OFFSET));
-        ButtonPanel buttons = new ButtonPanel(WindowState.INSTANCE, tileMaps);
+        ButtonPanel buttons = new ButtonPanel(this::closeThis, tileMaps);
 
         layers = new JPanel[]{backgroundImage, buttons};
 
@@ -36,9 +43,14 @@ public class MainMenuView implements Drawable {
     }
 
     @Override
-    public void draw(){
+    public void draw() {
         setSizeOfLayers(window.getSize(), layers);
         window.repaint();
+    }
+
+    private void closeThis() {
+        window.remove(layersPane);
+        onClose.close();
     }
 
 

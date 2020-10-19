@@ -6,8 +6,9 @@ import utils.Vector;
  * @author Oskar, Sebastian, Samuel, Erik
  * A helper class that give view components some data to know where to draw themselves
  * Is used by swingView and all objects in package layers.
+ * It follows a singleton pattern.
  */
-public enum  WindowState {
+public enum WindowState {
     INSTANCE;
 
     private int tileSize = 0;

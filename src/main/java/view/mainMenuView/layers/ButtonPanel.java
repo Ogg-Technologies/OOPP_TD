@@ -3,7 +3,7 @@ package view.mainMenuView.layers;
 import model.game.map.TileMap;
 import view.ColorHandler;
 import view.MapDrawer;
-import view.WindowState;
+import view.OnNewState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,10 +25,10 @@ public class ButtonPanel extends JPanel {
      * @param windowState used to change view state
      * @param tileMaps
      */
-    public ButtonPanel(WindowState windowState, TileMap[] tileMaps) {
+    public ButtonPanel(OnNewState onNewState, TileMap[] tileMaps) {
         this.tileMaps = tileMaps;
         startButton = new JButton();
-        //startButton.addActionListener((e -> windowState.setViewStateToGame()));
+        startButton.addActionListener((e -> onNewState.newState()));
         startButton.setText("Start Game");
         add(startButton);
 
