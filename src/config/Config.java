@@ -29,8 +29,10 @@ public enum  Config {
     public final SniperBear SNIPER_BEAR;
     public final SovietBear SOVIET_BEAR;
     public final Barbearian BARBEARIAN;
+    public final BazookaBear BAZOOKABEAR;
     public final Rock ROCK;
     public final BombardaCharm BOMBARDA_CHARM;
+    public final Rocket ROCKET;
     public final Fishstick FISHSTICK;
     public final Swordfish SWORDFISH;
     public final FishAndChips FISH_AND_CHIPS;
@@ -63,8 +65,10 @@ public enum  Config {
         SNIPER_BEAR = new SniperBear(prop);
         SOVIET_BEAR = new SovietBear(prop);
         BARBEARIAN = new Barbearian(prop);
+        BAZOOKABEAR = new BazookaBear(prop);
         ROCK = new Rock(prop);
         BOMBARDA_CHARM = new BombardaCharm(prop);
+        ROCKET = new Rocket(prop);
         FISHSTICK = new Fishstick(prop);
         SWORDFISH = new Swordfish(prop);
         FISH_AND_CHIPS = new FishAndChips(prop);
@@ -283,6 +287,22 @@ public enum  Config {
         }
     }
 
+    public static class BazookaBear {
+        public final int BASE_DAMAGE;
+        public final double RANGE;
+        public final int ATTACK_DELAY;
+        public final int COST;
+
+
+        private BazookaBear(Properties prop) {
+            BASE_DAMAGE = (int) readDoubleValue(prop, "bazooka_bear_base_damage");
+            RANGE = readDoubleValue(prop, "bazooka_bear_range");
+            COST = (int) readDoubleValue(prop, "bazooka_bear_cost");
+            ATTACK_DELAY = (int) readDoubleValue(prop, "bazooka_bear_updates_between_attacks");
+
+        }
+    }
+
     public static class Rock {
         public final double SPEED;
         public final double SIZE;
@@ -304,6 +324,15 @@ public enum  Config {
             EXPLOSION_RADIUS = readDoubleValue(prop, "bombarda_explosion_radius");
         }
     }
+
+    public static class Rocket {
+        public final double SPEED;
+
+        private Rocket(Properties prop) {
+            SPEED = readDoubleValue(prop, "rocket_speed");
+        }
+    }
+
 
     public static class Fishstick {
         public final double SPEED;

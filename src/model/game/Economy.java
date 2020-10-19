@@ -41,6 +41,8 @@ public class Economy {
         map.put(BearGrylls.class, config.BEAR_GRYLLS.COST);
         map.put(Beer.class, config.BEER.COST);
         map.put(RubixCubeBear.class, config.RUBIX_CUBE_BEAR.COST);
+        map.put(BazookaBear.class, config.BAZOOKABEAR.COST);
+
         return map;
     }
 

@@ -57,4 +57,8 @@ public class TowerFactory {
     public Tower createBarbearian(Vector pos) {
         return new Barbearian(pos, new EnemyTargeter(enemyGetter), eventSender);
     }
+
+    public Tower createBazookBear(Vector pos) {
+        return new BazookaBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
+    }
 }

@@ -4,7 +4,6 @@ import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.projectile.AbstractProjectile;
-import model.game.projectile.ProjectileService;
 import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;
 
@@ -21,8 +20,8 @@ public class Rocket extends AbstractProjectile {
     private final EnemyTargeter enemyTargeter;
 
 
-    public Rocket(ProjectileService service, Vector position, Vector velocity, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
-        super(service, position, velocity);
+    public Rocket(Vector position, Vector velocity, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
+        super(position, velocity);
         this.damage = damage;
         this.eventSender = eventSender;
         this.enemyTargeter = enemyTargeter;
@@ -30,7 +29,7 @@ public class Rocket extends AbstractProjectile {
     }
 
     @Override
-    protected void onEnemyHit(Enemy enemy) {
+    public void onEnemyHit(Enemy enemy) {
         damageEnemiesInRadius();
         eventSender.sendEvent(new Event(Event.Type.PROJECTILE_HIT, this.getClass(), getPosition()));
         consumed = true;

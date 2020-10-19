@@ -5,6 +5,7 @@ import model.event.EventSender;
 import model.game.enemy.Enemy;
 import model.game.projectile.concreteprojectile.BombardaCharm;
 import model.game.projectile.concreteprojectile.Rock;
+import model.game.projectile.concreteprojectile.Rocket;
 import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;
 
@@ -28,5 +29,9 @@ public final class ProjectileFactory {
 
     public Projectile createExplodingCharm(Vector position, Enemy target, int damage) {
         return new BombardaCharm(position, target, damage, eventSender, enemyTargeter);
+    }
+
+    public Projectile createRocket(Vector position, Vector target, int damage) {
+        return new Rocket(position, target.minus(position).setMagnitude(Config.INSTANCE.ROCKET.SPEED), damage, this.eventSender, this.enemyTargeter);
     }
 }
