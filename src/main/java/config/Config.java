@@ -17,7 +17,7 @@ import java.util.Properties;
 public enum  Config {
     INSTANCE;
 
-    private static final String propertyPath = "resource/config.properties";
+    private static final String propertyPath = "src/main/resources/config.properties";
 
     public final int ROTATED_IMAGE_CACHE_SIZE;
     public final Player PLAYER;

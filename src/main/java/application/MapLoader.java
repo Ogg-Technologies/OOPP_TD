@@ -18,7 +18,7 @@ import java.util.List;
  */
 public final class MapLoader {
 
-    private static final String ROOT_PATH = "resource/maps/";
+    private static final String ROOT_PATH = "src/main/resources/maps/";
     private static final String FILE_FORMAT = ".map";
 
     /**

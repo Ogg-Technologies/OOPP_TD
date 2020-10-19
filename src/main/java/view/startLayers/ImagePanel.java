@@ -23,7 +23,7 @@ public class ImagePanel extends JPanel {
      * @param size size to set the image to.
      */
     public ImagePanel(Vector size) {
-        this.image = ImageHandler.getImage("resource/startScreen.png");
+        this.image = ImageHandler.getImage("src/main/resources/startScreen.png");
         this.width = size.getIntX();
         this.height = size.getIntY();
     }
