@@ -5,6 +5,7 @@ import model.ModelData;
 import model.game.projectile.Projectile;
 import model.game.projectile.concreteprojectile.BombardaCharm;
 import model.game.projectile.concreteprojectile.Rock;
+import model.game.projectile.concreteprojectile.Rocket;
 import view.WindowState;
 import view.texture.ImageHandler;
 
@@ -23,27 +24,24 @@ import java.util.Map;
 public class ProjectileDrawer extends JPanel {
 
 
-    private final Map<Object, BufferedImage> imageMap = new HashMap<>();
-    private final Map<Object, Double> sizeMap = new HashMap<>();
+    private final Map<Class<? extends Projectile>, String> imageMap = new HashMap<>();
+    private final Map<Class<? extends Projectile>, Double> sizeMap = new HashMap<>();
     private final ModelData modelData;
     private final WindowState windowState;
-    private BufferedImage rockImage;
-    private BufferedImage bombardaImage;
+    private String rockImagePath;
+    private String bombardaImagePath;
+    private String rocketImagePath;
 
     public ProjectileDrawer(ModelData modelData, WindowState windowState) {
         this.windowState = windowState;
         this.modelData = modelData;
-        setupImages();
-        imageMap.put(Rock.class, rockImage);
-        imageMap.put(BombardaCharm.class, bombardaImage);
+        imageMap.put(Rock.class, Config.INSTANCE.IMAGE_PATH.ROCK);
+        imageMap.put(BombardaCharm.class, Config.INSTANCE.IMAGE_PATH.BOMBARDA_CHARM);
+        imageMap.put(Rocket.class, Config.INSTANCE.IMAGE_PATH.ROCKET);
         //Size parameter is percent of tileSize
         sizeMap.put(Rock.class, Config.INSTANCE.ROCK.SIZE);
         sizeMap.put(BombardaCharm.class, Config.INSTANCE.BOMBARDA_CHARM.SIZE);
-    }
-
-    private void setupImages() {
-        rockImage = ImageHandler.getImage(Config.INSTANCE.IMAGE_PATH.ROCK);
-        bombardaImage = ImageHandler.getImage(Config.INSTANCE.IMAGE_PATH.BOMBARDA_CHARM);
+        sizeMap.put(Rocket.class, Config.INSTANCE.ROCKET.SIZE);
     }
 
     @Override
@@ -51,7 +49,7 @@ public class ProjectileDrawer extends JPanel {
         super.paintComponent(g);
         Collection<? extends Projectile> pList = modelData.getProjectiles();
         for (Projectile p : pList) {
-            BufferedImage img = imageMap.get(p.getClass());
+            BufferedImage img = ImageHandler.getImage(imageMap.get(p.getClass()), p.getVelocity().getAngle());
             int x = (int) ((p.getPosition().x + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().x);
             int y = (int) ((p.getPosition().y + 0.5) * windowState.getTileSize() + windowState.getTileMapOffset().y);
             int size = (int) (windowState.getTileSize() * sizeMap.get(p.getClass()));

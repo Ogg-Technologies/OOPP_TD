@@ -28,6 +28,11 @@ public abstract class AbstractProjectile implements Projectile {
     }
 
     @Override
+    public Vector getVelocity() {
+        return velocity;
+    }
+
+    @Override
     public boolean isConsumed() {
         return consumed;
     }

@@ -61,6 +61,11 @@ public class Mock {
             }
 
             @Override
+            public Vector getVelocity() {
+                return null;
+            }
+
+            @Override
             public void update() {
             }
 

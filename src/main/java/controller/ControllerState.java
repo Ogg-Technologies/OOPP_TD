@@ -32,6 +32,7 @@ public class ControllerState implements ControllerStateValue {
                 new TowerProxy(factory::createBearGrylls, Config.INSTANCE.BEAR_GRYLLS.RANGE, BearGrylls.class, Config.INSTANCE.BEAR_GRYLLS.COST),
                 new TowerProxy(factory::createBeer, Config.INSTANCE.BEER.RANGE, Beer.class, Config.INSTANCE.BEER.COST),
                 new TowerProxy(factory::createRubixCubeBear, Config.INSTANCE.RUBIX_CUBE_BEAR.RANGE, RubixCubeBear.class, Config.INSTANCE.RUBIX_CUBE_BEAR.COST),
+                new TowerProxy(factory::createBazookaBear, Config.INSTANCE.BAZOOKA_BEAR.RANGE, BazookaBear.class, Config.INSTANCE.BAZOOKA_BEAR.COST),
         };
     }
 

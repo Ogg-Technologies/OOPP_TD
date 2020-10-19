@@ -29,7 +29,7 @@ public enum  Config {
     public final SniperBear SNIPER_BEAR;
     public final SovietBear SOVIET_BEAR;
     public final Barbearian BARBEARIAN;
-    public final BazookaBear BAZOOKABEAR;
+    public final BazookaBear BAZOOKA_BEAR;
     public final Rock ROCK;
     public final BombardaCharm BOMBARDA_CHARM;
     public final Rocket ROCKET;
@@ -65,7 +65,7 @@ public enum  Config {
         SNIPER_BEAR = new SniperBear(prop);
         SOVIET_BEAR = new SovietBear(prop);
         BARBEARIAN = new Barbearian(prop);
-        BAZOOKABEAR = new BazookaBear(prop);
+        BAZOOKA_BEAR = new BazookaBear(prop);
         ROCK = new Rock(prop);
         BOMBARDA_CHARM = new BombardaCharm(prop);
         ROCKET = new Rocket(prop);
@@ -326,10 +326,14 @@ public enum  Config {
     }
 
     public static class Rocket {
+        public final double SIZE;
         public final double SPEED;
+        public final double EXPLOSION_RADIUS;
 
         private Rocket(Properties prop) {
             SPEED = readDoubleValue(prop, "rocket_speed");
+            SIZE = readDoubleValue(prop, "rocket_size");
+            EXPLOSION_RADIUS = readDoubleValue(prop, "rocket_explosion_radius");
         }
     }
 
@@ -473,6 +477,9 @@ public enum  Config {
     public static class ImagePath {
 
 
+        public final String BAZOOKA_BEAR;
+        public final String EXPLOSION;
+        public final String ROCKET;
         public final String BEER_BEAR;
         public final String BEER;
         public final String RUBIX_CUBE;
@@ -525,6 +532,9 @@ public enum  Config {
             BEER = readStringValue(prop, "beer_path");
             RUBIX_CUBE = readStringValue(prop, "rubixCube_path");
             RUBIX_CUBE_BEAR = readStringValue(prop, "rubixCubeBear_path");
+            BAZOOKA_BEAR = readStringValue(prop, "bazookaBear_path");
+            EXPLOSION = readStringValue(prop, "explosion_path");
+            ROCKET = readStringValue(prop, "rocket_path");
         }
     }
 

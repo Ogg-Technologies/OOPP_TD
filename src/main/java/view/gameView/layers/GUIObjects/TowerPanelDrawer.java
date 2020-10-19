@@ -114,14 +114,14 @@ public class TowerPanelDrawer {
     private void drawArrows(Graphics g, int arrowLeftX, int arrowRightX, int arrowY, int arrowWidth, int arrowHeight) {
 
         if (controllerStateValue.getTowerPanelStartIndex() != 0) {
-            g.drawImage(ImageHandler.getImage("resource/arrowLeft.png"), arrowLeftX, arrowY,
+            g.drawImage(ImageHandler.getImage("src/main/resources/arrowLeft.png"), arrowLeftX, arrowY,
                     arrowWidth, arrowHeight, null);
             arrowButtons[0].setLocation(arrowLeftX, arrowY);
             arrowButtons[0].setSize(arrowWidth, arrowHeight);
         }
 
         if (controllerStateValue.getTowerPanelStartIndex() + towerButtons.length < controllerStateValue.getTotalAmountOfTowers()) {
-            g.drawImage(ImageHandler.getImage("resource/arrowRight.png"), arrowRightX, arrowY,
+            g.drawImage(ImageHandler.getImage("src/main/resources/arrowRight.png"), arrowRightX, arrowY,
                     arrowWidth, arrowHeight, null);
             arrowButtons[1].setLocation(arrowRightX, arrowY);
             arrowButtons[1].setSize(arrowWidth, arrowHeight);

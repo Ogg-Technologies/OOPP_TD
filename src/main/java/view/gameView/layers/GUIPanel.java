@@ -40,6 +40,7 @@ public class GUIPanel extends JPanel {
         pathMap.put(BearGrylls.class, Config.INSTANCE.IMAGE_PATH.BEAR_GRYLLS);
         pathMap.put(Beer.class, Config.INSTANCE.IMAGE_PATH.BEER_BEAR);
         pathMap.put(RubixCubeBear.class, Config.INSTANCE.IMAGE_PATH.RUBIX_CUBE_BEAR);
+        pathMap.put(BazookaBear.class, Config.INSTANCE.IMAGE_PATH.BAZOOKA_BEAR);
         return pathMap;
     }
 

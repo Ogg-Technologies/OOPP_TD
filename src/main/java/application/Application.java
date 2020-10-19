@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Application {
 
-    private List<? extends TileMap> maps;
+    private final List<? extends TileMap> maps;
     private final JFrame window;
     private Stoppable stoppable;
 
@@ -36,7 +36,7 @@ public class Application {
 
     private void setupGameView() {
         standardSetup();
-        Model model = new Model(maps.get(0));
+        Model model = new Model(maps.get(2));
         GameView gameView = new GameView(window, model, this::setupMainMenuView);
         Controller controller = new Controller(model, gameView);
         ApplicationLoop loop = new ApplicationLoop(model, gameView);

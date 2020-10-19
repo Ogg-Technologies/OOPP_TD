@@ -10,6 +10,8 @@ import utils.Vector;
 public interface Projectile {
     Vector getPosition();
 
+    Vector getVelocity();
+
     void update();
 
     boolean isConsumed();

@@ -11,7 +11,7 @@ import utils.Vector;
 public enum WindowState {
     INSTANCE;
 
-    private int tileSize = 0;
+    private int tileSize = 1;
     private Vector offset = new Vector(0, 0);
     private Vector totalMapSize = new Vector(0, 0);
 

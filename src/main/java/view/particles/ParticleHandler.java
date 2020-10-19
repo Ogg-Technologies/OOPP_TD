@@ -4,6 +4,7 @@ import model.event.Event;
 import model.event.EventListener;
 import model.game.projectile.concreteprojectile.BombardaCharm;
 import model.game.projectile.concreteprojectile.Rock;
+import model.game.projectile.concreteprojectile.Rocket;
 import model.game.tower.concretetowers.*;
 import view.WindowState;
 
@@ -40,6 +41,7 @@ public final class ParticleHandler extends JPanel implements EventListener {
         particleMap.put(BearGrylls.class, EmitterFactory::createCompassEmitter);
         particleMap.put(Beer.class, EmitterFactory::createBeerEmitter);
         particleMap.put(RubixCubeBear.class, EmitterFactory::createRubixCubeEmitter);
+        particleMap.put(Rocket.class, EmitterFactory::createExplosionEmitter);
 
     }
 

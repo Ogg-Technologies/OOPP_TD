@@ -1,5 +1,6 @@
 package model.game.projectile.concreteprojectile;
 
+import config.Config;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -13,7 +14,7 @@ import utils.Vector;
  */
 public class Rocket extends AbstractProjectile {
 
-    public static final double EXPLOSION_RADIUS = 2.0;
+    public static final double EXPLOSION_RADIUS = Config.INSTANCE.ROCKET.EXPLOSION_RADIUS;
 
     private final int damage;
     private final EventSender eventSender;

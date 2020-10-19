@@ -73,6 +73,12 @@ public class TowerDrawer implements TowerVisitor {
         drawTower(tower.getPos(), Config.INSTANCE.IMAGE_PATH.RUBIX_CUBE_BEAR);
     }
 
+    @Override
+    public void visit(BazookaBear tower) {
+        drawTower(tower.getPos(), tower.getAngle(), Config.INSTANCE.IMAGE_PATH.BAZOOKA_BEAR);
+    }
+
+
     private void drawTower(Vector pos, String path) {
         Vector defaultVector = new Vector(0, 1);
         drawTower(pos, defaultVector.getAngle(), path);

@@ -127,4 +127,17 @@ public final class EmitterFactory {
                 .setTileSize(LinearDoubleDistribution.fromRange(0.5, 0.5))
                 .build();
     }
+
+    public static Emitter createExplosionEmitter(Vector position, double angle) {
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImagePath(Config.INSTANCE.IMAGE_PATH.EXPLOSION)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(10, 20))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.01))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.05, 0.1)))
+                .setEmitterLifetime(5)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(5, 10))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.5, 0.5))
+                .build();
+    }
 }
