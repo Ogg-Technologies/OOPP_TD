@@ -18,7 +18,7 @@ class TileMapTest {
 
     @Test
     void mapWithNoStartPosition() {
-        assertThrows(IllegalTileMapException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 TileMap.fromTileGrid(new Tile[][]{
                         {GROUND, GROUND, GROUND},
                         {PATH, PATH, PATH},
@@ -28,7 +28,7 @@ class TileMapTest {
 
     @Test
     void mapWithMultipleStartPositions() {
-        assertThrows(IllegalTileMapException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 TileMap.fromTileGrid(new Tile[][]{
                         {BASE, GROUND, START},
                         {PATH, PATH, PATH},
@@ -38,7 +38,7 @@ class TileMapTest {
 
     @Test
     void mapWithNoBasePosition() {
-        assertThrows(IllegalTileMapException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 TileMap.fromTileGrid(new Tile[][]{
                         {GROUND, GROUND, START},
                         {PATH, PATH, PATH},
@@ -48,7 +48,7 @@ class TileMapTest {
 
     @Test
     void mapWithMultipleBasePositions() {
-        assertThrows(IllegalTileMapException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 TileMap.fromTileGrid(new Tile[][]{
                         {BASE, GROUND, START},
                         {PATH, PATH, PATH},
@@ -57,7 +57,7 @@ class TileMapTest {
     }
 
     @Test
-    void spawnPositionIsCorrect() throws IllegalTileMapException {
+    void spawnPositionIsCorrect() {
         assertEquals(new Vector(1, 0), TileMap.fromTileGrid(new Tile[][]{
                 {GROUND, GROUND, GROUND},
                 {GROUND, START, GROUND},
@@ -72,7 +72,7 @@ class TileMapTest {
     }
 
     @Test
-    void startPositionIsCorrect() throws IllegalTileMapException {
+    void startPositionIsCorrect() {
         assertEquals(new Vector(1, 1), TileMap.fromTileGrid(new Tile[][]{
                 {GROUND, GROUND, GROUND},
                 {GROUND, START, GROUND},
@@ -88,7 +88,7 @@ class TileMapTest {
 
     @Test
     void mapWithIllegalBasePosition() {
-        assertThrows(IllegalTileMapException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 TileMap.fromTileGrid(new Tile[][]{
                         {BASE, GROUND, START},
                         {PATH, PATH, PATH},
@@ -101,7 +101,7 @@ class TileMapTest {
         private TileMap tileMap;
 
         @BeforeEach
-        void setUp() throws IllegalTileMapException {
+        void setUp() {
             tileMap = TileMap.fromTileGrid(new Tile[][]{
                     {PATH, PATH, PATH, GROUND},
                     {PATH, GROUND, PATH, PATH},

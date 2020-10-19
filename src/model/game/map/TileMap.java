@@ -24,21 +24,21 @@ public class TileMap {
 
     /**
      * Tries to create a TileMap with the given tile grid information
+     * The grid information is valid if:
+     * There is exactly one START and BASE tile in the matrix
+     * There is a continuous connection of PATH tiles from the START tile to the BASE tile
      *
      * @param name     The name of the map
      * @param tileGrid The layout of the map as a Tile matrix
-     * @throws IllegalTileMapException Thrown during the creation process if:
-     *                                 There is not exactly one START and BASE tile in the matrix
-     *                                 There is not a continuous connection of PATH tiles from the START tile to the BASE tile
      */
-    private TileMap(String name, Tile[][] tileGrid) throws IllegalTileMapException {
+    private TileMap(String name, Tile[][] tileGrid) {
         this.name = name;
         this.tileGrid = tileGrid;
         this.deltas = initDirectionDeltas();
         this.path = calculatePath();
     }
 
-    private TileMap(Tile[][] tileGrid) throws IllegalTileMapException {
+    private TileMap(Tile[][] tileGrid) {
         this("Map has no name", tileGrid);
     }
 
@@ -51,15 +51,15 @@ public class TileMap {
         return deltas;
     }
 
-    public static TileMap fromDefaultTileGrid() throws IllegalTileMapException {
+    public static TileMap fromDefaultTileGrid() {
         return new TileMap(createBasicTileGrid());
     }
 
-    public static TileMap fromTileGrid(String name, Tile[][] tileGrid) throws IllegalTileMapException {
+    public static TileMap fromTileGrid(String name, Tile[][] tileGrid) {
         return new TileMap(name, tileGrid);
     }
 
-    public static TileMap fromTileGrid(Tile[][] tileGrid) throws IllegalTileMapException {
+    public static TileMap fromTileGrid(Tile[][] tileGrid) {
         return new TileMap(tileGrid);
     }
 
@@ -78,7 +78,7 @@ public class TileMap {
         };
     }
 
-    private List<Vector> calculatePath() throws IllegalTileMapException {
+    private List<Vector> calculatePath() {
         List<Vector> path = new ArrayList<>();
 
         Vector start = findSingleTilePosition(START);
@@ -98,8 +98,8 @@ public class TileMap {
             path.add(base);
             return path;
         }
-        throw new IllegalTileMapException("The base tile (" + base
-                + ") is not connected to the last path (" + path.get(path.size() - 1) + ") tile");
+        throw new IllegalArgumentException("The base tile (" + base
+                + ") is not connected to the last path (" + path.get(path.size() - 1) + ") tile in map " + this);
     }
 
     /**
@@ -109,10 +109,10 @@ public class TileMap {
      * @param startPosition The marked start position of the map
      * @return The position one tile backwards from where the next tile after the start tile is
      */
-    private Vector calculateSpawnTile(Vector startPosition) throws IllegalTileMapException {
+    private Vector calculateSpawnTile(Vector startPosition) {
         Vector next = findNext(new ArrayList<>(), startPosition);
         if (next == null) {
-            throw new IllegalTileMapException("The marked path is not connected to the START tile");
+            throw new IllegalArgumentException("The marked path is not connected to the START tile in map " + this);
         }
         Vector delta = next.minus(startPosition);
         return startPosition.minus(delta);
@@ -157,7 +157,7 @@ public class TileMap {
      * @param tile The tile to search for
      * @return A vector defining the position of the tile
      */
-    private Vector findSingleTilePosition(Tile tile) throws IllegalTileMapException {
+    private Vector findSingleTilePosition(Tile tile) {
         Vector position = null;
         for (int y = 0; y < tileGrid.length; y++) {
             for (int x = 0; x < tileGrid[0].length; x++) {
@@ -165,13 +165,13 @@ public class TileMap {
                     continue;
                 }
                 if (position != null) {
-                    throw new IllegalTileMapException("Found multiple " + tile + " in map when only expecting one");
+                    throw new IllegalArgumentException("Found multiple " + tile + " in map when only expecting one in map " + this);
                 }
                 position = new Vector(x, y);
             }
         }
         if (position == null) {
-            throw new IllegalTileMapException("Could not find a " + tile + " tile in map");
+            throw new IllegalArgumentException("Could not find a " + tile + " tile in map " + this);
         }
         return position;
     }
@@ -224,5 +224,10 @@ public class TileMap {
      */
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

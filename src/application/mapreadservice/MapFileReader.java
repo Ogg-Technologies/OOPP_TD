@@ -27,29 +27,28 @@ class MapFileReader implements MapReader {
                 .collect(Collectors.toList());
 
         if (content.isEmpty()) {
-            throw new IOException("Map could not be loaded because it is empty");
+            throw new RuntimeException("Map could not be loaded because it is empty");
         }
 
         return convertContentToTiles(content, content.get(0).length());
     }
 
     /**
-     * Converts the list of Strings to a Tile matrix
+     * Converts the list of Strings into a Tile matrix
      *
      * @param content   The list of Strings read from the file where every element is one row
      * @param rowLength The expected row length of all uncommented rows
      * @return A Tile matrix decoded from @param content
-     * @throws IOException Thrown if the content could not be converted to a tile matrix
      */
-    private Tile[][] convertContentToTiles(List<String> content, int rowLength) throws IOException {
+    private Tile[][] convertContentToTiles(List<String> content, int rowLength) {
         Tile[][] tileGrid = new Tile[content.size()][rowLength];
 
         for (int row = 0; row < content.size(); row++) {
             String currentRow = content.get(row);
 
-            // Invalid file if uneven row size
+            // Invalid content if uneven row size
             if (currentRow.length() != rowLength) {
-                throw new IOException("Map could not be loaded because row "
+                throw new IllegalArgumentException("Map could not be loaded because row "
                         + (row + 1) + " (not included commented lines) is not of correct length (" + rowLength + ")");
             }
 
@@ -79,7 +78,7 @@ class MapFileReader implements MapReader {
         private static final char START = 'S';
         private static final char BASE = 'X';
 
-        static Tile convertToTile(char character) throws IOException {
+        static Tile convertToTile(char character) {
             switch (character) {
                 case GROUND:
                     return Tile.GROUND;
@@ -90,8 +89,8 @@ class MapFileReader implements MapReader {
                 case BASE:
                     return Tile.BASE;
                 default:
-                    throw new IOException("The map could not be decoded as it uses the wrong format. " +
-                            "(Cannot have character " + character + ")");
+                    throw new IllegalArgumentException("The map could not be decoded as it uses the wrong format. " +
+                            "(Illegal character " + character + ")");
             }
         }
     }
