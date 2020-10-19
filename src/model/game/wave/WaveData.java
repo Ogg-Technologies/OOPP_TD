@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Oskar
+ * @author Oskar, Erik
  * Class which defines all waves in the game.
  * The first levels are manually declared in this class. After those levels, there is an infinite number of
  * algorithmically created levels
