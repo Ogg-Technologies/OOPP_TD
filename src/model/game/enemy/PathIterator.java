@@ -39,14 +39,14 @@ public class PathIterator {
         if (keepNth <= 0) {
             throw new IllegalArgumentException("keepNth cannot be zero or below");
         }
-
         this.path = calculateFlyingPath(path, keepNth);
         current = -1;
     }
 
     /**
-     * Filters the given basePath to only take the nth element from it (flyAmount) and returns it as a new list.
-     * Used to make path iterators for flying fish where they skip over most tiles
+     * Filters the given basePath to only take the nth element from it (defined by integer flyAmount) and returns it as a new list.
+     * The last element in the basePath is kept even if it is not the nth element.
+     * Used to make path iterators for flying fish where they skip over most tiles.
      *
      * @param basePath  The path containing all the path tile positions
      * @param flyAmount The number of tiles the new path will "fly over" between each element in the path
@@ -54,10 +54,18 @@ public class PathIterator {
      */
     private List<? extends Vector> calculateFlyingPath(List<? extends Vector> basePath, int flyAmount) {
         List<Vector> flyPath = new ArrayList<>(basePath);
-        return IntStream.range(0, flyPath.size())
+
+        flyPath = IntStream.range(0, flyPath.size())
                 .filter(n -> n % flyAmount == 0)
                 .mapToObj(flyPath::get)
                 .collect(Collectors.toList());
+
+        // Add last vector if not yet added
+        Vector last = basePath.get(basePath.size() - 1);
+        if (!flyPath.contains(last)) {
+            flyPath.add(last);
+        }
+        return flyPath;
     }
 
     public boolean hasNext() {
