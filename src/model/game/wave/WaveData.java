@@ -89,6 +89,22 @@ public class WaveData {
                 .spawnMultipleWithDelay(fac::createFishInABoat, 3, 20)
                 ::toWave);
 
+        // Introduce FlyingFish
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishInABoat, 4, 90)
+                .delay(180)
+                .spawnMultipleWithDelay(fac::createFlyingFish, 10, 90)
+                ::toWave
+        );
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFlyingFish, 8, 40)
+                .spawnMultipleWithDelay(fac::createFishAndChips, 8, 40)
+                .delay(300)
+                .spawnMultipleWithDelay(fac::createFlyingFish, 15, 20)
+                ::toWave
+        );
+
         // Introduce SailFish
         definedWaves.add(seq()
                 .spawnMultipleWithDelay(fac::createFishstick, 100, 2)
@@ -140,6 +156,18 @@ public class WaveData {
                 .delay(100)
                 .spawnMultipleWithDelay(fac::createShark, 8, 60)
                 ::toWave);
+
+        definedWaves.add(seq()
+                .spawnMultipleWithDelay(fac::createFishstick, 10, 5)
+                .spawnMultipleWithDelay(fac::createSwordfish, 10, 8)
+                .spawnMultipleWithDelay(fac::createFishAndChips, 10, 9)
+                .delay(60)
+                .spawnMultipleWithDelay(fac::createFishInABoat, 10, 11)
+                .spawnMultipleWithDelay(fac::createFlyingFish, 10, 8)
+                .delay(30)
+                .spawnMultipleWithDelay(fac::createSailfish, 10, 15)
+                ::toWave
+        );
 
         // Introduce fishInAFishTank
         definedWaves.add(seq()
