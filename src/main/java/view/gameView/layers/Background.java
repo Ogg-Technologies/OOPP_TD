@@ -1,4 +1,4 @@
-package view.gameLayers;
+package view.gameView.layers;
 
 import model.ModelData;
 import utils.Vector;

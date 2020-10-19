@@ -1,7 +1,7 @@
 package controller;
 
 import model.ModelInputListener;
-import view.View;
+import view.gameView.IGameView;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -13,17 +13,17 @@ public class Controller {
      * Is used by Application.
      *
      * @param modelInputListener handler of events for model
-     * @param view               a view that need input from controller
+     * @param IGameView               a view that need input from controller
      */
-    public Controller(ModelInputListener modelInputListener, View view) {
+    public Controller(ModelInputListener modelInputListener, IGameView IGameView) {
         ControllerState controllerState = new ControllerState(modelInputListener.getFactory());
-        SwingMouseController mouseController = new SwingMouseController(view, view, modelInputListener, controllerState);
-        SwingKeyboardController keyboardController = new SwingKeyboardController(controllerState, view.maxTowersInTowerPanel());
-        view.addMouseListener(mouseController);
-        view.addMouseMotionListener(mouseController);
-        view.addState(controllerState);
-        view.addButtonClickHandler(mouseController);
-        view.addKeyListener(keyboardController);
+        SwingMouseController mouseController = new SwingMouseController(IGameView, IGameView, modelInputListener, controllerState);
+        SwingKeyboardController keyboardController = new SwingKeyboardController(controllerState, IGameView.maxTowersInTowerPanel());
+        IGameView.addMouseListener(mouseController);
+        IGameView.addMouseMotionListener(mouseController);
+        IGameView.addState(controllerState);
+        IGameView.addButtonClickHandler(mouseController);
+        IGameView.addKeyListener(keyboardController);
     }
 
 }

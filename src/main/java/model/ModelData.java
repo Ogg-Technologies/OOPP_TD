@@ -63,12 +63,4 @@ public interface ModelData {
      * @return the wave number
      */
     int getWaveNumber();
-
-    /**
-     * Getter for all tileMaps that has been loaded in.
-     * This is used to see a preview for every map on start screen.
-     *
-     * @return an array of all tileMaps loaded in
-     */
-    TileMap[] getTileMaps();
 }

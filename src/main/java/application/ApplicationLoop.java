@@ -2,7 +2,6 @@ package application;
 
 import model.Updatable;
 import view.Drawable;
-import view.ShutDownAble;
 
 /**
  * @author Oskar, Sebastian, Erik
@@ -12,17 +11,14 @@ public class ApplicationLoop implements Runnable {
 
     private Updatable updatable;
     private Drawable drawable;
-    private final ShutDownAble shutDownAble;
 
     /**
      * @param updatable    logical class that tries to update 60 times a second
      * @param drawable     visual class that updates as often as possible
-     * @param shutDownAble decides if the loop should stop or not
      */
-    public ApplicationLoop(Updatable updatable, Drawable drawable, ShutDownAble shutDownAble) {
+    public ApplicationLoop(Updatable updatable, Drawable drawable) {
         this.updatable = updatable;
         this.drawable = drawable;
-        this.shutDownAble = shutDownAble;
     }
 
     /**
@@ -42,7 +38,7 @@ public class ApplicationLoop implements Runnable {
         int frames = 0;
         int updates = 0;
 
-        while (!shutDownAble.isShutDown()) {
+        while (true) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;

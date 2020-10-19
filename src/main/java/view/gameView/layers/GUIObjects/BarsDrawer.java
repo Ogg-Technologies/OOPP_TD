@@ -1,4 +1,4 @@
-package view.gameLayers.GUIObjects;
+package view.gameView.layers.GUIObjects;
 
 import view.ColorHandler;
 

@@ -1,4 +1,4 @@
-package view.startLayers;
+package view.mainMenuView.layers;
 
 import model.game.map.TileMap;
 import view.ColorHandler;
@@ -28,7 +28,7 @@ public class ButtonPanel extends JPanel {
     public ButtonPanel(WindowState windowState, TileMap[] tileMaps) {
         this.tileMaps = tileMaps;
         startButton = new JButton();
-        startButton.addActionListener((e -> windowState.setViewStateToGame()));
+        //startButton.addActionListener((e -> windowState.setViewStateToGame()));
         startButton.setText("Start Game");
         add(startButton);
 

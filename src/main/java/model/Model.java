@@ -23,12 +23,10 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
 
     private final Set<EventListener> eventListeners = new HashSet<>();
     private final List<Command> commands = new ArrayList<>();
-    private final List<? extends TileMap> maps;
     private Game game;
 
-    public Model(List<? extends TileMap> maps) {
-        this.maps = maps;
-        game = new Game(maps.get(0), this);
+    public Model(TileMap activeMap) {
+        game = new Game(activeMap, this);
         addOnModelEventListener(game);
     }
 
@@ -130,11 +128,6 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     @Override
     public int getWaveNumber() {
         return game.getWaveNumber();
-    }
-
-    @Override
-    public TileMap[] getTileMaps() {
-        return maps.toArray(new TileMap[0]);
     }
 
     /**

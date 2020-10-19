@@ -1,10 +1,10 @@
-package view.gameLayers.GUIObjects;
+package view.gameView.layers.GUIObjects;
 
 import model.game.tower.Tower;
 import view.ColorHandler;
 import view.ControllerStateValue;
 import view.WindowState;
-import view.gameLayers.GUIPanel;
+import view.gameView.layers.GUIPanel;
 import view.texture.ImageHandler;
 
 import javax.swing.*;

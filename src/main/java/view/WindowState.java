@@ -7,12 +7,12 @@ import utils.Vector;
  * A helper class that give view components some data to know where to draw themselves
  * Is used by swingView and all objects in package layers.
  */
-public class WindowState {
-    private int tileSize = 0;
-    private Vector offset;
-    private Vector totalMapSize;
+public enum  WindowState {
+    INSTANCE;
 
-    private ViewState viewState = ViewState.START;
+    private int tileSize = 0;
+    private Vector offset = new Vector(0, 0);
+    private Vector totalMapSize = new Vector(0, 0);
 
     public static final double MAP_LEFT = .17;
     public static final double MAP_UP = .02;
@@ -61,28 +61,5 @@ public class WindowState {
      */
     public Vector getTotalMapSize() {
         return totalMapSize;
-    }
-
-    /**
-     * Getter for which view state is active
-     *
-     * @return the view state
-     */
-    public ViewState getViewState() {
-        return viewState;
-    }
-
-    /**
-     * Used for when changing to startViewState
-     */
-    public void setViewStateToStart() {
-        this.viewState = ViewState.START;
-    }
-
-    /**
-     * Used for when changing to gameViewState
-     */
-    public void setViewStateToGame() {
-        this.viewState = ViewState.GAME;
     }
 }

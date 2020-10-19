@@ -1,4 +1,4 @@
-package view.gameLayers;
+package view.gameView.layers;
 
 import config.Config;
 import model.ModelData;
@@ -8,7 +8,7 @@ import utils.Vector;
 import view.ButtonClickHandler;
 import view.ControllerStateValue;
 import view.WindowState;
-import view.gameLayers.GUIObjects.*;
+import view.gameView.layers.GUIObjects.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,9 +73,8 @@ public class GUIPanel extends JPanel {
      * @param modelData   data from model that gui needs.
      * @param windowState the state of window
      */
-    public GUIPanel(ModelData modelData, WindowState windowState, ControllerStateValue controllerStateValue) {
+    public GUIPanel(ModelData modelData, WindowState windowState) {
         this.modelData = modelData;
-        this.controllerStateValue = controllerStateValue;
         ghostTowerDrawer = new GhostTowerDrawer(windowState);
 
         JLabel playerHealthLabel = new JLabel();
@@ -141,14 +140,14 @@ public class GUIPanel extends JPanel {
      *
      * @param buttonClickHandler the controller that handles the onClicks.
      */
-    public void setupButtons(ButtonClickHandler buttonClickHandler, WindowState windowState) {
+    public void setupButtons(ButtonClickHandler buttonClickHandler) {
         //nextWaveButton
         nextWaveButton.addActionListener(e -> buttonClickHandler.onNextWaveClicked());
         for (int i = 0; i < MAX_TOWERS; i++) {
             int finalI = i;
             towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTowerIndexButton(finalI)));
         }
-        backToStartButton.addActionListener(e -> windowState.setViewStateToStart());
+        //backToStartButton.addActionListener(e -> windowState.setViewStateToStart());
         arrowButtons[0].addActionListener(e -> controllerStateValue.changeStartIndex(-MAX_TOWERS));
         arrowButtons[1].addActionListener(e -> controllerStateValue.changeStartIndex(MAX_TOWERS));
     }

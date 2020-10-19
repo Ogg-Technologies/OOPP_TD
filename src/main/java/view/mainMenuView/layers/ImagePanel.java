@@ -1,4 +1,4 @@
-package view.startLayers;
+package view.mainMenuView.layers;
 
 import utils.Vector;
 import view.texture.ImageHandler;
