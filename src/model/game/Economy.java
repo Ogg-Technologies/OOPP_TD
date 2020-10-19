@@ -4,6 +4,7 @@ package model.game;
 import config.Config;
 import model.game.enemy.Enemy;
 import model.game.enemy.concreteenemies.BasicEnemy;
+import model.game.enemy.concreteenemies.FlyingFish;
 import model.game.tower.Tower;
 import model.game.tower.concretetowers.*;
 
@@ -59,6 +60,7 @@ public class Economy {
         map.put(BasicEnemy.Sailfish.class, config.SAILFISH.VALUE);
         map.put(BasicEnemy.Shark.class, config.SHARK.VALUE);
         map.put(BasicEnemy.FishInAFishTank.class, config.FISH_IN_A_FISH_TANK.VALUE);
+        map.put(FlyingFish.class, config.FLYING_FISH.VALUE);
 
         return map;
     }

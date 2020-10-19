@@ -14,7 +14,7 @@ public abstract class BasicEnemy extends AbstractEnemy {
     public static final int BASE_HEALTH = 20;
     public static final double BASE_SPEED = 0.01;
 
-    private BasicEnemy(BaseDamager baseDamager, PathIterator pathIterator, double healthMultiplier, double speedMultiplier) {
+    protected BasicEnemy(BaseDamager baseDamager, PathIterator pathIterator, double healthMultiplier, double speedMultiplier) {
         super(baseDamager, pathIterator, (int) (BASE_HEALTH * healthMultiplier), BASE_SPEED * speedMultiplier);
     }
 

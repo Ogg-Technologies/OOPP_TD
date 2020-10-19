@@ -38,6 +38,7 @@ public enum  Config {
     public final Sailfish SAILFISH;
     public final Shark SHARK;
     public final FishInAFishTank FISH_IN_A_FISH_TANK;
+    public final FlyingFish FLYING_FISH;
     public final ColorCode COLOR_CODE;
     public final ImagePath IMAGE_PATH;
 
@@ -71,6 +72,7 @@ public enum  Config {
         SAILFISH = new Sailfish(prop);
         SHARK = new Shark(prop);
         FISH_IN_A_FISH_TANK = new FishInAFishTank(prop);
+        FLYING_FISH = new FlyingFish(prop);
         COLOR_CODE = new ColorCode(prop);
         IMAGE_PATH = new ImagePath(prop);
     }
@@ -387,7 +389,21 @@ public enum  Config {
         }
     }
 
-    public class ColorCode {
+    public static class FlyingFish {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
+        public final int FLY_AMOUNT;
+
+        private FlyingFish(Properties prop) {
+            SPEED = readDoubleValue(prop, "flying_fish_speed");
+            HEALTH = readDoubleValue(prop, "flying_fish_health");
+            VALUE = (int) readDoubleValue(prop, "flying_fish_value");
+            FLY_AMOUNT = (int) readDoubleValue(prop, "flying_fish_fly_amount");
+        }
+    }
+
+    public static class ColorCode {
         public final String VALID_TILE_HOVER;
         public final int VALID_TILE_HOVER_ALPHA;
         public final String INVALID_TILE_HOVER;
@@ -451,6 +467,7 @@ public enum  Config {
         public final String SAILFISH;
         public final String SHARK;
         public final String FISH_IN_A_FISH_TANK;
+        public final String FLYING_FISH;
         public final String BASE;
 
         private ImagePath(Properties prop) {
@@ -472,6 +489,7 @@ public enum  Config {
             SAILFISH = readStringValue(prop, "sailfish_path");
             SHARK = readStringValue(prop, "shark_path");
             FISH_IN_A_FISH_TANK = readStringValue(prop, "fish_in_a_fish_tank_path");
+            FLYING_FISH = readStringValue(prop, "flying_fish_path");
             BASE = readStringValue(prop, "base_path");
             COMPASS = readStringValue(prop, "compass_path");
             BEER_BEAR = readStringValue(prop, "beerBear_path");

@@ -1,6 +1,7 @@
 package model.game.enemy;
 
 import model.game.enemy.concreteenemies.BasicEnemy;
+import model.game.enemy.concreteenemies.FlyingFish;
 
 /**
  * @author Oskar, Erik
@@ -24,6 +25,8 @@ public interface EnemyVisitor {
     void visit(BasicEnemy.FishInABoat enemy);
     void visit(BasicEnemy.Sailfish enemy);
     void visit(BasicEnemy.Shark enemy);
+
     void visit(BasicEnemy.FishInAFishTank enemy);
 
+    void visit(FlyingFish enemy);
 }

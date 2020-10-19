@@ -5,6 +5,7 @@ import model.game.enemy.AbstractEnemy;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.concreteenemies.BasicEnemy;
+import model.game.enemy.concreteenemies.FlyingFish;
 import view.ColorHandler;
 import view.WindowState;
 import view.texture.ImageHandler;
@@ -73,6 +74,11 @@ public class EnemyDrawer implements EnemyVisitor {
     @Override
     public void visit(BasicEnemy.FishInAFishTank enemy) {
         drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FISH_IN_A_FISH_TANK);
+    }
+
+    @Override
+    public void visit(FlyingFish enemy) {
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FLYING_FISH);
     }
 
     private void drawEnemy(AbstractEnemy enemy, String path) {
