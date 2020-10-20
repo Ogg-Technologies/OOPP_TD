@@ -22,15 +22,15 @@ public class BearGrylls extends AbstractBuffTower {
     private EventSender eventSender;
 
     public BearGrylls(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
-        super(pos, Config.INSTANCE.BEAR_GRYLLS.RANGE,
-                new ConstantChargeStrategy(Config.INSTANCE.BEAR_GRYLLS.ATTACK_DELAY), towerFinder);
+        super(pos, Config.BearGrylls.RANGE,
+                new ConstantChargeStrategy(Config.BearGrylls.ATTACK_DELAY), towerFinder);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void buffTowers(Collection<? extends Tower> towers) {
         towers.forEach(tower -> {
-            tower.applyBuff(m -> m.addRange(Config.INSTANCE.BEAR_GRYLLS.BUFF_PERCENTAGE), Config.INSTANCE.BEAR_GRYLLS.BUFF_DURATION);
+            tower.applyBuff(m -> m.addRange(Config.BearGrylls.BUFF_PERCENTAGE), Config.BearGrylls.BUFF_DURATION);
         });
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), 0));
     }

@@ -20,15 +20,15 @@ public class SovietBear extends AbstractAttackingTower {
     private EventSender eventSender;
 
     public SovietBear(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
-        super(pos, Config.INSTANCE.SOVIET_BEAR.RANGE,
-                new BurstChargeStrategy(Config.INSTANCE.SOVIET_BEAR.ATTACK_DELAY,
-                        Config.INSTANCE.SOVIET_BEAR.ATTACKS_PER_BURST, Config.INSTANCE.SOVIET_BEAR.TICKS_BETWEEN_ATTACKS), enemyTargeter);
+        super(pos, Config.SovietBear.RANGE,
+                new BurstChargeStrategy(Config.SovietBear.ATTACK_DELAY,
+                        Config.SovietBear.ATTACKS_PER_BURST, Config.SovietBear.TICKS_BETWEEN_ATTACKS), enemyTargeter);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        e.damage((int) (Config.INSTANCE.SOVIET_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier()));
+        e.damage((int) (Config.SovietBear.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier()));
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), getAngle()));
     }
 

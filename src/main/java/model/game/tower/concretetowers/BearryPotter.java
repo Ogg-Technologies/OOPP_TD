@@ -22,15 +22,15 @@ public class BearryPotter extends AbstractAttackingTower {
     private EventSender eventSender;
 
     public BearryPotter(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
-        super(pos, Config.INSTANCE.BEARRY_POTTER.RANGE,
-                new ConstantChargeStrategy(Config.INSTANCE.BEARRY_POTTER.ATTACK_DELAY), enemyTargeter);
+        super(pos, Config.BearryPotter.RANGE,
+                new ConstantChargeStrategy(Config.BearryPotter.ATTACK_DELAY), enemyTargeter);
         this.projectileCreator = projectileCreator;
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        int damage = (int) (Config.INSTANCE.BEARRY_POTTER.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
+        int damage = (int) (Config.BearryPotter.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
         Projectile bombarda = projectileCreator.getProjectileFactory().createExplodingCharm(getPos(), e, damage);
         projectileCreator.addProjectile(bombarda);
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), getAngle()));

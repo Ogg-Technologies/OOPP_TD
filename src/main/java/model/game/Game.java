@@ -31,11 +31,11 @@ import java.util.Collection;
 public class Game implements EnemyGetter, EventListener {
 
     private final TileMap tileMap;
-    private final MutableHealth baseHealth = new MutableHealth(Config.INSTANCE.PLAYER.START_HEALTH);
+    private final MutableHealth baseHealth = new MutableHealth(Config.Player.START_HEALTH);
     private final TowerHandler towerHandler = new TowerHandler();
     private final WaveHandler waveHandler;
     private final ProjectileHandler projectileHandler;
-    private final Economy economy = new Economy(Config.INSTANCE.PLAYER.START_MONEY);
+    private final Economy economy = new Economy(Config.Player.START_MONEY);
     private final TowerFactory towerFactory;
 
     public Game(TileMap tileMap, EventSender eventSender) {

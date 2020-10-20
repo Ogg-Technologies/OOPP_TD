@@ -18,8 +18,8 @@ public class BazookaBear extends AbstractAttackingTower {
     private EventSender eventSender;
 
     public BazookaBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
-        super(pos, Config.INSTANCE.BAZOOKA_BEAR.RANGE,
-                new ConstantChargeStrategy(Config.INSTANCE.BAZOOKA_BEAR.ATTACK_DELAY), enemyTargeter);
+        super(pos, Config.BazookaBear.RANGE,
+                new ConstantChargeStrategy(Config.BazookaBear.ATTACK_DELAY), enemyTargeter);
         this.projectileCreator = projectileCreator;
         this.eventSender = eventSender;
 
@@ -27,7 +27,7 @@ public class BazookaBear extends AbstractAttackingTower {
 
     @Override
     protected void attack(Enemy e) {
-        int damage = (int) (Config.INSTANCE.BAZOOKA_BEAR.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
+        int damage = (int) (Config.BazookaBear.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier());
         Projectile rocket = projectileCreator.getProjectileFactory().createRocket(getPos(), e.getPos(), damage);
         projectileCreator.addProjectile(rocket);
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), getAngle()));

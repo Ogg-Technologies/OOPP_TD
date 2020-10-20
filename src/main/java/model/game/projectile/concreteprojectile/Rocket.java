@@ -14,7 +14,7 @@ import utils.Vector;
  */
 public class Rocket extends AbstractProjectile {
 
-    private static final double EXPLOSION_RADIUS = Config.INSTANCE.ROCKET.EXPLOSION_RADIUS;
+    private static final double EXPLOSION_RADIUS = Config.Rocket.EXPLOSION_RADIUS;
 
     private final int damage;
     private final EventSender eventSender;

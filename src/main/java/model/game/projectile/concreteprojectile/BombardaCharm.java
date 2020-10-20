@@ -16,7 +16,7 @@ import utils.Vector;
  */
 public class BombardaCharm extends AbstractProjectile {
 
-    private static final double EXPLOSION_RADIUS = Config.INSTANCE.BOMBARDA_CHARM.EXPLOSION_RADIUS;
+    private static final double EXPLOSION_RADIUS = Config.BombardaCharm.EXPLOSION_RADIUS;
 
     private final int damage;
     private final EventSender eventSender;
@@ -24,7 +24,7 @@ public class BombardaCharm extends AbstractProjectile {
     private Enemy target;
 
     public BombardaCharm(Vector position, Enemy target, int damage, EventSender eventSender, EnemyTargeter enemyTargeter) {
-        super(position, target.getPos().minus(position).setMagnitude(Config.INSTANCE.BOMBARDA_CHARM.SPEED));
+        super(position, target.getPos().minus(position).setMagnitude(Config.BombardaCharm.SPEED));
         this.damage = damage;
         this.eventSender = eventSender;
         this.target = target;
@@ -42,7 +42,7 @@ public class BombardaCharm extends AbstractProjectile {
             if (target.getHealth().isDead()) {
                 target = null;
             } else {
-                velocity = target.getPos().minus(getPosition()).setMagnitude(Config.INSTANCE.BOMBARDA_CHARM.SPEED);
+                velocity = target.getPos().minus(getPosition()).setMagnitude(Config.BombardaCharm.SPEED);
             }
         }
         super.update();

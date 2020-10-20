@@ -24,7 +24,7 @@ public final class ProjectileFactory {
     }
 
     public Projectile createRock(Vector position, Vector target, int damage) {
-        return new Rock(position, target.minus(position).setMagnitude(Config.INSTANCE.ROCK.SPEED), damage, this.eventSender);
+        return new Rock(position, target.minus(position).setMagnitude(Config.Rock.SPEED), damage, this.eventSender);
     }
 
     public Projectile createExplodingCharm(Vector position, Enemy target, int damage) {
@@ -32,6 +32,6 @@ public final class ProjectileFactory {
     }
 
     public Projectile createRocket(Vector position, Vector target, int damage) {
-        return new Rocket(position, target.minus(position).setMagnitude(Config.INSTANCE.ROCKET.SPEED), damage, this.eventSender, this.enemyTargeter);
+        return new Rocket(position, target.minus(position).setMagnitude(Config.Rocket.SPEED), damage, this.eventSender, this.enemyTargeter);
     }
 }

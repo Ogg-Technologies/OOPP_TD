@@ -24,7 +24,7 @@ public class ImagePanel extends JPanel {
      * @param size size to set the image to.
      */
     public ImagePanel(Vector size) {
-        this.image = ImageHandler.getImage(Config.INSTANCE.IMAGE_PATH.START_SCREEN);
+        this.image = ImageHandler.getImage(Config.ImagePath.START_SCREEN);
         this.width = size.getIntX();
         this.height = size.getIntY();
     }

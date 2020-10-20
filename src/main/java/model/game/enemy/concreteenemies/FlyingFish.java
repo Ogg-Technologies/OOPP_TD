@@ -14,7 +14,7 @@ import model.game.enemy.PathIterator;
 public class FlyingFish extends BasicEnemy {
 
     public FlyingFish(BaseDamager baseDamager, PathIterator pathIterator) {
-        super(baseDamager, pathIterator, Config.INSTANCE.FLYING_FISH.HEALTH, Config.INSTANCE.FLYING_FISH.SPEED);
+        super(baseDamager, pathIterator, Config.FlyingFish.HEALTH, Config.FlyingFish.SPEED);
     }
 
     @Override

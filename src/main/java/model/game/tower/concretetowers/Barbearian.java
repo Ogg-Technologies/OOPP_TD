@@ -20,15 +20,15 @@ public class Barbearian extends AbstractAttackingTower {
     private EventSender eventSender;
 
     public Barbearian(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
-        super(pos, Config.INSTANCE.BARBEARIAN.RANGE,
-                new BurstChargeStrategy(Config.INSTANCE.BARBEARIAN.ATTACK_DELAY,
-                        Config.INSTANCE.BARBEARIAN.ATTACKS_PER_BURST, Config.INSTANCE.BARBEARIAN.TICKS_BETWEEN_ATTACKS), enemyTargeter);
+        super(pos, Config.Barbearian.RANGE,
+                new BurstChargeStrategy(Config.Barbearian.ATTACK_DELAY,
+                        Config.Barbearian.ATTACKS_PER_BURST, Config.Barbearian.TICKS_BETWEEN_ATTACKS), enemyTargeter);
         this.eventSender = eventSender;
     }
 
     @Override
     protected void attack(Enemy e) {
-        e.damage((int) (Config.INSTANCE.BARBEARIAN.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier()));
+        e.damage((int) (Config.Barbearian.BASE_DAMAGE * getActiveMultipliers().getDamageMultiplier()));
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), getAngle()));
     }
 

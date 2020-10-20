@@ -35,47 +35,47 @@ public class TowerDrawer implements TowerVisitor {
 
     @Override
     public void visit(GrizzlyBear tower) {
-        drawTower(tower.getPos(), tower.getAngle(), Config.INSTANCE.IMAGE_PATH.GRIZZLY_BEAR);
+        drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.GRIZZLY_BEAR);
     }
 
     @Override
     public void visit(BearryPotter tower) {
-        drawTower(tower.getPos(), tower.getAngle(), Config.INSTANCE.IMAGE_PATH.BEARRY_POTTER);
+        drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.BEARRY_POTTER);
     }
 
     @Override
     public void visit(SniperBear tower) {
-        drawTower(tower.getPos(), tower.getAngle(), Config.INSTANCE.IMAGE_PATH.SNIPER_BEAR);
+        drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.SNIPER_BEAR);
     }
 
     @Override
     public void visit(SovietBear tower) {
-        drawTower(tower.getPos(), tower.getAngle(), Config.INSTANCE.IMAGE_PATH.SOVIET_BEAR);
+        drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.SOVIET_BEAR);
     }
 
     @Override
     public void visit(Barbearian tower) {
-        drawTower(tower.getPos(), tower.getAngle(), Config.INSTANCE.IMAGE_PATH.BARBEARIAN);
+        drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.BARBEARIAN);
     }
 
     @Override
     public void visit(BearGrylls tower) {
-        drawTower(tower.getPos(), Config.INSTANCE.IMAGE_PATH.BEAR_GRYLLS);
+        drawTower(tower.getPos(), Config.ImagePath.BEAR_GRYLLS);
     }
 
     @Override
     public void visit(Beer tower) {
-        drawTower(tower.getPos(), Config.INSTANCE.IMAGE_PATH.BEER_BEAR);
+        drawTower(tower.getPos(), Config.ImagePath.BEER_BEAR);
     }
 
     @Override
     public void visit(RubixCubeBear tower) {
-        drawTower(tower.getPos(), Config.INSTANCE.IMAGE_PATH.RUBIX_CUBE_BEAR);
+        drawTower(tower.getPos(), Config.ImagePath.RUBIX_CUBE_BEAR);
     }
 
     @Override
     public void visit(BazookaBear tower) {
-        drawTower(tower.getPos(), tower.getAngle(), Config.INSTANCE.IMAGE_PATH.BAZOOKA_BEAR);
+        drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.BAZOOKA_BEAR);
     }
 
 

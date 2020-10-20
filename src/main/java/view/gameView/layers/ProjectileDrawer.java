@@ -35,13 +35,13 @@ public class ProjectileDrawer extends JPanel {
     public ProjectileDrawer(ModelData modelData, WindowState windowState) {
         this.windowState = windowState;
         this.modelData = modelData;
-        imageMap.put(Rock.class, Config.INSTANCE.IMAGE_PATH.ROCK);
-        imageMap.put(BombardaCharm.class, Config.INSTANCE.IMAGE_PATH.BOMBARDA_CHARM);
-        imageMap.put(Rocket.class, Config.INSTANCE.IMAGE_PATH.ROCKET);
+        imageMap.put(Rock.class, Config.ImagePath.ROCK);
+        imageMap.put(BombardaCharm.class, Config.ImagePath.BOMBARDA_CHARM);
+        imageMap.put(Rocket.class, Config.ImagePath.ROCKET);
         //Size parameter is percent of tileSize
-        sizeMap.put(Rock.class, Config.INSTANCE.ROCK.SIZE);
-        sizeMap.put(BombardaCharm.class, Config.INSTANCE.BOMBARDA_CHARM.SIZE);
-        sizeMap.put(Rocket.class, Config.INSTANCE.ROCKET.SIZE);
+        sizeMap.put(Rock.class, Config.Rock.SIZE);
+        sizeMap.put(BombardaCharm.class, Config.BombardaCharm.SIZE);
+        sizeMap.put(Rocket.class, Config.Rocket.SIZE);
     }
 
     @Override

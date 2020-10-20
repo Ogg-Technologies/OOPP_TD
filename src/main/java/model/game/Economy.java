@@ -32,16 +32,15 @@ public class Economy {
     private static Map<Class<? extends Tower>, Integer> setupTowerCostMap() {
         Map<Class<? extends Tower>, Integer> map = new HashMap<>();
 
-        Config config = Config.INSTANCE;
-        map.put(GrizzlyBear.class, config.GRIZZLY_BEAR.COST);
-        map.put(BearryPotter.class, config.BEARRY_POTTER.COST);
-        map.put(SniperBear.class, config.SNIPER_BEAR.COST);
-        map.put(SovietBear.class, config.SOVIET_BEAR.COST);
-        map.put(Barbearian.class, config.BARBEARIAN.COST);
-        map.put(BearGrylls.class, config.BEAR_GRYLLS.COST);
-        map.put(Beer.class, config.BEER.COST);
-        map.put(RubixCubeBear.class, config.RUBIX_CUBE_BEAR.COST);
-        map.put(BazookaBear.class, config.BAZOOKA_BEAR.COST);
+        map.put(GrizzlyBear.class, Config.GrizzlyBear.COST);
+        map.put(BearryPotter.class, Config.BearryPotter.COST);
+        map.put(SniperBear.class, Config.SniperBear.COST);
+        map.put(SovietBear.class, Config.SovietBear.COST);
+        map.put(Barbearian.class, Config.Barbearian.COST);
+        map.put(BearGrylls.class, Config.BearGrylls.COST);
+        map.put(Beer.class, Config.Beer.COST);
+        map.put(RubixCubeBear.class, Config.RubixCubeBear.COST);
+        map.put(BazookaBear.class, Config.BazookaBear.COST);
 
         return map;
     }
@@ -54,16 +53,15 @@ public class Economy {
     private static Map<Class<? extends Enemy>, Integer> setupEnemyDeathRewardMap() {
         Map<Class<? extends Enemy>, Integer> map = new HashMap<>();
 
-        Config config = Config.INSTANCE;
-        map.put(BasicEnemy.Fishstick.class, config.FISHSTICK.VALUE);
-        map.put(BasicEnemy.Swordfish.class, config.SWORDFISH.VALUE);
-        map.put(BasicEnemy.FishAndChips.class, config.FISH_AND_CHIPS.VALUE);
-        map.put(BasicEnemy.FishInABoat.class, config.FISH_IN_A_BOAT.VALUE);
-        map.put(BasicEnemy.Sailfish.class, config.SAILFISH.VALUE);
-        map.put(BasicEnemy.Shark.class, config.SHARK.VALUE);
-        map.put(BasicEnemy.FishInAFishTank.class, config.FISH_IN_A_FISH_TANK.VALUE);
-        map.put(BasicEnemy.TankSinatra.class, config.TANK_SINATRA.VALUE);
-        map.put(FlyingFish.class, config.FLYING_FISH.VALUE);
+        map.put(BasicEnemy.Fishstick.class, Config.Fishstick.VALUE);
+        map.put(BasicEnemy.Swordfish.class, Config.Swordfish.VALUE);
+        map.put(BasicEnemy.FishAndChips.class, Config.FishAndChips.VALUE);
+        map.put(BasicEnemy.FishInABoat.class, Config.FishInABoat.VALUE);
+        map.put(BasicEnemy.Sailfish.class, Config.Sailfish.VALUE);
+        map.put(BasicEnemy.Shark.class, Config.Shark.VALUE);
+        map.put(BasicEnemy.FishInAFishTank.class, Config.FishInAFishTank.VALUE);
+        map.put(BasicEnemy.TankSinatra.class, Config.TankSinatra.VALUE);
+        map.put(FlyingFish.class, Config.FlyingFish.VALUE);
 
         return map;
     }

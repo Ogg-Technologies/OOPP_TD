@@ -54,6 +54,6 @@ public class EnemyFactory {
     }
 
     public Enemy createFlyingFish() {
-        return new FlyingFish(baseDamager, new PathIterator(this.path, Config.INSTANCE.FLYING_FISH.FLY_AMOUNT));
+        return new FlyingFish(baseDamager, new PathIterator(this.path, Config.FlyingFish.FLY_AMOUNT));
     }
 }

@@ -32,15 +32,15 @@ public class GUIPanel extends JPanel {
 
     private static Map<Class<? extends Tower>, String> setupPathMap() {
         HashMap<Class<? extends Tower>, String> pathMap = new HashMap<>();
-        pathMap.put(GrizzlyBear.class, Config.INSTANCE.IMAGE_PATH.GRIZZLY_BEAR);
-        pathMap.put(BearryPotter.class, Config.INSTANCE.IMAGE_PATH.BEARRY_POTTER);
-        pathMap.put(SniperBear.class, Config.INSTANCE.IMAGE_PATH.SNIPER_BEAR);
-        pathMap.put(SovietBear.class, Config.INSTANCE.IMAGE_PATH.SOVIET_BEAR);
-        pathMap.put(Barbearian.class, Config.INSTANCE.IMAGE_PATH.BARBEARIAN);
-        pathMap.put(BearGrylls.class, Config.INSTANCE.IMAGE_PATH.BEAR_GRYLLS);
-        pathMap.put(Beer.class, Config.INSTANCE.IMAGE_PATH.BEER_BEAR);
-        pathMap.put(RubixCubeBear.class, Config.INSTANCE.IMAGE_PATH.RUBIX_CUBE_BEAR);
-        pathMap.put(BazookaBear.class, Config.INSTANCE.IMAGE_PATH.BAZOOKA_BEAR);
+        pathMap.put(GrizzlyBear.class, Config.ImagePath.GRIZZLY_BEAR);
+        pathMap.put(BearryPotter.class, Config.ImagePath.BEARRY_POTTER);
+        pathMap.put(SniperBear.class, Config.ImagePath.SNIPER_BEAR);
+        pathMap.put(SovietBear.class, Config.ImagePath.SOVIET_BEAR);
+        pathMap.put(Barbearian.class, Config.ImagePath.BARBEARIAN);
+        pathMap.put(BearGrylls.class, Config.ImagePath.BEAR_GRYLLS);
+        pathMap.put(Beer.class, Config.ImagePath.BEER_BEAR);
+        pathMap.put(RubixCubeBear.class, Config.ImagePath.RUBIX_CUBE_BEAR);
+        pathMap.put(BazookaBear.class, Config.ImagePath.BAZOOKA_BEAR);
         return pathMap;
     }
 
