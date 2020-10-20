@@ -25,8 +25,7 @@ public interface EnemyVisitor {
     void visit(BasicEnemy.FishInABoat enemy);
     void visit(BasicEnemy.Sailfish enemy);
     void visit(BasicEnemy.Shark enemy);
-
     void visit(BasicEnemy.FishInAFishTank enemy);
-
+    void visit(BasicEnemy.TankSinatra enemy);
     void visit(FlyingFish enemy);
 }

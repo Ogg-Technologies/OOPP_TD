@@ -77,6 +77,11 @@ public class EnemyDrawer implements EnemyVisitor {
     }
 
     @Override
+    public void visit(BasicEnemy.TankSinatra enemy) {
+        drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.TANK_SINATRA);
+    }
+
+    @Override
     public void visit(FlyingFish enemy) {
         drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FLYING_FISH);
     }

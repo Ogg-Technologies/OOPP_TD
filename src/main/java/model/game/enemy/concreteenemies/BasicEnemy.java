@@ -11,6 +11,7 @@ import model.game.enemy.PathIterator;
  * A class for all enemies which only differ in health and speed.
  */
 public abstract class BasicEnemy extends AbstractEnemy {
+
     public static final int BASE_HEALTH = 20;
     public static final double BASE_SPEED = 0.01;
 
@@ -94,6 +95,21 @@ public abstract class BasicEnemy extends AbstractEnemy {
 
         public FishInAFishTank(BaseDamager baseDamager, PathIterator pathIterator) {
             super(baseDamager, pathIterator, Config.INSTANCE.FISH_IN_A_FISH_TANK.HEALTH, Config.INSTANCE.FISH_IN_A_FISH_TANK.SPEED);
+        }
+
+        @Override
+        public void accept(EnemyVisitor visitor) {
+            visitor.visit(this);
+        }
+    }
+
+    /**
+     * Very slow Boss-like enemy with many health
+     */
+    public static class TankSinatra extends BasicEnemy {
+
+        public TankSinatra(BaseDamager baseDamager, PathIterator pathIterator) {
+            super(baseDamager, pathIterator, Config.INSTANCE.TANK_SINATRA.HEALTH, Config.INSTANCE.TANK_SINATRA.SPEED);
         }
 
         @Override

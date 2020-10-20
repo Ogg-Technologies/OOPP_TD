@@ -41,6 +41,7 @@ public enum Config {
     public final Sailfish SAILFISH;
     public final Shark SHARK;
     public final FishInAFishTank FISH_IN_A_FISH_TANK;
+    public final TankSinatra TANK_SINATRA;
     public final FlyingFish FLYING_FISH;
     public final ColorCode COLOR_CODE;
     public final ImagePath IMAGE_PATH;
@@ -77,6 +78,7 @@ public enum Config {
         SAILFISH = new Sailfish(prop);
         SHARK = new Shark(prop);
         FISH_IN_A_FISH_TANK = new FishInAFishTank(prop);
+        TANK_SINATRA = new TankSinatra(prop);
         FLYING_FISH = new FlyingFish(prop);
         COLOR_CODE = new ColorCode(prop);
         IMAGE_PATH = new ImagePath(prop);
@@ -423,6 +425,18 @@ public enum Config {
         }
     }
 
+    public static class TankSinatra {
+        public final double SPEED;
+        public final double HEALTH;
+        public final int VALUE;
+
+        private TankSinatra(Properties prop) {
+            SPEED = readDoubleValue(prop, "tank_sinatra_speed");
+            HEALTH = readDoubleValue(prop, "tank_sinatra_health");
+            VALUE = (int) readDoubleValue(prop, "tank_sinatra_value");
+        }
+    }
+
     public static class FlyingFish {
         public final double SPEED;
         public final double HEALTH;
@@ -507,6 +521,7 @@ public enum Config {
         public final String SAILFISH;
         public final String SHARK;
         public final String FISH_IN_A_FISH_TANK;
+        public final String TANK_SINATRA;
         public final String FLYING_FISH;
         public final String BASE;
 
@@ -532,6 +547,7 @@ public enum Config {
             SAILFISH = IMAGE_ROOT + readStringValue(prop, "img_sailfish");
             SHARK = IMAGE_ROOT + readStringValue(prop, "img_shark");
             FISH_IN_A_FISH_TANK = IMAGE_ROOT + readStringValue(prop, "img_fish_in_a_fish_tank");
+            TANK_SINATRA = IMAGE_ROOT + readStringValue(prop, "img_tank_sinatra");
             FLYING_FISH = IMAGE_ROOT + readStringValue(prop, "img_flying_fish");
             BASE = IMAGE_ROOT + readStringValue(prop, "img_base");
             COMPASS = IMAGE_ROOT + readStringValue(prop, "img_compass");

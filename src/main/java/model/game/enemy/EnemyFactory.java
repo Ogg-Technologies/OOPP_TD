@@ -49,6 +49,10 @@ public class EnemyFactory {
         return new BasicEnemy.FishInAFishTank(baseDamager, new PathIterator(path));
     }
 
+    public Enemy createTankSinatra() {
+        return new BasicEnemy.TankSinatra(baseDamager, new PathIterator(path));
+    }
+
     public Enemy createFlyingFish() {
         return new FlyingFish(baseDamager, new PathIterator(this.path, Config.INSTANCE.FLYING_FISH.FLY_AMOUNT));
     }

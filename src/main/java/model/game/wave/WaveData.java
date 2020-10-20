@@ -191,6 +191,12 @@ public class WaveData {
                 .delay(10)
                 .spawnMultipleWithDelay(fac::createFishInFishTank, 20, 60)
                 ::toWave);
+
+        // Introduce Tank Sinatra
+        definedWaves.add(seq()
+                .spawn(fac::createTankSinatra)
+                ::toWave
+        );
     }
 
     private Wave createWaveFromAlgorithm(int level) {
