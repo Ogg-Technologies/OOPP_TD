@@ -10,6 +10,7 @@ import model.game.enemy.EnemyFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -27,7 +28,8 @@ public class WaveHandler {
      * The sum of all the starting health of every wave that gets activated.
      * Gets reset when ALL active waves are cleared
      */
-    private int originalEnemyAttackHealth = 0; //TODO remove this by keeping finished waves to calculate enemyAttackHealth. Remove all Waves when all are finished
+    private int originalEnemyAttackHealth = 0;
+    //TODO remove originalEnemyAttackHealth by keeping finished waves in activeWaves to calculate enemyAttackHealth. Remove all Waves when all are finished.
 
     public WaveHandler(EnemyFactory enemyFactory, EventSender eventSender) {
         waveData = new WaveData(enemyFactory);
@@ -89,6 +91,20 @@ public class WaveHandler {
             activeWaves.add(wave);
         }
         originalEnemyAttackHealth += wave.getRemainingHealth();
+    }
+
+    /**
+     * Gets a set of all the enemy types that will appear in the next wave. When calling startNextWave() all the new
+     * enemies in that wave will be of one of the classes in the set.
+     *
+     * @return A set of all enemy types that will appear in the next wave.
+     */
+    public Set<Class<? extends Enemy>> getEnemyTypesInNextWave() {
+        //TODO: since waveData doesn't cache waves in getWave it creates it once here and once when actually starting
+        // the wave. This should be solved either by having WaveData cache the wave once it has been created, or having
+        // WaveHandler always cache the next wave.
+        Wave wave = waveData.getWave(currentLevel + 1);
+        return wave.getEnemyTypes();
     }
 
     /**

@@ -3,10 +3,8 @@ package model.game.wave.waveimplementation;
 import model.game.enemy.Enemy;
 import model.game.wave.Wave;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Oskar
@@ -76,6 +74,13 @@ class DefaultWave implements Wave {
                 .stream()
                 .map(enemy -> enemy.getHealth().getCurrent())
                 .reduce(0, Integer::sum);
+    }
+
+    @Override
+    public Set<Class<? extends Enemy>> getEnemyTypes() {
+        return getAllEnemies(commands).stream()
+                .map(Enemy::getClass)
+                .collect(Collectors.toSet());
     }
 
     private Collection<Enemy> getAllEnemies(Collection<Command> commands) {

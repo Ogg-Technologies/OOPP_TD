@@ -4,6 +4,7 @@ import model.game.enemy.Enemy;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * @author Oskar
@@ -29,4 +30,6 @@ public interface Wave extends Iterator<Collection<Enemy>> {
      * @return the total health of all remaining enemies
      */
     int getRemainingHealth();
+
+    Set<Class<? extends Enemy>> getEnemyTypes();
 }
