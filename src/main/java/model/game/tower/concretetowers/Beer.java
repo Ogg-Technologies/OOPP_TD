@@ -32,7 +32,7 @@ public class Beer extends AbstractBuffTower {
         final int duration = Config.Beer.BUFF_DURATION;
         towers.forEach(tower -> {
             tower.applyBuff(m -> m.addDamage(Config.Beer.DAMAGE_BUFF_PERCENTAGE), duration);
-            tower.applyBuff(m -> m.addRange(Config.Beer.RANGE), duration);
+            tower.applyBuff(m -> m.addRange(Config.Beer.RANGE_BUFF_PERCENTAGE), duration);
             tower.applyBuff(m -> m.addFireRate(Config.Beer.FIRE_RATE_BUFF_PERCENTAGE), duration);
         });
         eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), 0));
