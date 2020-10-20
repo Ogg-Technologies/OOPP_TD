@@ -19,6 +19,9 @@ public abstract class BasicEnemy extends AbstractEnemy {
         super(baseDamager, pathIterator, (int) (BASE_HEALTH * healthMultiplier), BASE_SPEED * speedMultiplier);
     }
 
+    /**
+     * The weakest enemy
+     */
     public static class Fishstick extends BasicEnemy {
 
         public Fishstick(BaseDamager baseDamager, PathIterator pathIterator) {
@@ -31,6 +34,9 @@ public abstract class BasicEnemy extends AbstractEnemy {
         }
     }
 
+    /**
+     * Slightly stronger than the weakest enemy
+     */
     public static class Swordfish extends BasicEnemy {
 
         public Swordfish(BaseDamager baseDamager, PathIterator pathIterator) {
@@ -43,6 +49,9 @@ public abstract class BasicEnemy extends AbstractEnemy {
         }
     }
 
+    /**
+     * Early-game progression enemy
+     */
     public static class FishAndChips extends BasicEnemy {
 
         public FishAndChips(BaseDamager baseDamager, PathIterator pathIterator) {
@@ -55,6 +64,9 @@ public abstract class BasicEnemy extends AbstractEnemy {
         }
     }
 
+    /**
+     * Average speed and health
+     */
     public static class FishInABoat extends BasicEnemy {
 
         public FishInABoat(BaseDamager baseDamager, PathIterator pathIterator) {
@@ -67,6 +79,9 @@ public abstract class BasicEnemy extends AbstractEnemy {
         }
     }
 
+    /**
+     * The fastest fish in the world, but weak
+     */
     public static class Sailfish extends BasicEnemy {
 
         public Sailfish(BaseDamager baseDamager, PathIterator pathIterator) {
@@ -79,6 +94,9 @@ public abstract class BasicEnemy extends AbstractEnemy {
         }
     }
 
+    /**
+     * Strong enemy, decent speed and pretty high health
+     */
     public static class Shark extends BasicEnemy {
 
         public Shark(BaseDamager baseDamager, PathIterator pathIterator) {
@@ -91,6 +109,9 @@ public abstract class BasicEnemy extends AbstractEnemy {
         }
     }
 
+    /**
+     * Tank-like enemy meaning slow and high health
+     */
     public static class FishInAFishTank extends BasicEnemy {
 
         public FishInAFishTank(BaseDamager baseDamager, PathIterator pathIterator) {
