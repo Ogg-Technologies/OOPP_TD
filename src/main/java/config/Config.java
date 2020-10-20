@@ -17,7 +17,8 @@ import java.util.Properties;
 public enum Config {
     INSTANCE;
 
-    private static final String propertyPath = "src/main/resources/config.properties";
+    private static final String PROPERTY_PATH = "src/main/resources/config.properties";
+    private static final String IMAGE_ROOT = "src/main/resources/";
 
     public final int ROTATED_IMAGE_CACHE_SIZE;
     public final Player PLAYER;
@@ -92,7 +93,7 @@ public enum Config {
         InputStream inputStream = null;
         try {
             prop = new Properties();
-            inputStream = new FileInputStream(new File(propertyPath));
+            inputStream = new FileInputStream(new File(PROPERTY_PATH));
             prop.load(inputStream);
         } catch (Exception e) {
             throw new RuntimeException("Property file could not be loaded");
@@ -477,8 +478,6 @@ public enum Config {
     }
 
     public static class ImagePath {
-
-
         public final String BAZOOKA_BEAR;
         public final String EXPLOSION;
         public final String ROCKET;
@@ -509,34 +508,34 @@ public enum Config {
         public final String BASE;
 
         private ImagePath(Properties prop) {
-            AXE = readStringValue(prop, "axe_path");
-            GRIZZLY_BEAR = readStringValue(prop, "grizzly_bear_path");
-            BEARRY_POTTER = readStringValue(prop, "bearry_potter_path");
-            SNIPER_BEAR = readStringValue(prop, "sniper_bear_path");
-            SOVIET_BEAR = readStringValue(prop, "soviet_bear_path");
-            BARBEARIAN = readStringValue(prop, "barbearian_path");
-            BEAR_GRYLLS = readStringValue(prop, "beargrylls_path");
-            ROCK = readStringValue(prop, "stone_path");
-            BOMBARDA_CHARM = readStringValue(prop, "bombarda_charm_path");
-            SMOKE = readStringValue(prop, "smoke_path");
-            BULLET = readStringValue(prop, "bullet_path");
-            FISHSTICK = readStringValue(prop, "fishstick_path");
-            SWORDFISH = readStringValue(prop, "swordfish_path");
-            FISH_AND_CHIPS = readStringValue(prop, "fish_and_chips_path");
-            FISH_IN_A_BOAT = readStringValue(prop, "fish_in_a_boat_path");
-            SAILFISH = readStringValue(prop, "sailfish_path");
-            SHARK = readStringValue(prop, "shark_path");
-            FISH_IN_A_FISH_TANK = readStringValue(prop, "fish_in_a_fish_tank_path");
-            FLYING_FISH = readStringValue(prop, "flying_fish_path");
-            BASE = readStringValue(prop, "base_path");
-            COMPASS = readStringValue(prop, "compass_path");
-            BEER_BEAR = readStringValue(prop, "beerBear_path");
-            BEER = readStringValue(prop, "beer_path");
-            RUBIX_CUBE = readStringValue(prop, "rubixCube_path");
-            RUBIX_CUBE_BEAR = readStringValue(prop, "rubixCubeBear_path");
-            BAZOOKA_BEAR = readStringValue(prop, "bazookaBear_path");
-            EXPLOSION = readStringValue(prop, "explosion_path");
-            ROCKET = readStringValue(prop, "rocket_path");
+            AXE = IMAGE_ROOT + readStringValue(prop, "img_axe");
+            GRIZZLY_BEAR = IMAGE_ROOT + readStringValue(prop, "img_grizzly_bear");
+            BEARRY_POTTER = IMAGE_ROOT + readStringValue(prop, "img_bearry_potter");
+            SNIPER_BEAR = IMAGE_ROOT + readStringValue(prop, "img_sniper_bear");
+            SOVIET_BEAR = IMAGE_ROOT + readStringValue(prop, "img_soviet_bear");
+            BARBEARIAN = IMAGE_ROOT + readStringValue(prop, "img_barbearian");
+            BEAR_GRYLLS = IMAGE_ROOT + readStringValue(prop, "img_beargrylls");
+            ROCK = IMAGE_ROOT + readStringValue(prop, "img_stone");
+            BOMBARDA_CHARM = IMAGE_ROOT + readStringValue(prop, "img_bombarda_charm");
+            SMOKE = IMAGE_ROOT + readStringValue(prop, "img_smoke");
+            BULLET = IMAGE_ROOT + readStringValue(prop, "img_bullet");
+            FISHSTICK = IMAGE_ROOT + readStringValue(prop, "img_fishstick");
+            SWORDFISH = IMAGE_ROOT + readStringValue(prop, "img_swordfish");
+            FISH_AND_CHIPS = IMAGE_ROOT + readStringValue(prop, "img_fish_and_chips");
+            FISH_IN_A_BOAT = IMAGE_ROOT + readStringValue(prop, "img_fish_in_a_boat");
+            SAILFISH = IMAGE_ROOT + readStringValue(prop, "img_sailfish");
+            SHARK = IMAGE_ROOT + readStringValue(prop, "img_shark");
+            FISH_IN_A_FISH_TANK = IMAGE_ROOT + readStringValue(prop, "img_fish_in_a_fish_tank");
+            FLYING_FISH = IMAGE_ROOT + readStringValue(prop, "img_flying_fish");
+            BASE = IMAGE_ROOT + readStringValue(prop, "img_base");
+            COMPASS = IMAGE_ROOT + readStringValue(prop, "img_compass");
+            BEER_BEAR = IMAGE_ROOT + readStringValue(prop, "img_beerBear");
+            BEER = IMAGE_ROOT + readStringValue(prop, "img_beer");
+            RUBIX_CUBE = IMAGE_ROOT + readStringValue(prop, "img_rubixCube");
+            RUBIX_CUBE_BEAR = IMAGE_ROOT + readStringValue(prop, "img_rubixCubeBear");
+            BAZOOKA_BEAR = IMAGE_ROOT + readStringValue(prop, "img_bazookaBear");
+            EXPLOSION = IMAGE_ROOT + readStringValue(prop, "img_explosion");
+            ROCKET = IMAGE_ROOT + readStringValue(prop, "img_rocket");
         }
     }
 
