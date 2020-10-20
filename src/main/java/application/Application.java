@@ -34,9 +34,9 @@ public class Application {
         setupMainMenuView();
     }
 
-    private void setupGameView() {
+    private void setupGameView(int index) {
         standardSetup();
-        Model model = new Model(maps.get(2));
+        Model model = new Model(maps.get(index));
         GameView gameView = new GameView(window, model, this::setupMainMenuView);
         Controller controller = new Controller(model, gameView);
         ApplicationLoop loop = new ApplicationLoop(model, gameView);

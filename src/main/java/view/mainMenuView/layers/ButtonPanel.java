@@ -3,7 +3,7 @@ package view.mainMenuView.layers;
 import model.game.map.TileMap;
 import view.ColorHandler;
 import view.MapDrawer;
-import view.OnNewState;
+import view.OnCloseWithIndex;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,17 +18,18 @@ public class ButtonPanel extends JPanel {
     private final TileMap[] tileMaps;
     private final JButton[] mapButtons;
     private final JLabel[] mapNameLabels;
+    private int selectedMapIndex = -1;
 
     /**
      * The constructor creates all the buttons
      *
-     * @param windowState used to change view state
-     * @param tileMaps
+     * @param onCloseWithIndex what happens when this view should close
+     * @param tileMaps         all the maps that has been loaded in
      */
-    public ButtonPanel(OnNewState onNewState, TileMap[] tileMaps) {
+    public ButtonPanel(OnCloseWithIndex onCloseWithIndex, TileMap[] tileMaps) {
         this.tileMaps = tileMaps;
         startButton = new JButton();
-        startButton.addActionListener((e -> onNewState.newState()));
+        startButton.addActionListener((e -> onCloseWithIndex.close(selectedMapIndex)));
         startButton.setText("Start Game");
         add(startButton);
 
@@ -38,6 +39,8 @@ public class ButtonPanel extends JPanel {
             JButton newButton = new JButton();
             newButton.setBorder(BorderFactory.createEmptyBorder());
             newButton.setContentAreaFilled(false);
+            int finalI1 = i;
+            newButton.addActionListener(e -> selectedMapIndex = finalI1);
             add(newButton);
             mapButtons[i] = newButton;
             int finalI = i;
@@ -66,6 +69,12 @@ public class ButtonPanel extends JPanel {
         int startX = (getWidth() - totalWidth) / 2;
         for (int i = 0; i < mapButtons.length; i++) {
             int x = startX + (width + gap) * i;
+
+            if (selectedMapIndex == i) {
+                g.setColor(ColorHandler.CLICKED_BUTTON_BORDER);
+                g.fillRect(x - 2, y - 2, width + 4, height + 4);
+            }
+
             MapDrawer.drawMap(g, tileMaps[i], x, y, width, height, ColorHandler.BACKGROUND);
             mapButtons[i].setSize(width, height);
             mapButtons[i].setLocation(x, y);

@@ -14,7 +14,7 @@ import java.util.Properties;
  * This class also has a lot of nested classes, to categorize the stored values.
  * This class is also a Singleton, because no more copies than one will ever be needed.
  */
-public enum  Config {
+public enum Config {
     INSTANCE;
 
     private static final String propertyPath = "src/main/resources/config.properties";
@@ -453,6 +453,7 @@ public enum  Config {
         public final String GHOST_RANGE;
         public final int GHOST_RANGE_ALPHA;
         public final String GAME_BACKGROUND;
+        public final String CLICKED_BUTTON_BORDER;
 
         private ColorCode(Properties prop) {
             VALID_TILE_HOVER = readStringValue(prop, "color_valid_tile_hover");
@@ -471,6 +472,7 @@ public enum  Config {
             GHOST_RANGE = readStringValue(prop, "color_ghost_range");
             GHOST_RANGE_ALPHA = (int) readDoubleValue(prop, "color_ghost_range_alpha");
             GAME_BACKGROUND = readStringValue(prop, "color_game_background");
+            CLICKED_BUTTON_BORDER = readStringValue(prop, "color_clicked_button_border");
         }
     }
 

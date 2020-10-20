@@ -7,7 +7,7 @@ import model.game.tower.concretetowers.*;
 import utils.Vector;
 import view.ButtonClickHandler;
 import view.ControllerStateValue;
-import view.OnNewState;
+import view.OnClose;
 import view.WindowState;
 import view.gameView.layers.GUIObjects.*;
 
@@ -142,14 +142,14 @@ public class GUIPanel extends JPanel {
      *
      * @param buttonClickHandler the controller that handles the onClicks.
      */
-    public void setupButtons(ButtonClickHandler buttonClickHandler, OnNewState newState) {
+    public void setupButtons(ButtonClickHandler buttonClickHandler, OnClose onClose) {
         //nextWaveButton
         nextWaveButton.addActionListener(e -> buttonClickHandler.onNextWaveClicked());
         for (int i = 0; i < MAX_TOWERS; i++) {
             int finalI = i;
             towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTowerIndexButton(finalI)));
         }
-        backToStartButton.addActionListener(e -> newState.newState());
+        backToStartButton.addActionListener(e -> onClose.close());
         arrowButtons[0].addActionListener(e -> controllerStateValue.changeStartIndex(-MAX_TOWERS));
         arrowButtons[1].addActionListener(e -> controllerStateValue.changeStartIndex(MAX_TOWERS));
     }

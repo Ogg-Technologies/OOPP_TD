@@ -11,7 +11,7 @@ public class ApplicationLoop implements Runnable, Stoppable {
 
     private Updatable updatable;
     private Drawable drawable;
-    private boolean shouldRun = true;
+    private volatile boolean shouldRun = true;
 
     /**
      * @param updatable logical class that tries to update 60 times a second

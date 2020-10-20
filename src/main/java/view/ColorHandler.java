@@ -11,7 +11,8 @@ import java.awt.*;
  */
 public final class ColorHandler {
 
-    private ColorHandler(){}
+    private ColorHandler() {
+    }
 
     public static final Color INVISIBLE = new Color(0, 0, 0, 0);
     public static final Color VALID_TILE_HOVER;
@@ -27,6 +28,7 @@ public final class ColorHandler {
     public static final Color TOWER_BUTTON_LABEL;
     public static final Color GHOST_RANGE;
     public static final Color GAME_BACKGROUND;
+    public static final Color CLICKED_BUTTON_BORDER;
 
     static {
         Config config = Config.INSTANCE;
@@ -43,19 +45,22 @@ public final class ColorHandler {
         TOWER_BUTTON_LABEL = convert(config.COLOR_CODE.STANDARD_GUI_BACKGROUND, config.COLOR_CODE.TOWER_BUTTON_LABEL_ALPHA);
         GHOST_RANGE = convert(config.COLOR_CODE.GHOST_RANGE, config.COLOR_CODE.GHOST_RANGE_ALPHA);
         GAME_BACKGROUND = Color.decode(config.COLOR_CODE.GAME_BACKGROUND);
+        CLICKED_BUTTON_BORDER = Color.decode(config.COLOR_CODE.CLICKED_BUTTON_BORDER);
     }
+
     /**
      * Converts a hexCode and an alpha to a Color object
+     *
      * @param hexCode the hexCode needs to start with '#' and have six hexadecimal values following the '#'
-     * @param alpha the alpha needs to be between 0-255
+     * @param alpha   the alpha needs to be between 0-255
      * @return a color from the hexCode and alpha values
      */
-    private static Color convert(String hexCode, int alpha){
+    private static Color convert(String hexCode, int alpha) {
         if (hexCode.length() != 7 || !hexCode.startsWith("#")) {
             throw new IllegalArgumentException("The hexCode " + hexCode + " is not a valid hexCode");
         }
 
-        if (alpha < 0 || alpha > 255){
+        if (alpha < 0 || alpha > 255) {
             throw new IllegalArgumentException("The alpha value " + alpha + " is not in range 0-255");
         }
 

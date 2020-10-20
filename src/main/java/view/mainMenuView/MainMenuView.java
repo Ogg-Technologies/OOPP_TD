@@ -4,7 +4,7 @@ import model.game.map.TileMap;
 import utils.Vector;
 import view.ColorHandler;
 import view.Drawable;
-import view.OnClose;
+import view.OnCloseWithIndex;
 import view.mainMenuView.layers.ButtonPanel;
 import view.mainMenuView.layers.ImagePanel;
 
@@ -23,11 +23,11 @@ public class MainMenuView implements Drawable {
     private final JPanel[] layers;
     private final JLayeredPane layersPane;
     private final JFrame window;
-    private final OnClose onClose;
+    private final OnCloseWithIndex onCloseWithIndex;
 
-    public MainMenuView(JFrame window, TileMap[] tileMaps, OnClose onClose) {
+    public MainMenuView(JFrame window, TileMap[] tileMaps, OnCloseWithIndex onCloseWithIndex) {
         this.window = window;
-        this.onClose = onClose;
+        this.onCloseWithIndex = onCloseWithIndex;
         window.getContentPane().setBackground(ColorHandler.GROUND);
 
         ImagePanel backgroundImage = new ImagePanel(new Vector(window.getWidth() - WIDTH_OFFSET, window.getHeight() - HEIGHT_OFFSET));
@@ -48,9 +48,11 @@ public class MainMenuView implements Drawable {
         window.repaint();
     }
 
-    private void closeThis() {
-        window.remove(layersPane);
-        onClose.close();
+    private void closeThis(int index) {
+        if (index >= 0) {
+            window.remove(layersPane);
+            onCloseWithIndex.close(index);
+        }
     }
 
 
