@@ -13,6 +13,10 @@ import model.game.tower.towerutils.ProjectileCreator;
 import model.game.tower.towerutils.chargestrategy.ConstantChargeStrategy;
 import utils.Vector;
 
+/**
+ * @author Behroz
+ * A tower which shoots rocket projectiles at enemies.
+ */
 public class BazookaBear extends AbstractAttackingTower {
     private ProjectileCreator projectileCreator;
     private EventSender eventSender;
