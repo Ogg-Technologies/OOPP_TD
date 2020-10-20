@@ -43,9 +43,6 @@ public class ButtonPanel extends JPanel {
             newButton.addActionListener(e -> selectedMapIndex = finalI1);
             add(newButton);
             mapButtons[i] = newButton;
-            int finalI = i;
-            newButton.addActionListener(e -> System.out.println(finalI));
-
             JLabel newLabel = new JLabel(tileMaps[i].getName());
             newLabel.setBackground(ColorHandler.STANDARD_GUI_BACKGROUND);
             newLabel.setOpaque(true);
@@ -59,16 +56,48 @@ public class ButtonPanel extends JPanel {
         int buttonWidth = (int) (getWidth() * .2);
         startButton.setSize(buttonWidth, (int) (getHeight() * 0.1));
         startButton.setFont(new Font("serif", Font.PLAIN, buttonWidth / 8));
-        startButton.setLocation((int) (getWidth() * 0.4), (int) (getHeight() * 0.6));
+        startButton.setLocation((int) (getWidth() * 0.4), (int) (getHeight() * 0.7));
 
-        int y = (int) (getHeight() * .1);
-        int height = (int) (getHeight() * .2);
+        paintMaps(g);
+    }
+
+
+    private void paintMaps(Graphics g) {
+
         int width = (int) (getWidth() * .2);
+        int height = (int) (getHeight() * .2);
         int gap = (int) (10 + .1 * width);
         int totalWidth = gap * (mapButtons.length - 1) + width * mapButtons.length;
-        int startX = (getWidth() - totalWidth) / 2;
+
+        //Calculates how many upper and lower map buttons there are
+        //and also total size of them
+        int upperWidth = totalWidth;
+        int lowerWidth = -1;
+        int numberOfLower = -1;
+        if (totalWidth > getWidth()) {
+            int temp = totalWidth - gap - width;
+            numberOfLower = 1;
+            while (temp > getWidth()) {
+                numberOfLower++;
+                temp -= gap + width;
+            }
+            upperWidth = temp;
+            lowerWidth = totalWidth - temp - gap;
+        }
+
+        int y = (int) (getHeight() * .1);
+        int startX = (getWidth() - upperWidth) / 2;
         for (int i = 0; i < mapButtons.length; i++) {
-            int x = startX + (width + gap) * i;
+            int index = i;
+            if (i == mapButtons.length - numberOfLower) {
+                startX = (getWidth() - lowerWidth) / 2;
+                y += height + (int) (.1 * getHeight());
+            }
+            if (i >= mapButtons.length - numberOfLower && numberOfLower != -1) {
+                index = i - mapButtons.length + numberOfLower;
+            }
+
+            int x = startX + (width + gap) * index;
 
             if (selectedMapIndex == i) {
                 g.setColor(ColorHandler.CLICKED_BUTTON_BORDER);
@@ -83,10 +112,9 @@ public class ButtonPanel extends JPanel {
             Font labelFont = new Font("serif", Font.PLAIN, width / 13);
             mapNameLabels[i].setFont(labelFont);
             mapNameLabels[i].setSize(width, labelHeight);
-            mapNameLabels[i].setLocation(x, labelHeight + height + y);
+            mapNameLabels[i].setLocation(x, height + y + (int) (.02 * getHeight()));
         }
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {
