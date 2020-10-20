@@ -18,7 +18,7 @@ public enum Config {
     INSTANCE;
 
     private static final String PROPERTY_PATH = "src/main/resources/config.properties";
-    private static final String IMAGE_ROOT = "src/main/resources/";
+    private static final String IMAGE_ROOT = "src/main/resources/img/";
 
     public final int ROTATED_IMAGE_CACHE_SIZE;
     public final Player PLAYER;
@@ -478,6 +478,9 @@ public enum Config {
     }
 
     public static class ImagePath {
+        public final String START_SCREEN;
+        public final String ARROW_LEFT;
+        public final String ARROW_RIGHT;
         public final String BAZOOKA_BEAR;
         public final String EXPLOSION;
         public final String ROCKET;
@@ -508,6 +511,9 @@ public enum Config {
         public final String BASE;
 
         private ImagePath(Properties prop) {
+            ARROW_LEFT = IMAGE_ROOT + readStringValue(prop, "img_arrow_left");
+            ARROW_RIGHT = IMAGE_ROOT + readStringValue(prop, "img_arrow_right");
+            START_SCREEN = IMAGE_ROOT + readStringValue(prop, "img_background");
             AXE = IMAGE_ROOT + readStringValue(prop, "img_axe");
             GRIZZLY_BEAR = IMAGE_ROOT + readStringValue(prop, "img_grizzly_bear");
             BEARRY_POTTER = IMAGE_ROOT + readStringValue(prop, "img_bearry_potter");
