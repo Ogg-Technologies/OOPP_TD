@@ -35,12 +35,6 @@ public class EnemyDrawer implements EnemyVisitor {
         this.windowState = windowState;
     }
 
-
-    @Override
-    public void visit(Enemy enemy) {
-        throw new IllegalArgumentException("This enemy " + enemy.getClass().getSimpleName() + " is not implemented in EnemyDrawer");
-    }
-
     @Override
     public void visit(BasicEnemy.Fishstick enemy) {
         drawEnemy(enemy, Config.INSTANCE.IMAGE_PATH.FISHSTICK);
