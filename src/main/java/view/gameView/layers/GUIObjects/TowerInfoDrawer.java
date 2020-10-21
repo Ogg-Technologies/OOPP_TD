@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author Samuel, Erik
  * <p>
- * Draws the tower info panel to the right containing information about selected tower
+ * Draws the tower info panel to the left containing information about selected tower
  */
 public class TowerInfoDrawer {
 
