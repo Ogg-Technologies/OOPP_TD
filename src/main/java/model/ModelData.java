@@ -9,6 +9,7 @@ import model.game.tower.Tower;
 import utils.Vector;
 
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -63,4 +64,6 @@ public interface ModelData {
      * @return the wave number
      */
     int getWaveNumber();
+
+    Set<Class<? extends Enemy>> getEnemyTypesInNextWave();
 }

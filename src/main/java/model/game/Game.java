@@ -26,6 +26,7 @@ import model.game.wave.WaveHandler;
 import utils.Vector;
 
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * @author Oskar, Sebastian, Behroz, Samuel, Erik
@@ -185,4 +186,7 @@ public class Game implements EnemyGetter, EventListener, Healable {
     }
 
 
+    public Set<Class<? extends Enemy>> getEnemiesInNextWave() {
+        return waveHandler.getEnemyTypesInNextWave();
+    }
 }

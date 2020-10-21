@@ -227,55 +227,55 @@ public final class Config {
 
     public static class Fishstick {
         public static final double SPEED = readDoubleValue("fishstick_speed");
-        public static final double HEALTH = readDoubleValue("fishstick_health");
+        public static final int HEALTH = (int) (readDoubleValue("fishstick_health"));
         public static final int VALUE = (int) readDoubleValue("fishstick_value");
     }
 
     public static class Swordfish {
         public static final double SPEED = readDoubleValue("swordfish_speed");
-        public static final double HEALTH = readDoubleValue("swordfish_health");
+        public static final int HEALTH = (int) (readDoubleValue("swordfish_health"));
         public static final int VALUE = (int) readDoubleValue("swordfish_value");
     }
 
     public static class FishAndChips {
         public static final double SPEED = readDoubleValue("fish_and_chips_speed");
-        public static final double HEALTH = readDoubleValue("fish_and_chips_health");
+        public static final int HEALTH = (int) (readDoubleValue("fish_and_chips_health"));
         public static final int VALUE = (int) readDoubleValue("fish_and_chips_value");
     }
 
     public static class FishInABoat {
         public static final double SPEED = readDoubleValue("fish_in_a_boat_speed");
-        public static final double HEALTH = readDoubleValue("fish_in_a_boat_health");
+        public static final int HEALTH = (int) (readDoubleValue("fish_in_a_boat_health"));
         public static final int VALUE = (int) readDoubleValue("fish_in_a_boat_value");
     }
 
     public static class Sailfish {
         public static final double SPEED = readDoubleValue("sailfish_speed");
-        public static final double HEALTH = readDoubleValue("sailfish_health");
+        public static final int HEALTH = (int) (readDoubleValue("sailfish_health"));
         public static final int VALUE = (int) readDoubleValue("sailfish_value");
     }
 
     public static class Shark {
         public static final double SPEED = readDoubleValue("shark_speed");
-        public static final double HEALTH = readDoubleValue("shark_health");
+        public static final int HEALTH = (int) (readDoubleValue("shark_health"));
         public static final int VALUE = (int) readDoubleValue("shark_value");
     }
 
     public static class FishInAFishTank {
         public static final double SPEED = readDoubleValue("fish_in_a_fish_tank_speed");
-        public static final double HEALTH = readDoubleValue("fish_in_a_fish_tank_health");
+        public static final int HEALTH = (int) (readDoubleValue("fish_in_a_fish_tank_health"));
         public static final int VALUE = (int) readDoubleValue("fish_in_a_fish_tank_value");
     }
 
     public static class TankSinatra {
         public static final double SPEED = readDoubleValue("tank_sinatra_speed");
-        public static final double HEALTH = readDoubleValue("tank_sinatra_health");
+        public static final int HEALTH = (int) (readDoubleValue("tank_sinatra_health"));
         public static final int VALUE = (int) readDoubleValue("tank_sinatra_value");
     }
 
     public static class FlyingFish {
         public static final double SPEED = readDoubleValue("flying_fish_speed");
-        public static final double HEALTH = readDoubleValue("flying_fish_health");
+        public static final int HEALTH = (int) (readDoubleValue("flying_fish_health"));
         public static final int VALUE = (int) readDoubleValue("flying_fish_value");
         public static final int FLY_AMOUNT = (int) readDoubleValue("flying_fish_fly_amount");
     }

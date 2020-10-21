@@ -133,6 +133,11 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
         return game.getWaveNumber();
     }
 
+    @Override
+    public Set<Class<? extends Enemy>> getEnemyTypesInNextWave() {
+        return game.getEnemiesInNextWave();
+    }
+
     /**
      * @author Oskar, Erik
      * <p>
