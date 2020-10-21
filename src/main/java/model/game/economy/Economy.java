@@ -42,6 +42,7 @@ public class Economy {
         map.put(RubixCubeBear.class, Config.RubixCubeBear.COST);
         map.put(BazookaBear.class, Config.BazookaBear.COST);
         map.put(Bearon.class, Config.Bearon.COST);
+        map.put(JustinBeeBear.class, Config.JustinBeeBear.COST);
 
 
         return map;

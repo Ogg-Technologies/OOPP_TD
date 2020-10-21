@@ -46,5 +46,6 @@ public class JustinBeeBear extends AbstractAttackingTower {
 
     @Override
     public void accept(TowerVisitor visitor) {
+        visitor.visit(this);
     }
 }

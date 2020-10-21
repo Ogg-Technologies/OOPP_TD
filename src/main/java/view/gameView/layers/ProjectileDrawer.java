@@ -3,9 +3,7 @@ package view.gameView.layers;
 import config.Config;
 import model.ModelData;
 import model.game.projectile.Projectile;
-import model.game.projectile.concreteprojectile.BombardaCharm;
-import model.game.projectile.concreteprojectile.Rock;
-import model.game.projectile.concreteprojectile.Rocket;
+import model.game.projectile.concreteprojectile.*;
 import view.WindowState;
 import view.texture.ImageHandler;
 
@@ -39,10 +37,13 @@ public class ProjectileDrawer extends JPanel {
         imageMap.put(Rock.class, Config.ImagePath.ROCK);
         imageMap.put(BombardaCharm.class, Config.ImagePath.BOMBARDA_CHARM);
         imageMap.put(Rocket.class, Config.ImagePath.ROCKET);
+        imageMap.put(Bee.class, Config.ImagePath.BEE);
         //Size parameter is percent of tileSize
         sizeMap.put(Rock.class, Config.Rock.SIZE);
         sizeMap.put(BombardaCharm.class, Config.BombardaCharm.SIZE);
         sizeMap.put(Rocket.class, Config.Rocket.SIZE);
+        sizeMap.put(Bee.class, Config.Bee.SIZE);
+
     }
 
     @Override

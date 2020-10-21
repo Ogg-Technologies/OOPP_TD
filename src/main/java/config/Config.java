@@ -185,14 +185,15 @@ public final class Config {
     }
 
     public static class JustinBeeBear {
-        public static final int BASE_DAMAGE = (int) readDoubleValue("beebear_base_damage");
-        public static final int BASE_HEALING = (int) readDoubleValue("beebear_healing");
-        public static final int BASE_COINS_PER_BEE = (int) readDoubleValue("beebear_coins");
-        public static final double RANGE = readDoubleValue("beebear_range");
-        public static final int ATTACK_DELAY = (int) readDoubleValue("beebear_updates_between_burst");
-        public static final int ATTACKS_PER_BURST = (int) readDoubleValue("beebear_attacks_per_burst");
-        public static final int COST = (int) readDoubleValue("beebear_cost");
-        public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("beebear_ticks_between_attack");
+        public static final int BASE_DAMAGE = (int) readDoubleValue("justinBeeBear_base_damage");
+        public static final int BASE_HEALING = (int) readDoubleValue("justinBeeBear_healing");
+        public static final int BASE_COINS_PER_BEE = (int) readDoubleValue("justinBeeBear_coins");
+        public static final double RANGE = readDoubleValue("justinBeeBear_range");
+        public static final int ATTACK_DELAY = (int) readDoubleValue("justinBeeBear_updates_between_burst");
+        public static final int ATTACKS_PER_BURST = (int) readDoubleValue("justinBeeBear_attacks_per_burst");
+        public static final int COST = (int) readDoubleValue("justinBeeBear_cost");
+        public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("justinBeeBear_ticks_between_attack");
+        public static final String INFO_TEXT = readStringValue("justinBeeBear_info");
     }
 
 
@@ -355,6 +356,8 @@ public final class Config {
         public static final String ROCKET = IMAGE_ROOT + readStringValue("img_rocket");
         public static final String BEARON = IMAGE_ROOT + readStringValue("img_bearon");
         public static final String MONEY = IMAGE_ROOT + readStringValue("img_money");
+        public static final String JUSTINBEEBEAR = IMAGE_ROOT + readStringValue("img_justinBeeBear");
+        public static final String BEE = IMAGE_ROOT + readStringValue("img_bee");
     }
 
     /**

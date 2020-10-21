@@ -73,6 +73,7 @@ public class Bee extends AbstractProjectile {
     @Override
     public void onEnemyHit(Enemy enemy) {
         eventSender.sendEvent(new Event(Event.Type.PROJECTILE_HIT, this.getClass(), getPosition()));
+        enemy.damage(damage);
         if (healable.isHealthEqualToMax()) {
             moneyAdder.addMoney(moneyAmount);
         } else {
@@ -84,6 +85,6 @@ public class Bee extends AbstractProjectile {
                 moneyAdder.addMoney(moneyAmount);
             }
         }
-
+        consumed = true;
     }
 }

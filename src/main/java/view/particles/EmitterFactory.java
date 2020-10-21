@@ -154,4 +154,18 @@ public final class EmitterFactory {
                 .setTileSize(LinearDoubleDistribution.fromRange(0.2, 0.2))
                 .build();
     }
+
+    public static Emitter createBeeEmitter(Vector position, double angle) {
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImagePath(Config.ImagePath.BEE)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(15, 15))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.01, 0.1)))
+                .setAngleVelocity(LinearDoubleDistribution.fromRange(0, 0))
+                .setEmitterLifetime(2)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(3, 3))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.1, 0.1))
+                .build();
+    }
 }

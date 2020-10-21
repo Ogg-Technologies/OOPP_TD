@@ -118,6 +118,12 @@ public class TowerInfoDrawer {
                 + createMoneyString(Config.Bearon.COINS_PER_TOWER) + NEW_LINE + NEW_LINE
                 + Config.Bearon.INFO_TEXT);
 
+        map.put(JustinBeeBear.class, "Justin Bee Bear" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.JustinBeeBear.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.JustinBeeBear.RANGE) + NEW_LINE
+                + createDamageString(Config.JustinBeeBear.BASE_DAMAGE) + NEW_LINE + NEW_LINE
+                + Config.JustinBeeBear.INFO_TEXT);
+
         return map;
     }
 
