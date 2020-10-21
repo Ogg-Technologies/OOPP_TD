@@ -68,6 +68,7 @@ public class GUIPanel extends JPanel {
     private final TowerPanelDrawer towerPanelDrawer;
     private final WaveLabelDrawer waveLabelDrawer;
     private final BackToStartButtonDrawer backToStartButtonDrawer;
+    private final TowerInfoDrawer towerInfoDrawer;
 
 
     /**
@@ -112,6 +113,11 @@ public class GUIPanel extends JPanel {
         backToStartButton.setText("X");
         add(backToStartButton);
         backToStartButtonDrawer = new BackToStartButtonDrawer(backToStartButton);
+
+        JLabel infoText = new JLabel();
+        infoText.setHorizontalAlignment(SwingConstants.LEFT);
+        add(infoText);
+        towerInfoDrawer = new TowerInfoDrawer(infoText);
 
         setLayout(null);
     }
@@ -188,6 +194,7 @@ public class GUIPanel extends JPanel {
     public void addState(ControllerStateValues controllerStateValues) {
         this.controllerStateValues = controllerStateValues;
         towerPanelDrawer.setControllerStateValues(controllerStateValues);
+        towerInfoDrawer.setControllerStateValues(controllerStateValues);
     }
 
     @Override
@@ -202,5 +209,6 @@ public class GUIPanel extends JPanel {
         towerPanelDrawer.draw(g, getWidth(), getHeight());
         waveLabelDrawer.draw(getWidth(), getHeight(), modelData.getWaveNumber());
         backToStartButtonDrawer.draw(getWidth(), getHeight());
+        towerInfoDrawer.draw(g, getWidth(), getHeight());
     }
 }

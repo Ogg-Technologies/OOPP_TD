@@ -126,6 +126,7 @@ public final class Config {
         public static final double RANGE = readDoubleValue("grizzly_bear_range");
         public static final int ATTACK_DELAY = (int) readDoubleValue("grizzly_bear_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("grizzly_bear_cost");
+        public static final String INFO_TEXT = readStringValue("grizzly_bear_info");
     }
 
     public static class BearryPotter {
@@ -298,6 +299,7 @@ public final class Config {
         public static final int GHOST_RANGE_ALPHA = (int) readDoubleValue("color_ghost_range_alpha");
         public static final String GAME_BACKGROUND = readStringValue("color_game_background");
         public static final String CLICKED_BUTTON_BORDER = readStringValue("color_clicked_button_border");
+        public static final String INFO_PANEL_BACKGROUND = readStringValue("color_info_panel_background");
     }
 
     public static class ImagePath {

@@ -29,6 +29,8 @@ public final class ColorHandler {
     public static final Color GHOST_RANGE;
     public static final Color GAME_BACKGROUND;
     public static final Color CLICKED_BUTTON_BORDER;
+    public static final Color INFO_PANEL_BACKGROUND;
+
 
     static {
         VALID_TILE_HOVER = convert(Config.ColorCode.VALID_TILE_HOVER, Config.ColorCode.VALID_TILE_HOVER_ALPHA);
@@ -45,6 +47,7 @@ public final class ColorHandler {
         GHOST_RANGE = convert(Config.ColorCode.GHOST_RANGE, Config.ColorCode.GHOST_RANGE_ALPHA);
         GAME_BACKGROUND = Color.decode(Config.ColorCode.GAME_BACKGROUND);
         CLICKED_BUTTON_BORDER = Color.decode(Config.ColorCode.CLICKED_BUTTON_BORDER);
+        INFO_PANEL_BACKGROUND = Color.decode(Config.ColorCode.INFO_PANEL_BACKGROUND);
     }
 
     /**
