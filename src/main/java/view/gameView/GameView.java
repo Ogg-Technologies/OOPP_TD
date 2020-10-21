@@ -123,8 +123,8 @@ public class GameView implements IGameView {
 
 
     @Override
-    public void addState(ControllerStateValue controllerStateValue) {
-        guiPanel.addState(controllerStateValue);
+    public void addState(ControllerStateValues controllerStateValues) {
+        guiPanel.addState(controllerStateValues);
     }
 
     @Override

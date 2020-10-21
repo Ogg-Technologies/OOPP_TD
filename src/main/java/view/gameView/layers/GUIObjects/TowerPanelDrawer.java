@@ -3,7 +3,7 @@ package view.gameView.layers.GUIObjects;
 import config.Config;
 import model.game.tower.Tower;
 import view.ColorHandler;
-import view.ControllerStateValue;
+import view.ControllerStateValues;
 import view.WindowState;
 import view.gameView.layers.GUIPanel;
 import view.texture.ImageHandler;
@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
  */
 public class TowerPanelDrawer {
 
-    private ControllerStateValue controllerStateValue;
+    private ControllerStateValues controllerStateValues;
     private final JButton[] towerButtons;
     private final JLabel[] towerPriceLabels;
     private final JButton[] arrowButtons;
@@ -36,12 +36,12 @@ public class TowerPanelDrawer {
     }
 
     /**
-     * A setter for controllerStateValue
+     * A setter for controllerStateValues
      *
-     * @param controllerStateValue an interface where information about towers can be fetched
+     * @param controllerStateValues an interface where information about towers can be fetched
      */
-    public void setControllerStateValue(ControllerStateValue controllerStateValue) {
-        this.controllerStateValue = controllerStateValue;
+    public void setControllerStateValues(ControllerStateValues controllerStateValues) {
+        this.controllerStateValues = controllerStateValues;
     }
 
     private static final double PERCENT_START_X = .87 - WindowState.MAP_WIDTH - WindowState.MAP_LEFT;
@@ -56,7 +56,7 @@ public class TowerPanelDrawer {
      */
     public void draw(Graphics g, int panelWidth, int panelHeight) {
 
-        if (controllerStateValue == null) {
+        if (controllerStateValues == null) {
             return;
         }
 
@@ -76,7 +76,7 @@ public class TowerPanelDrawer {
         double towerStartY = (startY + (height - towerSize) / 2);
         double gap = (WindowState.MAP_WIDTH * panelWidth - towerSize * maxTowerButtons) / (maxTowerButtons - 1);
         g.setColor(ColorHandler.TOWER_BUTTON_BACKGROUND);
-        for (int nr = controllerStateValue.getTowerPanelStartIndex(); nr < maxTowerButtons + controllerStateValue.getTowerPanelStartIndex(); nr++) {
+        for (int nr = controllerStateValues.getTowerPanelStartIndex(); nr < maxTowerButtons + controllerStateValues.getTowerPanelStartIndex(); nr++) {
             int index = nr % towerButtons.length;
             int towerStartX = (int) (PERCENT_START_X * panelWidth + startX + gap * index + index * towerSize);
             drawTower(g, nr, towerStartX, (int) towerStartY, (int) towerSize);
@@ -99,13 +99,13 @@ public class TowerPanelDrawer {
         //Adds a background
         g.fillRect(x, y, towerSize, towerSize);
         //Paints a tower if there is a sprite for it
-        Class<? extends Tower>[] towerTypes = controllerStateValue.getAllTowerTypes();
+        Class<? extends Tower>[] towerTypes = controllerStateValues.getAllTowerTypes();
         if (nr < towerTypes.length) {
             BufferedImage tempImage = ImageHandler.getImage(GUIPanel.towerPathMap.get(towerTypes[nr]), Math.toRadians(90));
             g.drawImage(tempImage, (int) (x + towerSize * 0.05), (int) (y + towerSize * 0.05),
                     (int) (towerSize * 0.9), (int) (towerSize * 0.9), null);
             //Populate the label if there is a tower there
-            drawPriceLabel(x, y, towerSize, nr, controllerStateValue.getTowerPrice(towerTypes[nr]));
+            drawPriceLabel(x, y, towerSize, nr, controllerStateValues.getTowerPrice(towerTypes[nr]));
         } else {
             drawPriceLabel(x, y, towerSize, nr, -1);
         }
@@ -114,14 +114,14 @@ public class TowerPanelDrawer {
 
     private void drawArrows(Graphics g, int arrowLeftX, int arrowRightX, int arrowY, int arrowWidth, int arrowHeight) {
 
-        if (controllerStateValue.getTowerPanelStartIndex() != 0) {
+        if (controllerStateValues.getTowerPanelStartIndex() != 0) {
             g.drawImage(ImageHandler.getImage(Config.ImagePath.ARROW_LEFT), arrowLeftX, arrowY,
                     arrowWidth, arrowHeight, null);
             arrowButtons[0].setLocation(arrowLeftX, arrowY);
             arrowButtons[0].setSize(arrowWidth, arrowHeight);
         }
 
-        if (controllerStateValue.getTowerPanelStartIndex() + towerButtons.length < controllerStateValue.getTotalAmountOfTowers()) {
+        if (controllerStateValues.getTowerPanelStartIndex() + towerButtons.length < controllerStateValues.getTotalAmountOfTowers()) {
             g.drawImage(ImageHandler.getImage(Config.ImagePath.ARROW_RIGHT), arrowRightX, arrowY,
                     arrowWidth, arrowHeight, null);
             arrowButtons[1].setLocation(arrowRightX, arrowY);

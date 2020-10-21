@@ -7,15 +7,17 @@ import model.game.tower.Tower;
  * Getters for some state values of a controller.
  * Used in view components.
  */
-public interface ControllerStateValue {
+public interface ControllerStateValues {
     /**
      * Getter for selected towerType.
+     *
      * @return the selected towerType.
      */
     Class<? extends Tower> getSelectedTowerType();
 
     /**
      * A getter for range of selected tower saved in ControllerState
+     *
      * @return the range
      */
     double getSelectedTowerRange();

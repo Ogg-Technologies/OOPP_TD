@@ -4,14 +4,14 @@ import config.Config;
 import model.game.tower.Tower;
 import model.game.tower.TowerFactory;
 import model.game.tower.concretetowers.*;
-import view.ControllerStateValue;
+import view.ControllerStateValues;
 
 /**
  * @author Sebastian, Samuel, Erik
  * The state of the controller.
  * Is used by controller.
  */
-public class ControllerState implements ControllerStateValue {
+public class ControllerState implements ControllerStateValues {
 
     private final TowerProxy[] towerProxies;
 

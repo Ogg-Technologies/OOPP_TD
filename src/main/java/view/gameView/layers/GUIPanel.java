@@ -6,7 +6,7 @@ import model.game.tower.Tower;
 import model.game.tower.concretetowers.*;
 import utils.Vector;
 import view.ButtonClickHandler;
-import view.ControllerStateValue;
+import view.ControllerStateValues;
 import view.OnClose;
 import view.WindowState;
 import view.gameView.layers.GUIObjects.*;
@@ -48,7 +48,7 @@ public class GUIPanel extends JPanel {
 
     private Vector mouseTilePos;
 
-    private ControllerStateValue controllerStateValue;
+    private ControllerStateValues controllerStateValues;
 
     public static final int MAX_TOWERS = 8;
 
@@ -150,8 +150,8 @@ public class GUIPanel extends JPanel {
             towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTowerIndexButton(finalI)));
         }
         backToStartButton.addActionListener(e -> onClose.close());
-        arrowButtons[0].addActionListener(e -> controllerStateValue.changeStartIndex(-MAX_TOWERS));
-        arrowButtons[1].addActionListener(e -> controllerStateValue.changeStartIndex(MAX_TOWERS));
+        arrowButtons[0].addActionListener(e -> controllerStateValues.changeStartIndex(-MAX_TOWERS));
+        arrowButtons[1].addActionListener(e -> controllerStateValues.changeStartIndex(MAX_TOWERS));
     }
 
     private JButton[] towerButtonsSetup() {
@@ -182,18 +182,18 @@ public class GUIPanel extends JPanel {
     /**
      * Adds a state for some controller values
      *
-     * @param controllerStateValue the state
+     * @param controllerStateValues the state
      */
-    public void addState(ControllerStateValue controllerStateValue) {
-        this.controllerStateValue = controllerStateValue;
-        towerPanelDrawer.setControllerStateValue(controllerStateValue);
+    public void addState(ControllerStateValues controllerStateValues) {
+        this.controllerStateValues = controllerStateValues;
+        towerPanelDrawer.setControllerStateValues(controllerStateValues);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (controllerStateValue.getSelectedTowerType() != null && mouseTilePos != null) {
-            ghostTowerDrawer.draw(g, controllerStateValue.getSelectedTowerType(), controllerStateValue.getSelectedTowerRange(), mouseTilePos);
+        if (controllerStateValues.getSelectedTowerType() != null && mouseTilePos != null) {
+            ghostTowerDrawer.draw(g, controllerStateValues.getSelectedTowerType(), controllerStateValues.getSelectedTowerRange(), mouseTilePos);
         }
         barsDrawer.draw(g, getWidth(), getHeight(), modelData.getBaseHealth().getFraction(),
                 modelData.getEnemyAttackHealth().getFraction());

@@ -37,9 +37,9 @@ public interface IGameView extends Drawable, MouseViewObserver, WindowPositionHe
      * Adds a state from controller to get some data from.
      * Is used in view.
      *
-     * @param controllerStateValue the state.
+     * @param controllerStateValues the state.
      */
-    void addState(ControllerStateValue controllerStateValue);
+    void addState(ControllerStateValues controllerStateValues);
 
     /**
      * Adds a keyListener to the window, so that controller can read keyboard inputs
