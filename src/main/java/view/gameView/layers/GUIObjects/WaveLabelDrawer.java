@@ -11,7 +11,7 @@ import java.awt.*;
 public class WaveLabelDrawer {
 
     private final double WAVE_LABEL_LEFT = .87;
-    private final double WAVE_LABEL_UP = .12;
+    private final double WAVE_LABEL_UP = .6;
     private final double WAVE_LABEL_WIDTH = .12;
     private final double WAVE_LABEL_HEIGHT = .2;
     private final double WAVE_LABEL_FONT = .025;

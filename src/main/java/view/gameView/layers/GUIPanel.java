@@ -10,7 +10,6 @@ import view.ControllerStateValues;
 import view.OnClose;
 import view.WindowState;
 import view.gameView.layers.GUIObjects.*;
-import view.mainMenuView.MainMenuView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,6 +68,7 @@ public class GUIPanel extends JPanel {
     private final WaveLabelDrawer waveLabelDrawer;
     private final BackToStartButtonDrawer backToStartButtonDrawer;
     private final TowerInfoDrawer towerInfoDrawer;
+    private final EnemyInfoDrawer enemyInfoDrawer;
 
 
     /**
@@ -114,11 +114,17 @@ public class GUIPanel extends JPanel {
         add(backToStartButton);
         backToStartButtonDrawer = new BackToStartButtonDrawer(backToStartButton);
 
-        JLabel infoText = new JLabel();
-        infoText.setHorizontalAlignment(SwingConstants.LEFT);
-        infoText.setVerticalAlignment(SwingConstants.TOP);
-        add(infoText);
-        towerInfoDrawer = new TowerInfoDrawer(infoText, towerPathMap);
+        JLabel towerInfoText = new JLabel();
+        towerInfoText.setHorizontalAlignment(SwingConstants.LEFT);
+        towerInfoText.setVerticalAlignment(SwingConstants.TOP);
+        add(towerInfoText);
+        towerInfoDrawer = new TowerInfoDrawer(towerInfoText, towerPathMap);
+
+        JLabel enemyInfoText = new JLabel();
+        enemyInfoText.setHorizontalAlignment(SwingConstants.LEFT);
+        enemyInfoText.setVerticalAlignment(SwingConstants.TOP);
+        add(enemyInfoText);
+        enemyInfoDrawer = new EnemyInfoDrawer(enemyInfoText);
 
         setLayout(null);
     }
@@ -152,7 +158,9 @@ public class GUIPanel extends JPanel {
      */
     public void setupButtons(ButtonClickHandler buttonClickHandler, OnClose onClose) {
         //nextWaveButton
-        nextWaveButton.addActionListener(e -> buttonClickHandler.onNextWaveClicked());
+        nextWaveButton.addActionListener(e -> {
+            buttonClickHandler.onNextWaveClicked();
+        });
         for (int i = 0; i < MAX_TOWERS; i++) {
             int finalI = i;
             towerButtons[i].addActionListener((e -> buttonClickHandler.setSelectedTowerIndexButton(finalI)));
@@ -206,10 +214,11 @@ public class GUIPanel extends JPanel {
         }
         barsDrawer.draw(g, getWidth(), getHeight(), modelData.getBaseHealth(), modelData.getEnemyAttackHealth());
         moneyLabelDrawer.draw(g, getWidth(), getHeight(), modelData.getMoney());
-        waveButtonDrawer.draw(g, getWidth(), getHeight());
         towerPanelDrawer.draw(g, getWidth(), getHeight());
         waveLabelDrawer.draw(getWidth(), getHeight(), modelData.getWaveNumber());
         backToStartButtonDrawer.draw(getWidth(), getHeight());
         towerInfoDrawer.draw(g, getWidth(), getHeight());
+        enemyInfoDrawer.draw(g, getWidth(), getHeight(), modelData.getEnemyTypesInNextWave());
+        waveButtonDrawer.draw(g, getWidth(), getHeight());
     }
 }
