@@ -18,7 +18,7 @@ public class Bearon extends AbstractTower {
     private final EventSender eventSender;
     private final TowerFinder towerFinder;
 
-    private final int coinsPerTowerNearby = Config.Baeron.COINS_PER_TOWER;
+    private final int coinsPerTowerNearby = Config.Bearon.COINS_PER_TOWER;
 
 
     /**
@@ -30,7 +30,7 @@ public class Bearon extends AbstractTower {
      * @param eventSender Gives tower ability to send events
      */
     public Bearon(Vector pos, MoneyAdder moneyAdder, TowerFinder towerFinder, EventSender eventSender) {
-        super(pos, Config.Baeron.RANGE, new ConstantChargeStrategy(Config.Baeron.ATTACK_DELAY));
+        super(pos, Config.Bearon.RANGE, new ConstantChargeStrategy(Config.Bearon.ATTACK_DELAY));
         this.moneyAdder = moneyAdder;
         this.towerFinder = towerFinder;
         this.eventSender = eventSender;
