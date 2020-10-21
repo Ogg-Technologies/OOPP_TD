@@ -2,7 +2,7 @@ package view.gameView.layers.GUIObjects;
 
 import config.Config;
 import model.game.tower.Tower;
-import model.game.tower.concretetowers.GrizzlyBear;
+import model.game.tower.concretetowers.*;
 import view.ColorHandler;
 import view.ControllerStateValues;
 import view.WindowState;
@@ -26,6 +26,7 @@ public class TowerInfoDrawer {
     private static final double HEIGHT = WindowState.MAP_HEIGHT - TOP - .01;
 
     private static final String NEW_LINE = "<br>";
+    public static final String BUFF_PREFIX = "Buff: ";
 
     private final JLabel infoText;
     private final Map<Class<? extends Tower>, String> towerImagePathMap;
@@ -43,34 +44,88 @@ public class TowerInfoDrawer {
 
     private Map<Class<? extends Tower>, String> setupInfoStringMap() {
         Map<Class<? extends Tower>, String> map = new HashMap<>();
+
         map.put(GrizzlyBear.class, "Grizzly Bear" + NEW_LINE + NEW_LINE
                 + createFireRateString(Config.GrizzlyBear.ATTACK_DELAY) + NEW_LINE
                 + createRangeString(Config.GrizzlyBear.RANGE) + NEW_LINE
                 + createDamageString(Config.GrizzlyBear.BASE_DAMAGE) + NEW_LINE + NEW_LINE
                 + Config.GrizzlyBear.INFO_TEXT);
-/*
-        map.put(BearryPotter.class, );
-        map.put(SniperBear.class, );
-        map.put(SovietBear.class, );
-        map.put(Barbearian.class, );
-        map.put(BearGrylls.class, Config.BearGrylls.COST);
-        map.put(Beer.class, Config.Beer.COST);
-        map.put(RubixCubeBear.class, Config.RubixCubeBear.COST);
-        map.put(BazookaBear.class, Config.BazookaBear.COST);
-*/
+
+        map.put(BearryPotter.class, "Bearry Potter" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.BearryPotter.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.BearryPotter.RANGE) + NEW_LINE
+                + createDamageString(Config.BearryPotter.BASE_DAMAGE) + NEW_LINE + NEW_LINE
+                + Config.BearryPotter.INFO_TEXT);
+
+        map.put(SniperBear.class, "Sniper Bear" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.SniperBear.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.SniperBear.RANGE) + NEW_LINE
+                + createDamageString(Config.SniperBear.BASE_DAMAGE) + NEW_LINE + NEW_LINE
+                + Config.SniperBear.INFO_TEXT);
+
+        map.put(SovietBear.class, "Soviet Bear" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.SovietBear.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.SovietBear.RANGE) + NEW_LINE
+                + createDamageString(Config.SovietBear.BASE_DAMAGE) + NEW_LINE + NEW_LINE
+                + Config.SovietBear.INFO_TEXT);
+
+        map.put(Barbearian.class, "Barbearian" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.Barbearian.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.Barbearian.RANGE) + NEW_LINE
+                + createDamageString(Config.Barbearian.BASE_DAMAGE) + NEW_LINE + NEW_LINE
+                + Config.Barbearian.INFO_TEXT);
+
+        map.put(BearGrylls.class, "Bear Grylls" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.BearGrylls.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.BearGrylls.RANGE) + NEW_LINE
+                + createRangeBuffString(Config.BearGrylls.BUFF_PERCENTAGE) + NEW_LINE + NEW_LINE
+                + Config.BearGrylls.INFO_TEXT);
+
+        map.put(Beer.class, "Beer" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.Beer.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.Beer.RANGE) + NEW_LINE
+                + createDamageBuffString(Config.Beer.DAMAGE_BUFF_PERCENTAGE) + NEW_LINE
+                + createFireRateBuffString(Config.Beer.FIRE_RATE_BUFF_PERCENTAGE) + NEW_LINE
+                + createRangeBuffString(Config.Beer.RANGE_BUFF_PERCENTAGE) + NEW_LINE + NEW_LINE
+                + Config.Beer.INFO_TEXT);
+
+        map.put(RubixCubeBear.class, "Rubix Cube Bear" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.RubixCubeBear.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.RubixCubeBear.RANGE) + NEW_LINE
+                + createFireRateBuffString(Config.RubixCubeBear.BUFF_PERCENTAGE) + NEW_LINE + NEW_LINE
+                + Config.RubixCubeBear.INFO_TEXT);
+
+        map.put(BazookaBear.class, "Bazooka Bear" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.BazookaBear.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.BazookaBear.RANGE) + NEW_LINE
+                + createDamageString(Config.BazookaBear.BASE_DAMAGE) + NEW_LINE + NEW_LINE
+                + Config.BazookaBear.INFO_TEXT);
+
         return map;
     }
 
     private String createFireRateString(int attackDelay) {
-        return "Attack Speed: " + String.format("%.2f", attackDelay / 60.0) + "/s";
+        return "Fire Rate: " + String.format("%.2f", attackDelay / 60.0) + "/s";
     }
 
     private String createRangeString(double range) {
-        return "Range: " + range + " tiles";
+        return "Range: " + String.format("%.1f", range) + " tiles";
     }
 
     private String createDamageString(int damage) {
         return "Damage: " + damage;
+    }
+
+    private String createDamageBuffString(int percentage) {
+        return BUFF_PREFIX + percentage + "% Damage";
+    }
+
+    private String createRangeBuffString(int percentage) {
+        return BUFF_PREFIX + percentage + "% Range";
+    }
+
+    private String createFireRateBuffString(int percentage) {
+        return BUFF_PREFIX + percentage + "% Fire Rate";
     }
 
     public void draw(Graphics g, int panelWidth, int panelHeight) {
@@ -110,10 +165,11 @@ public class TowerInfoDrawer {
     }
 
     private void drawTowerInfoText(int x, int y, int width, int height) {
+        String text = towerInfoStringMap.getOrDefault(lastSelectedTower, "No info text added yet");
         infoText.setLocation(x, y);
         infoText.setFont(new Font("serif", Font.BOLD, (int) (width * 0.1)));
         infoText.setSize(width, height);
-        infoText.setText("<html>" + towerInfoStringMap.get(lastSelectedTower) + "</html>");
+        infoText.setText("<html>" + text + "</html>");
     }
 
     /**

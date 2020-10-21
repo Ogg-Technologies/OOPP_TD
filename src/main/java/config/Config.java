@@ -101,6 +101,7 @@ public final class Config {
         public static final double RANGE = readDoubleValue("bear_grylls_range");
         public static final int ATTACK_DELAY = (int) readDoubleValue("bear_grylls_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("bear_grylls_cost");
+        public static final String INFO_TEXT = readStringValue("bear_grylls_info");
     }
 
     public static class RubixCubeBear {
@@ -109,6 +110,7 @@ public final class Config {
         public static final double RANGE = readDoubleValue("rubix_cube_bear_range");
         public static final int ATTACK_DELAY = (int) readDoubleValue("rubix_cube_bear_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("rubix_cube_bear_cost");
+        public static final String INFO_TEXT = readStringValue("rubix_cube_bear_info");
     }
 
     public static class Beer {
@@ -119,6 +121,7 @@ public final class Config {
         public static final double RANGE = readDoubleValue("beer_range");
         public static final int ATTACK_DELAY = (int) readDoubleValue("beer_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("beer_cost");
+        public static final String INFO_TEXT = readStringValue("beer_info");
     }
 
     public static class GrizzlyBear {
@@ -134,6 +137,7 @@ public final class Config {
         public static final double RANGE = readDoubleValue("bearry_potter_range");
         public static final int ATTACK_DELAY = (int) readDoubleValue("bearry_potter_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("bearry_potter_cost");
+        public static final String INFO_TEXT = readStringValue("bearry_potter_info");
     }
 
     public static class SniperBear {
@@ -141,6 +145,7 @@ public final class Config {
         public static final double RANGE = readDoubleValue("sniper_bear_range");
         public static final int ATTACK_DELAY = (int) readDoubleValue("sniper_bear_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("sniper_bear_cost");
+        public static final String INFO_TEXT = readStringValue("sniper_bear_info");
     }
 
     public static class SovietBear {
@@ -150,6 +155,7 @@ public final class Config {
         public static final int ATTACKS_PER_BURST = (int) readDoubleValue("soviet_bear_attacks_per_burst");
         public static final int COST = (int) readDoubleValue("soviet_bear_cost");
         public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("soviet_bear_ticks_between_attack");
+        public static final String INFO_TEXT = readStringValue("soviet_bear_info");
     }
 
     public static class Barbearian {
@@ -159,6 +165,7 @@ public final class Config {
         public static final int ATTACKS_PER_BURST = (int) readDoubleValue("barbearian_attacks_per_burst");
         public static final int COST = (int) readDoubleValue("barbearian_cost");
         public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("barbearian_ticks_between_attack");
+        public static final String INFO_TEXT = readStringValue("barbearian_info");
     }
 
     public static class BazookaBear {
@@ -166,6 +173,7 @@ public final class Config {
         public static final double RANGE = readDoubleValue("bazooka_bear_range");
         public static final int COST = (int) readDoubleValue("bazooka_bear_cost");
         public static final int ATTACK_DELAY = (int) readDoubleValue("bazooka_bear_updates_between_attacks");
+        public static final String INFO_TEXT = readStringValue("bazooka_bear_info");
     }
 
     public static class Bearon {
