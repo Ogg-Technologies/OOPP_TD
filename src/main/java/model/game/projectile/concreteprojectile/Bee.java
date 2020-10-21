@@ -1,6 +1,7 @@
 package model.game.projectile.concreteprojectile;
 
 import config.Config;
+import model.event.Event;
 import model.event.EventSender;
 import model.game.economy.MoneyAdder;
 import model.game.enemy.Enemy;
@@ -71,6 +72,7 @@ public class Bee extends AbstractProjectile {
      */
     @Override
     public void onEnemyHit(Enemy enemy) {
+        eventSender.sendEvent(new Event(Event.Type.PROJECTILE_HIT, this.getClass(), getPosition()));
         if (healable.isHealthEqualToMax()) {
             moneyAdder.addMoney(moneyAmount);
         } else {
