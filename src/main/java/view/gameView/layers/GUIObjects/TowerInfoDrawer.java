@@ -6,6 +6,7 @@ import model.game.tower.concretetowers.GrizzlyBear;
 import view.ColorHandler;
 import view.ControllerStateValues;
 import view.WindowState;
+import view.texture.ImageHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,17 +24,21 @@ public class TowerInfoDrawer {
     private static final double TOP = .1;
     private static final double WIDTH = .12;
     private static final double HEIGHT = WindowState.MAP_HEIGHT - TOP - .01;
+
     private static final String NEW_LINE = "<br>";
 
-    private final Map<Class<? extends Tower>, String> towerInfoStringMap;
     private final JLabel infoText;
+    private final Map<Class<? extends Tower>, String> towerImagePathMap;
+    private final Map<Class<? extends Tower>, String> towerInfoStringMap;
 
     private ControllerStateValues controllerStateValues;
+    private Class<? extends Tower> lastSelectedTower;
 
 
-    public TowerInfoDrawer(JLabel infoText) {
-        this.towerInfoStringMap = setupInfoStringMap();
+    public TowerInfoDrawer(JLabel infoText, Map<Class<? extends Tower>, String> towerInfoStringMap) {
         this.infoText = infoText;
+        this.towerImagePathMap = towerInfoStringMap;
+        this.towerInfoStringMap = setupInfoStringMap();
     }
 
     private Map<Class<? extends Tower>, String> setupInfoStringMap() {
@@ -79,10 +84,36 @@ public class TowerInfoDrawer {
         g.fillRect(x, y, width, height);
 
 
-        infoText.setLocation(x + margin, y + margin);
+        Class<? extends Tower> towerType = getLastSelectedTower();
+        if (towerType == null) {
+            return;
+        }
+
+        drawTowerImage(g, towerImagePathMap.get(towerType), (int) (x + width * 0.05), (int) (y + width * 0.05), (int) (width * 0.9));
+        drawTowerInfoText(x + margin, y + width, width - 2 * margin, height - 2 * margin);
+    }
+
+    private Class<? extends Tower> getLastSelectedTower() {
+        if (controllerStateValues == null) {
+            throw new IllegalStateException("controllerStateValues has not been set");
+        }
+        Class<? extends Tower> towerType = controllerStateValues.getSelectedTowerType();
+
+        if (towerType != null) {
+            lastSelectedTower = towerType;
+        }
+        return lastSelectedTower;
+    }
+
+    private void drawTowerImage(Graphics g, String imagePath, int x, int y, int size) {
+        g.drawImage(ImageHandler.getImage(imagePath, Math.PI / 2), x, y, size, size, null);
+    }
+
+    private void drawTowerInfoText(int x, int y, int width, int height) {
+        infoText.setLocation(x, y);
         infoText.setFont(new Font("serif", Font.BOLD, (int) (width * 0.1)));
-        infoText.setSize(width - 2 * margin, height - 2 * margin);
-        infoText.setText("<html>" + towerInfoStringMap.get(controllerStateValues.getSelectedTowerType()) + "</html>");
+        infoText.setSize(width, height);
+        infoText.setText("<html>" + towerInfoStringMap.get(lastSelectedTower) + "</html>");
     }
 
     /**

@@ -116,8 +116,9 @@ public class GUIPanel extends JPanel {
 
         JLabel infoText = new JLabel();
         infoText.setHorizontalAlignment(SwingConstants.LEFT);
+        infoText.setVerticalAlignment(SwingConstants.TOP);
         add(infoText);
-        towerInfoDrawer = new TowerInfoDrawer(infoText);
+        towerInfoDrawer = new TowerInfoDrawer(infoText, towerPathMap);
 
         setLayout(null);
     }
