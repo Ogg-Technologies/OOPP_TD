@@ -140,4 +140,18 @@ public final class EmitterFactory {
                 .setTileSize(LinearDoubleDistribution.fromRange(0.5, 0.5))
                 .build();
     }
+
+    public static Emitter createMoneyEmitter(Vector position, double angle) {
+        return new Emitter.Builder()
+                .setEmitterPosition(position)
+                .setImagePath(Config.ImagePath.MONEY)
+                .setLifetimeDistribution(LinearIntegerDistribution.fromRange(15, 15))
+                .setStartPosition(LinearVectorDistribution.withAnyAngle(() -> 0.0))
+                .setStartVelocity(LinearVectorDistribution.withAnyAngle(LinearDoubleDistribution.fromRange(0.01, 0.05)))
+                .setAngleVelocity(LinearDoubleDistribution.fromRange(0, 0))
+                .setEmitterLifetime(5)
+                .setNewParticlesPerUpdate(LinearIntegerDistribution.fromRange(5, 5))
+                .setTileSize(LinearDoubleDistribution.fromRange(0.2, 0.2))
+                .build();
+    }
 }

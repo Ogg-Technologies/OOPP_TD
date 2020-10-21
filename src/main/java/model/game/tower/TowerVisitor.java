@@ -30,4 +30,6 @@ public interface TowerVisitor {
     void visit(RubixCubeBear tower);
 
     void visit(BazookaBear tower);
+
+    void visit(Bearon tower);
 }

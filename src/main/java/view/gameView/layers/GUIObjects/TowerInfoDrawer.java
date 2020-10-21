@@ -112,8 +112,15 @@ public class TowerInfoDrawer {
                 + createDamageString(Config.BazookaBear.BASE_DAMAGE) + NEW_LINE + NEW_LINE
                 + Config.BazookaBear.INFO_TEXT);
 
+        map.put(Bearon.class, "Bearon" + NEW_LINE + NEW_LINE
+                + createFireRateString(Config.Bearon.ATTACK_DELAY) + NEW_LINE
+                + createRangeString(Config.Bearon.RANGE) + NEW_LINE
+                + createMoneyString(Config.Bearon.COINS_PER_TOWER) + NEW_LINE + NEW_LINE
+                + Config.Bearon.INFO_TEXT);
+
         return map;
     }
+
 
     /**
      * This method (and the following 5 or so) are convenience methods for displaying different information in a consistent manner
@@ -143,6 +150,10 @@ public class TowerInfoDrawer {
 
     private String createFireRateBuffString(int percentage) {
         return BUFF_PREFIX + percentage + "% Fire Rate";
+    }
+
+    private String createMoneyString(int coinsPerTower) {
+        return "Money/Tower: " + coinsPerTower + "Per tower in range";
     }
 
     public void draw(Graphics g, int panelWidth, int panelHeight) {

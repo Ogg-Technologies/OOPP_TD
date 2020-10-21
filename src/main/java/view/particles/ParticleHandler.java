@@ -42,6 +42,7 @@ public final class ParticleHandler extends JPanel implements EventListener {
         particleMap.put(Beer.class, EmitterFactory::createBeerEmitter);
         particleMap.put(RubixCubeBear.class, EmitterFactory::createRubixCubeEmitter);
         particleMap.put(Rocket.class, EmitterFactory::createExplosionEmitter);
+        particleMap.put(Bearon.class, EmitterFactory::createMoneyEmitter);
 
     }
 

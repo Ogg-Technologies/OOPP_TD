@@ -54,5 +54,6 @@ public class Bearon extends AbstractTower {
 
     @Override
     public void accept(TowerVisitor visitor) {
+        visitor.visit(this);
     }
 }

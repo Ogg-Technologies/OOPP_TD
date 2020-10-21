@@ -72,6 +72,11 @@ public class TowerDrawer implements TowerVisitor {
         drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.BAZOOKA_BEAR);
     }
 
+    @Override
+    public void visit(Bearon tower) {
+        drawTower(tower.getPos(), Config.ImagePath.BEARON);
+    }
+
 
     private void drawTower(Vector pos, String path) {
         Vector defaultVector = new Vector(0, 1);

@@ -181,6 +181,7 @@ public final class Config {
         public static final int COINS_PER_TOWER = (int) readDoubleValue("bearon_coins_per_tower");
         public static final int ATTACK_DELAY = (int) readDoubleValue("bearon_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("bearon_cost");
+        public static final String INFO_TEXT = readStringValue("bearon_info");
     }
 
     public static class JustinBeeBear {
@@ -352,6 +353,8 @@ public final class Config {
         public static final String BAZOOKA_BEAR = IMAGE_ROOT + readStringValue("img_bazookaBear");
         public static final String EXPLOSION = IMAGE_ROOT + readStringValue("img_explosion");
         public static final String ROCKET = IMAGE_ROOT + readStringValue("img_rocket");
+        public static final String BEARON = IMAGE_ROOT + readStringValue("img_bearon");
+        public static final String MONEY = IMAGE_ROOT + readStringValue("img_money");
     }
 
     /**
