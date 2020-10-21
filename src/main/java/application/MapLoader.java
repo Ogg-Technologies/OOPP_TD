@@ -37,8 +37,6 @@ public final class MapLoader {
             throw new RuntimeException("Could not load any maps at " + ROOT_PATH);
         }
 
-        String mapOrMaps = maps.size() == 1 ? "map" : "maps";
-        System.out.println("Succeeded in loading " + maps.size() + " " + mapOrMaps);
         return maps;
     }
 
