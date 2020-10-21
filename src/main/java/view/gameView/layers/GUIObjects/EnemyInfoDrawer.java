@@ -82,6 +82,12 @@ public class EnemyInfoDrawer {
                 + createMoneyString(Config.FishInABoat.VALUE) + NEW_LINE + NEW_LINE
                 + Config.FishInABoat.INFO_TEXT);
 
+        map.put(FlyingFish.class, "Flying Fish" + NEW_LINE + NEW_LINE
+                + createHealthString(Config.FlyingFish.HEALTH) + NEW_LINE
+                + createSpeedString(Config.FlyingFish.SPEED) + NEW_LINE
+                + createMoneyString(Config.FlyingFish.VALUE) + NEW_LINE + NEW_LINE
+                + Config.FlyingFish.INFO_TEXT);
+
         map.put(BasicEnemy.Sailfish.class, "Sailfish" + NEW_LINE + NEW_LINE
                 + createHealthString(Config.Sailfish.HEALTH) + NEW_LINE
                 + createSpeedString(Config.Sailfish.SPEED) + NEW_LINE
@@ -101,16 +107,11 @@ public class EnemyInfoDrawer {
                 + Config.FishInAFishTank.INFO_TEXT);
 
         map.put(BasicEnemy.TankSinatra.class, "Tank Sinatra" + NEW_LINE + NEW_LINE
-                + createHealthString(Config.TankSinatra.HEALTH) + NEW_LINE
-                + createSpeedString(Config.TankSinatra.SPEED) + NEW_LINE
+                + "Health: i dunno, a lot?" + NEW_LINE
+                + "Speed: fast, or slow, i don't remember" + NEW_LINE
                 + createMoneyString(Config.TankSinatra.VALUE) + NEW_LINE + NEW_LINE
                 + Config.TankSinatra.INFO_TEXT);
 
-        map.put(FlyingFish.class, "Flying Fish" + NEW_LINE + NEW_LINE
-                + createHealthString(Config.FlyingFish.HEALTH) + NEW_LINE
-                + createSpeedString(Config.FlyingFish.SPEED) + NEW_LINE
-                + createMoneyString(Config.FlyingFish.VALUE) + NEW_LINE + NEW_LINE
-                + Config.FlyingFish.INFO_TEXT);
 
         return map;
     }

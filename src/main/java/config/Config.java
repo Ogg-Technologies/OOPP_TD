@@ -236,7 +236,7 @@ public final class Config {
         public static final double SPEED = readDoubleValue("swordfish_speed");
         public static final int HEALTH = (int) (readDoubleValue("swordfish_health"));
         public static final int VALUE = (int) readDoubleValue("swordfish_value");
-        public static final String INFO_TEXT = readStringValue("swordfish_value");
+        public static final String INFO_TEXT = readStringValue("swordfish_info");
     }
 
     public static class FishAndChips {
