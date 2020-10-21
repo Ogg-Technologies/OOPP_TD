@@ -26,15 +26,15 @@ public class ControllerState implements ControllerStateValues {
         return new TowerProxy[]{
                 new TowerProxy(factory::createGrizzlyBear, Config.GrizzlyBear.RANGE, GrizzlyBear.class, Config.GrizzlyBear.COST),
                 new TowerProxy(factory::createBearryPotter, Config.BearryPotter.RANGE, BearryPotter.class, Config.BearryPotter.COST),
-                new TowerProxy(factory::createSniperBear, Config.SniperBear.RANGE, SniperBear.class, Config.SniperBear.COST),
-                new TowerProxy(factory::createSovietBear, Config.SovietBear.RANGE, SovietBear.class, Config.SovietBear.COST),
                 new TowerProxy(factory::createBarbearian, Config.Barbearian.RANGE, Barbearian.class, Config.Barbearian.COST),
-                new TowerProxy(factory::createBearGrylls, Config.BearGrylls.RANGE, BearGrylls.class, Config.BearGrylls.COST),
-                new TowerProxy(factory::createBeer, Config.Beer.RANGE, Beer.class, Config.Beer.COST),
-                new TowerProxy(factory::createRubixCubeBear, Config.RubixCubeBear.RANGE, RubixCubeBear.class, Config.RubixCubeBear.COST),
-                new TowerProxy(factory::createBazookaBear, Config.BazookaBear.RANGE, BazookaBear.class, Config.BazookaBear.COST),
-                new TowerProxy(factory::createBearon, Config.Bearon.RANGE, Bearon.class, Config.Bearon.COST),
                 new TowerProxy(factory::createJustinBeeBear, Config.JustinBeeBear.RANGE, JustinBeeBear.class, Config.JustinBeeBear.COST),
+                new TowerProxy(factory::createSovietBear, Config.SovietBear.RANGE, SovietBear.class, Config.SovietBear.COST),
+                new TowerProxy(factory::createBearGrylls, Config.BearGrylls.RANGE, BearGrylls.class, Config.BearGrylls.COST),
+                new TowerProxy(factory::createRubixCubeBear, Config.RubixCubeBear.RANGE, RubixCubeBear.class, Config.RubixCubeBear.COST),
+                new TowerProxy(factory::createBeer, Config.Beer.RANGE, Beer.class, Config.Beer.COST),
+                new TowerProxy(factory::createBazookaBear, Config.BazookaBear.RANGE, BazookaBear.class, Config.BazookaBear.COST),
+                new TowerProxy(factory::createSniperBear, Config.SniperBear.RANGE, SniperBear.class, Config.SniperBear.COST),
+                new TowerProxy(factory::createBearon, Config.Bearon.RANGE, Bearon.class, Config.Bearon.COST),
         };
     }
 
