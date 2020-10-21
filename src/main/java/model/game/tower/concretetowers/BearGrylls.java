@@ -19,7 +19,7 @@ import java.util.Collection;
  */
 public class BearGrylls extends AbstractBuffTower {
 
-    private EventSender eventSender;
+    private final EventSender eventSender;
 
     public BearGrylls(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
         super(pos, Config.BearGrylls.RANGE,

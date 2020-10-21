@@ -17,7 +17,7 @@ import utils.Vector;
  */
 public class Barbearian extends AbstractAttackingTower {
 
-    private EventSender eventSender;
+    private final EventSender eventSender;
 
     public Barbearian(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
         super(pos, Config.Barbearian.RANGE,

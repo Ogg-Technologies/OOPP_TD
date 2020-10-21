@@ -46,7 +46,7 @@ public class Game implements EnemyGetter, EventListener {
         ProjectileFactory projectileFactory = new ProjectileFactory(eventSender, new EnemyTargeter(this));
         projectileHandler = new ProjectileHandler(projectileFactory, tileMap.getSize(), this);
 
-        towerFactory = new TowerFactory(this, new TowerFinder(towerHandler::getTowers), projectileHandler, eventSender);
+        towerFactory = new TowerFactory(this, new TowerFinder(towerHandler::getTowers), projectileHandler, economy::addMoney, eventSender);
     }
 
     public void update() {

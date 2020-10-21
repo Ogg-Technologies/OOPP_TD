@@ -167,6 +167,13 @@ public final class Config {
         public static final int ATTACK_DELAY = (int) readDoubleValue("bazooka_bear_updates_between_attacks");
     }
 
+    public static class Baeron {
+        public static final double RANGE = readDoubleValue("bearon_range");
+        public static final int COINS_PER_TOWER = (int) readDoubleValue("bearon_coins_per_tower");
+        public static final int ATTACK_DELAY = (int) readDoubleValue("bearon_updates_between_attacks");
+
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Projectiles
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -319,4 +326,6 @@ public final class Config {
             super("The property " + propName + " was not found in config file");
         }
     }
+
+
 }

@@ -2,10 +2,7 @@ package model.game.tower;
 
 import model.event.EventSender;
 import model.game.tower.concretetowers.*;
-import model.game.tower.towerutils.EnemyGetter;
-import model.game.tower.towerutils.EnemyTargeter;
-import model.game.tower.towerutils.ProjectileCreator;
-import model.game.tower.towerutils.TowerFinder;
+import model.game.tower.towerutils.*;
 import utils.Vector;
 
 /**
@@ -17,12 +14,14 @@ public class TowerFactory {
     private final EnemyGetter enemyGetter;
     private final TowerFinder towerFinder;
     private final ProjectileCreator projectileCreator;
+    private final MoneyAdder moneyAdder;
     private final EventSender eventSender;
 
-    public TowerFactory(EnemyGetter enemyGetter, TowerFinder towerFinder, ProjectileCreator projectileCreator, EventSender eventSender) {
+    public TowerFactory(EnemyGetter enemyGetter, TowerFinder towerFinder, ProjectileCreator projectileCreator, MoneyAdder moneyAdder, EventSender eventSender) {
         this.enemyGetter = enemyGetter;
         this.towerFinder = towerFinder;
         this.projectileCreator = projectileCreator;
+        this.moneyAdder = moneyAdder;
         this.eventSender = eventSender;
     }
 
@@ -61,4 +60,10 @@ public class TowerFactory {
     public Tower createBazookaBear(Vector pos) {
         return new BazookaBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
     }
+
+    public Tower createBearon(Vector pos) {
+        return new Bearon(pos, moneyAdder, towerFinder, eventSender);
+    }
+
+
 }

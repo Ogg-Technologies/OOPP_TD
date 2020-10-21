@@ -18,8 +18,8 @@ import utils.Vector;
  */
 public class GrizzlyBear extends AbstractAttackingTower {
 
-    private ProjectileCreator projectileCreator;
-    private EventSender eventSender;
+    private final ProjectileCreator projectileCreator;
+    private final EventSender eventSender;
 
     public GrizzlyBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
         super(pos, Config.GrizzlyBear.RANGE,

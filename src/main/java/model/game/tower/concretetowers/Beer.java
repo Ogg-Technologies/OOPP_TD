@@ -19,7 +19,7 @@ import java.util.Collection;
  */
 public class Beer extends AbstractBuffTower {
 
-    private EventSender eventSender;
+    private final EventSender eventSender;
 
     public Beer(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
         super(pos, Config.Beer.RANGE,

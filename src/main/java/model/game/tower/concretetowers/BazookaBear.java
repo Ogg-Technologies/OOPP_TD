@@ -18,8 +18,8 @@ import utils.Vector;
  * A tower which shoots rocket projectiles at enemies.
  */
 public class BazookaBear extends AbstractAttackingTower {
-    private ProjectileCreator projectileCreator;
-    private EventSender eventSender;
+    private final ProjectileCreator projectileCreator;
+    private final EventSender eventSender;
 
     public BazookaBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
         super(pos, Config.BazookaBear.RANGE,

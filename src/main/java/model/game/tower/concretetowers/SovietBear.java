@@ -17,7 +17,7 @@ import utils.Vector;
  */
 public class SovietBear extends AbstractAttackingTower {
 
-    private EventSender eventSender;
+    private final EventSender eventSender;
 
     public SovietBear(Vector pos, EnemyTargeter enemyTargeter, EventSender eventSender) {
         super(pos, Config.SovietBear.RANGE,

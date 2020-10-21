@@ -18,7 +18,7 @@ import utils.Vector;
  */
 public class SniperBear extends AbstractAttackingTower {
 
-    private EventSender eventSender;
+    private final EventSender eventSender;
 
     public SniperBear(Vector pos, EnemyTargeter enemyTargeter, ProjectileCreator projectileCreator, EventSender eventSender) {
         super(pos, Config.SniperBear.RANGE,

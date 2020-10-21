@@ -19,7 +19,7 @@ import java.util.Collection;
  */
 public class RubixCubeBear extends AbstractBuffTower {
 
-    private EventSender eventSender;
+    private final EventSender eventSender;
 
     public RubixCubeBear(Vector pos, TowerFinder towerFinder, EventSender eventSender) {
         super(pos, Config.RubixCubeBear.RANGE,
