@@ -4,28 +4,30 @@ import model.game.tower.Tower;
 import utils.Vector;
 import view.ColorHandler;
 import view.WindowState;
-import view.gameView.layers.GUIPanel;
 import view.texture.ImageHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 /**
- * @author Sebastian
+ * @author Sebastian, Samuel, Erik
  * A class for drawing a ghost image of active tower (the tower the user is holding).
  * It is used by GUIPanel.
  */
 public class GhostTowerDrawer {
 
     private final WindowState windowState;
+    private final Map<Class<? extends Tower>, String> towerImagePathMap;
 
     /**
      * Only gets objects needed to use this class
      *
      * @param windowState a windowState that gives values for tile size
      */
-    public GhostTowerDrawer(WindowState windowState) {
+    public GhostTowerDrawer(WindowState windowState, Map<Class<? extends Tower>, String> towerImagePathMap) {
         this.windowState = windowState;
+        this.towerImagePathMap = towerImagePathMap;
     }
 
 
@@ -57,7 +59,7 @@ public class GhostTowerDrawer {
         Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 
-        String path = GUIPanel.towerPathMap.get(ghostTowerType);
+        String path = towerImagePathMap.get(ghostTowerType);
 
         BufferedImage ghostImage = ImageHandler.getImage(path, Math.toRadians(90));
         g.drawImage(ghostImage, tilePosX, tilePosY, windowState.getTileSize(), windowState.getTileSize(), null);

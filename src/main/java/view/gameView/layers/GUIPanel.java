@@ -29,7 +29,7 @@ public class GUIPanel extends JPanel {
      * A map used by a lot of GUI elements (in this class and in GUIObjects) to know which path to use for displaying
      * an image.
      */
-    public static Map<Class<? extends Tower>, String> towerPathMap = setupPathMap();
+    private static final Map<Class<? extends Tower>, String> towerPathMap = setupPathMap();
 
     private static Map<Class<? extends Tower>, String> setupPathMap() {
         HashMap<Class<? extends Tower>, String> pathMap = new HashMap<>();
@@ -79,7 +79,7 @@ public class GUIPanel extends JPanel {
      */
     public GUIPanel(ModelData modelData, WindowState windowState) {
         this.modelData = modelData;
-        ghostTowerDrawer = new GhostTowerDrawer(windowState);
+        ghostTowerDrawer = new GhostTowerDrawer(windowState, towerPathMap);
 
         RotatingLabel playerHealthLabel = new RotatingLabel(Math.PI / 2);
         playerHealthLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -102,7 +102,7 @@ public class GUIPanel extends JPanel {
 
         towerButtons = towerButtonsSetup();
         arrowButtons = arrowButtonsSetup();
-        towerPanelDrawer = new TowerPanelDrawer(towerButtons, towerPriceLabelSetup(), arrowButtons);
+        towerPanelDrawer = new TowerPanelDrawer(towerButtons, towerPriceLabelSetup(), arrowButtons, towerPathMap);
 
         JLabel waveLabel = new JLabel();
         waveLabel.setHorizontalAlignment(SwingConstants.CENTER);

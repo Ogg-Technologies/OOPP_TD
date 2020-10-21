@@ -5,12 +5,12 @@ import model.game.tower.Tower;
 import view.ColorHandler;
 import view.ControllerStateValues;
 import view.WindowState;
-import view.gameView.layers.GUIPanel;
 import view.texture.ImageHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 /**
  * @author Sebastian
@@ -23,16 +23,18 @@ public class TowerPanelDrawer {
     private final JButton[] towerButtons;
     private final JLabel[] towerPriceLabels;
     private final JButton[] arrowButtons;
+    private Map<Class<? extends Tower>, String> towerImagePathMap;
 
     /**
      * @param towerButtons     the buttons to be updated
      * @param towerPriceLabels the labels to be updated
      * @param arrowButtons     the buttons for the arrows on the panel
      */
-    public TowerPanelDrawer(JButton[] towerButtons, JLabel[] towerPriceLabels, JButton[] arrowButtons) {
+    public TowerPanelDrawer(JButton[] towerButtons, JLabel[] towerPriceLabels, JButton[] arrowButtons, Map<Class<? extends Tower>, String> towerImagePathMap) {
         this.towerButtons = towerButtons;
         this.towerPriceLabels = towerPriceLabels;
         this.arrowButtons = arrowButtons;
+        this.towerImagePathMap = towerImagePathMap;
     }
 
     /**
@@ -101,7 +103,7 @@ public class TowerPanelDrawer {
         //Paints a tower if there is a sprite for it
         Class<? extends Tower>[] towerTypes = controllerStateValues.getAllTowerTypes();
         if (nr < towerTypes.length) {
-            BufferedImage tempImage = ImageHandler.getImage(GUIPanel.towerPathMap.get(towerTypes[nr]), Math.toRadians(90));
+            BufferedImage tempImage = ImageHandler.getImage(towerImagePathMap.get(towerTypes[nr]), Math.toRadians(90));
             g.drawImage(tempImage, (int) (x + towerSize * 0.05), (int) (y + towerSize * 0.05),
                     (int) (towerSize * 0.9), (int) (towerSize * 0.9), null);
             //Populate the label if there is a tower there
