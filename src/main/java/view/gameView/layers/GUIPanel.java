@@ -10,6 +10,7 @@ import view.ControllerStateValues;
 import view.OnClose;
 import view.WindowState;
 import view.gameView.layers.GUIObjects.*;
+import view.mainMenuView.MainMenuView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,10 +80,10 @@ public class GUIPanel extends JPanel {
         this.modelData = modelData;
         ghostTowerDrawer = new GhostTowerDrawer(windowState);
 
-        JLabel playerHealthLabel = new JLabel();
+        RotatingLabel playerHealthLabel = new RotatingLabel(Math.PI / 2);
         playerHealthLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(playerHealthLabel);
-        JLabel enemyHealthLabel = new JLabel();
+        RotatingLabel enemyHealthLabel = new RotatingLabel(-Math.PI / 2 );
         enemyHealthLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(enemyHealthLabel);
         barsDrawer = new BarsDrawer(playerHealthLabel, enemyHealthLabel);
@@ -195,8 +196,7 @@ public class GUIPanel extends JPanel {
         if (controllerStateValues.getSelectedTowerType() != null && mouseTilePos != null) {
             ghostTowerDrawer.draw(g, controllerStateValues.getSelectedTowerType(), controllerStateValues.getSelectedTowerRange(), mouseTilePos);
         }
-        barsDrawer.draw(g, getWidth(), getHeight(), modelData.getBaseHealth().getFraction(),
-                modelData.getEnemyAttackHealth().getFraction());
+        barsDrawer.draw(g, getWidth(), getHeight(), modelData.getBaseHealth(), modelData.getEnemyAttackHealth());
         moneyLabelDrawer.draw(g, getWidth(), getHeight(), modelData.getMoney());
         waveButtonDrawer.draw(g, getWidth(), getHeight());
         towerPanelDrawer.draw(g, getWidth(), getHeight());
