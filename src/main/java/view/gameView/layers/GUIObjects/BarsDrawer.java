@@ -1,6 +1,6 @@
 package view.gameView.layers.GUIObjects;
 
-import model.game.Health;
+import model.game.health.Health;
 import view.ColorHandler;
 
 import javax.swing.*;
