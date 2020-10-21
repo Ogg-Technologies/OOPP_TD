@@ -1,4 +1,4 @@
-package model.game.tower.towerutils;
+package model.game.economy;
 
 /**
  * @author Behroz, Erix

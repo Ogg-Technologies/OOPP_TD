@@ -1,8 +1,12 @@
 package model.game.tower;
 
 import model.event.EventSender;
+import model.game.economy.MoneyAdder;
 import model.game.tower.concretetowers.*;
-import model.game.tower.towerutils.*;
+import model.game.tower.towerutils.EnemyGetter;
+import model.game.tower.towerutils.EnemyTargeter;
+import model.game.tower.towerutils.ProjectileCreator;
+import model.game.tower.towerutils.TowerFinder;
 import utils.Vector;
 
 /**
@@ -63,6 +67,10 @@ public class TowerFactory {
 
     public Tower createBearon(Vector pos) {
         return new Bearon(pos, moneyAdder, towerFinder, eventSender);
+    }
+
+    public Tower createJustinBeeBear(Vector pos) {
+        return new JustinBeeBear(pos, new EnemyTargeter(enemyGetter), projectileCreator, eventSender);
     }
 
 

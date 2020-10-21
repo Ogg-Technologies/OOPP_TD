@@ -1,8 +1,8 @@
 package model;
 
 import model.event.EventListener;
-import model.game.Health;
 import model.game.enemy.Enemy;
+import model.game.health.Health;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
 import model.game.tower.Tower;

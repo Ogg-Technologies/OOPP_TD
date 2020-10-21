@@ -1,5 +1,6 @@
 package model.game;
 
+import model.game.economy.Economy;
 import model.game.enemy.Enemy;
 import model.game.enemy.concreteenemies.BasicEnemy;
 import model.game.tower.Tower;

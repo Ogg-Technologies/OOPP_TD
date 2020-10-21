@@ -145,7 +145,7 @@ public final class Config {
     public static class SovietBear {
         public static final int BASE_DAMAGE = (int) readDoubleValue("soviet_bear_base_damage");
         public static final double RANGE = readDoubleValue("soviet_bear_range");
-        public static final int ATTACK_DELAY = (int) readDoubleValue("soviet_bear_updates_between_attacks");
+        public static final int ATTACK_DELAY = (int) readDoubleValue("soviet_bear_updates_between_burst");
         public static final int ATTACKS_PER_BURST = (int) readDoubleValue("soviet_bear_attacks_per_burst");
         public static final int COST = (int) readDoubleValue("soviet_bear_cost");
         public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("soviet_bear_ticks_between_attack");
@@ -154,7 +154,7 @@ public final class Config {
     public static class Barbearian {
         public static final int BASE_DAMAGE = (int) readDoubleValue("barbearian_base_damage");
         public static final double RANGE = readDoubleValue("barbearian_range");
-        public static final int ATTACK_DELAY = (int) readDoubleValue("barbearian_updates_between_attacks");
+        public static final int ATTACK_DELAY = (int) readDoubleValue("barbearian_updates_between_burst");
         public static final int ATTACKS_PER_BURST = (int) readDoubleValue("barbearian_attacks_per_burst");
         public static final int COST = (int) readDoubleValue("barbearian_cost");
         public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("barbearian_ticks_between_attack");
@@ -173,6 +173,18 @@ public final class Config {
         public static final int ATTACK_DELAY = (int) readDoubleValue("bearon_updates_between_attacks");
         public static final int COST = (int) readDoubleValue("bearon_cost");
     }
+
+    public static class JustinBeeBear {
+        public static final int BASE_DAMAGE = (int) readDoubleValue("beebear_base_damage");
+        public static final int BASE_HEALING = (int) readDoubleValue("beebear_healing");
+        public static final int BASE_COINS_PER_BEE = (int) readDoubleValue("beebear_coins");
+        public static final double RANGE = readDoubleValue("beebear_range");
+        public static final int ATTACK_DELAY = (int) readDoubleValue("beebear_updates_between_burst");
+        public static final int ATTACKS_PER_BURST = (int) readDoubleValue("beebear_attacks_per_burst");
+        public static final int COST = (int) readDoubleValue("beebear_cost");
+        public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("beebear_ticks_between_attack");
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Projectiles
@@ -193,6 +205,11 @@ public final class Config {
         public static final double SPEED = readDoubleValue("rocket_speed");
         public static final double SIZE = readDoubleValue("rocket_size");
         public static final double EXPLOSION_RADIUS = readDoubleValue("rocket_explosion_radius");
+    }
+
+    public static class Bee {
+        public static final double SPEED = readDoubleValue("bee_speed");
+        public static final double SIZE = readDoubleValue("bee_size");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

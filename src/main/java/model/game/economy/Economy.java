@@ -1,4 +1,4 @@
-package model.game;
+package model.game.economy;
 
 
 import config.Config;

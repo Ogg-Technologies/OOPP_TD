@@ -4,8 +4,12 @@ import config.Config;
 import model.event.Event;
 import model.event.EventListener;
 import model.event.EventSender;
+import model.game.economy.Economy;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyFactory;
+import model.game.health.Healable;
+import model.game.health.Health;
+import model.game.health.MutableHealth;
 import model.game.map.Tile;
 import model.game.map.TileMap;
 import model.game.projectile.Projectile;
@@ -28,7 +32,7 @@ import java.util.Collection;
  * The class representing the whole TowerDefenseGame with a given map.
  * It is created and used by Model
  */
-public class Game implements EnemyGetter, EventListener {
+public class Game implements EnemyGetter, EventListener, Healable {
 
     private final TileMap tileMap;
     private final MutableHealth baseHealth = new MutableHealth(Config.Player.START_HEALTH);
@@ -43,7 +47,7 @@ public class Game implements EnemyGetter, EventListener {
         EnemyFactory enemyFactory = new EnemyFactory(baseHealth::damage, tileMap.getPath());
         waveHandler = new WaveHandler(enemyFactory, eventSender);
 
-        ProjectileFactory projectileFactory = new ProjectileFactory(eventSender, new EnemyTargeter(this));
+        ProjectileFactory projectileFactory = new ProjectileFactory(eventSender, new EnemyTargeter(this), this, economy::addMoney);
         projectileHandler = new ProjectileHandler(projectileFactory, tileMap.getSize(), this);
 
         towerFactory = new TowerFactory(this, new TowerFinder(towerHandler::getTowers), projectileHandler, economy::addMoney, eventSender);
@@ -159,4 +163,26 @@ public class Game implements EnemyGetter, EventListener {
     public TileMap getMap() {
         return tileMap;
     }
+
+    /**
+     * Tells if users current health is equal to its max
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean isHealthEqualToMax() {
+        return baseHealth.getCurrent() == baseHealth.getMax();
+    }
+
+    /**
+     * Increases users current health by amount
+     *
+     * @param amount
+     */
+    @Override
+    public void addHealth(int amount) {
+        baseHealth.heal(amount);
+    }
+
+
 }

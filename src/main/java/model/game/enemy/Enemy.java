@@ -1,6 +1,6 @@
 package model.game.enemy;
 
-import model.game.Health;
+import model.game.health.Health;
 import utils.Vector;
 
 /**

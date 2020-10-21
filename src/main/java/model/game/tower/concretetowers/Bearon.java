@@ -3,16 +3,21 @@ package model.game.tower.concretetowers;
 import config.Config;
 import model.event.Event;
 import model.event.EventSender;
+import model.game.economy.MoneyAdder;
 import model.game.tower.AbstractTower;
 import model.game.tower.Tower;
 import model.game.tower.TowerVisitor;
-import model.game.tower.towerutils.MoneyAdder;
 import model.game.tower.towerutils.TowerFinder;
 import model.game.tower.towerutils.chargestrategy.ConstantChargeStrategy;
 import utils.Vector;
 
 import java.util.ArrayList;
 
+/**
+ * @author Behroz
+ * <p>
+ * Tower that gives player coins depending on number of towers nearby
+ */
 public class Bearon extends AbstractTower {
     private final MoneyAdder moneyAdder;
     private final EventSender eventSender;

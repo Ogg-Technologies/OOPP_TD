@@ -2,10 +2,10 @@ package model.game.wave;
 
 import model.event.Event;
 import model.event.EventSender;
-import model.game.Health;
-import model.game.MutableHealth;
 import model.game.enemy.Enemy;
 import model.game.enemy.EnemyFactory;
+import model.game.health.Health;
+import model.game.health.MutableHealth;
 
 import java.util.ArrayList;
 import java.util.Collection;

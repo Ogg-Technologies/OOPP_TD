@@ -4,6 +4,8 @@ import model.game.enemy.Enemy;
 import model.game.enemy.EnemyFactory;
 import model.game.enemy.EnemyVisitor;
 import model.game.enemy.StatusEffect;
+import model.game.health.Health;
+import model.game.health.MutableHealth;
 import model.game.projectile.Projectile;
 import model.game.tower.towerutils.EnemyTargeter;
 import utils.Vector;

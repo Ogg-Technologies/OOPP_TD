@@ -1,7 +1,7 @@
 package model.game.enemy;
 
-import model.game.Health;
-import model.game.MutableHealth;
+import model.game.health.Health;
+import model.game.health.MutableHealth;
 import utils.Vector;
 
 /**
