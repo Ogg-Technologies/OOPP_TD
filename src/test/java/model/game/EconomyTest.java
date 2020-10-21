@@ -52,13 +52,13 @@ class EconomyTest {
 
     @Test
     void canBuyTowerIfHasEnoughMoney(){
-        economy.addMoney(100);
+        economy.addMoney(10000);
         assertTrue(economy.buyTower(GrizzlyBear.class));
     }
 
     @Test
     void buyingTowerDecreasesAmountOfMoney(){
-        int moneyCurrent = 100;
+        int moneyCurrent = 10000;
         economy.addMoney(moneyCurrent);
         economy.buyTower(GrizzlyBear.class);
         assertTrue(moneyCurrent > economy.getMoney());
