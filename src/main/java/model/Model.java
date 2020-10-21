@@ -40,6 +40,9 @@ public final class Model implements ModelInputListener, ModelData, Updatable, Ev
     }
 
     private void executeCommands() {
+        if (game.getBaseHealth().isDead()) {
+            return;
+        }
         synchronized (commands) {
             commands.forEach(Command::execute);
             commands.clear();
