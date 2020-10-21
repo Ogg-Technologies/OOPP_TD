@@ -135,7 +135,7 @@ public class TowerInfoDrawer {
      * @return A nicely formatted String explaining the attack delay stat for the tower
      */
     private String createFireRateString(int attackDelay) {
-        return "Fire Rate: " + String.format("%.2f", attackDelay / 60.0) + "/s";
+        return "Fire Rate: " + String.format("%.2f", 60.0 / attackDelay) + "/s";
     }
 
     private String createRangeString(double range) {
