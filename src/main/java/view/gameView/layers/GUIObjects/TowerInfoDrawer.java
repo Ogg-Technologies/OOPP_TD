@@ -20,13 +20,19 @@ import java.util.Map;
  */
 public class TowerInfoDrawer {
 
+    /**
+     * Position of the panel
+     */
     private static final double LEFT = .01;
     private static final double TOP = .1;
     private static final double WIDTH = .12;
     private static final double HEIGHT = WindowState.MAP_HEIGHT - TOP - .01;
 
+    /**
+     * String constants used when displaying info
+     */
     private static final String NEW_LINE = "<br>";
-    public static final String BUFF_PREFIX = "Buff: ";
+    private static final String BUFF_PREFIX = "Buff: ";
 
     private final JLabel infoText;
     private final Map<Class<? extends Tower>, String> towerImagePathMap;
@@ -42,6 +48,11 @@ public class TowerInfoDrawer {
         this.towerInfoStringMap = setupInfoStringMap();
     }
 
+    /**
+     * Defines the information text to be displayed for every tower when it is selected
+     *
+     * @return A map containing every tower as key to its information String as value
+     */
     private Map<Class<? extends Tower>, String> setupInfoStringMap() {
         Map<Class<? extends Tower>, String> map = new HashMap<>();
 
@@ -104,6 +115,12 @@ public class TowerInfoDrawer {
         return map;
     }
 
+    /**
+     * This method (and the following 5 or so) are convenience methods for displaying different information in a consistent manner
+     *
+     * @param attackDelay The attack delay value for the tower
+     * @return A nicely formatted String explaining the attack delay stat for the tower
+     */
     private String createFireRateString(int attackDelay) {
         return "Fire Rate: " + String.format("%.2f", attackDelay / 60.0) + "/s";
     }
