@@ -49,6 +49,9 @@ public interface EnemySequence {
 
     /**
      * Finalizes the sequence to a Wave.
+     * <p>
+     * You are not allowed to change the EnemySequence after calling this function. Doing so will result in undefined
+     * behavior for the created wave.
      *
      * @return a Wave of this sequence
      */
