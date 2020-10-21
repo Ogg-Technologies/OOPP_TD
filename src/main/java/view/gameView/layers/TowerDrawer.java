@@ -27,12 +27,6 @@ public class TowerDrawer implements TowerVisitor {
         this.windowState = windowState;
     }
 
-
-    @Override
-    public void visit(Tower tower) {
-        throw new RuntimeException("This tower: " + tower.getClass().getSimpleName() + " is not implemented in view");
-    }
-
     @Override
     public void visit(GrizzlyBear tower) {
         drawTower(tower.getPos(), tower.getAngle(), Config.ImagePath.GRIZZLY_BEAR);
