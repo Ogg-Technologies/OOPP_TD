@@ -1,5 +1,6 @@
 package model.game.wave;
 
+import config.Config;
 import model.event.Event;
 import model.event.EventSender;
 import model.game.enemy.Enemy;
@@ -118,13 +119,13 @@ public class WaveHandler {
     }
 
     /**
-     * Calculates the money reward for starting a wave early
+     * Calculates the money reward for starting a wave
      *
      * @return The amount of money that should be rewarded
      */
-    public int getRewardForStartingWaveEarly() {
+    public int getRewardForStartingWave() {
         int remainingHealth = getEnemyAttackHealth().getCurrent();
-        return (int) Math.sqrt(remainingHealth);
+        return (int) Math.sqrt(remainingHealth) + Config.NEW_WAVE_FLAT_BONUS;
     }
 
     /**

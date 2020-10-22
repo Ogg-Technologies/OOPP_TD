@@ -132,7 +132,7 @@ public class Game implements EnemyGetter, EventListener, Healable {
      * Starts the next waves and gives extra money based on the remaining health of all activated waves and enemies on the map.
      */
     public void startNewWave() {
-        economy.addMoney(waveHandler.getRewardForStartingWaveEarly());
+        economy.addMoney(waveHandler.getRewardForStartingWave());
         waveHandler.startNewWave();
     }
 

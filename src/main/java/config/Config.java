@@ -90,6 +90,7 @@ public final class Config {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static final int ROTATED_IMAGE_CACHE_SIZE = (int) readDoubleValue("rotated_image_cache_size");
+    public static final int NEW_WAVE_FLAT_BONUS = (int) readDoubleValue("new_wave_flat_bonus");
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Towers
@@ -185,15 +186,15 @@ public final class Config {
     }
 
     public static class JustinBeeBear {
-        public static final int BASE_DAMAGE = (int) readDoubleValue("justinBeeBear_base_damage");
-        public static final int BASE_HEALING = (int) readDoubleValue("justinBeeBear_healing");
-        public static final int BASE_COINS_PER_BEE = (int) readDoubleValue("justinBeeBear_coins");
-        public static final double RANGE = readDoubleValue("justinBeeBear_range");
-        public static final int ATTACK_DELAY = (int) readDoubleValue("justinBeeBear_updates_between_burst");
-        public static final int ATTACKS_PER_BURST = (int) readDoubleValue("justinBeeBear_attacks_per_burst");
-        public static final int COST = (int) readDoubleValue("justinBeeBear_cost");
-        public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("justinBeeBear_ticks_between_attack");
-        public static final String INFO_TEXT = readStringValue("justinBeeBear_info");
+        public static final int BASE_DAMAGE = (int) readDoubleValue("justin_bee_bear_base_damage");
+        public static final int BASE_HEALING = (int) readDoubleValue("justin_bee_bear_healing");
+        public static final int BASE_COINS_PER_BEE = (int) readDoubleValue("justin_bee_bear_coins");
+        public static final double RANGE = readDoubleValue("justin_bee_bear_range");
+        public static final int ATTACK_DELAY = (int) readDoubleValue("justin_bee_bear_updates_between_burst");
+        public static final int ATTACKS_PER_BURST = (int) readDoubleValue("justin_bee_bear_attacks_per_burst");
+        public static final int COST = (int) readDoubleValue("justin_bee_bear_cost");
+        public static final int TICKS_BETWEEN_ATTACKS = (int) readDoubleValue("justin_bee_bear_ticks_between_attack");
+        public static final String INFO_TEXT = readStringValue("justin_bee_bear_info");
     }
 
 
@@ -356,7 +357,7 @@ public final class Config {
         public static final String ROCKET = IMAGE_ROOT + readStringValue("img_rocket");
         public static final String BEARON = IMAGE_ROOT + readStringValue("img_bearon");
         public static final String MONEY = IMAGE_ROOT + readStringValue("img_money");
-        public static final String JUSTINBEEBEAR = IMAGE_ROOT + readStringValue("img_justinBeeBear");
+        public static final String JUSTINBEEBEAR = IMAGE_ROOT + readStringValue("img_justin_bee_bear");
         public static final String BEE = IMAGE_ROOT + readStringValue("img_bee");
     }
 
