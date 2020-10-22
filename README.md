@@ -1,5 +1,5 @@
 # OOPP_TD
-Object Oriented Programming Project Tower Defense
+Object Oriented Programming Project - Tower Defense
 ---
 ```
    _____                             _                          ____                               _______ _____  
@@ -11,19 +11,21 @@ Object Oriented Programming Project Tower Defense
               | |                           | |                                       __/ |                       
               |_|                           |_|                                      |___/                       
 ```
----
-## Super duper Omega gruppen:
 
-Behroz = BehrozRazaq
-
-Erik = OneZeroWasTaken
-
-Oskar = OggTechnologies
-
-Samuel = ApansKaffekopp
-
-Sebastian = Sebulon, s33b00r
+![Start Screen](documents/startScreen.png)
 
 ---
+## Members in Super duper Omega gruppen:
 
-Dubble click on the .exe file to start the game.
+* Behroz = BehrozRazaq
+* Erik = OneZeroWasTaken
+* Oskar = OggTechnologies
+* Samuel = ApansKaffekopp
+* Sebastian = Sebulon, s33b00r
+
+---
+## Running the Game
+Just dubble click on the .exe file in the root folder to start the game.
+
+## Description
+Super duper Omega TD is a tower defense game highly inspired by Bloons Tower Defense. Play as bears trying to defend their honey from highly evolved fish.
