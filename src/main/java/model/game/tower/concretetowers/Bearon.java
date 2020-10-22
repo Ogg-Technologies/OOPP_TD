@@ -45,7 +45,7 @@ public class Bearon extends AbstractTower {
     protected boolean tryFire() {
         ArrayList<Tower> towersNearby = new ArrayList<>(towerFinder.getTowersInRange(getPos(), getRange()));
         if (towersNearby.size() > 0) {
-            moneyAdder.addMoney(coinsPerTowerNearby);
+            moneyAdder.addMoney(coinsPerTowerNearby * towersNearby.size());
             eventSender.sendEvent(new Event(Event.Type.TOWER_FIRE, this.getClass(), getPos(), 0));
             return true;
         }
