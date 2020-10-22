@@ -42,10 +42,18 @@ public class WaveHandler {
         updateWaves();
         updateEnemies();
 
-        if (activeWaves.isEmpty() && enemies.isEmpty()) {
+        if (!hasOngoingWave()) {
             originalEnemyAttackHealth = 0;
         }
+    }
 
+    /**
+     * Checks if there's an ongoing wave, meaning if there's enemies alive or an active wave.
+     *
+     * @return If there's an ongoing wave, returns true.
+     */
+    public boolean hasOngoingWave() {
+        return !(activeWaves.isEmpty() && enemies.isEmpty());
     }
 
     private void updateEnemies() {

@@ -59,7 +59,9 @@ public class Game implements EnemyGetter, EventListener, Healable {
             return;
         }
         projectileHandler.update();
-        towerHandler.update();
+        if (waveHandler.hasOngoingWave()) {
+            towerHandler.update();
+        }
         waveHandler.update();
     }
 
