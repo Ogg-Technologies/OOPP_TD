@@ -29,3 +29,5 @@ Just dubble click on the .exe file in the root folder to start the game.
 
 ## Description
 Super duper Omega TD is a tower defense game highly inspired by Bloons Tower Defense. Play as bears trying to defend their honey from highly evolved fish.
+
+[Link to github repo](https://github.com/Ogg-Technologies/OOPP_TD)
